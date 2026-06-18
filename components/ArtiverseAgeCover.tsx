@@ -106,12 +106,12 @@ export function ArtiverseAgeCover({
               : "text-[15px] font-extrabold lowercase leading-tight text-ink md:text-[18px]"
           }
         >
-          the artiverse book
+          artwork references
         </h2>
         {!isThumb && (
           <>
             <p className="mx-auto mt-1 max-w-xs text-[10px] leading-relaxed text-ink/70 md:text-[11px]">
-              a making book — {unitCount} units across the year
+              reference artworks for the age — educators pick their own
             </p>
             <div className="mx-auto mt-2 max-w-sm rounded-lg bg-brand-white/70 px-3 py-1.5 ring-1 ring-ink/10">
               <p className="text-[8px] font-bold tracking-normal text-brand-orange">

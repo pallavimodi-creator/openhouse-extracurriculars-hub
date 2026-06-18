@@ -516,12 +516,12 @@ export function ArtiverseCoverArt({
               : "text-[28px] font-extrabold lowercase leading-tight text-ink md:text-[34px]"
           }
         >
-          the artiverse book
+          artwork references
         </h2>
         {!isThumb && (
           <>
             <p className="mx-auto mt-3 max-w-xs text-[13px] leading-relaxed text-ink/70 md:text-[14px]">
-              a making book — paper, crayons, paint
+              reference artworks — paper, crayons, paint
             </p>
             <div className="mx-auto mt-4 max-w-sm rounded-xl bg-brand-white/70 px-4 py-3 ring-1 ring-ink/10">
               <p className="text-[10px] font-bold tracking-normal text-brand-orange">
@@ -861,7 +861,7 @@ export function ArtiverseBookModal({
             teacher reference
           </p>
           <h2 className="truncate text-[18px] font-extrabold lowercase leading-tight text-ink md:text-[22px]">
-            the artiverse book · art &amp; design 3–5
+            artwork references · art &amp; design 3–5
           </h2>
         </div>
         <button

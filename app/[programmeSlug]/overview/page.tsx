@@ -279,24 +279,24 @@ const skills = [
 // chips below say "art gym book (in art games)" to make that explicit
 // to a teacher reading the abilities table.
 const abilityLocations: Record<string, string[]> = {
-  "lt-0": ["art gym book (in art games)", "shape stitch", "artiverse"],
-  "lt-1": ["art gym book (in art games)", "shape stitch", "artiverse"],
-  "lt-2": ["artiverse"],
-  "lt-3": ["cue cards", "artiverse"],
+  "lt-0": ["art gym book (in art games)", "shape stitch", "reference artworks"],
+  "lt-1": ["art gym book (in art games)", "shape stitch", "reference artworks"],
+  "lt-2": ["reference artworks"],
+  "lt-3": ["cue cards", "reference artworks"],
   "sf-0": ["art gym book (in art games)"],
   "sf-1": ["art gym cue card (in art games)", "shape fusion", "cue cards", "artventure"],
   "sf-2": ["shape fusion", "imagine that", "artventure"],
-  "sf-3": ["artiverse"],
-  "cp-0": ["artiverse"],
-  "cp-1": ["colour flip", "artiverse"],
-  "cp-2": ["colour flip", "match me", "artiverse"],
-  "cp-3": ["artiverse"],
-  "bc-0": ["cue cards", "artiverse"],
-  "bc-1": ["artiverse"],
-  "bc-2": ["artiverse"],
-  "bc-3": ["artiverse"],
-  "ic-0": ["artventure", "doodle dash", "artiverse"],
-  "ic-1": ["imagine that", "doodle dash", "artiverse"],
+  "sf-3": ["reference artworks"],
+  "cp-0": ["reference artworks"],
+  "cp-1": ["colour flip", "reference artworks"],
+  "cp-2": ["colour flip", "match me", "reference artworks"],
+  "cp-3": ["reference artworks"],
+  "bc-0": ["cue cards", "reference artworks"],
+  "bc-1": ["reference artworks"],
+  "bc-2": ["reference artworks"],
+  "bc-3": ["reference artworks"],
+  "ic-0": ["artventure", "doodle dash", "reference artworks"],
+  "ic-1": ["imagine that", "doodle dash", "reference artworks"],
   "ic-2": ["imagine that"],
   "ic-3": ["imagine that"],
 };
@@ -810,11 +810,18 @@ function ProgrammeOverviewContent() {
             ],
     },
     {
-      segment: programme.ageGroup === "3-5" ? "artiverse / artistotle" : "artiverse",
+      // No "artiverse" at the centre — all the artworks for the age are
+      // clubbed together as a reference pool. Educators pick artworks of
+      // their choice in class.
+      segment: "reference artworks",
       icon: Palette,
       color: "bg-segment-blue/30",
       type: "fixed" as const,
-      games: [{ name: `${programme.artiverseUnits?.length ?? 0} ${programme.ageGroup === "3-5" ? "projects" : "artiverse units"}`, skills: ["all five skills"], rotation: "fixed" as const }],
+      games: (programme.artiverseUnits ?? []).map((u) => ({
+        name: u.whatChildrenMake.toLowerCase(),
+        skills: [] as string[],
+        rotation: "fixed" as const,
+      })),
     },
     {
       segment: "experience book",
@@ -1152,15 +1159,9 @@ function ProgrammeOverviewContent() {
             </div>
           </div>
 
-          {/* Stat strip — every programme is ongoing. The session count
-              shown here is what's uploaded so far; more sessions will be
-              uploaded over time. */}
-          <div className="grid grid-cols-3 gap-px bg-ink/5">
+          {/* Stat strip — age group + class size only. */}
+          <div className="grid grid-cols-2 gap-px bg-ink/5">
             {[
-              {
-                label: "sessions uploaded",
-                value: String(programme.totalSessions),
-              },
               { label: "age group", value: programme.ageLabel.replace(/^ages?\s+/i, "") },
               {
                 label: "class size",
@@ -1181,9 +1182,6 @@ function ProgrammeOverviewContent() {
             ))}
           </div>
         </div>
-        <p className="mx-auto mt-3 max-w-2xl text-center text-[11px] italic leading-relaxed text-ink-muted md:text-[12px]">
-          this is an ongoing programme — {programme.totalSessions} sessions are uploaded so far, more will be uploaded over time.
-        </p>
       </section>
 
       {/* ─── WELCOME — 3-5 art only ─── */}
@@ -1359,27 +1357,7 @@ function ProgrammeOverviewContent() {
           segment expands to show its games, materials, rules, and
           alteration notes. ─── */}
       <section className="mt-3 px-4 md:px-8">
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          <p className="text-[11px] font-bold tracking-normal text-ink-subtle">
-            what happens inside each segment
-          </p>
-          {/* Key — explains the rotating / fixed badges shown on each
-              segment header below. */}
-          <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[10px] font-semibold text-ink-muted">
-            <span className="inline-flex items-center gap-1 rounded-chip bg-ink/5 px-2 py-0.5">
-              <RotateCw className="h-3 w-3" /> rotating
-            </span>
-            <span className="text-ink-subtle">
-              — no fixed order; play any · come back to one only after the rest are done
-            </span>
-            <span className="inline-flex items-center gap-1 rounded-chip bg-ink/5 px-2 py-0.5">
-              <Lock className="h-3 w-3" /> fixed
-            </span>
-            <span className="text-ink-subtle">— follow the prescribed order</span>
-          </div>
-        </div>
-
-        <div className="mt-3 space-y-2">
+        <div className="space-y-2">
           {gamesTable.map((seg) => {
             const Icon = seg.icon;
             const isOpen = openSegment === seg.segment;
@@ -1398,24 +1376,9 @@ function ProgrammeOverviewContent() {
                 >
                   <Icon className="h-4 w-4 text-ink" />
                   <p className="text-[13px] font-extrabold text-ink">{seg.segment}</p>
-                  <span className="ml-auto flex items-center gap-1 text-[10px] font-bold text-ink-muted">
-                    {seg.type === "rotating" ? (
-                      // STEM 3-5: imagine playground / wonderworld run their
-                      // activities in fixed order, each revisited deeper —
-                      // distinct from a true random rotation. Surface that
-                      // distinction in the chip so the model is clear.
-                      seg.games[0]?.skills?.includes("fixed order") ? (
-                        <><RotateCw className="h-3 w-3" /> fixed order · {seg.games.length} {seg.games.length === 1 ? "activity" : "activities"} · revisited</>
-                      ) : (
-                        <><RotateCw className="h-3 w-3" /> rotating · {seg.games.length} games</>
-                      )
-                    ) : (
-                      <><Lock className="h-3 w-3" /> fixed</>
-                    )}
-                  </span>
                   <ChevronDown
                     className={cn(
-                      "h-4 w-4 text-ink/60 transition-transform",
+                      "ml-auto h-4 w-4 text-ink/60 transition-transform",
                       isOpen && "rotate-180"
                     )}
                   />
@@ -1466,35 +1429,19 @@ function ProgrammeOverviewContent() {
                                   </div>
                                 )}
                               </div>
-                              <span className="shrink-0 rounded-chip bg-ink/5 px-1.5 py-0.5 text-[9px] font-bold text-ink-muted">
-                                {g.rotation}
-                              </span>
                             </div>
                           );
                         })}
                       </div>
                     </div>
 
-                {/* Rotation rule note (rotating segments only) */}
-                {seg.type === "rotating" && (
+                {/* Reference artworks — educator's choice (art only). */}
+                {seg.segment === "reference artworks" && isArt && (
                   <div className="rounded-xl bg-brand-orange/5 p-4">
-                    <p className="text-[12px] font-bold text-ink">How rotation works</p>
+                    <p className="text-[12px] font-bold text-ink">reference artworks</p>
                     <p className="mt-1 text-[11px] leading-relaxed text-ink-muted">
-                      Rotates across {seg.games.length} games — each activity can only repeat after all others have been used. Variations change how children play. Levels adjust difficulty within the same game, without separating children.
+                      A pool of reference artworks for this age — not a fixed sequence. Educators can do artworks of their choice in class.
                     </p>
-                  </div>
-                )}
-                {seg.type === "fixed" && isRobotics && (seg.segment === "experiment" || seg.segment === "build") && (
-                  <div className="rounded-xl bg-brand-orange/5 p-4">
-                    <p className="text-[12px] font-bold text-ink">How it runs</p>
-                    <p className="mt-1 text-[11px] leading-relaxed text-ink-muted">
-                      No rotation — every session is fixed. Experiments and build-day steps are set in advance so children can join at any session and pick up exactly where the class is.
-                    </p>
-                    {seg.segment === "build" && (
-                      <p className="mt-2 text-[11px] italic leading-relaxed text-ink-muted">
-                        At the end of the build, children sort components back to the kit box and reset their workspace.
-                      </p>
-                    )}
                   </div>
                 )}
 
@@ -3000,8 +2947,8 @@ function ProgrammeOverviewContent() {
             kind: "modal",
             modalKey: "artiverse-3-5",
             cover: "/artiverse-book/01-accordion.png",
-            title: "the artiverse book",
-            subtitle: "teacher reference · 3 chapters · ~37 artworks",
+            title: "artwork references",
+            subtitle: "reference artworks for the age — educators pick their own",
           });
           books.push({
             kind: "modal",
@@ -3020,8 +2967,8 @@ function ProgrammeOverviewContent() {
             kind: "route",
             href: "/artiverse-book-5-8",
             cover: firstUnit?.heroImageUrl ?? "/artiverse/art-5-8/unit-1.png",
-            title: "the artiverse book",
-            subtitle: `teacher reference · ${programme.artiverseUnits?.length ?? 0} units`,
+            title: "artwork references",
+            subtitle: `reference artworks · ${programme.artiverseUnits?.length ?? 0} artworks`,
           });
         }
         if (programme.slug === "art-design-8-12") {
@@ -3030,8 +2977,8 @@ function ProgrammeOverviewContent() {
             kind: "route",
             href: "/artiverse-book-8-12",
             cover: firstUnit?.heroImageUrl ?? "/artiverse/art-8-12/unit-1.png",
-            title: "the artiverse book",
-            subtitle: `teacher reference · ${programme.artiverseUnits?.length ?? 0} units`,
+            title: "artwork references",
+            subtitle: `reference artworks · ${programme.artiverseUnits?.length ?? 0} artworks`,
           });
         }
         // STEM 3–5 — two teacher reference books built like the
