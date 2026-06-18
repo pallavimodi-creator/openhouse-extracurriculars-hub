@@ -146,8 +146,6 @@ const ALL_FILTERS: { id: string; label: string }[] = [
   { id: "artistotle", label: "artistotle" },
   { id: "experiment", label: "experiment" },
   { id: "build", label: "build" },
-  { id: "experience-book", label: "experience book" },
-  { id: "log-book", label: "experience book" },
 ];
 
 type LibraryItem = (

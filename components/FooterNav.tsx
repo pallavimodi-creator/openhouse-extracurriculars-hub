@@ -3,17 +3,10 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { Home, BookOpen, LayoutGrid, LogOut, Notebook, Building2 } from "lucide-react";
+import { Home, BookOpen, LayoutGrid, LogOut, Building2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { listCurriculumProgrammes } from "@/lib/content";
 import { clearTeacher, getBuilding, clearBuilding, getTeacher } from "@/lib/teacher-state";
-
-const PROGRAMME_TO_BOOK: Record<string, string> = {
-  "art-design-5-8": "art-5-8",
-  "art-design-8-12": "art-8-12",
-  "public-speaking-5-8": "speaking-5-8",
-  "public-speaking-8-12": "speaking-8-12",
-};
 
 export function FooterNav() {
   const pathname = usePathname();
@@ -46,23 +39,13 @@ export function FooterNav() {
   ];
 
   if (programmeMatch && programmeMatch.totalSessions > 0) {
-    // The hub is a reference, not a session runner — no plans tab.
-    //   1. overview — the programme at a glance
-    //   2. experience book (where one exists)
-    //   3. library  — reference (added below)
+    // The hub is a reference, not a session runner — no plans tab, no
+    // experience book. Just the overview and the library.
     items.push({
       href: `/${programmeMatch.slug}/overview`,
       label: "overview",
       icon: LayoutGrid,
     });
-    const bookSlug = PROGRAMME_TO_BOOK[programmeMatch.slug];
-    if (bookSlug) {
-      items.push({
-        href: `/book/${bookSlug}`,
-        label: "experience book",
-        icon: Notebook,
-      });
-    }
   }
 
   items.push({ href: "/library", label: "library", icon: BookOpen });

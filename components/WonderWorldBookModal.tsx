@@ -644,7 +644,7 @@ function ActivityPage({
     <div className="flex h-full w-full flex-col gap-3 overflow-hidden bg-brand-cream p-5 md:p-7">
       <div>
         <p className="text-[10px] font-bold tracking-normal text-ink-subtle">
-          {chapterName} · activity {activity.number} · {activity.time}
+          {chapterName} · activity {activity.number}
         </p>
         <h3 className="mt-1 text-[20px] font-extrabold lowercase leading-tight text-ink md:text-[24px]">
           {activity.title}

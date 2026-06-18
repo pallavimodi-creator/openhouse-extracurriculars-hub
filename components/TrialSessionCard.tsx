@@ -9,9 +9,6 @@ function Segment({ segment }: { segment: TrialSessionSegment }) {
     <div className="rounded-card bg-brand-white p-4 shadow-card ring-1 ring-ink/5">
       <div className="flex items-center justify-between">
         <p className="text-[14px] font-extrabold text-ink">{segment.name}</p>
-        <span className="rounded-chip bg-brand-orange/10 px-2 py-0.5 text-[10px] font-semibold text-brand-orange">
-          {segment.time}
-        </span>
       </div>
 
       {segment.heroImageUrl && (

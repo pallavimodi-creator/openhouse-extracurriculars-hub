@@ -42,16 +42,6 @@ function GuideContent() {
               <p className="mt-1 text-[12px] text-ink-muted">use the library to search and browse all activities across all programmes. filter by segment type. tap any activity for the complete game card.</p>
             </div>
           </div>
-          <div className="mt-4">
-            <a href="/book" className="flex items-center gap-3 rounded-card bg-brand-orange/10 p-4 transition hover:bg-brand-orange/15">
-              <span className="text-[20px]">📓</span>
-              <div>
-                <h3 className="text-[14px] font-bold text-ink">experience books</h3>
-                <p className="mt-0.5 text-[12px] text-ink-muted">browse all experience books for art & design and public speaking.</p>
-              </div>
-              <span className="ml-auto text-[12px] font-bold text-brand-orange">view →</span>
-            </a>
-          </div>
         </section>
 
         {/* Talking to Parents */}
@@ -112,7 +102,7 @@ function GuideContent() {
               skills are built through repetition across many sessions. a child who does the same type of activity repeatedly over a programme builds a real habit — not because they were drilled, but because the structure kept returning to it. the skills transfer directly into school and everyday life.
             </FaqItem>
             <FaqItem q="how do you keep us updated?">
-              three ways. the experience book comes home after every session — filled in by the child in their own words and drawings. the report card is issued at the end of every month — specific to your child, written by the educator. the educator is available at drop-off and pick-up for brief conversations. longer conversations can be scheduled.
+              the report card is issued at the end of every month — specific to your child, written by the educator. the educator is also available at drop-off and pick-up for brief conversations, and longer conversations can be scheduled.
             </FaqItem>
             <FaqItem q="my child is shy — will this work for them?">
               the programme is built for children who are not naturally confident. no child is ever put on the spot alone without preparation. every activity is designed so children participate at the same time — no one is singled out or waiting to be watched. reluctant children have a gradual pathway and are never forced.

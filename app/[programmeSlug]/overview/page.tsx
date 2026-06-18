@@ -171,7 +171,6 @@ const dailyFlow = [
     id: "art-gym",
     icon: Dumbbell,
     name: "art gym",
-    time: "15–20 min",
     durationFlex: 17.5,
     meaning:
       "a structured opening segment using books, cue cards, and their extensions, where each session builds directly on the previous one. art gym books are laminated — children mark them with resources of choice: thread, clay, sequins, or erasable markers.",
@@ -182,7 +181,6 @@ const dailyFlow = [
     id: "art-games",
     icon: Gamepad2,
     name: "art games",
-    time: "15–20 min",
     durationFlex: 17.5,
     meaning:
       "openhouse art games using varied formats and materials. children experiment, create, and develop core art skills through playful exploration.",
@@ -193,7 +191,6 @@ const dailyFlow = [
     id: "artiverse",
     icon: Palette,
     name: "artiverse",
-    time: "40–45 min",
     durationFlex: 42.5,
     meaning:
       "a structured making programme combining medium, technique, and outcome over multiple sessions.",
@@ -204,7 +201,6 @@ const dailyFlow = [
     id: "log-book",
     icon: Notebook,
     name: "experience book",
-    time: "10 min",
     durationFlex: 10,
     meaning:
       "Coming soon — a record of the child's learning and an opportunity for the teacher to debrief and plan how to help the child. Also used for communication to parents.",
@@ -310,7 +306,6 @@ const segmentGames = [
     segment: "art gym",
     icon: Dumbbell,
     color: "bg-segment-yellow",
-    time: "15–20 min",
     type: "fixed" as const,
     games: [
       {
@@ -339,7 +334,6 @@ const segmentGames = [
     segment: "art games",
     icon: Gamepad2,
     color: "bg-segment-green/30",
-    time: "15–20 min",
     type: "rotating" as const,
     games: [
       { name: "match me", skills: ["colour & painting"], rotation: "rotating" as const },
@@ -372,7 +366,6 @@ const segmentGames = [
     segment: "artiverse",
     icon: Palette,
     color: "bg-segment-blue/30",
-    time: "40–45 min",
     type: "fixed" as const,
     games: [
       {
@@ -386,7 +379,6 @@ const segmentGames = [
     segment: "experience book",
     icon: Notebook,
     color: "bg-segment-pink/30",
-    time: "10 min",
     type: "fixed" as const,
     games: [
       {
@@ -717,20 +709,23 @@ function ProgrammeOverviewContent() {
         "Every child works in their personal gamebook at their own level. Three level books — children move up at their own pace.",
     },
   };
-  const dailyFlow = programme.segmentDefinitions.map((s) => {
-    const meta = segmentMeta[s.id] ?? segmentMeta["log-book"];
-    const palette = segmentPalette(s.id);
-    return {
-      id: s.id,
-      icon: meta.icon,
-      name: (s.id === "log-book" || s.id === "experience-book") ? "experience book" : s.name.toLowerCase(),
-      time: s.durationRange,
-      durationFlex: meta.durationFlex,
-      meaning: meta.meaning,
-      color: palette.fill,
-      textColor: palette.text,
-    };
-  });
+  const dailyFlow = programme.segmentDefinitions
+    // The hub doesn't surface the experience book — exclude it from the
+    // segment list (and the segment count) entirely.
+    .filter((s) => s.id !== "log-book" && s.id !== "experience-book")
+    .map((s) => {
+      const meta = segmentMeta[s.id] ?? segmentMeta["log-book"];
+      const palette = segmentPalette(s.id);
+      return {
+        id: s.id,
+        icon: meta.icon,
+        name: s.name.toLowerCase(),
+        durationFlex: meta.durationFlex,
+        meaning: meta.meaning,
+        color: palette.fill,
+        textColor: palette.text,
+      };
+    });
 
   const skills = programme.skillAreas.map((s) => ({
     id: s.id,
@@ -760,7 +755,6 @@ function ProgrammeOverviewContent() {
             segment: "art gym",
             icon: Dumbbell,
             color: "bg-segment-yellow",
-            time: "15 min",
             type: "rotating" as const,
             games: [
               { name: "art gym book", skills: ["fine motor", "creative expression"], rotation: "fixed" as const },
@@ -773,7 +767,6 @@ function ProgrammeOverviewContent() {
       segment: programme.ageGroup === "3-5" ? "art games" : "art games + gym",
       icon: Gamepad2,
       color: "bg-segment-green/30",
-      time: programme.ageGroup === "3-5" ? "25 min" : "25 min · 1–2 games",
       type: "rotating" as const,
       games:
         programme.ageGroup === "3-5"
@@ -792,7 +785,6 @@ function ProgrammeOverviewContent() {
       segment: programme.ageGroup === "3-5" ? "artiverse / artistotle" : "artiverse",
       icon: Palette,
       color: "bg-segment-blue/30",
-      time: programme.ageGroup === "3-5" ? "35 min" : "55 min",
       type: "fixed" as const,
       games: [{ name: `${programme.artiverseUnits?.length ?? 0} ${programme.ageGroup === "3-5" ? "projects" : "artiverse units"}`, skills: ["all five skills"], rotation: "fixed" as const }],
     },
@@ -800,7 +792,6 @@ function ProgrammeOverviewContent() {
       segment: "experience book",
       icon: Notebook,
       color: "bg-segment-pink/30",
-      time: "10 min",
       type: "fixed" as const,
       games: [{ name: "personal experience book", skills: ["reflection"], rotation: "fixed" as const }],
     },
@@ -811,7 +802,6 @@ function ProgrammeOverviewContent() {
             segment: "art care",
             icon: Sparkles,
             color: "bg-brand-orange/15",
-            time: "5 min",
             type: "fixed" as const,
             games: [
               {
@@ -831,7 +821,6 @@ function ProgrammeOverviewContent() {
       segment: "roll call",
       icon: Zap,
       color: "bg-segment-yellow",
-      time: "8–10 min",
       type: "rotating" as const,
       games: Object.values(programme.activities)
         .filter((a) => a.segment === "roll-call")
@@ -841,7 +830,6 @@ function ProgrammeOverviewContent() {
       segment: "playground",
       icon: Gamepad2,
       color: "bg-segment-green/30",
-      time: "20–25 min",
       type: "rotating" as const,
       games: Object.values(programme.activities)
         .filter((a) => a.segment === "playground")
@@ -851,7 +839,6 @@ function ProgrammeOverviewContent() {
       segment: "showtime",
       icon: Star,
       color: "bg-segment-blue/30",
-      time: "30–35 min",
       type: "rotating" as const,
       games: Object.values(programme.activities)
         .filter((a) => a.segment === "showtime")
@@ -861,7 +848,6 @@ function ProgrammeOverviewContent() {
       segment: "experience book",
       icon: Notebook,
       color: "bg-segment-pink/30",
-      time: "8–10 min",
       type: "fixed" as const,
       games: [{ name: "personal experience book", skills: ["reflection"], rotation: "fixed" as const }],
     },
@@ -888,7 +874,6 @@ function ProgrammeOverviewContent() {
       segment: "experiment",
       icon: FlaskConical,
       color: "bg-segment-yellow",
-      time: "40 min",
       type: "fixed" as const,
       games: ROBOTICS_EXPERIMENT_ORDER
         .map((id) => programme.activities[id])
@@ -903,7 +888,6 @@ function ProgrammeOverviewContent() {
       segment: "build",
       icon: Wrench,
       color: "bg-segment-green/30",
-      time: "40 min",
       type: "fixed" as const,
       games: Object.values(programme.activities)
         .filter((a) => a.segment === "build")
@@ -913,7 +897,6 @@ function ProgrammeOverviewContent() {
       segment: "experience book",
       icon: Notebook,
       color: "bg-segment-pink/30",
-      time: "10 min",
       type: "fixed" as const,
       games: [{ name: "daily five-mark log · monthly robotics journey letter", skills: ["reflection"], rotation: "fixed" as const }],
     },
@@ -929,7 +912,6 @@ function ProgrammeOverviewContent() {
       segment: "roll & rhyme",
       icon: Zap,
       color: "bg-segment-yellow",
-      time: "10 min",
       type: "fixed" as const,
       games: [
         {
@@ -943,7 +925,6 @@ function ProgrammeOverviewContent() {
       segment: "book'o'clock",
       icon: BookOpen,
       color: "bg-segment-blue/30",
-      time: "25 min",
       type: "fixed" as const,
       games: [
         {
@@ -957,7 +938,6 @@ function ProgrammeOverviewContent() {
       segment: "wordsmiths",
       icon: Sparkles,
       color: "bg-brand-orange/15",
-      time: "10 min",
       type: "rotating" as const,
       games: Object.values(programme.activities)
         .filter((a) => a.segment === "wordsmiths")
@@ -971,7 +951,6 @@ function ProgrammeOverviewContent() {
       segment: "play-writes",
       icon: PenLine,
       color: "bg-segment-green/30",
-      time: "10 min",
       type: "fixed" as const,
       games: [
         {
@@ -985,7 +964,6 @@ function ProgrammeOverviewContent() {
       segment: "playground",
       icon: Gamepad2,
       color: "bg-segment-green/30",
-      time: "15 min",
       type: "rotating" as const,
       games: Object.values(programme.activities)
         .filter((a) => a.segment === "playground")
@@ -999,7 +977,6 @@ function ProgrammeOverviewContent() {
       segment: "experience book",
       icon: Notebook,
       color: "bg-segment-pink/30",
-      time: "10 min",
       type: "fixed" as const,
       games: [
         {
@@ -1028,7 +1005,6 @@ function ProgrammeOverviewContent() {
       segment: "imagine playground",
       icon: Wrench,
       color: segmentPalette("imagine-playground").soft,
-      time: "35 min · session a",
       type: "rotating" as const,
       // 11 core projects run in fixed order, each met 2–3 times. Mark
       // the order with a "fixed order" hint and surface (re-visit) tags
@@ -1045,7 +1021,6 @@ function ProgrammeOverviewContent() {
       segment: "wonderworld",
       icon: BookOpen,
       color: segmentPalette("wonder-world").soft,
-      time: "35 min · session b",
       type: "rotating" as const,
       games: Object.values(programme.activities)
         .filter((a) => a.segment === "wonder-world")
@@ -1059,7 +1034,6 @@ function ProgrammeOverviewContent() {
       segment: "logic lab",
       icon: Gamepad2,
       color: segmentPalette("logic-lab").soft,
-      time: "20 min",
       type: "rotating" as const,
       games: Object.values(programme.activities)
         .filter((a) => a.segment === "logic-lab")
@@ -1073,7 +1047,6 @@ function ProgrammeOverviewContent() {
       segment: "numbersgym",
       icon: Sparkles,
       color: segmentPalette("numbers-gym").soft,
-      time: "25 min",
       type: "fixed" as const,
       games: [
         {
@@ -1087,7 +1060,6 @@ function ProgrammeOverviewContent() {
       segment: "experience book",
       icon: Notebook,
       color: segmentPalette("experience-book").soft,
-      time: "10 min",
       type: "fixed" as const,
       games: [
         {
@@ -1105,7 +1077,7 @@ function ProgrammeOverviewContent() {
   // wordsmiths, play-writes). Route by slug, not category, so they don't
   // pick up the 3-5 storytelling segments table.
   const isStorytelling35 = programme.slug === "language-storytelling-3-5";
-  const gamesTable = isStem35
+  const gamesTableRaw = isStem35
     ? stem35SegmentGames
     : isRobotics
       ? roboticsSegmentGames
@@ -1114,6 +1086,11 @@ function ProgrammeOverviewContent() {
         : isStorytelling35
           ? languageSegmentGames
           : psSegmentGames;
+  // The hub doesn't surface the experience book — drop that segment from
+  // every programme's segment list.
+  const gamesTable = gamesTableRaw.filter(
+    (s) => s.segment !== "experience book",
+  );
 
   return (
     <div className="flex flex-col pb-6">
@@ -3054,29 +3031,7 @@ function ProgrammeOverviewContent() {
             subtitle: "teacher reference · 3 levels · self-paced",
           });
         }
-        // Experience book (programmes that have one wired)
-        const expBookSlug: Record<string, string> = {
-          "art-design-5-8": "art-5-8",
-          "art-design-8-12": "art-8-12",
-          "public-speaking-5-8": "speaking-5-8",
-          "public-speaking-8-12": "speaking-8-12",
-        };
-        const expSlug = expBookSlug[programme.slug];
-        const expCover: Record<string, string> = {
-          "art-5-8": "/book-covers/art-5-8.png",
-          "art-8-12": "/book-covers/art-8-12.png",
-          "speaking-5-8": "/book-covers/speaking-5-8.png",
-          "speaking-8-12": "/book-covers/speaking-8-12.png",
-        };
-        if (expSlug) {
-          books.push({
-            kind: "route",
-            href: `/book/${expSlug}`,
-            cover: expCover[expSlug],
-            title: "experience book",
-            subtitle: "the child's daily reflection book",
-          });
-        }
+        // The experience book is not surfaced in the hub — no card here.
         if (books.length === 0) return null;
         return (
           <section className="mt-10 px-4 md:px-8">

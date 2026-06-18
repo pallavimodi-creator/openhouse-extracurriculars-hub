@@ -338,16 +338,6 @@ export function SegmentInfoPopup({ info }: { info: SegmentInfo }) {
         </div>
       )}
 
-      {info.bookLinkSlug && (
-        <Link
-          href={`/book/${info.bookLinkSlug}`}
-          className="flex items-center justify-center gap-2 rounded-card bg-brand-orange py-3 text-[13px] font-bold text-white shadow-card transition hover:opacity-95 active:scale-[0.98]"
-        >
-          <BookOpen className="h-4 w-4" />
-          Open experience book
-        </Link>
-      )}
-
       {info.externalLink && (
         <Link
           href={info.externalLink.href}

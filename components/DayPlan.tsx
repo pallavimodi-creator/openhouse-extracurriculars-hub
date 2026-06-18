@@ -298,9 +298,6 @@ function SegmentRow({
             )}
             {segment.segmentName}
           </span>
-          <span className="text-[11px] text-ink-subtle">
-            {segment.durationRange}
-          </span>
           {/* Lanyard + debrief reminder — public-speaking ONLY. The
               lanyard system (one ability per segment, child wears
               the focus chip) is a PS programme tool; other
