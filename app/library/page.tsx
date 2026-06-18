@@ -49,6 +49,7 @@ import {
   listCurriculumProgrammes,
   getActivityImage,
   GYM_BOOK_IMAGES,
+  getProgrammeStage,
 } from "@/lib/content";
 import { cn } from "@/lib/utils";
 import type {
@@ -216,14 +217,14 @@ function buildItemsFor(prog: CurriculumProgramme): LibraryItem[] {
       kind: "primer",
       id: `${programmeSlug}/art-gym-overview`,
       segment: "art-gym",
-      title: is35 ? "artgym book" : "art gym — 4-session cycle",
+      title: is35 ? "artgym book" : "art gym — book & cue cards",
       description: is35
         ? "Fine motor books with materials of choice — erasable markers, clay, yarn. Reusable laminated pages. Offer children a choice in what to use."
         : "A structured opening segment using books, cue cards, and their extensions. Each session builds directly on the previous one. Books are laminated — children mark them with resources of choice (thread, clay, sequins, erasable markers). Every book day children do 1–3 pages, then replicate what they drew in their sketchbook freely with materials of choice.",
       info: {
         segmentId: "art-gym",
         segmentName: "Art Gym",
-        title: is35 ? "artgym book" : "art gym — 4-session cycle",
+        title: is35 ? "artgym book" : "art gym — book & cue cards",
         description: is35
           ? "A quick warm-up for fine motor skills and imagination. ArtGym books are fine motor books that can be used with materials of choice — erasable markers, clay, yarn. They are reusable laminated books, so anything that wipes off works (no paint, nothing that stains). Offer children a choice in what they use. ArtGym book and Scribble book rotate on alternate days — do one, then the next day, the other. There are 2 ArtGym books — start every child on level 1, then move to level 2. Use the prescribed resources only. Children do 1–2 pages of ArtGym a day. Use the books in linear order — first page to last — the challenge increases page by page."
           : "a self-paced warm-up. the cycle runs: book → extension (book) → cue card → extension (cue card). each extension day belongs to the day before it — the book session and its extension are one unit, and the cue card session and its extension are one unit. an extension day is never independent. art gym books are laminated — children mark them with resources of choice: thread, clay, sequins, or erasable markers. every book day children do 1–3 pages and then replicate what they drew in their sketchbook freely with materials of choice (crayons, colour pencils, brush pens, yarn + glue, etc.). on extension days children apply the same lines onto simple daily objects or shapes — progression goes shape → simple object → imaginary object → scene.",
@@ -296,7 +297,13 @@ export default function LibraryPage() {
     const admin = t.programmeSlug === "*" || t.role === "admin";
     setIsAdmin(admin);
     setTeacherSlug(t.programmeSlug);
-    setSelectedProgSlug(admin ? "all" : t.programmeSlug);
+    // The library is always scoped to a single programme — never "all" —
+    // so educators aren't shown every programme's resources at once.
+    // Admin / centre logins default to the first live programme.
+    const firstLive = listCurriculumProgrammes().find(
+      (p) => p.totalSessions > 0 && getProgrammeStage(p) === "live",
+    );
+    setSelectedProgSlug(admin ? (firstLive?.slug ?? "") : t.programmeSlug);
     setAuthReady(true);
   }, [router]);
 
@@ -305,10 +312,8 @@ export default function LibraryPage() {
 
     let progsToShow: CurriculumProgramme[] = [];
     if (isAdmin) {
-      progsToShow =
-        selectedProgSlug === "all"
-          ? programmes
-          : programmes.filter((p) => p.slug === selectedProgSlug);
+      // Always exactly one programme — never the full list.
+      progsToShow = programmes.filter((p) => p.slug === selectedProgSlug);
     } else if (teacherSlug) {
       const p = getCurriculumProgramme(teacherSlug);
       progsToShow = p ? [p] : [];
@@ -317,8 +322,13 @@ export default function LibraryPage() {
     return progsToShow.flatMap(buildItemsFor);
   }, [isAdmin, teacherSlug, selectedProgSlug]);
 
+  // Programme picker (admin / centre) — live programmes only, since trial
+  // programmes are blocked.
   const adminProgrammes = useMemo(
-    () => listCurriculumProgrammes().filter((p) => p.totalSessions > 0),
+    () =>
+      listCurriculumProgrammes().filter(
+        (p) => p.totalSessions > 0 && getProgrammeStage(p) === "live",
+      ),
     []
   );
 
@@ -453,7 +463,7 @@ export default function LibraryPage() {
       )}
       <h1 className="text-[22px] font-bold text-ink">library</h1>
       <p className="mt-1 text-[13px] text-ink-muted">
-        every resource across programmes — search by name, keyword, or material.
+        every resource for this programme — search by name, keyword, or material.
       </p>
 
       {/* Admin-only programme picker */}
@@ -472,17 +482,6 @@ export default function LibraryPage() {
               ref={progPickerRef}
               className="no-scrollbar flex flex-1 gap-2 overflow-x-auto scroll-smooth"
             >
-              <button
-                onClick={() => setSelectedProgSlug("all")}
-                className={cn(
-                  "shrink-0 rounded-chip px-3 py-1.5 text-[11px] font-semibold transition",
-                  selectedProgSlug === "all"
-                    ? "bg-brand-orange text-white"
-                    : "bg-ink/5 text-ink-muted hover:bg-ink/10"
-                )}
-              >
-                all programmes
-              </button>
               {adminProgrammes.map((p) => (
                 <button
                   key={p.slug}
@@ -528,11 +527,12 @@ export default function LibraryPage() {
         {query.trim() ? ` for "${query.trim()}"` : ""}
       </p>
 
-      {/* Results — grouped programme → segment in conduction order */}
+      {/* Results — the single selected programme's resources */}
       <div className="mt-4 space-y-8">
         {grouped.map((prog) => {
-          const showProgrammeHeader =
-            isAdmin && selectedProgSlug === "all" && grouped.length > 1;
+          // Show the programme title so the centre login knows which
+          // programme's resources are on screen.
+          const showProgrammeHeader = isAdmin;
           return (
             <section key={prog.slug} className="space-y-4">
               {showProgrammeHeader && (

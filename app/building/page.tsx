@@ -81,12 +81,11 @@ export default function BuildingPickerPage() {
           hi {teacherName?.toLowerCase() ?? "teacher"}
         </p>
         <h1 className="mt-2 text-[26px] font-extrabold leading-[1.05] tracking-tight text-ink md:text-[32px]">
-          which building are you at today?
+          which centre are you at today?
         </h1>
         <p className="mt-3 max-w-sm text-[12.5px] leading-relaxed text-ink-muted md:text-[13px]">
-          your class progress (completed sessions, next day to teach) is tracked
-          per building. pick the one you're teaching at right now — you can
-          switch any time without signing out.
+          pick the centre you&apos;re at right now — you can switch any time
+          without signing out.
         </p>
       </div>
 
