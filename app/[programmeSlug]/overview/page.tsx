@@ -1148,6 +1148,9 @@ function ProgrammeOverviewContent() {
               <h1 className="mt-2 text-[28px] font-extrabold lowercase leading-[1.05] tracking-tight text-ink md:text-[40px]">
                 {programme.title}
               </h1>
+              <p className="mt-2 inline-block rounded-chip bg-brand-orange/10 px-2.5 py-0.5 text-[11px] font-bold lowercase text-brand-orange">
+                {programme.ageLabel}
+              </p>
               {programme.slug !== "art-design-3-5" &&
                 programme.slug !== "language-storytelling-3-5" && (
                   <div className="mt-4 border-l-[3px] border-brand-orange pl-4">
@@ -1159,30 +1162,24 @@ function ProgrammeOverviewContent() {
             </div>
           </div>
 
-          {/* Stat strip — age group + class size only. */}
-          <div className="grid grid-cols-2 gap-px bg-ink/5">
-            {[
-              { label: "age group", value: programme.ageLabel.replace(/^ages?\s+/i, "") },
-              {
-                label: "class size",
-                value: programme.category === "art" ? "6–10" : programme.category === "stem" ? "6–10" : "6–10",
-              },
-            ].map((stat) => (
-              <div
-                key={stat.label}
-                className="flex flex-col items-center justify-center bg-brand-cream px-3 py-3 text-center"
-              >
-                <p className="text-[18px] font-extrabold leading-none text-ink md:text-[20px]">
-                  {stat.value}
-                </p>
-                <p className="mt-1 text-[10px] font-semibold text-ink-muted md:text-[11px]">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
+
+      {/* ─── HOW THIS PROGRAMME WORKS — category-specific approach ─── */}
+      {(isArt || isRobotics || isLanguage) && (
+        <section className="mt-4 px-4 md:px-8">
+          <div className="rounded-2xl bg-brand-white p-4 shadow-card ring-1 ring-ink/5 md:p-5">
+            <p className="text-[11px] font-bold text-brand-orange">how this programme works</p>
+            <p className="mt-1.5 text-[13px] leading-relaxed text-ink md:text-[14px]">
+              {isRobotics
+                ? "this overview covers mechanics. robotics at openhouse spans three strands — mechanics, electronics, and coding — and this is the mechanics programme."
+                : isArt
+                  ? "the skills below are built through a combination of games, making artworks, and practice in the art gym."
+                  : "the skills below are built through a combination of games."}
+            </p>
+          </div>
+        </section>
+      )}
 
       {/* ─── WELCOME — 3-5 art only ─── */}
       {programme.slug === "art-design-3-5" && (

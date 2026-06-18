@@ -928,7 +928,7 @@ export const artDesign58: CurriculumProgramme = {
   tagline:
     "explore materials and techniques while building core artistic skills.",
   description:
-    "builds line control, shape-making, colour mixing, composition, and imagination — through hands-on making across seven mediums.",
+    "builds line control, shape-making, colour mixing, composition, and imagination — through hands-on making.",
   totalSessions: 50,
   skillAreas: [
     {
