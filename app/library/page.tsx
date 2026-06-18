@@ -553,13 +553,13 @@ export default function LibraryPage() {
               <span className="flex h-4 w-4 items-center justify-center rounded-full bg-segment-blue/40 text-ink">
                 <Box className="h-2.5 w-2.5" strokeWidth={2.4} />
               </span>
-              games with resources — needs a kit or cards
+              games with physical resources — needs a kit or cards
             </span>
             <span className="inline-flex items-center gap-1.5">
               <span className="flex h-4 w-4 items-center justify-center rounded-full bg-brand-white text-brand-orange ring-1 ring-ink/10">
                 <MessageCircle className="h-2.5 w-2.5" strokeWidth={2.4} />
               </span>
-              games without resources — no physical materials needed
+              games without physical resources — verbal, no kit
             </span>
           </>
         )}
@@ -640,17 +640,21 @@ export default function LibraryPage() {
                           const kindTag: { Icon: LucideIcon; label: string } | null =
                             it.kind !== "activity"
                               ? null
-                              : it.item.materials?.length === 0
-                                ? { Icon: MessageCircle, label: "no resources" }
-                                : currentCategory === "stem" && it.segment === "experiment"
-                                  ? { Icon: FlaskConical, label: "experiment" }
-                                  : currentCategory === "stem" && it.segment === "build"
-                                    ? { Icon: Wrench, label: "model" }
-                                    : currentCategory === "art"
-                                      ? { Icon: Gamepad2, label: "game" }
-                                      : currentCategory === "language"
-                                        ? { Icon: Box, label: "resources" }
-                                        : null;
+                              : currentCategory === "art"
+                                ? { Icon: Gamepad2, label: "game" }
+                                : currentCategory === "language"
+                                  // A facilitated game is verbal / teacher-led —
+                                  // it needs no physical resources even if a
+                                  // prompt deck is listed. Only physical-games
+                                  // need a kit the children handle.
+                                  ? it.item.type === "physical-game"
+                                    ? { Icon: Box, label: "kit" }
+                                    : { Icon: MessageCircle, label: "no kit" }
+                                  : currentCategory === "stem" && it.segment === "experiment"
+                                    ? { Icon: FlaskConical, label: "experiment" }
+                                    : currentCategory === "stem" && it.segment === "build"
+                                      ? { Icon: Wrench, label: "model" }
+                                      : null;
                           const cornerBadge = kindTag ? (
                             <span
                               className="absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-brand-white text-brand-orange shadow-sm ring-2 ring-brand-white"
