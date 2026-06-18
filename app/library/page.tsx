@@ -633,9 +633,25 @@ export default function LibraryPage() {
                                 : it.kind === "primer"
                                   ? it.thumbImageUrl ?? null
                                   : null;
-                          // Per-category marker for this entry (see legend):
-                          //   PS   → "no resources" (empty materials list)
-                          //   stem → experiment / model build (by segment)
+                          // PS "physical resources" test: a game needs a kit
+                          // only if it's a physical-game whose materials list a
+                          // REAL physical item. A facilitated game is verbal
+                          // (no kit even with a prompt deck), and a physical-game
+                          // whose only "materials" are an app / URL prompt also
+                          // needs no physical kit.
+                          const psMats =
+                            it.kind === "activity" ? it.item.materials : undefined;
+                          const psAllNonPhysical =
+                            psMats !== undefined &&
+                            (psMats.length === 0 ||
+                              psMats.every((m) =>
+                                /\bapp\b|\(app\)|digital|https?:\/\//i.test(m),
+                              ));
+                          const psHasKit =
+                            it.kind === "activity" &&
+                            it.item.type === "physical-game" &&
+                            !psAllNonPhysical;
+                          // Per-category marker for this entry (see legend).
                           // Art games carry no marker; artworks use the 🌍 badge.
                           const kindTag: { Icon: LucideIcon; label: string } | null =
                             it.kind !== "activity"
@@ -643,11 +659,7 @@ export default function LibraryPage() {
                               : currentCategory === "art"
                                 ? { Icon: Gamepad2, label: "game" }
                                 : currentCategory === "language"
-                                  // A facilitated game is verbal / teacher-led —
-                                  // it needs no physical resources even if a
-                                  // prompt deck is listed. Only physical-games
-                                  // need a kit the children handle.
-                                  ? it.item.type === "physical-game"
+                                  ? psHasKit
                                     ? { Icon: Box, label: "kit" }
                                     : { Icon: MessageCircle, label: "no kit" }
                                   : currentCategory === "stem" && it.segment === "experiment"
