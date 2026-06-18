@@ -550,8 +550,10 @@ export default function LibraryPage() {
         {currentCategory === "language" && (
           <>
             <span className="inline-flex items-center gap-1.5">
-              <span aria-hidden className="flex h-4 w-4 items-center justify-center rounded bg-ink/10 text-[8px]">📷</span>
-              games with resources — a photo shows the kit
+              <span className="flex h-4 w-4 items-center justify-center rounded-full bg-segment-blue/40 text-ink">
+                <Box className="h-2.5 w-2.5" strokeWidth={2.4} />
+              </span>
+              games with resources — needs a kit or cards
             </span>
             <span className="inline-flex items-center gap-1.5">
               <span className="flex h-4 w-4 items-center justify-center rounded-full bg-brand-white text-brand-orange ring-1 ring-ink/10">
@@ -644,7 +646,11 @@ export default function LibraryPage() {
                                   ? { Icon: FlaskConical, label: "experiment" }
                                   : currentCategory === "stem" && it.segment === "build"
                                     ? { Icon: Wrench, label: "model" }
-                                    : null;
+                                    : currentCategory === "art"
+                                      ? { Icon: Gamepad2, label: "game" }
+                                      : currentCategory === "language"
+                                        ? { Icon: Box, label: "resources" }
+                                        : null;
                           const cornerBadge = kindTag ? (
                             <span
                               className="absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-brand-white text-brand-orange shadow-sm ring-2 ring-brand-white"
