@@ -42,7 +42,7 @@ import {
   Compass,
   type LucideIcon,
 } from "lucide-react";
-import { getCurriculumProgramme, getActivityImage, GYM_BOOK_IMAGES } from "@/lib/content";
+import { getCurriculumProgramme, getActivityImage, GYM_BOOK_IMAGES, getProgrammeStage } from "@/lib/content";
 import { cn } from "@/lib/utils";
 import { TeacherGate } from "@/components/TeacherGate";
 import { ArtiverseChapters } from "@/components/ArtiverseChapters";
@@ -464,6 +464,34 @@ function ProgrammeOverviewContent() {
   if (!programme) {
     notFound();
     return null;
+  }
+
+  // Trial programmes (the 3-5 band) are blocked for now — their overviews
+  // are still being finalised (timings differ at the centre). Show a
+  // "coming soon" notice instead of the overview. Flip this off by
+  // removing the guard when the trial overviews are ready.
+  if (getProgrammeStage(programme) === "trial") {
+    return (
+      <div className="flex min-h-[60vh] flex-col items-center justify-center px-6 text-center">
+        <span className="inline-flex items-center gap-1.5 rounded-chip bg-brand-orange/15 px-3 py-1 text-[11px] font-extrabold lowercase text-brand-orange ring-1 ring-brand-orange/30">
+          <Lock className="h-3 w-3" strokeWidth={2.4} />
+          trial · coming soon
+        </span>
+        <h1 className="mt-4 text-[22px] font-extrabold lowercase leading-tight text-ink md:text-[26px]">
+          {programme.title}
+        </h1>
+        <p className="mt-2 max-w-sm text-[13px] leading-relaxed text-ink-muted">
+          this trial programme isn&apos;t open yet — the overview is being
+          finalised for the centre. check back soon.
+        </p>
+        <Link
+          href="/"
+          className="mt-6 rounded-card bg-brand-orange px-5 py-2.5 text-[13px] font-bold text-white shadow-card transition hover:opacity-95 active:scale-[0.98]"
+        >
+          back to home
+        </Link>
+      </div>
+    );
   }
 
   const isArt = programme.category === "art";

@@ -1,5 +1,7 @@
 import Link from "next/link";
+import { Lock } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { getProgrammeStage } from "@/lib/content";
 import { CategoryChip } from "./CategoryChip";
 import { AgeChip } from "./AgeChip";
 import type { CurriculumProgramme, Category } from "@/content/types";
@@ -28,6 +30,9 @@ export function ProgrammeCard({
   desktop?: boolean;
 }) {
   const hasContent = programme.totalSessions > 0;
+  // Trial programmes are blocked for now — their overviews are still being
+  // finalised. Show a locked "coming soon" tag instead of a working link.
+  const isTrial = getProgrammeStage(programme) === "trial";
 
   return (
     <div className={cn(
@@ -81,7 +86,12 @@ export function ProgrammeCard({
         <p className="mt-1 flex-1 text-[12px] font-medium leading-relaxed text-ink-muted">
           {programme.tagline}
         </p>
-        {hasContent ? (
+        {isTrial ? (
+          <span className="mt-3 flex items-center justify-center gap-1.5 rounded-card border border-ink/5 bg-bg-subtle py-2 text-center text-[11px] font-semibold text-ink-subtle">
+            <Lock className="h-3 w-3" strokeWidth={2.4} />
+            coming soon
+          </span>
+        ) : hasContent ? (
           <Link
             href={`/${programme.slug}/overview`}
             className="mt-3 block rounded-card border border-ink/10 bg-brand-white py-2 text-center text-[12px] font-semibold text-ink transition hover:bg-ink/5 active:scale-[0.98]"
