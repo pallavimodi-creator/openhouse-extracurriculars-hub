@@ -450,6 +450,14 @@ export default function LibraryPage() {
       ? getCurriculumProgramme(teacherSlug)
       : null;
 
+  // The library shows one programme at a time, so the legend + card
+  // markers are specific to that programme's category:
+  //   art   → games · artworks
+  //   PS    → games with resources · games without resources
+  //   stem  → experiments · model builds
+  const currentSlug = isAdmin ? selectedProgSlug : (teacherSlug ?? "");
+  const currentCategory = getCurriculumProgramme(currentSlug)?.category;
+
   return (
     <div className="flex flex-col px-4 pt-4 pb-6">
       {programmeForBack && (
@@ -521,26 +529,54 @@ export default function LibraryPage() {
         />
       </div>
 
-      {/* Legend — explains the thumbnail markers. A real photo is the
-          actual resource; an illustrated icon means there's no photo yet.
-          The badges below clarify the two cases teachers ask about most:
-          games that need no physical materials, and reference artworks. */}
+      {/* Legend — specific to this programme's category. It names the
+          kinds of entries you'll find and the marker each one carries. */}
       <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1.5 rounded-lg bg-brand-white/60 px-3 py-2 text-[10px] text-ink-muted ring-1 ring-ink/5">
         <span className="font-bold tracking-wide text-ink-subtle">key</span>
-        <span className="inline-flex items-center gap-1.5">
-          <span className="flex h-4 w-4 items-center justify-center rounded-full bg-brand-white text-brand-orange ring-1 ring-ink/10">
-            <MessageCircle className="h-2.5 w-2.5" strokeWidth={2.4} />
-          </span>
-          no physical materials needed — a talk- or play-based game
-        </span>
-        <span className="inline-flex items-center gap-1.5">
-          <span aria-hidden className="text-[12px]">🌍</span>
-          reference artwork — children make their own
-        </span>
-        <span className="inline-flex items-center gap-1.5">
-          <span aria-hidden className="flex h-4 w-4 items-center justify-center rounded bg-ink/10 text-[8px]">📷</span>
-          a photo shows the actual resource
-        </span>
+        {currentCategory === "art" && (
+          <>
+            <span className="inline-flex items-center gap-1.5">
+              <span className="flex h-4 w-4 items-center justify-center rounded-full bg-segment-green/40 text-ink">
+                <Gamepad2 className="h-2.5 w-2.5" strokeWidth={2.4} />
+              </span>
+              games — build the skills through play
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <span aria-hidden className="text-[12px]">🌍</span>
+              artworks — reference only; children make their own
+            </span>
+          </>
+        )}
+        {currentCategory === "language" && (
+          <>
+            <span className="inline-flex items-center gap-1.5">
+              <span aria-hidden className="flex h-4 w-4 items-center justify-center rounded bg-ink/10 text-[8px]">📷</span>
+              games with resources — a photo shows the kit
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <span className="flex h-4 w-4 items-center justify-center rounded-full bg-brand-white text-brand-orange ring-1 ring-ink/10">
+                <MessageCircle className="h-2.5 w-2.5" strokeWidth={2.4} />
+              </span>
+              games without resources — no physical materials needed
+            </span>
+          </>
+        )}
+        {currentCategory === "stem" && (
+          <>
+            <span className="inline-flex items-center gap-1.5">
+              <span className="flex h-4 w-4 items-center justify-center rounded-full bg-segment-yellow/50 text-ink">
+                <FlaskConical className="h-2.5 w-2.5" strokeWidth={2.4} />
+              </span>
+              experiments — find the answer to one question
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <span className="flex h-4 w-4 items-center justify-center rounded-full bg-segment-green/40 text-ink">
+                <Wrench className="h-2.5 w-2.5" strokeWidth={2.4} />
+              </span>
+              model builds — build a working mechanical model
+            </span>
+          </>
+        )}
       </div>
 
       {/* Count */}
@@ -595,19 +631,26 @@ export default function LibraryPage() {
                                 : it.kind === "primer"
                                   ? it.thumbImageUrl ?? null
                                   : null;
-                          // A game with an explicitly-empty materials list
-                          // needs no physical materials — flag it so the
-                          // icon thumbnail reads as "no kit needed", not just
-                          // "no photo". (See the legend above the results.)
-                          const noMaterials =
-                            it.kind === "activity" &&
-                            it.item.materials?.length === 0;
-                          const noMaterialsBadge = noMaterials ? (
+                          // Per-category marker for this entry (see legend):
+                          //   PS   → "no resources" (empty materials list)
+                          //   stem → experiment / model build (by segment)
+                          // Art games carry no marker; artworks use the 🌍 badge.
+                          const kindTag: { Icon: LucideIcon; label: string } | null =
+                            it.kind !== "activity"
+                              ? null
+                              : it.item.materials?.length === 0
+                                ? { Icon: MessageCircle, label: "no resources" }
+                                : currentCategory === "stem" && it.segment === "experiment"
+                                  ? { Icon: FlaskConical, label: "experiment" }
+                                  : currentCategory === "stem" && it.segment === "build"
+                                    ? { Icon: Wrench, label: "model" }
+                                    : null;
+                          const cornerBadge = kindTag ? (
                             <span
                               className="absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-brand-white text-brand-orange shadow-sm ring-2 ring-brand-white"
-                              title="no physical materials needed"
+                              title={kindTag.label}
                             >
-                              <MessageCircle className="h-3 w-3" strokeWidth={2.4} />
+                              <kindTag.Icon className="h-3 w-3" strokeWidth={2.4} />
                             </span>
                           ) : null;
                           return (
@@ -673,7 +716,7 @@ export default function LibraryPage() {
                                           </span>
                                         );
                                       })()}
-                                      {noMaterialsBadge}
+                                      {cornerBadge}
                                     </div>
                                   ) : (
                                     <div
@@ -698,16 +741,16 @@ export default function LibraryPage() {
                                         }
                                         return <SegmentThumbIcon segment={it.segment} />;
                                       })()}
-                                      {noMaterialsBadge}
+                                      {cornerBadge}
                                     </div>
                                   )}
 
                                   <div className="flex-1">
                                     <div className="flex flex-wrap items-center gap-1.5">
-                                      {noMaterials && (
+                                      {kindTag && (
                                         <span className="inline-flex items-center gap-1 rounded-chip bg-brand-orange/10 px-2 py-0.5 text-[9px] font-semibold text-brand-orange">
-                                          <MessageCircle className="h-2.5 w-2.5" strokeWidth={2.2} />
-                                          no materials
+                                          <kindTag.Icon className="h-2.5 w-2.5" strokeWidth={2.2} />
+                                          {kindTag.label}
                                         </span>
                                       )}
                                       {cardName && (
