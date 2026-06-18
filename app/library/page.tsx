@@ -220,14 +220,14 @@ function buildItemsFor(prog: CurriculumProgramme): LibraryItem[] {
       title: is35 ? "artgym book" : "art gym — book & cue cards",
       description: is35
         ? "Fine motor books with materials of choice — erasable markers, clay, yarn. Reusable laminated pages. Offer children a choice in what to use."
-        : "A structured opening segment using books, cue cards, and their extensions. Each session builds directly on the previous one. Books are laminated — children mark them with resources of choice (thread, clay, sequins, erasable markers). Every book day children do 1–3 pages, then replicate what they drew in their sketchbook freely with materials of choice.",
+        : "Laminated art-gym books and cue cards for fine-motor and line practice. Children mark them with resources of choice (thread, clay, sequins, erasable markers), do 1–3 pages, then replicate what they drew in their sketchbook freely with materials of choice.",
       info: {
         segmentId: "art-gym",
         segmentName: "Art Gym",
         title: is35 ? "artgym book" : "art gym — book & cue cards",
         description: is35
           ? "A quick warm-up for fine motor skills and imagination. ArtGym books are fine motor books that can be used with materials of choice — erasable markers, clay, yarn. They are reusable laminated books, so anything that wipes off works (no paint, nothing that stains). Offer children a choice in what they use. ArtGym book and Scribble book rotate on alternate days — do one, then the next day, the other. There are 2 ArtGym books — start every child on level 1, then move to level 2. Use the prescribed resources only. Children do 1–2 pages of ArtGym a day. Use the books in linear order — first page to last — the challenge increases page by page."
-          : "a self-paced warm-up. the cycle runs: book → extension (book) → cue card → extension (cue card). each extension day belongs to the day before it — the book session and its extension are one unit, and the cue card session and its extension are one unit. an extension day is never independent. art gym books are laminated — children mark them with resources of choice: thread, clay, sequins, or erasable markers. every book day children do 1–3 pages and then replicate what they drew in their sketchbook freely with materials of choice (crayons, colour pencils, brush pens, yarn + glue, etc.). on extension days children apply the same lines onto simple daily objects or shapes — progression goes shape → simple object → imaginary object → scene.",
+          : "a self-paced fine-motor warm-up using laminated art-gym books and cue cards. children mark them with resources of choice: thread, clay, sequins, or erasable markers — do 1–3 pages, then replicate what they drew in their sketchbook freely with materials of choice (crayons, colour pencils, brush pens, yarn + glue, etc.). cue cards apply the same lines onto simple objects or shapes — progression goes shape → simple object → imaginary object → scene.",
         heroImageUrl: gymThumb,
       },
       thumbImageUrl: gymThumb,
@@ -422,8 +422,8 @@ export default function LibraryPage() {
         ? `project ${projectNumber} of 6 · ${u.whatChildrenMake.toLowerCase()}`
         : `unit ${u.unitNumber} · reference: ${u.whatChildrenMake.toLowerCase()}`;
       const description = isArtistotle
-        ? "an illustrator-led project. children meet the work, learn the technique, then make in the same spirit — not a copy of the original. each project runs over 3 sessions."
-        : "the main making session. children work on a3 paper using the medium of this unit. each unit runs over several sessions so technique can deepen. the reference topic below is inspiration only — the actual topic is the child's choice.";
+        ? "an illustrator-led project. children meet the work, learn the technique, then make in the same spirit — not a copy of the original."
+        : "the main making activity. children work on a3 paper using the medium of this unit. the reference topic below is inspiration only — the actual topic is the child's choice.";
       setSelectedInfo({
         segmentId: "artiverse",
         segmentName: isArtistotle ? "Artistotle" : "Artiverse",

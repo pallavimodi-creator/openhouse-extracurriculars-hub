@@ -509,7 +509,7 @@ const artGamesActivities: Record<string, CurriculumActivity> = {
     segment: "art-games",
     title: "art gym book",
     setupLine:
-      "each child works in their own laminated art gym book at their own pace. 1–3 pages per session, then a free replication on a sketch sheet.",
+      "each child works in their own laminated art gym book at their own pace. 1–3 pages at a time, then a free replication on a sketch sheet.",
     howToPlay:
       "Children open the laminated art gym book (level 5 → level 6) to their next page and complete 1–3 pages with thread, clay, sequins, or erasable markers. Pages progress in order — page 1 to last — challenge increases page by page. Once the page is done, the child copies the same line / shape / pattern freely on a sketch sheet using a material of choice (brush pen, colour pencil, charcoal, ink). No extension-day follow-on — the page and the sketch happen in the same slot.",
     materials: [
