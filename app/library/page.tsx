@@ -14,7 +14,7 @@ import {
   Shapes,
   ChevronLeft,
   ChevronRight,
-  Smartphone,
+  MessageCircle,
   Brain,
   Mic,
   Eye,
@@ -521,6 +521,28 @@ export default function LibraryPage() {
         />
       </div>
 
+      {/* Legend — explains the thumbnail markers. A real photo is the
+          actual resource; an illustrated icon means there's no photo yet.
+          The badges below clarify the two cases teachers ask about most:
+          games that need no physical materials, and reference artworks. */}
+      <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1.5 rounded-lg bg-brand-white/60 px-3 py-2 text-[10px] text-ink-muted ring-1 ring-ink/5">
+        <span className="font-bold tracking-wide text-ink-subtle">key</span>
+        <span className="inline-flex items-center gap-1.5">
+          <span className="flex h-4 w-4 items-center justify-center rounded-full bg-brand-white text-brand-orange ring-1 ring-ink/10">
+            <MessageCircle className="h-2.5 w-2.5" strokeWidth={2.4} />
+          </span>
+          no physical materials needed — a talk- or play-based game
+        </span>
+        <span className="inline-flex items-center gap-1.5">
+          <span aria-hidden className="text-[12px]">🌍</span>
+          reference artwork — children make their own
+        </span>
+        <span className="inline-flex items-center gap-1.5">
+          <span aria-hidden className="flex h-4 w-4 items-center justify-center rounded bg-ink/10 text-[8px]">📷</span>
+          a photo shows the actual resource
+        </span>
+      </div>
+
       {/* Count */}
       <p className="mt-4 text-[11px] font-medium text-ink-subtle">
         {filtered.length} {filtered.length === 1 ? "entry" : "entries"}
@@ -573,6 +595,21 @@ export default function LibraryPage() {
                                 : it.kind === "primer"
                                   ? it.thumbImageUrl ?? null
                                   : null;
+                          // A game with an explicitly-empty materials list
+                          // needs no physical materials — flag it so the
+                          // icon thumbnail reads as "no kit needed", not just
+                          // "no photo". (See the legend above the results.)
+                          const noMaterials =
+                            it.kind === "activity" &&
+                            it.item.materials?.length === 0;
+                          const noMaterialsBadge = noMaterials ? (
+                            <span
+                              className="absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-brand-white text-brand-orange shadow-sm ring-2 ring-brand-white"
+                              title="no physical materials needed"
+                            >
+                              <MessageCircle className="h-3 w-3" strokeWidth={2.4} />
+                            </span>
+                          ) : null;
                           return (
                             <li key={it.id}>
                               <button
@@ -636,6 +673,7 @@ export default function LibraryPage() {
                                           </span>
                                         );
                                       })()}
+                                      {noMaterialsBadge}
                                     </div>
                                   ) : (
                                     <div
@@ -660,23 +698,16 @@ export default function LibraryPage() {
                                         }
                                         return <SegmentThumbIcon segment={it.segment} />;
                                       })()}
-                                      {it.kind === "activity" && it.item.type === "digital-game" && (
-                                        <span
-                                          className="absolute bottom-0.5 right-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-white/90 shadow-sm"
-                                          title="no physical material — digital / facilitated game"
-                                        >
-                                          <Smartphone className="h-2.5 w-2.5 text-ink-muted" strokeWidth={2.2} />
-                                        </span>
-                                      )}
+                                      {noMaterialsBadge}
                                     </div>
                                   )}
 
                                   <div className="flex-1">
                                     <div className="flex flex-wrap items-center gap-1.5">
-                                      {it.kind === "activity" && it.item.type === "digital-game" && (
-                                        <span className="inline-flex items-center gap-1 rounded-chip bg-ink/5 px-2 py-0.5 text-[9px] font-semibold text-ink-muted">
-                                          <Smartphone className="h-2.5 w-2.5" strokeWidth={2.2} />
-                                          digital only
+                                      {noMaterials && (
+                                        <span className="inline-flex items-center gap-1 rounded-chip bg-brand-orange/10 px-2 py-0.5 text-[9px] font-semibold text-brand-orange">
+                                          <MessageCircle className="h-2.5 w-2.5" strokeWidth={2.2} />
+                                          no materials
                                         </span>
                                       )}
                                       {cardName && (
