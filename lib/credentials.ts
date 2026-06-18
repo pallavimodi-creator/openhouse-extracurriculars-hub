@@ -14,6 +14,15 @@ export interface Credential {
 }
 
 export const CREDENTIALS: Credential[] = [
+  // centre — the shared centre login for the extra-curriculars hub.
+  // Sees every programme; this is the centre's reference point.
+  {
+    username: "openhousecentre",
+    password: "oh.centre.eca",
+    programmeSlug: "*",
+    displayName: "openhouse centre",
+    role: "admin",
+  },
   // admin — sees every programme
   {
     username: "admin",

@@ -70,10 +70,10 @@ export default function LoginPage() {
       {/* Sign-in card */}
       <div className="w-full max-w-md rounded-card bg-brand-white p-6 shadow-float md:p-8">
         <h1 className="text-[22px] font-extrabold leading-tight text-ink md:text-[26px]">
-          teacher sign in
+          centre sign in
         </h1>
         <p className="mt-1 text-[13px] font-medium text-ink-muted">
-          enter the login id and password you were given.
+          enter your centre login id and password.
         </p>
 
         <form onSubmit={handleSubmit} className="mt-5 space-y-4">
@@ -87,7 +87,7 @@ export default function LoginPage() {
               onChange={(e) => setUsername(e.target.value)}
               required
               autoComplete="username"
-              placeholder="e.g. art58-01"
+              placeholder="e.g. openhousecentre"
               className="mt-1 block w-full rounded-lg border border-ink/10 bg-bg/40 px-3 py-2.5 text-[14px] focus:border-brand-orange focus:outline-none focus:ring-2 focus:ring-brand-orange/20"
             />
           </div>
