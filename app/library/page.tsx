@@ -47,7 +47,6 @@ import {
 import {
   getCurriculumProgramme,
   listCurriculumProgrammes,
-  SEGMENT_COLORS,
   getActivityImage,
   GYM_BOOK_IMAGES,
 } from "@/lib/content";
@@ -134,19 +133,6 @@ function SegmentThumbIcon({ segment }: { segment: string }) {
       return <Star className={common} strokeWidth={1.8} />;
   }
 }
-
-const ALL_FILTERS: { id: string; label: string }[] = [
-  { id: "all", label: "all" },
-  { id: "roll-call", label: "roll call" },
-  { id: "playground", label: "playground" },
-  { id: "showtime", label: "showtime" },
-  { id: "art-gym", label: "art gym" },
-  { id: "art-games", label: "art games" },
-  { id: "artiverse", label: "artiverse" },
-  { id: "artistotle", label: "artistotle" },
-  { id: "experiment", label: "experiment" },
-  { id: "build", label: "build" },
-];
 
 type LibraryItem = (
   | { kind: "activity"; item: CurriculumActivity }
@@ -286,7 +272,6 @@ function buildItemsFor(prog: CurriculumProgramme): LibraryItem[] {
 export default function LibraryPage() {
   const router = useRouter();
   const [query, setQuery] = useState("");
-  const [segmentFilter, setSegmentFilter] = useState("all");
   const [selectedActivity, setSelectedActivity] = useState<CurriculumActivity | null>(null);
   const [selectedInfo, setSelectedInfo] = useState<SegmentInfo | null>(null);
   const [teacherSlug, setTeacherSlug] = useState<string | null>(null);
@@ -315,7 +300,7 @@ export default function LibraryPage() {
     setAuthReady(true);
   }, [router]);
 
-  const { allItems, availableSegments } = useMemo(() => {
+  const allItems = useMemo(() => {
     const programmes = listCurriculumProgrammes().filter((p) => p.totalSessions > 0);
 
     let progsToShow: CurriculumProgramme[] = [];
@@ -329,9 +314,7 @@ export default function LibraryPage() {
       progsToShow = p ? [p] : [];
     }
 
-    const items = progsToShow.flatMap(buildItemsFor);
-    const segments = new Set(items.map((i) => i.segment));
-    return { allItems: items, availableSegments: segments };
+    return progsToShow.flatMap(buildItemsFor);
   }, [isAdmin, teacherSlug, selectedProgSlug]);
 
   const adminProgrammes = useMemo(
@@ -339,22 +322,8 @@ export default function LibraryPage() {
     []
   );
 
-  // Only show filter chips for segments this programme actually has
-  const filters = useMemo(() => {
-    return ALL_FILTERS.filter(
-      (f) => f.id === "all" || availableSegments.has(f.id)
-    );
-  }, [availableSegments]);
-
   const filtered = useMemo(() => {
     let result = allItems;
-    if (segmentFilter !== "all") {
-      // Treat experience-book and log-book as the same segment for filtering.
-      const wanted = new Set([segmentFilter]);
-      if (segmentFilter === "experience-book") wanted.add("log-book");
-      if (segmentFilter === "log-book") wanted.add("experience-book");
-      result = result.filter((i) => wanted.has(i.segment));
-    }
     if (query.trim()) {
       const q = query.trim().toLowerCase();
       result = result.filter((i) => {
@@ -387,87 +356,34 @@ export default function LibraryPage() {
       });
     }
     return result;
-  }, [allItems, segmentFilter, query]);
+  }, [allItems, query]);
 
-  // Group filtered items by programme → segment in conduction order.
-  // Programme order follows listCurriculumProgrammes(). Within each
-  // programme, segments follow the order of programme.segmentDefinitions.
+  // Group filtered items by programme only — the hub is a flat resource
+  // library, with no "segments of the day" sectioning. Programme order
+  // follows listCurriculumProgrammes(); item order is preserved.
   const grouped = useMemo(() => {
     const allProgs = listCurriculumProgrammes().filter(
       (p) => p.totalSessions > 0
     );
 
-    type Section = {
-      segmentId: string;
-      label: string;
-      items: LibraryItem[];
-    };
     type ProgrammeGroup = {
       slug: string;
       title: string;
       ageLabel: string;
-      sections: Section[];
+      items: LibraryItem[];
     };
 
     return allProgs.flatMap<ProgrammeGroup>((prog) => {
-      // Items belonging to this programme, preserving their existing order.
       const itemsForProg = filtered.filter(
         (i) => i.programmeSlug === prog.slug
       );
       if (itemsForProg.length === 0) return [];
-
-      // Build segment rank from segmentDefinitions order. log-book and
-      // experience-book share a rank — whichever the programme uses sits
-      // in its definitions list, the other slot still resolves.
-      const segmentRank: Record<string, number> = {};
-      prog.segmentDefinitions.forEach((s, i) => {
-        segmentRank[s.id] = i;
-        if (s.id === "log-book") segmentRank["experience-book"] = i;
-        if (s.id === "experience-book") segmentRank["log-book"] = i;
-        // Artistotle isn't a separate segment in the data model — it
-        // lives inside the "artiverse" segment but gets its own filter
-        // chip and section. Rank it just after artiverse.
-        if (s.id === "artiverse") segmentRank["artistotle"] = i + 0.5;
-      });
-      const rankFor = (segId: string) =>
-        segmentRank[segId] ?? Number.POSITIVE_INFINITY;
-
-      // Bucket items by segment id (using a normalised id so log-book and
-      // experience-book group together).
-      const buckets = new Map<string, LibraryItem[]>();
-      itemsForProg.forEach((it) => {
-        const segId =
-          it.segment === "log-book" ? "experience-book" : it.segment;
-        const bucket = buckets.get(segId) ?? [];
-        bucket.push(it);
-        buckets.set(segId, bucket);
-      });
-
-      // Convert buckets to sections in segment order.
-      const sections: Section[] = Array.from(buckets.entries())
-        .map(([segId, items]) => {
-          // 3-5 art's "artiverse" segment is rendered as Artiverse / Artistotle.
-          // Add a fun blue emoji per "world" — globe for artiverse,
-          // older-man face for artistotle (the philosopher) — so the
-          // section bands separate visually when scrolling.
-          const label =
-            segId === "artiverse"
-              ? "🌍 artiverse"
-              : segId === "artistotle"
-                ? "👴 artistotle"
-                : segId === "experience-book" || segId === "log-book"
-                  ? "experience book"
-                  : segId.replace(/-/g, " ");
-          return { segmentId: segId, label, items };
-        })
-        .sort((a, b) => rankFor(a.segmentId) - rankFor(b.segmentId));
-
       return [
         {
           slug: prog.slug,
           title: prog.title,
           ageLabel: prog.ageLabel,
-          sections,
+          items: itemsForProg,
         },
       ];
     });
@@ -519,12 +435,6 @@ export default function LibraryPage() {
     }
   };
 
-  // Pick a sensible programme slug for the in-page journey strip:
-  //   admin → no slug, the strip simplifies to home + library
-  //   teacher → their assigned programme slug
-  const journeySlug =
-    !isAdmin && teacherSlug && teacherSlug !== "*" ? teacherSlug : null;
-
   const programmeForBack =
     !isAdmin && teacherSlug && teacherSlug !== "*"
       ? getCurriculumProgramme(teacherSlug)
@@ -543,34 +453,8 @@ export default function LibraryPage() {
       )}
       <h1 className="text-[22px] font-bold text-ink">library</h1>
       <p className="mt-1 text-[13px] text-ink-muted">
-        every resource across programmes — for reference.
+        every resource across programmes — search by name, keyword, or material.
       </p>
-
-      {/* Journey strip — library is step 3 of 3 (reference). When the
-          teacher belongs to a single programme, link back to that
-          programme's overview + plans so the journey is reversible. */}
-      {journeySlug && (
-        <div className="mt-3 flex flex-wrap items-center gap-2 text-[11px] font-semibold text-ink-muted md:text-[12px]">
-          <Link
-            href={`/${journeySlug}/overview`}
-            className="rounded-chip bg-brand-white px-2.5 py-1 ring-1 ring-ink/10 transition hover:bg-ink/5"
-          >
-            <span className="mr-1 font-bold text-ink-subtle">1</span> overview
-          </Link>
-          <span className="text-ink-subtle">→</span>
-          <Link
-            href={`/${journeySlug}`}
-            className="rounded-chip bg-brand-white px-2.5 py-1 ring-1 ring-ink/10 transition hover:bg-ink/5"
-          >
-            <span className="mr-1 font-bold text-ink-subtle">2</span> today&apos;s plan
-          </Link>
-          <span className="text-ink-subtle">→</span>
-          <span className="rounded-chip bg-brand-orange px-2.5 py-1 font-bold text-white shadow-sm">
-            <span className="mr-1 opacity-80">3</span> library
-            <span className="ml-1 italic font-normal text-white/85">for reference</span>
-          </span>
-        </div>
-      )}
 
       {/* Admin-only programme picker */}
       {isAdmin && (
@@ -638,24 +522,6 @@ export default function LibraryPage() {
         />
       </div>
 
-      {/* Filter chips */}
-      <div className="no-scrollbar mt-3 flex gap-2 overflow-x-auto">
-        {filters.map((f) => (
-          <button
-            key={f.id}
-            onClick={() => setSegmentFilter(f.id)}
-            className={cn(
-              "shrink-0 rounded-chip px-3 py-1.5 text-[11px] font-semibold transition",
-              segmentFilter === f.id
-                ? "bg-brand-charcoal text-white"
-                : "bg-ink/5 text-ink-muted hover:bg-ink/10"
-            )}
-          >
-            {f.label}
-          </button>
-        ))}
-      </div>
-
       {/* Count */}
       <p className="mt-4 text-[11px] font-medium text-ink-subtle">
         {filtered.length} {filtered.length === 1 ? "entry" : "entries"}
@@ -675,38 +541,13 @@ export default function LibraryPage() {
                     {prog.title} · {prog.ageLabel}
                   </h2>
                   <span className="rounded-chip bg-ink/5 px-2 py-0.5 text-[10px] font-semibold text-ink-muted">
-                    {prog.sections.reduce((n, s) => n + s.items.length, 0)} entries
+                    {prog.items.length} entries
                   </span>
                 </header>
               )}
 
-              <div className="space-y-6">
-                {prog.sections.map((section) => {
-                  const palette = segmentPalette(section.segmentId);
-                  return (
-                    <div key={section.segmentId} className="space-y-2">
-                      {/* Segment header band */}
-                      <div className="flex items-center justify-between gap-3">
-                        <div className="flex items-center gap-2.5">
-                          <span
-                            className={cn(
-                              "h-6 w-6 flex-none rounded-md",
-                              palette.fill
-                            )}
-                            aria-hidden="true"
-                          />
-                          <h3 className="text-[13px] font-extrabold lowercase text-ink">
-                            {section.label}
-                          </h3>
-                        </div>
-                        <span className="rounded-chip bg-ink/5 px-2 py-0.5 text-[10px] font-semibold text-ink-muted">
-                          {section.items.length}
-                        </span>
-                      </div>
-
-                      {/* Section cards */}
-                      <ul className="space-y-2">
-                        {section.items.map((it) => {
+              <ul className="space-y-2">
+                {prog.items.map((it) => {
                           const itemPalette = segmentPalette(it.segment);
                           const title =
                             it.kind === "activity"
@@ -855,12 +696,8 @@ export default function LibraryPage() {
                               </button>
                             </li>
                           );
-                        })}
-                      </ul>
-                    </div>
-                  );
                 })}
-              </div>
+              </ul>
             </section>
           );
         })}
