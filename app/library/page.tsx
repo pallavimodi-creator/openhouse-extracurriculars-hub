@@ -165,6 +165,19 @@ function programmeShortLabel(p: CurriculumProgramme): string {
   return `${p.title} · ${p.ageLabel}`;
 }
 
+// A public-speaking game "needs a kit" only if it uses a designed game
+// component — cards, a deck, a board, a mat, tiles, chits, tokens, etc.
+// Generic gear (a soft ball, a Bluetooth speaker), app / URL prompts, and
+// verbal prompt decks/sheets are NOT the programme's physical resources.
+const KIT_KEYWORDS =
+  /\b(cards?|decks?|boards?|gameboards?|mats?|tiles?|chits?|tokens?|meeples?|dice|cubes?|booklets?|sheets?|spinners?|flashcards?|box|slates?|quadrant|puzzle|gameboard)\b/i;
+function psNeedsKit(materials?: string[]): boolean {
+  return (materials ?? []).some((m) => {
+    if (/\bapp\b|\(app\)|digital|https?:\/\/|prompt/i.test(m)) return false;
+    return KIT_KEYWORDS.test(m);
+  });
+}
+
 function buildItemsFor(prog: CurriculumProgramme): LibraryItem[] {
   const bookMap: Record<string, string> = {
     "public-speaking-5-8": "speaking-5-8",
@@ -633,24 +646,11 @@ export default function LibraryPage() {
                                 : it.kind === "primer"
                                   ? it.thumbImageUrl ?? null
                                   : null;
-                          // PS "physical resources" test: a game needs a kit
-                          // only if it's a physical-game whose materials list a
-                          // REAL physical item. A facilitated game is verbal
-                          // (no kit even with a prompt deck), and a physical-game
-                          // whose only "materials" are an app / URL prompt also
-                          // needs no physical kit.
-                          const psMats =
-                            it.kind === "activity" ? it.item.materials : undefined;
-                          const psAllNonPhysical =
-                            psMats !== undefined &&
-                            (psMats.length === 0 ||
-                              psMats.every((m) =>
-                                /\bapp\b|\(app\)|digital|https?:\/\//i.test(m),
-                              ));
+                          // PS "physical resources" = a designed kit (cards,
+                          // deck, board, mat, tiles…). Generic gear (ball,
+                          // speaker), apps/URLs and verbal prompts don't count.
                           const psHasKit =
-                            it.kind === "activity" &&
-                            it.item.type === "physical-game" &&
-                            !psAllNonPhysical;
+                            it.kind === "activity" && psNeedsKit(it.item.materials);
                           // Per-category marker for this entry (see legend).
                           // Art games carry no marker; artworks use the 🌍 badge.
                           const kindTag: { Icon: LucideIcon; label: string } | null =
