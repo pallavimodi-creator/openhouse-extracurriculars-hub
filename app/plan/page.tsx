@@ -34,6 +34,7 @@ const ABOUT = [
     blurb: "the live, fillable book — one per child, with a class progress dashboard",
     href: "/plan/experience",
     icon: BookOpen,
+    wip: true,
   },
   {
     title: "how to fill the experience book",
@@ -116,7 +117,12 @@ function Hub() {
               <a.icon className="h-3.5 w-3.5" strokeWidth={2.2} />
             </span>
             <span className="flex-1">
-              <span className="block text-[13px] font-bold leading-tight text-ink">{a.title}</span>
+              <span className="flex items-center gap-1.5 text-[13px] font-bold leading-tight text-ink">
+                {a.title}
+                {"wip" in a && a.wip && (
+                  <span className="rounded-chip bg-segment-yellow/50 px-1.5 py-0.5 text-[9px] font-bold lowercase text-ink-muted">work in progress</span>
+                )}
+              </span>
               <span className="mt-0.5 block text-[11px] leading-relaxed text-ink-muted">{a.blurb}</span>
             </span>
             <ChevronRight className="mt-1 h-4 w-4 shrink-0 text-ink-subtle transition group-hover:text-brand-orange" />

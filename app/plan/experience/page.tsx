@@ -65,6 +65,10 @@ function Dashboard() {
         one book per child{centre ? ` · ${centre.toLowerCase()}` : ""} — every child&apos;s rung per skill, at a glance. tap a child to open & fill their book.
       </p>
 
+      <div className="mt-3 rounded-card bg-segment-yellow/30 px-3.5 py-2.5 text-[12px] leading-relaxed text-ink-muted ring-1 ring-segment-yellow/50">
+        <span className="font-bold text-ink">work in progress</span> — the experience book &amp; progress model are being reworked around the new levels structure. explore it, but treat it as a preview, not the final design.
+      </div>
+
       {/* add child */}
       <div className="mt-4 flex gap-2">
         <input

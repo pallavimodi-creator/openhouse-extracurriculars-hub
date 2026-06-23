@@ -133,24 +133,44 @@ export const LO_LADDERS: Record<string, LoProgramme> = {
       "every skill here is a 'levels' skill — the target itself changes by level, so the same story-game is run with a different aim per child. level is per-skill attainment, not age.",
     skills: [
       {
-        skill: "speaking & listening",
+        skill: "listening",
         kind: "levels",
         ladders: [
           {
             levels: [
-              lv(L1, "sits through a short story and answers a simple question about it 👁", [
-                "listens to a short story & shows they follow",
-                "answers with a word or two",
+              lv(L1, "sits through a short story and shows they're following 👁", [
+                "attends to a short read-aloud",
                 "follows a one-step instruction",
               ]),
-              lv(L2, "tells you 2–3 things that happened, in full sentences 👁", [
-                "speaks in full sentences; answers who / what / where",
+              lv(L2, "recalls 2–3 things that happened in the story 👁", [
+                "listens for detail",
                 "follows a two-step instruction",
-                "recalls 2–3 things that happened",
               ]),
-              lv(L3, "narrates an event or retells in order, with reasons, and takes turns in talk 👁", [
-                "narrates / retells in sequence; gives reasons",
-                "follows multi-step talk; takes conversational turns",
+              lv(L3, "hears & plays with sounds — rhymes, claps syllables, catches the first sound 👁", [
+                "joins in rhymes; claps syllables in names & words",
+                "hears the first sound of a word",
+              ]),
+            ],
+          },
+        ],
+      },
+      {
+        skill: "speaking",
+        kind: "levels",
+        ladders: [
+          {
+            levels: [
+              lv(L1, "answers with a word or two 👁", [
+                "responds when spoken to",
+                "joins in with single words & phrases",
+              ]),
+              lv(L2, "speaks in a full sentence and answers who / what / where 👁", [
+                "uses full sentences",
+                "asks & answers simple questions",
+              ]),
+              lv(L3, "narrates an event or retells in sequence, and takes turns in talk 👁", [
+                "narrates / retells in order; gives reasons",
+                "takes conversational turns",
               ]),
             ],
           },
@@ -180,29 +200,6 @@ export const LO_LADDERS: Record<string, LoProgramme> = {
         ],
       },
       {
-        skill: "sound-play (the bridge to reading)",
-        kind: "levels",
-        note: "phonological awareness — the continuum from big sound units to small. level 3 often emerges at the top of this age band / into reception.",
-        ladders: [
-          {
-            levels: [
-              lv(L1, "claps the beats (syllables) in their name and spots a rhyme 👁", [
-                "joins in rhymes; hears when two words rhyme",
-                "claps syllables in names & words",
-              ]),
-              lv(L2, "tells you the first sound of a word and finds another that starts the same 👁", [
-                "hears the first (and last) sound of a word",
-                "matches words by first sound; blends onset-rime (c-at → cat)",
-              ]),
-              lv(L3, "blends c-a-t into 'cat' and breaks a short word into its sounds 👁", [
-                "blends 3 sounds into a word; segments a short word",
-                "swaps a sound to make a new word",
-              ]),
-            ],
-          },
-        ],
-      },
-      {
         skill: "storytelling & comprehension",
         kind: "levels",
         ladders: [
@@ -225,7 +222,7 @@ export const LO_LADDERS: Record<string, LoProgramme> = {
         ],
       },
       {
-        skill: "early writing (pre-writing)",
+        skill: "pre-writing",
         kind: "levels",
         ladders: [
           {
