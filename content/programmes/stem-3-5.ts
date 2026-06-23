@@ -702,7 +702,7 @@ export const stem35: CurriculumProgramme = {
       name: "Kitchen Play",
       durationRange: "35 min",
       objective:
-        "STEM concepts — sorting, sequencing, fractions, classification — through real kitchen actions: sorting food, following recipes, and running a café. Kitchen Play activities rotate. Sessions begin alternating between Game 1 (Sort & Guess) and Game 2 (Cooking). Game 3 (Restaurant) unlocks only after 20 sessions when children have completed about 5 Cooking sessions; from then on, all three games rotate. Materials: action cards · food cards · recipe cards · category cards · cooking mat with menu template on reverse · play-dough + clay tools · pretend-money tokens. Runs on Session B only.",
+        "Kitchen Play is a set of themed games — children meet STEM concepts (sorting, sequencing, fractions, classification) through real kitchen actions: sorting food, following recipes, and running a café. The three themed games rotate: sessions begin alternating between Game 1 (Sort & Guess) and Game 2 (Cooking). Game 3 (Restaurant) unlocks only after 20 sessions when children have completed about 5 Cooking sessions; from then on, all three rotate. Materials: action cards · food cards · recipe cards · category cards · cooking mat with menu template on reverse · play-dough + clay tools · pretend-money tokens. Runs on Session B only.",
       type: "rotating",
       rotationPool: Object.keys(wonderWorldActivities),
     },

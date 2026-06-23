@@ -44,6 +44,20 @@ import {
 } from "lucide-react";
 import { getCurriculumProgramme, getActivityImage, GYM_BOOK_IMAGES } from "@/lib/content";
 import { LO_LADDERS } from "@/lib/lo-ladders";
+
+// Segment illustrations (3-5). Only the segments that have a render are
+// listed; the rest show without an image.
+const SEGMENT_IMAGES: Record<string, string> = {
+  "imagine-playground": "/games/stem-3-5/imagine-playground.png",
+  "wonder-world": "/games/stem-3-5/kitchen-play.png", // id stays wonder-world; display is Kitchen Play
+};
+
+// First sentence or two of a long segment objective, for the scannable
+// "the day" cards.
+function firstSentences(text: string, n = 2): string {
+  const parts = text.split(/(?<=\.)\s+/);
+  return parts.slice(0, n).join(" ");
+}
 import { cn } from "@/lib/utils";
 import { TeacherGate } from "@/components/TeacherGate";
 import { ArtiverseChapters } from "@/components/ArtiverseChapters";
@@ -499,6 +513,45 @@ function ProgrammeOverviewContent() {
         </section>
       )}
 
+
+      {/* ─── THE DAY (3-5 centre programmes) ─── */}
+      {programme.ageGroup === "3-5" && programme.segmentDefinitions.length > 0 && (
+        <section className="mt-10 px-4 md:px-8">
+          <SectionTitle num="·" label="the day · what happens in each part">
+            the centre day moves through these parts. each is a rotating set of games/activities the educator runs at the child&apos;s level.
+          </SectionTitle>
+          <div className="mt-4 space-y-2.5">
+            {programme.segmentDefinitions
+              .filter((s) => s.id !== "experience-book")
+              .map((seg) => {
+                const img = SEGMENT_IMAGES[seg.id];
+                return (
+                  <div key={seg.id} className="flex gap-3 rounded-2xl bg-brand-white p-3.5 shadow-card ring-1 ring-ink/5">
+                    {img ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img src={img} alt="" className="h-20 w-20 shrink-0 rounded-lg object-cover ring-1 ring-ink/10" />
+                    ) : (
+                      <span className="flex h-20 w-20 shrink-0 items-center justify-center rounded-lg bg-segment-yellow/20 text-[10px] font-bold lowercase text-ink-subtle">
+                        {seg.name.toLowerCase()}
+                      </span>
+                    )}
+                    <div className="min-w-0 flex-1">
+                      <div className="flex flex-wrap items-baseline gap-2">
+                        <p className="text-[14px] font-extrabold lowercase text-ink">{seg.name.toLowerCase()}</p>
+                        {seg.durationRange && (
+                          <span className="text-[10px] font-semibold text-ink-subtle">{seg.durationRange}</span>
+                        )}
+                      </div>
+                      <p className="mt-1 text-[12px] leading-relaxed text-ink-muted">
+                        {firstSentences(seg.objective, 2)}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+          </div>
+        </section>
+      )}
 
       {/* ─── SKILLS & ABILITIES ─── */}
       <section className="mt-10 px-4 md:px-8">
@@ -1068,18 +1121,16 @@ function ProgrammeOverviewContent() {
         // STEM 3–5 — two educator reference books built like the
         // artiverse / artistotle books.
         if (programme.slug === "robotics-3-5") {
+          // Imagine Playground is a game (the 11 build projects, in the
+          // library/segment) PLUS its game manual — this book, which opens
+          // the scripted by-level activities. Kitchen Play is a game too,
+          // but has no manual book, so no card for it here.
           books.push({
             kind: "route",
             href: "/plan/docs/imagine-playground-activities",
-            cover: "/imagine-playground-book/cover.png",
-            title: "the imagine playground book",
-            subtitle: "11 build projects · scripted by level (easy/medium/hard)",
-          });
-          books.push({
-            kind: "soon",
-            cover: "/prog-stem-3-5.png",
-            title: "the kitchen play book",
-            subtitle: "replaces wonderworld · recipes & café builds — coming soon",
+            cover: "/games/stem-3-5/imagine-playground.png",
+            title: "the imagine playground game manual",
+            subtitle: "how to run all 11 build projects · scripted by level",
           });
           books.push({
             kind: "modal",
