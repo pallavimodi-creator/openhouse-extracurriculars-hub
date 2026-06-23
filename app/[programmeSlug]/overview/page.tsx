@@ -49,7 +49,7 @@ import { LO_LADDERS } from "@/lib/lo-ladders";
 // listed; the rest show without an image.
 const SEGMENT_IMAGES: Record<string, string> = {
   "imagine-playground": "/games/stem-3-5/imagine-playground.png",
-  "wonder-world": "/games/stem-3-5/kitchen-play.png", // id stays wonder-world; display is Kitchen Play
+  "wonder-world": "/games/stem-3-5/kitchen-play.png", // section is Wonder World; Kitchen Play is the current resource (its image)
 };
 
 // Relevant icon per segment — used (instead of a text tile) when a segment
