@@ -1,6 +1,26 @@
 import Link from "next/link";
-import { ChevronLeft, Music, BookOpen, MessageCircle, Pencil, Dice5, Sparkles, Grid3x3, Palette, Check, Blocks, Lightbulb, Hash } from "lucide-react";
+import { ChevronLeft, Music, BookOpen, MessageCircle, Pencil, Dice5, Sparkles, Grid3x3, Palette, Check, Blocks, Lightbulb, Hash, GraduationCap, Smile, Brain } from "lucide-react";
 import { TeacherGate } from "@/components/TeacherGate";
+import { PrintButton } from "@/components/PrintButton";
+
+// What parents most want — the aspiration the programme is building toward.
+const GOALS: { icon: typeof Smile; title: string; body: string }[] = [
+  {
+    icon: GraduationCap,
+    title: "school-ready",
+    body: "the focus, routines, listening and pencil-control that make starting big school feel easy.",
+  },
+  {
+    icon: Smile,
+    title: "confident & expressive",
+    body: "a child who speaks up, tries new things, and shares their own ideas without fear.",
+  },
+  {
+    icon: Brain,
+    title: "strong early foundations",
+    body: "early language & reading, early numeracy, and problem-solving — the academic groundwork, built through play.",
+  },
+];
 
 // Parent-facing positioning brochure for the 3-5 at-centre programme.
 // Adapted from the print brochure (at-apartment → at-centre, wonderworld →
@@ -86,16 +106,19 @@ export default function BrochurePage() {
   return (
     <TeacherGate>
       <div className="flex flex-col items-center px-4 pt-4 pb-14">
-        <Link
-          href="/plan"
-          className="mb-3 inline-flex w-fit items-center gap-1.5 self-start rounded-chip bg-brand-white px-2.5 py-1 text-[11px] font-semibold text-ink-muted ring-1 ring-ink/10 transition hover:bg-ink/5"
-        >
-          <ChevronLeft className="h-3.5 w-3.5" /> the 3–5 programme
-        </Link>
+        <div className="mb-3 flex w-full max-w-md items-center justify-between gap-2">
+          <Link
+            href="/plan"
+            className="inline-flex w-fit items-center gap-1.5 rounded-chip bg-brand-white px-2.5 py-1 text-[11px] font-semibold text-ink-muted ring-1 ring-ink/10 transition hover:bg-ink/5 print:hidden"
+          >
+            <ChevronLeft className="h-3.5 w-3.5" /> the 3–5 programme
+          </Link>
+          <PrintButton />
+        </div>
 
         <div className="w-full max-w-md space-y-5">
           {/* ── COVER ── */}
-          <section className="overflow-hidden rounded-2xl bg-brand-white shadow-float ring-1 ring-ink/5">
+          <section className="overflow-hidden rounded-2xl bg-brand-white shadow-float ring-1 ring-ink/5 print:break-inside-avoid">
             <Header />
             <div className="px-5 pb-6 pt-5">
               <p className="text-[11px] font-bold lowercase tracking-wide text-brand-orange">at-centre · ages 3–5</p>
@@ -121,9 +144,35 @@ export default function BrochurePage() {
             </div>
           </section>
 
+          {/* ── THE ASPIRATION (what parents want most) ── */}
+          <section className="overflow-hidden rounded-2xl bg-brand-white shadow-float ring-1 ring-ink/5 print:break-inside-avoid">
+            <Header />
+            <div className="px-5 pb-6 pt-5">
+              <p className="text-[11px] font-bold lowercase tracking-wide text-brand-orange">what they grow into</p>
+              <h2 className="mt-1 text-[24px] font-extrabold lowercase leading-tight text-ink">ready for school, and for life.</h2>
+              <span className="mt-1.5 block h-1.5 w-14 rounded-full bg-brand-orange/40" />
+              <p className="mt-3 text-[13.5px] leading-relaxed text-ink-muted">
+                three years of thoughtful, play-based learning that add up to what matters most to you:
+              </p>
+              <div className="mt-4 space-y-2.5">
+                {GOALS.map((g) => (
+                  <div key={g.title} className="flex gap-3 rounded-xl bg-brand-cream/50 p-3.5">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-orange/12 text-brand-orange">
+                      <g.icon className="h-5 w-5" strokeWidth={2} />
+                    </span>
+                    <div>
+                      <p className="text-[14px] font-extrabold lowercase text-ink">{g.title}</p>
+                      <p className="mt-0.5 text-[12.5px] leading-relaxed text-ink-muted">{g.body}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
           {/* ── ONE PAGE PER STRAND ── */}
           {STRANDS.map((s) => (
-            <section key={s.key} className="overflow-hidden rounded-2xl bg-brand-white shadow-float ring-1 ring-ink/5">
+            <section key={s.key} className="overflow-hidden rounded-2xl bg-brand-white shadow-float ring-1 ring-ink/5 print:break-inside-avoid">
               <Header />
               <div className="px-5 pb-6 pt-5">
                 <p className="text-[11px] font-semibold lowercase text-ink-subtle">ages 3–5</p>
@@ -136,14 +185,14 @@ export default function BrochurePage() {
                 <img src={s.image} alt="" className="mt-4 w-full rounded-xl" />
                 <p className="mt-4 text-[15px] font-extrabold text-ink">{s.headline}</p>
 
-                <p className="mt-4 text-[11px] font-bold uppercase tracking-wide text-brand-orange">what they learn</p>
+                <p className="mt-4 text-[11px] font-bold tracking-wide text-brand-orange">what they learn</p>
                 <div className="mt-2 flex flex-wrap gap-1.5">
                   {s.learn.map((l) => (
                     <span key={l} className={`rounded-chip ${s.band} px-3 py-1 text-[12px] font-semibold text-ink`}>{l}</span>
                   ))}
                 </div>
 
-                <p className="mt-4 text-[11px] font-bold uppercase tracking-wide text-brand-orange">how the day flows</p>
+                <p className="mt-4 text-[11px] font-bold tracking-wide text-brand-orange">how the day flows</p>
                 <p className="mt-1.5 text-[12.5px] leading-relaxed text-ink-muted">
                   we play the openhouse way — the day flows as games and discovery:
                 </p>

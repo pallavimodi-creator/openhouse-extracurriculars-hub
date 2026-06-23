@@ -20,7 +20,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
  * spread becomes image | text.
  */
 export interface FlipbookCaption {
-  /** Small uppercase eyebrow above the title (e.g. "paper chapter"). */
+  /** Small eyebrow above the title (e.g. "paper chapter"). */
   eyebrow?: string;
   /** Big lowercase title (e.g. "accordions"). */
   title: string;

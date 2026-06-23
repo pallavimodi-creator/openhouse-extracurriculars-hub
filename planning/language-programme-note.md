@@ -108,10 +108,3 @@ Worked example — **opening songs & movement (5, fixed for the year):**
 4. *the wheels on the bus / actions song* (sequence · actions) — Thu
 5. *a rhyming song of the month* (rhyme awareness) — Fri
 > same 5 all year → the child masters and *anticipates* them (which builds the security 3–5s need), the educator never has to invent, and across the week all five touch different language sub-skills. The *exact* song list + lyrics + actions ship in the activity pack.
-
----
-
-## open checks for you before I build the experience book + activity packs
-- **levels:** is L1/L2/L3 ≈ age-as-readiness (3 / 4 / 5-ish), or purely attainment regardless of age? (I've written it as **per-skill attainment**, age-agnostic — confirm.)
-- **phonological awareness:** OK that we include oral sound-play (rhyme, syllables, first sounds) as the *bridge*, while still holding formal letters? (your spiral has both tracks; I've put only the oral bridge in the 3–5 centre strand.)
-- **the math milestones** (your 11-month number spiral) belong to the **stem** strand note — I'll build that the same way next; flag if you want number-sense represented in language too.

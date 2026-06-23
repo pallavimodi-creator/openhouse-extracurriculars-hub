@@ -661,7 +661,7 @@ export default function LibraryPage() {
       {/* Physical-resource filter — what must I physically have present?
           Works across every programme (use with "all programmes"). */}
       <div className="mt-3 flex flex-wrap items-center gap-1.5">
-        <span className="mr-0.5 text-[10px] font-bold uppercase tracking-wide text-ink-subtle">
+        <span className="mr-0.5 text-[10px] font-bold tracking-wide text-ink-subtle">
           needs
         </span>
         {([

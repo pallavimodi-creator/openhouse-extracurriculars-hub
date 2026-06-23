@@ -91,7 +91,7 @@ function Book({ childId }: { childId: string }) {
           <div className="grid gap-2.5 sm:grid-cols-2">
             {BLOOM_FIELDS.map((f) => (
               <label key={f.key} className="block rounded-2xl bg-brand-white p-3 shadow-card ring-1 ring-ink/5">
-                <span className="text-[10px] font-bold uppercase tracking-wide text-brand-orange">{f.label}</span>
+                <span className="text-[10px] font-bold tracking-wide text-brand-orange">{f.label}</span>
                 <textarea
                   value={child.bloom[f.key]}
                   onChange={(e) => setBloom(f.key, e.target.value)}

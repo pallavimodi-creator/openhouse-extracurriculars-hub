@@ -318,7 +318,7 @@ export default function HomePage() {
           {trial.length > 0 && (
             <div className="flex items-center gap-3 pt-2" aria-hidden>
               <span className="h-px flex-1 bg-ink/10" />
-              <span className="rounded-chip bg-ink/5 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-ink-subtle">
+              <span className="rounded-chip bg-ink/5 px-2.5 py-1 text-[10px] font-bold tracking-wider text-ink-subtle">
                 a separate programme
               </span>
               <span className="h-px flex-1 bg-ink/10" />

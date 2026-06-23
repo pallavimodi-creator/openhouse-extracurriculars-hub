@@ -52,6 +52,23 @@ const SEGMENT_IMAGES: Record<string, string> = {
   "wonder-world": "/games/stem-3-5/kitchen-play.png", // id stays wonder-world; display is Kitchen Play
 };
 
+// Relevant icon per segment — used (instead of a text tile) when a segment
+// has no illustration, so "the day" never shows a bare placeholder.
+const SEGMENT_ICONS: Record<string, LucideIcon> = {
+  "roll-rhyme": Music,
+  "book-o-clock": BookOpen,
+  wordsmiths: MessageCircle,
+  "play-writes": Pencil,
+  playground: Gamepad2,
+  "art-gym": Dumbbell,
+  "art-games": Puzzle,
+  artiverse: Palette,
+  "log-book": Notebook,
+  "art-care": Heart,
+  "logic-lab": Lightbulb,
+  "numbers-gym": Hash,
+};
+
 // First sentence or two of a long segment objective, for the scannable
 // "the day" cards.
 function firstSentences(text: string, n = 2): string {
@@ -533,8 +550,11 @@ function ProgrammeOverviewContent() {
                       // eslint-disable-next-line @next/next/no-img-element
                       <img src={img} alt="" className="h-20 w-20 shrink-0 rounded-lg object-cover ring-1 ring-ink/10" />
                     ) : (
-                      <span className="flex h-20 w-20 shrink-0 items-center justify-center rounded-lg bg-segment-yellow/20 text-[10px] font-bold lowercase text-ink-subtle">
-                        {seg.name.toLowerCase()}
+                      <span className="flex h-20 w-20 shrink-0 items-center justify-center rounded-lg bg-brand-cream text-brand-orange ring-1 ring-ink/5">
+                        {(() => {
+                          const Icon = SEGMENT_ICONS[seg.id] ?? Star;
+                          return <Icon className="h-8 w-8" strokeWidth={1.8} />;
+                        })()}
                       </span>
                     )}
                     <div className="min-w-0 flex-1">

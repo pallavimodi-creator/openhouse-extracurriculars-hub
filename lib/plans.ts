@@ -27,12 +27,6 @@ export const PLAN_DOCS: PlanDoc[] = [
     blurb: "the one big why (school readiness) + the ladder to the 5+ programmes",
   },
   {
-    slug: "2hr-ecc-research-and-testing-plan",
-    title: "research base, draft structure & testing plan",
-    group: "start here",
-    blurb: "the evidence + the 2-hour frame + how we pilot it",
-  },
-  {
     slug: "language-programme-note",
     title: "language — programme & formats note",
     group: "teacher programme notes",
@@ -99,11 +93,6 @@ export const PLAN_DOCS: PlanDoc[] = [
     slug: "how-to-fill-the-experience-book",
     title: "how to fill it — teacher guide",
     group: "the experience book",
-  },
-  {
-    slug: "pilot-04-session-log-and-parent-pulse",
-    title: "educator session log & parent pulse",
-    group: "pilot & research",
   },
   {
     slug: "vocabulary-card-research",

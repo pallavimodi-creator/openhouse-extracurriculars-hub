@@ -96,7 +96,7 @@ export function VocabFlashcards({ level }: { level: VocabLevel }) {
                 <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white/70 text-brand-orange shadow-sm">
                   <Sparkles className="h-7 w-7" strokeWidth={1.8} />
                 </span>
-                <span className="text-[10px] font-semibold uppercase tracking-wide text-ink-subtle">picture coming soon</span>
+                <span className="text-[10px] font-semibold tracking-wide text-ink-subtle">picture coming soon</span>
               </div>
             )}
 
@@ -126,7 +126,7 @@ export function VocabFlashcards({ level }: { level: VocabLevel }) {
             </div>
 
             <div className="mt-auto">
-              <p className="text-[9px] font-bold uppercase tracking-wider text-ink-subtle">pairs with</p>
+              <p className="text-[9px] font-bold tracking-wider text-ink-subtle">pairs with</p>
               <div className="mt-1.5 flex flex-wrap gap-1.5">
                 {card.pairs.map((p) => (
                   <span key={p} className="rounded-chip bg-ink/[0.06] px-2.5 py-1 text-[11px] text-ink-muted">{p}</span>

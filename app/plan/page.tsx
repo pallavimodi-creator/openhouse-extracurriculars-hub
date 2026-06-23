@@ -41,12 +41,6 @@ const ABOUT = [
     href: "/plan/docs/how-to-fill-the-experience-book",
     icon: ChevronRight,
   },
-  {
-    title: "research & the 2-hour structure",
-    blurb: "the evidence base, the day frame, and how we pilot it",
-    href: "/plan/docs/2hr-ecc-research-and-testing-plan",
-    icon: Sparkles,
-  },
 ];
 
 // The three programmes — each opens its full overview (daily structure ·
