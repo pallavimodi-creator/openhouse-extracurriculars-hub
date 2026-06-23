@@ -1,7 +1,9 @@
-# activity pack — the deepened blocks (the +10 that makes it a programme, not a session)
-### one per strand · the open-ended heart of each day
+# how to use the extra time — extending existing sections
+### *(NOT a separate "block" — you simply give more minutes to a section you already run)*
 
-The deepened block is where the real learning lands. It is **never "do more"** — it's the same three-move shape on every strand, so the day feels coherent and the experience-book observation is consistent:
+> **the centre version doesn't add a new block — it extends an existing section.** Language gives the extra time to **book'o'clock**, art to **making**, stem to the **build/explore**. This page is optional guidance for *spending that extra time well* — same three-move shape on every strand, so the day stays coherent and the experience-book observation is consistent. If a teacher just runs the existing section longer, that's fine; this makes the extra minutes count.
+
+The shape, on every strand:
 
 > **do it · notice it · say something about it**
 
