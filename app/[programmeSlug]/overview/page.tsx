@@ -753,59 +753,77 @@ function ProgrammeOverviewContent() {
         )}
       </section>
 
-      {/* ─── LEARNING OUTCOMES BY LEVEL (3-5 programmes) ─── */}
+      {/* ─── LEARNING OUTCOMES (3-5 programmes) ───
+          Two kinds of skill, modelled differently (see
+          planning/levels-and-skills-model.md): "levels" skills carry a
+          different milestone at each level; "ladder" skills (dispositions)
+          are one ladder toward one milestone. */}
       {LO_LADDERS[programme.slug] && (() => {
-        const ladder = LO_LADDERS[programme.slug];
+        const prog = LO_LADDERS[programme.slug];
         return (
           <section className="mt-10 px-4 md:px-8">
-            <SectionTitle num="·" label="learning outcomes — by level">
-              what &ldquo;going strong&rdquo; looks like at each level. the same activity runs at every level — only the rung changes, by attainment not age.
+            <SectionTitle num="·" label="learning outcomes">
+              two kinds of skill grow here. some are <strong>true levels</strong> — each level is a different target with its own milestone, so the same game carries a different aim per child. others are <strong>dispositions</strong> — one ladder toward one goal, climbed at each child&rsquo;s own pace.
             </SectionTitle>
-            {ladder.note && (
-              <p className="mt-2 text-[11px] italic leading-relaxed text-ink-muted">{ladder.note}</p>
+            {prog.levelNote && (
+              <p className="mt-2 text-[11px] italic leading-relaxed text-ink-muted">{prog.levelNote}</p>
             )}
             <div className="mt-4 space-y-4">
-              {ladder.groups.map((g) => {
-                const hasLabels = g.rows.some((r) => r.label);
-                return (
-                  <div key={g.skill} className="overflow-hidden rounded-2xl bg-brand-white p-4 shadow-card ring-1 ring-ink/5">
-                    <p className="mb-2 text-[13px] font-extrabold lowercase text-ink">{g.skill}</p>
-                    <div className="-mx-1 overflow-x-auto">
-                      <table className="w-full border-collapse">
-                        <thead>
-                          <tr>
-                            {hasLabels && <th className="w-24" />}
-                            {ladder.scale.map((s) => (
-                              <th key={s} className="border-b border-ink/10 px-2 py-1.5 text-left text-[10px] font-extrabold lowercase text-brand-orange">
-                                {s}
-                              </th>
-                            ))}
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {g.rows.map((row, i) => (
-                            <tr key={i} className="align-top">
-                              {hasLabels && (
-                                <td className="border-b border-ink/5 px-2 py-2 text-[11px] font-bold lowercase text-ink-muted">
-                                  {row.label}
-                                </td>
-                              )}
-                              {row.cells.map((c, j) => (
-                                <td key={j} className="border-b border-ink/5 px-2 py-2 text-[11px] leading-relaxed text-ink-muted">
-                                  {c}
-                                </td>
-                              ))}
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
+              {prog.skills.map((sk) => (
+                <div key={sk.skill} className="overflow-hidden rounded-2xl bg-brand-white p-4 shadow-card ring-1 ring-ink/5">
+                  <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
+                    <p className="text-[13px] font-extrabold lowercase text-ink">{sk.skill}</p>
+                    <span className={`rounded-chip px-2 py-0.5 text-[9px] font-bold lowercase ${sk.kind === "levels" ? "bg-brand-orange/12 text-brand-orange" : "bg-ink/8 text-ink-muted"}`}>
+                      {sk.kind === "levels" ? "true levels · a milestone each" : "one ladder · disposition"}
+                    </span>
                   </div>
-                );
-              })}
+                  {sk.note && <p className="mb-3 text-[10.5px] italic leading-relaxed text-ink-subtle">{sk.note}</p>}
+
+                  {sk.kind === "levels" ? (
+                    <div className="space-y-4">
+                      {sk.ladders.map((dim, di) => (
+                        <div key={di}>
+                          {dim.dimension && (
+                            <p className="mb-2 text-[10.5px] font-bold lowercase text-ink-muted">▸ {dim.dimension}</p>
+                          )}
+                          <div className="grid gap-2 sm:grid-cols-3">
+                            {dim.levels.map((lvl) => (
+                              <div key={lvl.name} className="flex flex-col rounded-xl bg-brand-cream/40 p-3">
+                                <p className="text-[10px] font-extrabold lowercase text-brand-orange">{lvl.name}</p>
+                                <ul className="mt-1.5 flex-1 space-y-1">
+                                  {lvl.los.map((lo, k) => (
+                                    <li key={k} className="text-[10.5px] leading-snug text-ink-muted">{lo}</li>
+                                  ))}
+                                </ul>
+                                <p className="mt-2 rounded-lg bg-brand-white p-2 text-[10px] leading-snug text-ink ring-1 ring-brand-orange/20">
+                                  <span className="font-bold text-brand-orange">milestone · </span>{lvl.milestone}
+                                </p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div>
+                      <div className="flex flex-wrap items-stretch gap-2">
+                        {sk.rungs.map((r, ri) => (
+                          <div key={ri} className="flex min-w-[140px] flex-1 items-start gap-2 rounded-xl bg-brand-cream/40 p-2.5">
+                            <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-orange/15 text-[10px] font-bold text-brand-orange">{ri + 1}</span>
+                            <span className="text-[10.5px] leading-snug text-ink-muted"><span className="font-bold lowercase text-ink">{r.label}</span> — {r.detail}</span>
+                          </div>
+                        ))}
+                      </div>
+                      <p className="mt-2 rounded-lg bg-brand-white p-2 text-[10.5px] leading-snug text-ink ring-1 ring-brand-orange/20">
+                        <span className="font-bold text-brand-orange">north star · </span>{sk.milestone}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              ))}
             </div>
             <p className="mt-3 text-[11px] text-ink-subtle">
-              promotion = securing the ★/hardest rung independently, more than once. the full prose lives in the{" "}
+              for <strong>levels</strong> skills, promotion = securing the next level&rsquo;s milestone independently, more than once. for <strong>dispositions</strong>, the goal is the same — children just deepen. full prose in the{" "}
               <Link href="/plan/docs" className="font-semibold text-brand-orange">planning docs</Link>.
             </p>
           </section>
