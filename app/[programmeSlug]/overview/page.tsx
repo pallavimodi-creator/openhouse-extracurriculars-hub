@@ -1014,6 +1014,7 @@ function ProgrammeOverviewContent() {
           subtitle: string;
         } & (
           | { kind: "route"; href: string }
+          | { kind: "soon" }
           | {
               kind: "modal";
               modalKey:
@@ -1068,18 +1069,17 @@ function ProgrammeOverviewContent() {
         // artiverse / artistotle books.
         if (programme.slug === "robotics-3-5") {
           books.push({
-            kind: "modal",
-            modalKey: "imagine-playground-3-5",
-            cover: "/prog-stem-3-5.png",
+            kind: "route",
+            href: "/plan/docs/imagine-playground-activities",
+            cover: "/imagine-playground-book/cover.png",
             title: "the imagine playground book",
-            subtitle: "educator reference · 11 build projects",
+            subtitle: "11 build projects · scripted by level (easy/medium/hard)",
           });
           books.push({
-            kind: "modal",
-            modalKey: "wonderworld-3-5",
+            kind: "soon",
             cover: "/prog-stem-3-5.png",
-            title: "the wonderworld book",
-            subtitle: "educator reference · 3 chapters · 15 activities",
+            title: "the kitchen play book",
+            subtitle: "replaces wonderworld · recipes & café builds — coming soon",
           });
           books.push({
             kind: "modal",
@@ -1158,12 +1158,28 @@ function ProgrammeOverviewContent() {
                     <div className="text-center">
                       <p className="text-[14px] font-extrabold lowercase text-ink">{book.title}</p>
                       <p className="mt-1 text-[11px] italic text-ink-muted">{book.subtitle}</p>
-                      <p className="mt-2 inline-flex items-center gap-1 text-[11px] font-bold text-brand-orange">
-                        open the book →
-                      </p>
+                      {book.kind === "soon" ? (
+                        <p className="mt-2 inline-flex items-center gap-1 rounded-chip bg-ink/5 px-2 py-0.5 text-[10px] font-bold text-ink-subtle">
+                          coming soon
+                        </p>
+                      ) : (
+                        <p className="mt-2 inline-flex items-center gap-1 text-[11px] font-bold text-brand-orange">
+                          open the book →
+                        </p>
+                      )}
                     </div>
                   </>
                 );
+                if (book.kind === "soon") {
+                  return (
+                    <div
+                      key={book.title}
+                      className="flex flex-col items-center gap-3 rounded-2xl bg-brand-white/70 p-5 opacity-75 shadow-card ring-1 ring-ink/[0.05]"
+                    >
+                      {inner}
+                    </div>
+                  );
+                }
                 if (book.kind === "modal") {
                   const onClick =
                     book.modalKey === "artistotle-3-5"
