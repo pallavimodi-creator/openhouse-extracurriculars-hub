@@ -42,7 +42,7 @@ import {
   Compass,
   type LucideIcon,
 } from "lucide-react";
-import { getCurriculumProgramme, getActivityImage, GYM_BOOK_IMAGES, getProgrammeStage } from "@/lib/content";
+import { getCurriculumProgramme, getActivityImage, GYM_BOOK_IMAGES } from "@/lib/content";
 import { cn } from "@/lib/utils";
 import { TeacherGate } from "@/components/TeacherGate";
 import { ArtiverseChapters } from "@/components/ArtiverseChapters";
@@ -125,33 +125,10 @@ function ProgrammeOverviewContent() {
     return null;
   }
 
-  // Trial programmes (the 3-5 band) are blocked for now — their overviews
-  // are still being finalised (timings differ at the centre). Show a
-  // "coming soon" notice instead of the overview. Flip this off by
-  // removing the guard when the trial overviews are ready.
-  if (getProgrammeStage(programme) === "trial") {
-    return (
-      <div className="flex min-h-[60vh] flex-col items-center justify-center px-6 text-center">
-        <span className="inline-flex items-center gap-1.5 rounded-chip bg-brand-orange/15 px-3 py-1 text-[11px] font-extrabold lowercase text-brand-orange ring-1 ring-brand-orange/30">
-          <Lock className="h-3 w-3" strokeWidth={2.4} />
-          trial · coming soon
-        </span>
-        <h1 className="mt-4 text-[22px] font-extrabold lowercase leading-tight text-ink md:text-[26px]">
-          {programme.title}
-        </h1>
-        <p className="mt-2 max-w-sm text-[13px] leading-relaxed text-ink-muted">
-          this trial programme isn&apos;t open yet — the overview is being
-          finalised for the centre. check back soon.
-        </p>
-        <Link
-          href="/"
-          className="mt-6 rounded-card bg-brand-orange px-5 py-2.5 text-[13px] font-bold text-white shadow-card transition hover:opacity-95 active:scale-[0.98]"
-        >
-          back to home
-        </Link>
-      </div>
-    );
-  }
+  // The 3-5 (centre) programmes are now open — their overviews render the
+  // same way as the 5+ programmes (daily structure · skills · games with
+  // images). The combined "about the programme" intro + the shared planner
+  // live under /plan.
 
   const isArt = programme.category === "art";
   const isRobotics = programme.category === "stem";
@@ -1057,7 +1034,7 @@ function ProgrammeOverviewContent() {
         return (
           <section className="mt-10 px-4 md:px-8">
             <SectionTitle num={sectionNum("books")} label="educator reference books">
-              flip through every reference book — for teachers, not children
+              flip through every reference book — for educators, not children
             </SectionTitle>
             <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {books.map((book) => {
