@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, RotateCw, BookOpen } from "lucide-react";
 import { vocabByLevel, VOCAB_TASKS, type VocabLevel } from "@/content/vocab-cards";
+import { VOCAB_IMAGES } from "@/lib/vocab-images";
 
 const TYPE_TONE: Record<string, string> = {
   noun: "bg-segment-blue/30 text-ink",
@@ -44,7 +45,7 @@ export function VocabFlashcards({ level }: { level: VocabLevel }) {
           <div className="absolute inset-0 flex flex-col overflow-hidden rounded-3xl bg-brand-white shadow-float ring-1 ring-ink/10 [backface-visibility:hidden]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={card.image ?? card.bookCover}
+              src={VOCAB_IMAGES[card.word.toLowerCase()] ?? card.image ?? card.bookCover}
               alt=""
               className="h-[300px] w-full bg-brand-cream object-contain p-4"
             />
