@@ -78,7 +78,7 @@ export default function BuildingPickerPage() {
       {/* Hero */}
       <div className="mb-6 w-full max-w-md text-center">
         <p className="text-[12px] font-bold tracking-widest text-brand-orange">
-          hi {teacherName?.toLowerCase() ?? "teacher"}
+          hi {teacherName?.toLowerCase() ?? "educator"}
         </p>
         <h1 className="mt-2 text-[26px] font-extrabold leading-[1.05] tracking-tight text-ink md:text-[32px]">
           which centre are you at today?

@@ -1,4 +1,4 @@
-// Core content types for the Openhouse Teacher Tool.
+// Core content types for the Openhouse Educator Tool.
 // All content is statically typed and loaded at build time — no DB in v1.
 
 export type SkillTag = "L&T" | "S&F" | "C&P" | "I&E" | "Responsibility";
@@ -172,7 +172,7 @@ export interface CurriculumProgramme {
   /**
    * Songs used as the warm-up playlist (e.g. Roll & Rhyme in the
    * language programme). Each song embeds an existing YouTube video
-   * so teachers can play it directly inside the overview.
+   * so educators can play it directly inside the overview.
    */
   songs?: ProgrammeSong[];
   trialSession?: TrialSession;
@@ -234,7 +234,7 @@ export interface ProgrammeSong {
   whatItBuilds: string;
   /** Which book or programme moment this song pairs with. */
   pairsWith: string;
-  /** Hint to the teacher about when to introduce this song. */
+  /** Hint to the educator about when to introduce this song. */
   introHint: string;
 }
 
@@ -356,12 +356,12 @@ export interface CurriculumSessionEntry {
   buildDayLabel?: string; // "Day 1 — Explore", "Day 6 — Disassemble", etc.
   /**
    * Engage question — asked at the start of the 40-min Build segment.
-   * Short, curiosity-opening; teacher takes 3-4 answers and moves on.
+   * Short, curiosity-opening; educator takes 3-4 answers and moves on.
    */
   engageQuestion?: string;
   /**
    * Concept question — asked in the closing debrief. One direct question
-   * about today's concept; one child answers; teacher confirms.
+   * about today's concept; one child answers; educator confirms.
    */
   conceptQuestion?: string;
 }

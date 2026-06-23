@@ -1,4 +1,4 @@
-# supabase setup — the teacher activity log
+# supabase setup — the educator activity log
 
 The planner (`/plan`) and the admin log (`/plan/log`) write/read one Supabase table. Until you do these three steps, the planner still works as a **run-sheet** (it just can't log). ~10 minutes.
 
@@ -12,8 +12,8 @@ create table public.session_plans (
   id uuid primary key default gen_random_uuid(),
   created_at timestamptz not null default now(),
   session_date date not null,
-  teacher_name text not null,
-  teacher_username text,
+  educator_name text not null,
+  educator_username text,
   centre text,
   strand text not null,
   strand_label text not null,
@@ -43,8 +43,8 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=<your-anon-public-key>
 `.env.local` is gitignored, so the keys never get committed.
 
 ## done
-- `/plan` → teacher picks strand + a resource per part → **submit today's plan** → a row lands in `session_plans`.
-- `/plan/log` (admin only) → see every plan: teacher · strand · date · centre · the resources they chose.
+- `/plan` → educator picks strand + a resource per part → **submit today's plan** → a row lands in `session_plans`.
+- `/plan/log` (admin only) → see every plan: educator · strand · date · centre · the resources they chose.
 
 ## what gets logged (one row per submitted plan)
-`session_date · teacher_name · teacher_username · centre · strand · strand_label · picks{ segmentId → {resourceId, resourceLabel} }`
+`session_date · educator_name · educator_username · centre · strand · strand_label · picks{ segmentId → {resourceId, resourceLabel} }`

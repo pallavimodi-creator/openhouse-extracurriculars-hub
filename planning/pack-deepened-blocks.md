@@ -1,7 +1,7 @@
 # how to use the extra time — extending existing sections
 ### *(NOT a separate "block" — you simply give more minutes to a section you already run)*
 
-> **the centre version doesn't add a new block — it extends an existing section.** Language gives the extra time to **book'o'clock**, art to **making**, stem to the **build/explore**. This page is optional guidance for *spending that extra time well* — same three-move shape on every strand, so the day stays coherent and the experience-book observation is consistent. If a teacher just runs the existing section longer, that's fine; this makes the extra minutes count.
+> **the centre version doesn't add a new block — it extends an existing section.** Language gives the extra time to **book'o'clock**, art to **making**, stem to the **build/explore**. This page is optional guidance for *spending that extra time well* — same three-move shape on every strand, so the day stays coherent and the experience-book observation is consistent. If a educator just runs the existing section longer, that's fine; this makes the extra minutes count.
 
 The shape, on every strand:
 
@@ -95,4 +95,4 @@ Each child/group shows their build and says **one thing they found.** **prompt s
 ---
 
 ## why the same three moves on every strand
-Not just for tidiness: the **"do · notice · say"** shape means (1) the child learns the same thinking habit — *make/try something, look at it, put it into words* — across art, stem and language; (2) the teacher has the **same observe window** every day (the "say" move = where you mark the book); and (3) it's the seed of the **why-split infographic** — one programme, three doors, one rhythm.
+Not just for tidiness: the **"do · notice · say"** shape means (1) the child learns the same thinking habit — *make/try something, look at it, put it into words* — across art, stem and language; (2) the educator has the **same observe window** every day (the "say" move = where you mark the book); and (3) it's the seed of the **why-split infographic** — one programme, three doors, one rhythm.

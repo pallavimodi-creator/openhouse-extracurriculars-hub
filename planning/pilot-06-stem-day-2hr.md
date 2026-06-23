@@ -17,7 +17,7 @@ Design rules (NCF-FS): plan around attention span; **alternate quiet ↔ active 
 | 3 | **break / snack** | 10 | — | free | snack + free movement |
 | 4 | **imagine playground / wonder world — deepened** | 40 | small groups → individual | active-focused | the heart of the day — build → test → explain (see deepening guide). IP and WW alternate by day. |
 | 5 | **numbers gym** | 20 | individual | calm-focused | self-paced personal number gamebook (each child at their own level) |
-| 6 | **closing & experience book** | 15 | whole → individual | calm | recap → feelings check → calm-down; teacher marks the experience book + child adds an artefact/photo of their build |
+| 6 | **closing & experience book** | 15 | whole → individual | calm | recap → feelings check → calm-down; educator marks the experience book + child adds an artefact/photo of their build |
 
 **= 120 min.** (+30 over at-building: circle 15 · break 10 · build/explore +5.) Minutes tune in the pilot.
 
@@ -29,7 +29,7 @@ Quiet/active check: active(1) → focused(2) → free(3) → active-focused(4) �
 
 The extra time is **not** "build a bigger tower" — it's the **scientific-reasoning + engineering loop**, in three moves (mirrors language and art):
 
-1. **build / explore (≈22 min)** — children build with the construction kit (imagine playground) or investigate the day's theme/materials (wonder world). Open-ended, child-led; teacher sets the challenge then steps back. Four questions only, never the answer.
+1. **build / explore (≈22 min)** — children build with the construction kit (imagine playground) or investigate the day's theme/materials (wonder world). Open-ended, child-led; educator sets the challenge then steps back. Four questions only, never the answer.
 2. **test (≈10 min)** — "what happens if…?" — push the tower, roll the ball down the ramp, change one thing and watch. This is observe → predict → test, the heart of early science. Children notice, compare, and try again.
 3. **explain (≈8 min)** — each child (or group) shows their build and says one thing they found — "it fell because the bottom was too small", "the long ramp was faster." Putting a finding into words is where the thinking gets locked in — and it's the concept-question moment.
 

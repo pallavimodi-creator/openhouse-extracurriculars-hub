@@ -9,12 +9,18 @@ import type {
  * 60 sessions across ~7.5 months.
  *
  * Session structure (A and B alternate; Imagine Playground and
- * WonderWorld are exploration-based segments that swap places):
+ * Kitchen Play are exploration-based segments that swap places):
  *
  *   imagine-playground / wonder-world    35 min
  *   logic-lab                            20 min
  *   numbers-gym                          25 min
  *   experience-book                      10 min
+ *
+ * Scheduling Note: The duration of Imagine Playground / Kitchen Play
+ * sessions may be adjusted based on the scope of the activity. If a
+ * project needs more time, educators may shorten Number Gym, Logic
+ * Lab, or other components to ensure meaningful engagement and
+ * completion of the project.
  * ----------------------------------------------------------------- */
 
 /* ─── Logic Lab games ─────────────────────────────────────────────
@@ -23,68 +29,71 @@ import type {
  * deeper each time. ───────────────────────────────────────────── */
 
 const logicLabGames: Record<string, CurriculumActivity> = {
+  // TODO(image): Candy Sort needs file "Candy sort .png" (from user)
   "ll-candy-sort": {
     id: "ll-candy-sort",
     segment: "logic-lab",
     title: "candy sort",
-    setupLine: "Roll the dice, spot the matching candy, win it for your team.",
+    setupLine: "Sort, spot the pattern, match and find — candies by their traits.",
     howToPlay:
-      "Two teams race. The facilitator rolls two dice (colour, shape, or pattern). Teams scan the Candy Field — first hand to touch the candy whose traits match both dice claims it. No match visible? Both dice are rerolled. After several rounds, gather teams with their trays for an end-game math quiz: counting, more/less, add/take-away, comparing sets, simple equality — each correct answer = 1 bonus point.",
-    materials: [
-      "4 dice — Colour Die A (6 colours) · Colour Die B (same 6 colours) · Shape Die (6 shapes) · Pattern Die (6 patterns)",
-      "36 single-trait candies — each shows one colour + one shape + one pattern (e.g. red-triangle-stripes)",
-      "30 double-trait candies (2 sets of 15) — each shows two colours + two shapes + two patterns (e.g. blue-yellow / square-circle / dots-zigzags)",
-      "Two sorting plates — team trays for collected candies",
-      "Play Mat — the 'Candy Field' where all 66 candies sit picture-side up",
-      "Timer or sand-glass (optional) — 30 sec per round keeps it zippy",
-    ],
+      "Three gameplay areas, each with several games that progress in the order listed.\n\nSORT — Children group or identify candies by a shared trait — sort, guess, or find the odd one based on colour, shape, or pattern.\n\nPATTERN — Children observe a candy sequence, understand the rule, and predict what comes next, taking turns adding the correct candy.\n\nMATCH/FIND — Children listen to a cue, number, or matching trait and search for the correct candy, taking turns picking, matching, and naming aloud.",
+    example:
+      "Each gameplay area (Sort, Pattern, Match/Find) contains several games that progress in the order listed — work through them in sequence. Within any one game, the educator sets the support level (Easy/Medium/Hard) to match the child, so a child might be at 'Easy' on a new Pattern game while already at 'Hard' on a familiar Sort game.",
     variations: [
       {
-        name: "Setup",
+        name: "Sort · Venn Sort",
         description:
-          "Scatter all 66 candies picture-side up on the Candy Field. Divide children into two teams (3–4 players per team). Place a tray beside each team for their winnings.",
+          "Divide the class into 2–3 groups. Give each group a pile of candy cards in the centre. The educator shows one sorting rule (e.g. colour: red candies / shape: round candies / pattern: striped candies). The educator first picks and sorts 3–4 candies that follow the rule. Children look through the pile and take turns picking one candy at a time; each checks if it matches the rule and, if so, places it in the correct group. Continue until all children have had a turn or the pile is sorted.",
       },
       {
-        name: "How a round works",
+        name: "Sort · Candy Sort",
         description:
-          "Facilitator says 'Ready… roll!' and rolls the two chosen dice. Teams scan the field. First hand to touch the correct candy claims it and pops it in their tray. No match visible? Say 'Pass!' — both dice are rerolled.",
+          "Divide into small groups of 2–3. Give each group a pile in the centre. The educator gives each child/group one sorting rule (colour: red/blue/yellow; shape: round/wavy/umbrella; pattern: striped/dotted/plain). Children find all candies matching their rule, then count how many they found; the educator can also ask them to count the ones that don't match. If a group finds candies belonging to another group's rule, they exchange them. To make it harder, add a second rule within the sorted set (e.g. 'from your blue candies, now find only the wavy blue candies'). Start with colour, then shape, then patterns.",
       },
       {
-        name: "Single-trait round",
+        name: "Sort · Secret Rule",
         description:
-          "Use the 36 single-trait candies. Roll one die at a time (colour OR shape OR pattern) — children find a candy matching that single trait.",
+          "Divide into groups of 2–3. Place a small group of candy cards in front of each group, all following one secret rule (e.g. all red / all round / all striped). Children look carefully and guess what is the same about all the candies; each takes a turn to share an idea and name the rule aloud (e.g. 'the rule is red candies'). The educator guides with 'what do you notice?' / 'what is the same?'",
       },
       {
-        name: "Double-trait round",
+        name: "Sort · Odd Candy Out",
         description:
-          "Use the 30 double-trait candies. Roll two dice at once — children find a candy whose two trait values both match.",
+          "Divide into groups of 2–3. Place a small row of candy cards; most share one trait (colour/shape/pattern) and one is different. Children find the candy that doesn't belong and say why (e.g. 'this one is not round').",
+      },
+      {
+        name: "Pattern · What's Next?",
+        description:
+          "Divide into groups of 2–3. Place a few candy cards in a simple pattern (e.g. colour: red, blue, red, blue / shape: round, wavy, round, wavy). Children observe, guess what candy comes next, and take turns adding one candy to the pattern chain. Continue until every child has a turn or the pattern is complete. Start with colour patterns, then shape, then more complex sequences.",
+      },
+      {
+        name: "Match/Find · Roll & Hunt",
+        description:
+          "Divide into groups of 2–3 with a pile in the centre. Each child rolls the die and picks candies based on the number shown. For a challenge, roll two dice (up to 6 candies). Continue until every child has a turn.",
+      },
+      {
+        name: "Match/Find · Sweet Relay",
+        description:
+          "Divide into groups of 2–3 with a pile in the centre. One child picks any candy; the next child picks another candy that has one matching trait and says it aloud (e.g. 'my candy is red too'). Continue until no matching candies are left; the educator can start a new relay with a different candy and trait.",
+      },
+      {
+        name: "Match/Find · I Spy Candy",
+        description:
+          "Divide into groups of 2–3. Place all candy cards visible. The educator or a child secretly chooses one candy and gives a clue (e.g. 'I spy a candy shaped like an umbrella'). Others look and take turns guessing; continue with a new candy and clue.",
       },
     ],
     difficultyLevels: [
       {
-        level: "End-game · Counting",
-        description:
-          "Team Sunshine, count your red candies. How many do you have?",
+        level: "Easy",
+        description: "educator demonstrates first and assists whenever required",
       },
       {
-        level: "End-game · More / Less",
-        description:
-          "Who has more striped candies, Team Sunshine or Team Rainbow?",
+        level: "Medium",
+        description: "children play the game independently",
       },
       {
-        level: "End-game · Add & Take Away",
+        level: "Hard",
         description:
-          "Team Rainbow, if you eat two star candies, how many star candies are left?",
-      },
-      {
-        level: "End-game · Compare Sets",
-        description:
-          "Put your circle candies in a line. Does the line look shorter or longer than Team Sunshine's?",
-      },
-      {
-        level: "End-game · Simple Equality",
-        description:
-          "Can each team give me three candies? Do you both still have some left?",
+          "children take on the level-up version — a second sorting rule, two dice, child-given clues, or a time limit",
       },
     ],
     debriefPrompts: [],
@@ -97,28 +106,27 @@ const logicLabGames: Record<string, CurriculumActivity> = {
     title: "stitch me",
     setupLine: "Pair up. Solve the prompt. Lace the bead.",
     howToPlay:
-      "Divide the children into pairs. Set up stations or scavenger bins around the room — one for beads, one for numbers, one for shapes. Give each pair a laminated template, a sewing base, and a shoelace. The teacher calls out one prompt at a time. The current player runs to the right station, finds the matching bead, comes back, and laces it onto the template. The lace is passed to the next child. The round ends when every bead is sewn into the template.",
+      "Each child is given one base template card (start with Level Easy) along with a shoelace and beads. The kids start lacing according to the pattern on the card. All kids start at Level Easy then gradually progress to Level Hard.",
     materials: [
-      "Laminated templates (beads · numbers · shapes)",
-      "Sewing bases",
-      "Shoelaces with a stiff tip",
-      "Bead, number, and shape stations scattered around the room",
+      "Stitch me pattern cards (easy, medium, difficult)",
+      "Sewing bases (beads, numbers)",
+      "Shoelaces",
     ],
-    difficultyLevels: [
+    variations: [
       {
-        level: "Easy — colour pattern beads",
+        name: "Free pattern",
         description:
-          "Prompt: \"Sew a necklace with this ABAB pattern — red, yellow, red, yellow.\" The child finds beads of the two colours and laces them in the alternating sequence shown on the template.",
+          "educator increases the difficulty level; at the harder level the kids are free to make their own pattern.",
       },
       {
-        level: "Medium — beads + numbers",
+        name: "Scavenger prompt",
         description:
-          "Prompt: \"Colour + number pattern — blue 1, yellow 2, orange + blue 3, ___\". The child finds the beads and numbers shown on the template and laces them in order.",
+          "The educator gives a verbal prompt including colour and number and the kids find them in the scavenger bin (box). Example: \"Blue 2, yellow 1…\".",
       },
       {
-        level: "Hard — verbal riddles",
+        name: "Riddle relay",
         description:
-          "The teacher reads a riddle. The child runs, picks the matching bead or number, and laces it. Examples: \"I'm as red as a strawberry on a sunny day\" → red bead. \"I'm what comes after 2 and before 4\" → number 3. \"Mix red and yellow, I'll show. I shine like the sunset's glow\" → orange bead. \"Double 2, that's me\" → number 4.",
+          "The whole class is divided into two groups, each with their own lace. The educator reads a riddle; a child from both groups races to pick the matching bead or number and lace it. Examples: \"I'm the same colour as a strawberry\" → red bead; \"I'm what comes after 2 and before 5\" → number 3 or 4. educator note: since there is only one set of number cards, the riddles should allow multiple possible answers.",
       },
     ],
     debriefPrompts: [],
@@ -131,154 +139,132 @@ const logicLabGames: Record<string, CurriculumActivity> = {
     title: "dot grid",
     setupLine: "Pick a card, place disks, check by laying the card on top.",
     howToPlay:
-      "Two children per board. One picks a card. They read the card type and follow the rule for that puzzle type. They take turns placing disks. When done, they check their work by placing the card on top of the board — the cut-out windows let them see if disks line up underneath.",
+      "Setup: place the play mat in the centre with the four colour disks beside it. Sort the cards by level. One child picks a card, observes the puzzle type, follows the instructions and recreates it on the mat. Children take turns placing the colour disks on the mat to solve the puzzle. After completing the card, try the bonus challenge on the other side of the card. Note: the bonus-round prompts are examples; educators may create similar prompts based on the children's learning and interests to extend gameplay.",
     materials: [
-      "5 play boards (one per pair of children)",
-      "240 disks — 60 each in red, yellow, blue, green",
-      "32 pattern cards — 16 see-and-match (blue-backed) + 16 see-and-predict (green-backed)",
-      "How-to-play booklet (8 pages, A5)",
-      "Answer key (1 sheet, A4 — for teacher only)",
-      "Storage box (A3 footprint with compartments)",
+      "Dot grid mat",
+      "See and predict cards - 16",
+      "See and match cards - 16",
+      "Coloured disks",
     ],
     variations: [
       {
-        name: "Setup",
+        name: "Game Types · Copy",
         description:
-          "Place each play board flat on a table. Open the four colour pouches and spread disks beside the boards. Sort cards by game mode into two stacks (blue-backed for see-and-match, green-backed for see-and-predict).",
+          "Direct visual replication. Children build exactly what they see on the card.",
       },
       {
-        name: "Game 1 · See and Match (16 cards)",
+        name: "Game Types · Finish the Pattern",
         description:
-          "Children build what they see — direct visual replication, pattern recognition, symmetry, and mirror-image puzzles.",
+          "Pattern recognition + completion. Children continue an existing pattern into the next row or column.",
       },
       {
-        name: "Game 2 · See and Predict (16 cards)",
+        name: "Game Types · Mirror It Across",
         description:
-          "Children think and answer — counting, subitising, comparison, and identifying rules to predict what comes next.",
+          "Spatial reflection (left → right). Children build the mirror image on the next half, matching the first half.",
+      },
+      {
+        name: "Game Types · Count How Many?",
+        description:
+          "Counting and comparison (more/less). Children arrange the dot pattern on the mat and count to answer 'how many?'",
+      },
+      {
+        name: "Game Types · What Comes Next?",
+        description:
+          "Identifying rules and predicting. Children look at a sequence and place disks to show what comes next in a given cell.",
+      },
+      {
+        name: "Team Challenge",
+        description:
+          "One pair or team creates a pattern/arrangement on the grid. The other team copies it exactly or solves the puzzle on their own board.",
+      },
+      {
+        name: "Create & Challenge",
+        description:
+          "A child creates a pattern/arrangement on the grid; their partner then solves it. Use with card types Mirror It Across, How Many?, Finish the Pattern, or What Comes Next?",
       },
     ],
     difficultyLevels: [
       {
-        level: "Easy · Copy (4 cards · See and Match)",
-        description:
-          "Direct visual replication — children build exactly what they see on the card.",
+        level: "Easy",
+        description: "Easy cards",
       },
       {
-        level: "Easy · Continue (4 cards · See and Match)",
-        description:
-          "Pattern recognition + completion — children continue an existing pattern.",
+        level: "Medium",
+        description: "Medium cards, Create & Challenge variation",
       },
       {
-        level: "Medium · Symmetry (4 cards · See and Match)",
-        description:
-          "Recognising symmetrical structure — children build the matching half.",
-      },
-      {
-        level: "Hard · Mirror (4 cards · See and Match)",
-        description:
-          "Spatial reflection (left → right) — children build the mirror image.",
-      },
-      {
-        level: "Easy + Hard · Count (8 cards · See and Predict · 4 easy + 4 hard)",
-        description:
-          "Counting, subitising, comparison — children answer 'how many?' from the dot pattern.",
-      },
-      {
-        level: "Medium + Hard · Pattern Predict (8 cards · See and Predict · 4 medium + 4 hard)",
-        description:
-          "Identifying rules, predicting next — children look at a sequence and place disks to show what comes next.",
+        level: "Hard",
+        description: "Hard cards, Team Challenge variation",
       },
     ],
     debriefPrompts: [],
     type: "physical-game",
   },
 
+  // TODO(image): Logical Road Builder needs file "Logical road builder.png" (from user)
   "ll-logical-road-builder": {
     id: "ll-logical-road-builder",
     segment: "logic-lab",
     title: "logical road builder",
     setupLine: "Build straight, then curvy paths — graduate to the puzzle book.",
     howToPlay:
-      "Refer to the instruction book for understanding how the game is used. Start by introducing children to making straight and curvy paths using only half of the board. Give children puzzles using half the board. Once they are comfortable, let them graduate to puzzles from the starter level of the book.",
+      "Place tiles on the board one by one to create a connected road from the starting point to the end point. Choose between straight and curved tiles to make the path fit and flow without any gaps or dead ends. educators can initially start with just one base board, then add more base boards. educator can add a timer to increase difficulty in later variations.",
     materials: [
       "Logical Road Builder game board",
       "Road tiles",
-      "Instruction book + puzzle book (Starter / Junior / Expert levels)",
     ],
     variations: [
       {
-        name: "Modes",
+        name: "Variation 1",
         description:
-          "There are 3 gameplay modes as given in the book. Start with the single-player mode. Only once players have completed all levels of this mode, move to the next mode and so on.",
-      },
-    ],
-    difficultyLevels: [
-      {
-        level: "Half-board warm-up",
-        description:
-          "Children build straight, then curvy paths using only half of the board. Once comfortable with both, graduate to the book.",
+          "The educator can give the child a limited number of tiles (example: 6 straight, 4 straight and 1 curved) and the child builds the road using only the given pieces.",
       },
       {
-        level: "Starter",
+        name: "Variation 2",
         description:
-          "First level of the puzzle book. Single-player mode. Complete all Starter puzzles before moving on.",
+          "educator gives more than 2 final points and the child builds a path reaching destination 1 then travelling to destination 2.",
       },
       {
-        level: "Junior",
+        name: "Variation 3",
         description:
-          "Second level of the puzzle book — more complex constraints. Stay in single-player mode until all Junior puzzles are done.",
-      },
-      {
-        level: "Expert",
-        description:
-          "Third level. Once all Expert single-player puzzles are complete, move to the next mode in the book.",
+          "educator asks two kids to start from opposite ends with one final destination; both race to reach it first in a relay.",
       },
     ],
     debriefPrompts: [],
     type: "physical-game",
   },
 
+  // TODO(image): Magna-Tiles needs file "Magnatiles .png" (from user)
   "ll-magna-tiles": {
     id: "ll-magna-tiles",
     segment: "logic-lab",
     title: "magna tiles",
     setupLine: "Match a flashcard, build the shape — five levels of difficulty.",
     howToPlay:
-      "Children build using Magna-Tiles. The teacher shows a prompt flashcard (laminated for reuse). Each card specifies the level — children match colours, count tiles, copy structure, fill borders, or invent freely. Five levels run in sequence: 3D Build → 2D Match → 2D Stack → Border Fill → Open-ended.",
+      "Children build using Magna-Tiles. The educator shows a prompt flashcard (laminated for reuse). Each card specifies the level — children match colours, count tiles, copy structure, fill borders, or invent freely. Children can play individually or as a group, depending on the card level.",
     materials: [
-      "Magna-Tiles (variety of shapes and colours)",
-      "Prompt flashcards (laminated):",
-      "  · Level 1 — 3D shaped prompts + number of tiles",
-      "  · Level 2 — 2D flat shapes + number of tiles",
-      "  · Level 3 — 2D double-layered prompts + number of tiles",
-      "  · Level 4 — Outlined borders + number of tiles",
-      "  · Level 5 — Open-ended prompts",
+      "Magnatiles set",
+      "Prompt cards (level 1 to 5)",
+    ],
+    variations: [
+      {
+        name: "Free Play",
+        description:
+          "Children use the Magna-Tiles to explore, create, and build freely — their own shapes, structures, objects, or designs — following their imagination, with no set rules.",
+      },
     ],
     difficultyLevels: [
       {
-        level: "Level 1 — Build It Tall! (3D Structures)",
-        description:
-          "Show the 3D prompt (tower, bridge, cube house). Say 'Can you make this shape that stands up? Let's build it standing!'. Let them build vertically with your support to balance. Encourage 'strong and steady'. Builds: fine motor, stability, early engineering, 3D thinking.",
+        level: "Easy",
+        description: "Level 1 cards, free play",
       },
       {
-        level: "Level 2 — Match & Build (2D Single Layer)",
-        description:
-          "Show the flashcard (a flat shape — house, rocket, fish — made with Magna-Tiles, with number of tiles + colours visible). Ask: 'Can you match and make this shape using Magna-Tiles?' Count the tiles. Complete the shape flat on the floor. Builds: colour & shape matching, tile counting, visual copying.",
+        level: "Medium",
+        description: "Level 2, 3 cards",
       },
       {
-        level: "Level 3 — Stack & Copy (2D Double Layer)",
-        description:
-          "Show the layered flashcard (two distinct layers). Say: 'This one has two parts! Let's build the bottom first and then add the top.' Guide them to build the two layers one at a time, using the given number of tiles. Builds: sequencing, understanding structure, spatial layering.",
-      },
-      {
-        level: "Level 4 — Fill the Frame (Border with Tile Count)",
-        description:
-          "Place the border prompt card on the floor or table. Say: 'Here's your space. You get exactly ___ tiles. Can you fill this up?' Let them explore how to fill the shape using the right number of tiles. Offer help only if they run out or go over the tile count. Builds: problem-solving, estimation, planning, number sense.",
-      },
-      {
-        level: "Level 5 — Creative Builders (Open-Ended Challenges)",
-        description:
-          "Show a playful challenge — a goal but no fixed picture, just a tile limit or design challenge. Read the challenge aloud or show the prompt card. Give the set number of tiles (or let them pick). Encourage them to experiment freely, then describe their build. Builds: creativity, engineering thinking, experimentation, storytelling, resilience.",
+        level: "Hard",
+        description: "Level 4, 5 cards",
       },
     ],
     debriefPrompts: [],
@@ -290,7 +276,7 @@ const logicLabGames: Record<string, CurriculumActivity> = {
  * Each project listed here is a CurriculumActivity so it can be
  * surfaced via the library / segment popups. Lesson-plan detail
  * lives in components/ImaginePlaygroundBookModal.tsx (used as the
- * teacher reference book on the overview page). ───────────────── */
+ * educator reference book on the overview page). ───────────────── */
 
 const imaginePlaygroundProjects: Record<string, CurriculumActivity> = {
   "ip-train-time": {
@@ -376,7 +362,7 @@ const imaginePlaygroundProjects: Record<string, CurriculumActivity> = {
     title: "trouble on the road",
     setupLine: "Read the traffic signs and solve the route problem.",
     howToPlay:
-      "Children apply route planning to solve traffic problems. The teacher places action bricks randomly along the track — children identify the problem and choose the right traffic sign to fix it.",
+      "Children apply route planning to solve traffic problems. The educator places action bricks randomly along the track — children identify the problem and choose the right traffic sign to fix it.",
     materials: ["Y-shaped track", "Building cards", "Action bricks", "Traffic sign set"],
     debriefPrompts: [],
     type: "physical-game",
@@ -417,211 +403,150 @@ const imaginePlaygroundProjects: Record<string, CurriculumActivity> = {
 
 };
 
-/* ─── WonderWorld — workbook activities (one book all year) ────────
- * One book — "What Is In Your Tiffin?" — runs across 30 Session-Bs.
- * 14 activities cycle twice each + 4 game support sessions.
- * Lesson-plan detail lives in components/WonderWorldBookModal.tsx. */
+/* ─── Kitchen Play — 3 rotating games (segment id stays "wonder-world")
+ * STEM through real kitchen actions: sorting food, following recipes,
+ * and running a café. Game 1 (Sort & Guess) and Game 2 (Cooking)
+ * alternate from the start; Game 3 (Restaurant) unlocks after ~20
+ * sessions (≈5 Cooking sessions in), then all three rotate.
+ *
+ * TODO(asset): Kitchen Play book + recipe list to be added soon
+ * (from user). The old WonderWorldBookModal placeholder remains in
+ * components/ until the new book is provided.
+ *
+ * FLAG: the segment id below is still "wonder-world" under the hood
+ * (display name is "Kitchen Play") to avoid type churn. */
 
 const wonderWorldActivities: Record<string, CurriculumActivity> = {
-  // Chapter 1 — The Bread (5 activities)
-  "ww-bread-1-punch-and-squish": {
-    id: "ww-bread-1-punch-and-squish",
+  // Game 1 — Sort & Guess
+  "kp-sort-and-guess": {
+    id: "kp-sort-and-guess",
     segment: "wonder-world",
-    title: "punch and squish",
-    setupLine: "Knead playdough — count the presses, feel the change.",
+    title: "sort & guess",
+    setupLine: "Sort food by its traits, flip to match, then guess the mystery food.",
     howToPlay:
-      "Children press and knead beige playdough, counting from 1 to 10 each round. They notice how dough changes — flat, soft, warm, smooth. Material transformation, hand strength, counting, observation.",
-    materials: ["Beige/yellow playdough", "Tiffin mat or A4 sheet"],
-    debriefPrompts: [],
-    type: "physical-game",
-  },
-  "ww-bread-2-make-a-bread": {
-    id: "ww-bread-2-make-a-bread",
-    segment: "wonder-world",
-    title: "make a bread from somewhere in the world",
-    setupLine: "Each child shapes one kind of bread.",
-    howToPlay:
-      "Bread comes in many shapes. Each child chooses one — round chapati, long loaf, tiny bun, or square slice — and makes it from playdough. Children compare biggest, smallest, round, long.",
-    materials: ["Beige/yellow playdough", "4-section tiffin mat"],
-    debriefPrompts: [],
-    type: "physical-game",
-  },
-  "ww-bread-3-bread-riddles": {
-    id: "ww-bread-3-bread-riddles",
-    segment: "wonder-world",
-    title: "bread riddles",
-    setupLine: "Listen to the clue — guess the bread.",
-    howToPlay:
-      "Teacher gives clues ('I am round and flat. I puff on the pan'). Children point to the matching picture or playdough bread. Then children invent their own clues.",
-    materials: ["Picture cards (chapati, loaf, bun, toast)"],
-    debriefPrompts: [],
-    type: "physical-game",
-  },
-  "ww-bread-4-what-comes-next": {
-    id: "ww-bread-4-what-comes-next",
-    segment: "wonder-world",
-    title: "what comes next?",
-    setupLine: "Put the bread journey in order.",
-    howToPlay:
-      "5 cards — seed, wheat, flour, dough, bread. Children arrange them in order, then act out the sequence with their bodies (tiny seed → tall wheat → grinding → kneading → eating).",
-    materials: ["5 picture cards (seed, wheat, flour, dough, bread)"],
-    debriefPrompts: [],
-    type: "physical-game",
-  },
-  "ww-bread-5-sieve": {
-    id: "ww-bread-5-sieve",
-    segment: "wonder-world",
-    title: "sieve the wheat & stone",
-    setupLine: "Sort the food from the not-food.",
-    howToPlay:
-      "Children pick out grains and stones/beads from a mixed tray, placing them in 'food' and 'not food' bowls. Then they try a sieve and compare.",
-    materials: ["Rice/wheat/lentils", "Pebbles or large beads", "Tray", "2 bowls", "Sieve (optional)"],
+      "Three game types — Sort, Flip, and Guess — run in order over several sessions, with the rule getting harder each time. Type 1 (Sort) builds the trait language; Type 2 (Flip) adds memory and matching; Type 3 (Guess) only opens once Sort is learned.",
+    materials: [
+      "food cards (start with half the deck, fruits + vegetables only)",
+      "2 hoops (or 2 marked floor areas)",
+      "a chalk line for above/below",
+    ],
+    example:
+      "Progress from colour recognition to category sorting, then above/below ground, then guessing. Ensure each skill is independently and consistently demonstrated before moving on. If a child sorts wrong, place their card beside the correct one and ask 'why did you sort this here?' / 'does this match the rule you chose?' — let them notice, don't tell.",
+    variations: [
+      {
+        name: "Type 1 · Sort",
+        description:
+          "Run these in order over several sessions; same setup, the rule gets harder. Colour: assign one colour to each hoop; the educator sorts 3–4 cards to show how, then children sort the rest. Category: two areas = fruit/vegetable; the educator fixes the rule before starting and keeps it fixed (if tomato is a fruit today, it stays a fruit). Above/below ground: draw a line; cards go above or below by where the food grows; once secure, add a third zone 'on the ground'. Individual: each child gets a set number of cards and takes turns sorting into categories. Group: the educator assigns a category to each group and they sort their cards into it.",
+      },
+      {
+        name: "Type 2 · Flip (memory + match)",
+        description:
+          "All cards face-up 20–30 sec; children look, then flip all face-down. Each child turns one card and hunts for its match, keeping the pair if it matches, returning it if not. Match rule rises with level: same colour → same category → same colour and category → the exact same food card.",
+      },
+      {
+        name: "Type 3 · Guess (only after Sort is learned)",
+        description:
+          "One child picks a mystery food (kept secret). Others ask yes/no questions ('is it a fruit?', 'does it grow underground?'). Children can ask only 3 yes/no questions. After each answer, remove the ruled-out cards. Guess the food, then the finder explains 'because…' to connect the clues.",
+      },
+    ],
+    difficultyLevels: [
+      {
+        level: "Easy",
+        description:
+          "Children sort on a single rule (e.g. fruit/vegetable); in Guess, no limited questions; educator supports if needed.",
+      },
+      {
+        level: "Hard",
+        description:
+          "The educator gives a combination of traits (colour + category, or colour + above/below ground, or category + above/below ground) e.g. 'red fruit', 'yellow vegetable that grows above ground'; in Guess, the educator assigns a limited number of questions; children play independently or add a time constraint.",
+      },
+    ],
     debriefPrompts: [],
     type: "physical-game",
   },
 
-  // Chapter 2 — Say Cheese (5 activities)
-  "ww-cheese-1-make-a-pretend-cheese": {
-    id: "ww-cheese-1-make-a-pretend-cheese",
+  // Game 2 — Cooking
+  "kp-cooking": {
+    id: "kp-cooking",
     segment: "wonder-world",
-    title: "make a pretend cheese",
-    setupLine: "Sort foods into 'yes with cheese' / 'not with cheese'.",
+    title: "cooking",
+    setupLine: "Lay the recipe steps, collect the play-dough, cook station by station.",
     howToPlay:
-      "Children make a pretend cheese piece from yellow playdough, then sort foods into two piles — what tastes good with cheese, what doesn't. They explain their choice each time.",
-    materials: ["Yellow playdough", "Plastic foods or picture cards", "2 sorting mats"],
-    debriefPrompts: [],
-    type: "physical-game",
-  },
-  "ww-cheese-2-does-it-come-from-milk": {
-    id: "ww-cheese-2-does-it-come-from-milk",
-    segment: "wonder-world",
-    title: "does it come from milk?",
-    setupLine: "Clap if it comes from milk.",
-    howToPlay:
-      "Teacher reads a food name. If it comes from milk (butter, paneer, cheese, yoghurt), children clap. If not, hands stay still. Builds categorisation and listening control.",
-    materials: ["Teacher-read food list (optional picture cards)"],
-    debriefPrompts: [],
-    type: "physical-game",
-  },
-  "ww-cheese-3-spread-your-butter": {
-    id: "ww-cheese-3-spread-your-butter",
-    segment: "wonder-world",
-    title: "spread your butter",
-    setupLine: "Spread the butter all over the toast.",
-    howToPlay:
-      "Children get a brown craft-paper 'toast' and a small playdough 'butter'. They spread it from the centre to every corner using one finger, then thumb, then a child-safe spreader. They compare which tool worked best.",
-    materials: ["Brown craft paper squares", "Small yellow playdough pieces", "Child-safe spreaders (optional)"],
-    debriefPrompts: [],
-    type: "physical-game",
-  },
-  "ww-cheese-4-cut-your-cheese": {
-    id: "ww-cheese-4-cut-your-cheese",
-    segment: "wonder-world",
-    title: "cut your cheese into pieces",
-    setupLine: "Cut a whole into halves, quarters, cubes.",
-    howToPlay:
-      "Starting with one playdough cheese block, children cut into 2, then 4, then tiny cubes. They count after each cut and compare: 'are 4 pieces bigger or smaller than 2?' Early fractions and size comparison.",
-    materials: ["Yellow playdough", "Clay tools or blunt plastic knives"],
-    debriefPrompts: [],
-    type: "physical-game",
-  },
-  "ww-cheese-5-sandwich-game": {
-    id: "ww-cheese-5-sandwich-game",
-    segment: "wonder-world",
-    title: "the cheese sandwich game",
-    setupLine: "Build the sandwich one ingredient at a time.",
-    howToPlay:
-      "Memory and sequencing game. First child names one ingredient. Next child adds another. Each child must repeat the full sandwich so far. Teacher uses picture cards if support is needed.",
-    materials: ["Picture cards (bread, cheese, vegetables, sandwich ingredients)"],
+      "Follow the recipe. The instruction is dictated by the educator according to the child's level (e.g. an easier 3–4 step instruction, and a harder variation, even on the same mat with the same recipe; extra steps for the harder recipe can be prompted by the educator separately to that group). Following the instructions, children lay the action cards and ingredient cards in order on the mat = the cooking steps. Collect the play-dough of the specific colour from the educator matching your ingredients (educators can make a portion of each clay and ask kids to collect). Follow the steps on the mat. Cut, pour, mix, mould — child performs these on their mat. Scoop, freeze, heat, blend — carry the mat to the station, do the action, run the station timer if needed and count the cook time, bring it back. Finish on the work-plate/glass; check & serve. educators can assign roles — one child reads the recipe and counts portions; the other walks the stations and cooks.",
+    materials: [
+      "recipe cards (easy / medium / hard — same recipe)",
+      "fruit/vegetable cards as ingredients",
+      "action cards (cut · mix · mould · pour · blend · heat · cool · scoop)",
+      "cooking mat (work-plate with ½/¼ lines — mat A)",
+      "play-dough + clay tools",
+      "action station set around the room + a timer/clock (Heat · Cool/Freeze · Blend · Scoop — handled by educator at the station)",
+    ],
+    example:
+      "Progression: counting before adding; adding before halving. Let a child notice a wrong step (e.g. 'the soup has no water') and fix it — that noticing-and-fixing is the problem-solving skill, not the finished dish.",
+    variations: [
+      {
+        name: "Fractions & Adding (harder)",
+        description:
+          "After the dish is made, add the ½/¼ concept: halve a portion on the ½ line, quarter it on the ¼ line.",
+      },
+    ],
+    difficultyLevels: [
+      {
+        level: "Easy",
+        description: "Easy/medium recipe cards, type 1 gameplay",
+      },
+      {
+        level: "Hard",
+        description: "Difficult recipe cards, type 2 gameplay",
+      },
+    ],
     debriefPrompts: [],
     type: "physical-game",
   },
 
-  // Chapter 3 — Salad Days (5 activities)
-  "ww-salad-1-cut-your-tomato": {
-    id: "ww-salad-1-cut-your-tomato",
+  // Game 3 — Restaurant (unlocks after ~20 sessions / ~5 Cooking sessions)
+  "kp-restaurant": {
+    id: "kp-restaurant",
     segment: "wonder-world",
-    title: "cut your tomato",
-    setupLine: "Cut the tomato many ways and compare.",
+    title: "restaurant",
+    setupLine: "Order, cook, bill and pay — run the café in two rounds.",
     howToPlay:
-      "Children roll a red playdough tomato and cut it into halves, quarters, slices, then tiny cubes. They compare which has the most pieces, which has the smallest pieces, and discuss why smaller pieces cook faster.",
-    materials: ["Red playdough", "Clay tools or blunt plastic knives"],
-    debriefPrompts: [],
-    type: "physical-game",
-  },
-  "ww-salad-2-rainbow-tiffin": {
-    id: "ww-salad-2-rainbow-tiffin",
-    segment: "wonder-world",
-    title: "the rainbow tiffin",
-    setupLine: "Fill the tiffin with one food per colour.",
-    howToPlay:
-      "Children pick one red food, one green, one orange, one yellow — and place each in its tiffin section. They name the food and the colour, count the colours, and notice what's missing.",
-    materials: ["Plastic foods or coloured picture cards", "Tiffin tray or 4-section mat"],
-    debriefPrompts: [],
-    type: "physical-game",
-  },
-  "ww-salad-3-above-or-below": {
-    id: "ww-salad-3-above-or-below",
-    segment: "wonder-world",
-    title: "above or below the soil?",
-    setupLine: "Sort foods by where they grow.",
-    howToPlay:
-      "A brown paper sheet marks the soil line. Children take cards one at a time and place each above or below the line. Each placement is explained — 'tomato grows above because…'. Plant awareness and reasoning.",
-    materials: ["Picture cards (foods that grow above and below)", "Brown paper sheet"],
-    debriefPrompts: [],
-    type: "physical-game",
-  },
-  "ww-salad-4-follow-the-recipe": {
-    id: "ww-salad-4-follow-the-recipe",
-    segment: "wonder-world",
-    title: "follow the salad recipe",
-    setupLine: "First, next, last — follow the steps.",
-    howToPlay:
-      "Teacher gives a salad recipe one step at a time — base, vegetables, topping, mix. Children follow in order, then a second round where they choose their own order and compare results. Sequencing and decision-making.",
-    materials: ["Bowl or plate", "Pretend or real salad ingredients", "Spoon/tongs"],
-    debriefPrompts: [],
-    type: "physical-game",
-  },
-  "ww-salad-5-salad-quiz": {
-    id: "ww-salad-5-salad-quiz",
-    segment: "wonder-world",
-    title: "the salad quiz",
-    setupLine: "Be a food detective — find the answer.",
-    howToPlay:
-      "Four rounds — colour ('find something red'), texture ('which is crunchy?'), growing place ('which grows below?'), and odd one out ('which doesn't belong?'). Children explain their reasoning each time.",
-    materials: ["Picture cards or toy foods", "Basket or tray"],
-    debriefPrompts: [],
-    type: "physical-game",
-  },
-
-  // 2 food games — used as game support on select WonderWorld days
-  "ww-game-food-guess": {
-    id: "ww-game-food-guess",
-    segment: "wonder-world",
-    title: "food guess",
-    setupLine: "Ask up to 10 yes/no questions to guess the food.",
-    howToPlay:
-      "Picture-only Guider Tiles deck. One child holds a hidden food card; the others ask up to 10 yes/no questions to guess what it is. Builds questioning and visual deduction. Runs twice — mid-year and end-of-year.",
-    materials: ["Food Guess card deck (Guider Tiles · picture only)"],
-    debriefPrompts: [],
-    type: "physical-game",
-  },
-  "ww-game-food-connect": {
-    id: "ww-game-food-connect",
-    segment: "wonder-world",
-    title: "food connect",
-    setupLine: "Join tiles by colour, texture, food group, or shape.",
-    howToPlay:
-      "40 food tiles + dice. Children join tiles based on a shared attribute. Used at the easiest difficulty level only at this age. Runs twice — once after Chapter 2 and once after Chapter 4.",
-    materials: ["40 food tiles", "Dice"],
+      "Pre-game setup: the educator places the recipe cards on the menu card (max 5) and sets prices as a number of tokens; gives a set number of tokens to the customer; educators can divide them into groups with roles as customers and chef+cashier. Play 2 rounds and swap roles for the 2nd round. Stage 1 · Order & Cook: customer orders from the menu by pointing; one child/group is both chef and cashier; the chef takes the order and places the recipe card on the invoice side of the card; the chef cooks the dish on the kitchen mat; the chef discusses the recipe requirements with the customer and can ask the customer to choose the required ingredients (fruit/vegetable/toppings etc). Stage 2 · Bill & Pay: the cashier totals the bill (adding extra price for add-ons if used) on the invoice; the customer pays the total; the cashier gives change.",
+    materials: [
+      "two areas: a kitchen (the cooking mat) and a restaurant counter",
+      "one menu card (educator sets the prices)",
+      "pretend money — tokens",
+      "the cooked dishes",
+    ],
+    example:
+      "Don't add money until counting and serving are smooth: paying → making change → re-totalling for add-ons.",
+    variations: [
+      {
+        name: "Add-ons (harder)",
+        description:
+          "The chef offers add-ons — 'extra cheese? butter? a vegetable?' — and tells the prices; the child chooses add-ons based on the tokens left. Add-ons cost ₹1–₹4 extra, so the bill must be re-totalled on the invoice.",
+      },
+    ],
+    difficultyLevels: [
+      {
+        level: "Easy",
+        description: "Customers and chefs with a single recipe",
+      },
+      {
+        level: "Hard",
+        description:
+          "Chefs with multiple food items, cooking specified portions (e.g. ½ portion sandwich + ½ portion vegetable salad + 1 glass of orange juice)",
+      },
+    ],
     debriefPrompts: [],
     type: "physical-game",
   },
 };
 
-/* ─── 60-session table — Imagine Playground / WonderWorld alternate
+/* ─── 60-session table — Imagine Playground / Kitchen Play alternate
  * Sessions 1, 3, 5… are Session A (Imagine Playground).
- * Sessions 2, 4, 6… are Session B (WonderWorld).
+ * Sessions 2, 4, 6… are Session B (Kitchen Play; entry field is still
+ * `wonderWorld` and segment id is still "wonder-world").
  * Logic Lab and NumbersGym run every session. ──────────────────── */
 
 const buildPlayground = (n: number): string => {
@@ -645,43 +570,23 @@ const buildPlayground = (n: number): string => {
   return order[(n - 1) % order.length];
 };
 
-const buildWonderWorld = (n: number): string => {
-  // 30 Session-B slots: 14 activities × 2 (28) + 4 game days,
-  // then revisits with extensions. Map by index.
-  const cycle = [
-    "ww-bread-1-punch-and-squish",
-    "ww-bread-2-make-a-bread",
-    "ww-bread-3-bread-riddles",
-    "ww-bread-4-what-comes-next",
-    "ww-bread-5-sieve",
-    "ww-cheese-1-make-a-pretend-cheese",
-    "ww-cheese-2-does-it-come-from-milk",
-    "ww-cheese-3-spread-your-butter",
-    "ww-cheese-4-cut-your-cheese",
-    "ww-cheese-5-sandwich-game",
-    "ww-game-food-connect",
-    "ww-salad-1-cut-your-tomato",
-    "ww-salad-2-rainbow-tiffin",
-    "ww-salad-3-above-or-below",
-    "ww-salad-4-follow-the-recipe",
-    "ww-salad-5-salad-quiz",
-    "ww-game-food-guess",
-    // Second cycle — revisited, deepened
-    "ww-bread-1-punch-and-squish",
-    "ww-bread-2-make-a-bread",
-    "ww-bread-3-bread-riddles",
-    "ww-bread-4-what-comes-next",
-    "ww-cheese-1-make-a-pretend-cheese",
-    "ww-cheese-3-spread-your-butter",
-    "ww-cheese-4-cut-your-cheese",
-    "ww-cheese-5-sandwich-game",
-    "ww-game-food-connect",
-    "ww-salad-1-cut-your-tomato",
-    "ww-salad-3-above-or-below",
-    "ww-salad-5-salad-quiz",
-    "ww-game-food-guess",
-  ];
-  return cycle[(n - 1) % cycle.length];
+const buildKitchenPlay = (n: number): string => {
+  // 30 Session-B slots (n = 1..30). Kitchen Play has 3 games.
+  // Sessions begin alternating Game 1 (Sort & Guess) and Game 2
+  // (Cooking). Game 3 (Restaurant) unlocks only after ~20 sessions,
+  // by when children have done ~5 Cooking sessions; from then on all
+  // three games rotate. (Segment id stays "wonder-world".)
+  const SORT_AND_GUESS = "kp-sort-and-guess";
+  const COOKING = "kp-cooking";
+  const RESTAURANT = "kp-restaurant";
+
+  // Slots 1–10 (Session-B 1–10 ≈ overall sessions 2–20): alternate
+  // Sort & Guess / Cooking. From slot 11 onward, rotate all three.
+  if (n <= 10) {
+    return n % 2 === 1 ? SORT_AND_GUESS : COOKING;
+  }
+  const rotation = [SORT_AND_GUESS, COOKING, RESTAURANT];
+  return rotation[(n - 11) % rotation.length];
 };
 
 const LOGIC_LAB_CYCLE = [
@@ -710,7 +615,7 @@ const buildSessionTable = (): CurriculumSessionEntry[] => {
       entry.imaginePlayground = buildPlayground(aIndex);
       aIndex += 1;
     } else {
-      entry.wonderWorld = buildWonderWorld(bIndex);
+      entry.wonderWorld = buildKitchenPlay(bIndex);
       bIndex += 1;
     }
     out.push(entry);
@@ -784,16 +689,20 @@ export const stem35: CurriculumProgramme = {
       name: "Imagine Playground",
       durationRange: "35 min",
       objective:
-        "Imagination through building. Children meet stem concepts — math, physics, sequencing, conditionals, probability — through stories and hands-on building. Materials are blocks of different kinds: Math Train, Coding Express, STEAM Park, ramp materials, magna tiles, general blocks. The teacher sets a challenge, lays out materials, and steps back. 11 core projects run in a fixed order, each met 2–3 times across the year — deeper every time. Why it alternates with WonderWorld: both build curiosity, problem solving, and creation, but Imagine Playground works in the language of blocks and structures, while WonderWorld works in the language of everyday things. Children need both. Runs on Session A only.",
+        "Imagination through building. Children meet stem concepts — math, physics, sequencing, conditionals, probability — through stories and hands-on building. Materials are blocks of different kinds: Math Train, Coding Express, STEAM Park, ramp materials, magna tiles, general blocks. The educator sets a challenge, lays out materials, and steps back. 11 core projects run in a fixed order, each met 2–3 times across the year — deeper every time. Why it alternates with Kitchen Play: both build curiosity, problem solving, and creation, but Imagine Playground works in the language of blocks and structures, while Kitchen Play works in the language of everyday kitchen actions. Children need both. Scheduling Note: The duration of Imagine Playground / Kitchen Play sessions may be adjusted based on the scope of the activity. If a project needs more time, educators may shorten Number Gym, Logic Lab, or other components to ensure meaningful engagement and completion of the project. Runs on Session A only.",
       type: "rotating",
       rotationPool: Object.keys(imaginePlaygroundProjects),
     },
     {
+      // NOTE: the internal segment id stays "wonder-world" to avoid type
+      // churn across the session table and CurriculumSessionEntry; the
+      // display name and content are now "Kitchen Play". FLAG: a later
+      // rename of the id string to "kitchen-play" is possible if wanted.
       id: "wonder-world",
-      name: "WonderWorld",
+      name: "Kitchen Play",
       durationRange: "35 min",
       objective:
-        "Imagination through everyday things. Children meet stem concepts — sorting, sequencing, fractions, classification — through food, families, and the world around them. The book this year is What Is In Your Tiffin? — covering bread, cheese, butter, salad. Materials are basic art supplies (playdough, crayons, paper, plastic foods) and DIY food games (Food Connect, Food Guess) — no blocks. 15 activities run in a fixed order, each met twice across the year — deeper every time. Why it alternates with Imagine Playground: both are creation- and curiosity-driven, but WonderWorld grounds learning in daily life while Imagine Playground stretches it through imaginary worlds. Runs on Session B only.",
+        "STEM concepts — sorting, sequencing, fractions, classification — through real kitchen actions: sorting food, following recipes, and running a café. Kitchen Play activities rotate. Sessions begin alternating between Game 1 (Sort & Guess) and Game 2 (Cooking). Game 3 (Restaurant) unlocks only after 20 sessions when children have completed about 5 Cooking sessions; from then on, all three games rotate. Materials: action cards · food cards · recipe cards · category cards · cooking mat with menu template on reverse · play-dough + clay tools · pretend-money tokens. Runs on Session B only.",
       type: "rotating",
       rotationPool: Object.keys(wonderWorldActivities),
     },
@@ -802,7 +711,7 @@ export const stem35: CurriculumProgramme = {
       name: "Logic Lab",
       durationRange: "20 min",
       objective:
-        "One game per session — rules explained once at first play, by the third session children know the rules and the teacher only observes. 6 games rotate (Candy Sort, Stitch Me, Dot Grid, Logical Road Builder, Where Does It Go?, Magna Tiles). Each game has 4 difficulty layers built in so the same game runs deeper across the year.",
+        "One game per session — rules explained once at first play, by the third session children know the rules and the educator only observes. 6 games rotate (Candy Sort, Stitch Me, Dot Grid, Logical Road Builder, Where Does It Go?, Magna Tiles). Each game has 4 difficulty layers built in so the same game runs deeper across the year.",
       type: "rotating",
       rotationPool: Object.keys(logicLabGames),
     },
@@ -819,7 +728,7 @@ export const stem35: CurriculumProgramme = {
       name: "Experience Book",
       durationRange: "10 min",
       objective:
-        "Each child has a personal Experience Book. The teacher writes one specific sentence about what the child did that day — a project they built, a question they asked, a number they counted, a 'because' they explained. The child adds a drawing or stamp. The book goes home regularly so parents can see growth. This is also where Number Sense level transitions are recorded.",
+        "Each child has a personal Experience Book. The educator writes one specific sentence about what the child did that day — a project they built, a question they asked, a number they counted, a 'because' they explained. The child adds a drawing or stamp. The book goes home regularly so parents can see growth. This is also where Number Sense level transitions are recorded.",
       type: "fixed",
     },
   ],

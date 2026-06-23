@@ -1,7 +1,7 @@
 # stem — programme & formats note
-### the teacher source-of-truth · ages 3–5 · at-centre
+### the educator source-of-truth · ages 3–5 · at-centre
 
-> **Output ①** — *goal · skills · learning outcomes · milestones · levels · format map.* The **experience book**, the **activities** and **teacher training** all derive from it. Written for a brand-new teacher. Skill spine + activities already exist in the at-building programme (curiosity · problem solving · logic · number sense; logic lab · imagine playground · wonder world · numbers gym) — this note adds the **goal/why**, the **levels & milestones** (anchored on your number-sense spiral), and the **format-set** layer.
+> **Output ①** — *goal · skills · learning outcomes · milestones · levels · format map.* The **experience book**, the **activities** and **educator training** all derive from it. Written for a brand-new educator. Skill spine + activities already exist in the at-building programme (curiosity · problem solving · logic · number sense; logic lab · imagine playground · wonder world · numbers gym) — this note adds the **goal/why**, the **levels & milestones** (anchored on your number-sense spiral), and the **format-set** layer.
 
 ---
 
@@ -84,4 +84,4 @@ The build/explore block (imagine playground / wonder world) and numbers gym are 
 - **activities (already built):** logic lab games, imagine playground builds, wonder world investigations, numbers gym gamebook — each runs at all three rungs. The **new segments** to script are only the shared **opening circle / closing reflection** and the **deepened build block moves** (build → test → explain, keyed to curiosity/problem-solving/scientific-reasoning rungs).
 
 ### format-set principle (for the new segments)
-Same as language: each new recurring slot gets a **small fixed set of named, scripted formats**, rotated on a known schedule — repetition for the child, no guesswork for the teacher, each format nudging a different sub-skill. (e.g. a fixed set of 4–5 **"what-if" prompts** to open the build block; a fixed set of **calm-down** rituals to close.)
+Same as language: each new recurring slot gets a **small fixed set of named, scripted formats**, rotated on a known schedule — repetition for the child, no guesswork for the educator, each format nudging a different sub-skill. (e.g. a fixed set of 4–5 **"what-if" prompts** to open the build block; a fixed set of **calm-down** rituals to close.)

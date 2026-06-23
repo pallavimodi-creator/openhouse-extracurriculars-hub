@@ -1,5 +1,5 @@
-# how to fill the experience book — a teacher guide
-### part of the teacher overview · read this once, then it's a 2-minute-a-day habit
+# how to fill the experience book — a educator guide
+### part of the educator overview · read this once, then it's a 2-minute-a-day habit
 
 You don't test children to fill this book. You **watch** them during class and record what they can already do. If you've never done this before, this page tells you exactly how. The book has two parts — the **daily page** and each child's **progress spread** — and you fill them at two different rhythms.
 
@@ -24,7 +24,7 @@ You mark skills on each child's **progress spread**, mostly **during the closing
 
 Two words do all the work: **independently** (you didn't help them) and **more than once** (not a lucky one-off). If both are true → date the dot. If not → leave it; you'll catch it another day.
 
-**you do NOT mark every child every day.** Pick **2–4 focus children** each session and watch them closely. Over a week, everyone gets seen. Trying to mark all 10 every day is what makes teachers give up — don't.
+**you do NOT mark every child every day.** Pick **2–4 focus children** each session and watch them closely. Over a week, everyone gets seen. Trying to mark all 10 every day is what makes educators give up — don't.
 
 **mark the skill, not the segment.** You never write down *which* part of the day it happened in. The programme overview already tells you where each skill shows up (below) — so you just look there, then tick the skill.
 

@@ -1,11 +1,11 @@
 # the experience book
 ### one per child · travels across all strand days · *supersedes the earlier v0 draft*
 
-Built to your format: **what class today → what we did → how each child did on each skill → their journey to the milestones → what they need more help with.** Simple enough to fill in-session (mostly from the closing circle), helpful for teacher, parent and child. Grounded in NCF's prescribed method — teacher *observation*, not testing — and derived 1:1 from each strand's LO table (language ladders live in [language-programme-note.md](language-programme-note.md); stem/art to follow).
+Built to your format: **what class today → what we did → how each child did on each skill → their journey to the milestones → what they need more help with.** Simple enough to fill in-session (mostly from the closing circle), helpful for educator, parent and child. Grounded in NCF's prescribed method — educator *observation*, not testing — and derived 1:1 from each strand's LO table (language ladders live in [language-programme-note.md](language-programme-note.md); stem/art to follow).
 
 The book has **two parts**: a **daily page** (the class record, parent-facing) and the **child's progress spread** (the slow journey, child-owned).
 
-> **teachers:** the step-by-step how-to lives in [how-to-fill-the-experience-book.md](how-to-fill-the-experience-book.md) — part of the teacher overview.
+> **educators:** the step-by-step how-to lives in [how-to-fill-the-experience-book.md](how-to-fill-the-experience-book.md) — part of the educator overview.
 
 ---
 
@@ -25,12 +25,12 @@ The book has **two parts**: a **daily page** (the class record, parent-facing) a
 
 ## part B · the child's progress spread  *(one per child — updated over weeks, not every day)*
 
-This is the **milestone journey**. The teacher doesn't mark everything every day — on a language day she dots the **language skills** she actually saw (mostly in the closing recap/feelings/one-good-thing), for a few focus children. Over a week, every child gets seen across skills.
+This is the **milestone journey**. The educator doesn't mark everything every day — on a language day she dots the **language skills** she actually saw (mostly in the closing recap/feelings/one-good-thing), for a few focus children. Over a week, every child gets seen across skills.
 
 ### how to mark (the whole mechanic, on one line)
-Each skill has **three rungs**. When a child shows a rung **independently**, **date the dot**. Three dots = they've reached the ★ and are ready to level up. If a child is **stuck** on a rung for weeks, **circle it** — that's the "needs more help" flag, visible to teacher and parent at a glance.
+Each skill has **three rungs**. When a child shows a rung **independently**, **date the dot**. Three dots = they've reached the ★ and are ready to level up. If a child is **stuck** on a rung for weeks, **circle it** — that's the "needs more help" flag, visible to educator and parent at a glance.
 
-> **mark the skill, not the segment.** We deliberately do **not** ask the teacher to also tag *which segment* a mark came from — that doubles the work and is exactly what would "break" the marking. The teacher only ever records **skill → rung**. *Where* each skill shows up is already solved in the programme note's **segment → skill map** (e.g. "storytelling lives in book'o'clock; pre-writing in play-writes"), so the teacher knows where to *look*, then just marks the skill. The overview answers "where to observe"; the book answers "how far along" — two jobs, kept apart, so marking stays a 30-second task.
+> **mark the skill, not the segment.** We deliberately do **not** ask the educator to also tag *which segment* a mark came from — that doubles the work and is exactly what would "break" the marking. The educator only ever records **skill → rung**. *Where* each skill shows up is already solved in the programme note's **segment → skill map** (e.g. "storytelling lives in book'o'clock; pre-writing in play-writes"), so the educator knows where to *look*, then just marks the skill. The overview answers "where to observe"; the book answers "how far along" — two jobs, kept apart, so marking stays a 30-second task.
 
 ```
 skill        starting out · getting there · going strong ★     focus?
@@ -78,12 +78,12 @@ The child's work (or a photo) goes in the folder with the book and travels home 
 ---
 
 ## what makes this useful (the point)
-- **for the teacher:** at a glance — who's where, who's stuck (the circles), what to plan more of.
+- **for the educator:** at a glance — who's where, who's stuck (the circles), what to plan more of.
 - **for the parent:** not a grade — a *journey* they can see filling up, plus real moments. The "focus" circles say honestly "here's where we're helping next."
 - **for the child:** dots that fill toward a star — the small, visible progress that makes them want to come back.
 
 ## what to test in the pilot (carried from the plan)
-- Can the teacher mark from the **closing circle** without it eating the 20 min or feeling like a test?
+- Can the educator mark from the **closing circle** without it eating the 20 min or feeling like a test?
 - Are 3 rungs enough, or is a "not yet seen" state needed?
 - Does the daily page double cleanly as the parent update?
 - Does the under-3-min-per-child "moment" hold?

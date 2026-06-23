@@ -40,7 +40,7 @@ Nothing in the 5+ programmes appears from nowhere. The child who *made and expla
 
 ## and it readies them for school
 
-Beyond our own ladder, the same foundations are exactly what India's NEP/NCF Foundational Stage calls **school readiness** — not early academics, but the **positive learning habits** that make formal school work: focusing, persisting, getting along, regulating big feelings, and a love of finding things out. Our daily frame builds these on purpose: a circle time that settles and focuses, a closing reflection that names feelings and recaps learning, and a teacher who *observes and notices* every child rather than testing them.
+Beyond our own ladder, the same foundations are exactly what India's NEP/NCF Foundational Stage calls **school readiness** — not early academics, but the **positive learning habits** that make formal school work: focusing, persisting, getting along, regulating big feelings, and a love of finding things out. Our daily frame builds these on purpose: a circle time that settles and focuses, a closing reflection that names feelings and recaps learning, and a educator who *observes and notices* every child rather than testing them.
 
 ---
 
@@ -50,6 +50,6 @@ Beyond our own ladder, the same foundations are exactly what India's NEP/NCF Fou
 - **art:** "Making art at this age builds the hands, the imagination, and the confidence to express an idea — the start of the art & design journey."
 - **stem:** "Building and testing teaches your child to think in steps and solve problems — children this age can already think like little engineers. It's where robotics begins."
 - **language:** "Telling and re-telling stories is the single best way to grow language — and it's the seed of confident public speaking."
-- **why no tests:** "We don't test 3-year-olds. Teachers *observe* and record what your child can actually do, in a book that comes home each term."
+- **why no tests:** "We don't test 3-year-olds. Educators *observe* and record what your child can actually do, in a book that comes home each term."
 
 *Grounded in: NCF Foundational Stage / NEP 2020 (ncf.ncert.gov.in); EYFS Statutory Framework (gov.uk); Head Start ELOF (headstart.gov); Bers, computational thinking in early childhood (ecrp.illinois.edu); storytelling & oral-language research (link.springer.com, easternct.edu).*

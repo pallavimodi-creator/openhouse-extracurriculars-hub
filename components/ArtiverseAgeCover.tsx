@@ -133,7 +133,7 @@ export function ArtiverseAgeCover({
               : "mt-1.5 text-[8px] font-bold lowercase tracking-tight text-ink/45"
           }
         >
-          teacher reference
+          educator reference
         </p>
       </div>
     </div>

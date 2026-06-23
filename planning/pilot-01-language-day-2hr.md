@@ -17,7 +17,7 @@ Design rules carried from the research (NCF-FS): plan each block around the chil
 | 3 | **break / snack** | 10 | — | free | snack + free movement; reset before the long block |
 | 4 | **book'o'clock — deepened read-aloud** | 35 | whole → small | calm→active | the heart of the day — dialogic read-aloud + story-grammar + illustration talk + a group response (see deepening guide below) |
 | 5 | **play-writes + playground game** | 25 | individual → whole | active | individual A4 pre-writing book, then one language playground game |
-| 6 | **closing & experience book** | 20 | whole → individual | calm | story recap → feelings check → calm-down ritual; teacher marks the experience book + child adds an artefact to the portfolio |
+| 6 | **closing & experience book** | 20 | whole → individual | calm | story recap → feelings check → calm-down ritual; educator marks the experience book + child adds an artefact to the portfolio |
 
 **= 120 min.** (Language's +40 over at-building comes from: circle 15 · break 10 · read-aloud deepened +10 · fuller closing.)
 

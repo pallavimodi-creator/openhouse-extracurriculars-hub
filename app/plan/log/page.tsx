@@ -63,7 +63,7 @@ export default function ActivityLogPage() {
       <h1 className="flex items-center gap-2 text-[22px] font-bold text-ink">
         <ClipboardList className="h-5 w-5 text-brand-orange" /> activity log
       </h1>
-      <p className="mt-1 text-[13px] text-ink-muted">what each teacher ran, by day and centre.</p>
+      <p className="mt-1 text-[13px] text-ink-muted">what each educator ran, by day and centre.</p>
 
       {!isSupabaseConfigured ? (
         <div className="mt-6 rounded-2xl bg-brand-white p-5 shadow-card ring-1 ring-ink/5">

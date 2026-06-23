@@ -9,7 +9,7 @@ import {
 } from "@/components/ImageFlipbook";
 
 /**
- * NumbersGym — teacher reference book for STEM 3–5.
+ * NumbersGym — educator reference book for STEM 3–5.
  *
  * Three level books — every child works in their personal gamebook
  * at their own level. A child moves to the next level when they
@@ -328,7 +328,7 @@ export function NumbersGymCoverArt({
               : "mt-6 text-[10px] font-bold lowercase tracking-tight text-ink/45"
           }
         >
-          teacher reference
+          educator reference
         </p>
       </div>
     </div>
@@ -544,7 +544,7 @@ export function NumbersGymBookModal({
       <header className="flex shrink-0 items-center justify-between gap-4 border-b border-ink/5 bg-brand-orange px-4 py-3 text-white md:px-8">
         <div className="min-w-0">
           <p className="text-[10px] font-bold tracking-normal text-white/80">
-            teacher reference
+            educator reference
           </p>
           <h2 className="truncate text-[18px] font-extrabold lowercase leading-tight md:text-[22px]">
             the numbersgym book · stem 3–5

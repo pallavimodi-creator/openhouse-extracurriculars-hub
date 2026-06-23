@@ -1,7 +1,7 @@
 # art & design — programme & formats note
-### the teacher source-of-truth · ages 3–5 · at-centre
+### the educator source-of-truth · ages 3–5 · at-centre
 
-> **Output ①** — *goal · skills · learning outcomes · milestones · levels · format map.* The **experience book**, the **activities** and **teacher training** derive from it. Skill spine + activities already exist in the at-building programme (fine motor · colour · creative expression; art gym · art games · reference-artwork making · art care) — this note adds the **goal/why**, the **levels & milestones**, and the **format-set** layer.
+> **Output ①** — *goal · skills · learning outcomes · milestones · levels · format map.* The **experience book**, the **activities** and **educator training** derive from it. Skill spine + activities already exist in the at-building programme (fine motor · colour · creative expression; art gym · art games · reference-artwork making · art care) — this note adds the **goal/why**, the **levels & milestones**, and the **format-set** layer.
 
 ---
 
@@ -70,4 +70,4 @@ In **one** making activity, an **L1** child explores the material and makes free
 - **activities (already built):** art gym (fine-motor warm-up), art games, reference-artwork making, art care — each runs at all three rungs. The **new segments** to script are only the shared **opening circle / closing reflection** and the **deepened making block moves** (make → look closely → talk about choices, keyed to the creative-expression rungs).
 
 ### format-set principle (for the new segments)
-Same as language & stem: each new recurring slot gets a **small fixed set of named, scripted formats**, rotated on a known schedule — repetition for the child, no guesswork for the teacher, each format nudging a different sub-skill. (e.g. a fixed set of **"gallery look" prompts** for the look-closely move; a fixed set of **art-care / i-care** closing rituals.)
+Same as language & stem: each new recurring slot gets a **small fixed set of named, scripted formats**, rotated on a known schedule — repetition for the child, no guesswork for the educator, each format nudging a different sub-skill. (e.g. a fixed set of **"gallery look" prompts** for the look-closely move; a fixed set of **art-care / i-care** closing rituals.)

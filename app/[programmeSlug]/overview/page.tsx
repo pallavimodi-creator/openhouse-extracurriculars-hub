@@ -883,6 +883,11 @@ function ProgrammeOverviewContent() {
                   </div>
                 ))}
               </div>
+              <div className="mt-3 rounded-xl bg-brand-orange/5 p-3 ring-1 ring-brand-orange/15">
+                <p className="text-[11.5px] leading-relaxed text-ink-muted">
+                  <span className="font-bold text-ink">educator note:</span> educators may use puppets from the story while conducting these activities. Children can either participate individually by taking turns, or be divided into small puppet groups, each group assigned a different character. Group members should discuss and agree on their responses or actions before participating in the activity.
+                </p>
+              </div>
             </div>
           </section>
 
@@ -922,43 +927,12 @@ function ProgrammeOverviewContent() {
               </p>
             </div>
 
-            {/* The order — numbered list of songs in the sequence
-                they should be introduced. */}
-            <div className="mt-4 overflow-hidden rounded-2xl bg-brand-white shadow-card ring-1 ring-ink/5">
-              <p className="border-b border-ink/5 bg-segment-yellow/30 px-4 py-2.5 text-[12px] font-extrabold lowercase text-ink">
-                order to add the songs
-              </p>
-              <ol className="divide-y divide-ink/5">
-                {[
-                  "mulberry bush",
-                  "knick knack paddy whack — verses 1–3",
-                  "if you're happy and you know it",
-                  "walking through the jungle",
-                  "a hole in the bottom of the sea",
-                ].map((song, i) => (
-                  <li
-                    key={song}
-                    className="flex items-center gap-3 px-4 py-3"
-                  >
-                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-orange/15 text-[11px] font-extrabold text-brand-orange">
-                      {i + 1}
-                    </span>
-                    <span className="text-[12.5px] font-semibold text-ink">
-                      {song}
-                    </span>
-                  </li>
-                ))}
-              </ol>
-              <p className="border-t border-ink/5 bg-brand-cream/50 px-4 py-2.5 text-[11px] italic leading-relaxed text-ink-muted">
-                Each new song joins after 5 sessions of the song before it. Knick Knack returns at verses 1–3 → 4–6 → all 10.
-              </p>
-            </div>
           </section>
 
-          {/* ─── PLAY-WRITES WORKBOOKS — teacher reference ─── */}
+          {/* ─── PLAY-WRITES WORKBOOKS — educator reference ─── */}
           <section className="mt-10 px-4 md:px-8">
-            <SectionTitle num="·" label="teacher reference books">
-              the play-writes workbook
+            <SectionTitle num="·" label="educator reference books">
+              playwrites 1 &amp; playwrites 2
             </SectionTitle>
             <p className="mt-2 text-[13px] font-medium leading-relaxed text-ink md:text-[14px]">
               A play-based writing workbook used in the play-writes segment. Two levels — children move from level 1 to level 2 as they grow. Each chapter pairs with one of the eight books.
@@ -979,10 +953,10 @@ function ProgrammeOverviewContent() {
                   />
                   <div className="text-center">
                     <p className="text-[14px] font-extrabold lowercase text-ink">
-                      play-writes · level {lvl}
+                      playwrites {lvl}
                     </p>
                     <p className="mt-1 text-[11px] italic text-ink-muted">
-                      teacher reference · 27 pages · 8 chapters
+                      educator reference · 27 pages · 8 chapters
                     </p>
                     <p className="mt-2 inline-flex items-center gap-1 text-[11px] font-bold text-brand-orange">
                       open the book →
@@ -1027,7 +1001,7 @@ function ProgrammeOverviewContent() {
             modalKey: "artistotle-3-5",
             cover: "/artistotle-book/01-cover.png",
             title: "the artistotle book",
-            subtitle: "teacher reference · 3 artists · 13 projects",
+            subtitle: "educator reference · 3 artists · 13 projects",
           });
         }
         // 5-8 / 8-12 art programmes — each has its own artiverse book
@@ -1053,7 +1027,7 @@ function ProgrammeOverviewContent() {
             subtitle: `reference artworks · ${programme.artiverseUnits?.length ?? 0} artworks`,
           });
         }
-        // STEM 3–5 — two teacher reference books built like the
+        // STEM 3–5 — two educator reference books built like the
         // artiverse / artistotle books.
         if (programme.slug === "robotics-3-5") {
           books.push({
@@ -1061,28 +1035,28 @@ function ProgrammeOverviewContent() {
             modalKey: "imagine-playground-3-5",
             cover: "/prog-stem-3-5.png",
             title: "the imagine playground book",
-            subtitle: "teacher reference · 11 build projects",
+            subtitle: "educator reference · 11 build projects",
           });
           books.push({
             kind: "modal",
             modalKey: "wonderworld-3-5",
             cover: "/prog-stem-3-5.png",
             title: "the wonderworld book",
-            subtitle: "teacher reference · 3 chapters · 15 activities",
+            subtitle: "educator reference · 3 chapters · 15 activities",
           });
           books.push({
             kind: "modal",
             modalKey: "numbersgym-3-5",
             cover: "/prog-stem-3-5.png",
             title: "the numbersgym book",
-            subtitle: "teacher reference · 3 levels · self-paced",
+            subtitle: "educator reference · 3 levels · self-paced",
           });
         }
         // The experience book is not surfaced in the hub — no card here.
         if (books.length === 0) return null;
         return (
           <section className="mt-10 px-4 md:px-8">
-            <SectionTitle num={sectionNum("books")} label="teacher reference books">
+            <SectionTitle num={sectionNum("books")} label="educator reference books">
               flip through every reference book — for teachers, not children
             </SectionTitle>
             <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

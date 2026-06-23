@@ -1,7 +1,7 @@
 # activity pack — opening circle time
 ### shared · runs the same way on every strand day · ~15 min · whole group on the mat
 
-This is the start of every day. Same five moves, same order, every day — the *sameness is the point* (it settles and focuses 3–5s). Only the **song** and the **strand word** change by day. Scripted so a brand-new teacher can run it word-for-word.
+This is the start of every day. Same five moves, same order, every day — the *sameness is the point* (it settles and focuses 3–5s). Only the **song** and the **strand word** change by day. Scripted so a brand-new educator can run it word-for-word.
 
 **the five moves (in order):** greeting → song → today's window → intention → focus game.
 **materials (kept in the circle box):** name cards · weather/day cards · feelings strip (also used at closing) · the focus-game props (music/speaker, a few picture cards).

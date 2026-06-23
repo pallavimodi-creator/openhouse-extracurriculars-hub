@@ -1,7 +1,7 @@
 # language through storytelling — programme & formats note
-### the teacher source-of-truth · ages 3–5 · at-centre
+### the educator source-of-truth · ages 3–5 · at-centre
 
-> This is **Output ①** of the programme — the *goal · skills · learning outcomes · milestones · levels · format map*. Everything else derives from it: the **experience book** (the child's journey), the **activities** (how we teach each rung), and **teacher training**. Written for a brand-new teacher with little training — if it isn't here, don't assume it.
+> This is **Output ①** of the programme — the *goal · skills · learning outcomes · milestones · levels · format map*. Everything else derives from it: the **experience book** (the child's journey), the **activities** (how we teach each rung), and **educator training**. Written for a brand-new educator with little training — if it isn't here, don't assume it.
 
 ---
 
@@ -58,7 +58,7 @@ Five skills, each with an **ability ladder → ★ north star**. (Names are stab
 
 The programme runs in **three levels within 3–5** (roughly: **L1** newest/youngest · **L2** developing · **L3** ready-for-5+). Crucially, **level is per-skill, not per-child** — a child can be L3 in storytelling and L1 in pre-writing — and **the same activity is run at every level at once** by changing the rung, not the activity. (Exactly your number example: in one number game, a 3-year-old counts to 5 while a 5-year-old does take-away — same game, different rung.)
 
-**the language LO ladders (× level)** — each cell is what "going strong" looks like at that level; the rung *below* is "getting there", and just meeting it is "starting out". Every LO carries a **check** (👁 = observe it; the teacher watches for it — never a test).
+**the language LO ladders (× level)** — each cell is what "going strong" looks like at that level; the rung *below* is "getting there", and just meeting it is "starting out". Every LO carries a **check** (👁 = observe it; the educator watches for it — never a test).
 
 | skill | level 1 (going strong) | level 2 (going strong) | level 3 ★ (going strong) |
 |---|---|---|---|
@@ -92,14 +92,14 @@ Each segment has a **primary skill** it grows and observes best. Teach to it, an
 
 ## 6 · how this feeds the rest (so points 5 & 6 derive from here)
 
-- **the experience book (next deliverable)** tracks each child's **rung per skill** from this table and their journey toward the ★ — that *is* the milestone journey. The book's "how did each child do" marks map 1:1 to these LOs and their 👁 checks. A child stuck at L1 listening for weeks = "needs more help here," visible to teacher and parent.
-- **the activities (next deliverable)** are *how we teach each rung*. Each activity will name **which skill + which rung** it works, and come as a **fixed set of formats** (e.g. 5 opening songs, named, rotating all year) so a new teacher knows exactly what to run, with built-in repetition for mastery and variety for interest. (See the format-set principle below.)
+- **the experience book (next deliverable)** tracks each child's **rung per skill** from this table and their journey toward the ★ — that *is* the milestone journey. The book's "how did each child do" marks map 1:1 to these LOs and their 👁 checks. A child stuck at L1 listening for weeks = "needs more help here," visible to educator and parent.
+- **the activities (next deliverable)** are *how we teach each rung*. Each activity will name **which skill + which rung** it works, and come as a **fixed set of formats** (e.g. 5 opening songs, named, rotating all year) so a new educator knows exactly what to run, with built-in repetition for mastery and variety for interest. (See the format-set principle below.)
 
 ### the format-set principle (answering point 6)
 For every recurring slot we define a **small fixed set of formats** (typically 4–6), each:
-- **named** and **scripted** (exact words, materials, steps) — teacher-proof;
+- **named** and **scripted** (exact words, materials, steps) — educator-proof;
 - tied to a **skill/rung** it serves (so variety isn't random — each format gets at a slightly different sub-skill);
-- **rotated on a known schedule** so the child gets *repetition* (mastery) and the teacher gets *variety* (not bored, never guessing).
+- **rotated on a known schedule** so the child gets *repetition* (mastery) and the educator gets *variety* (not bored, never guessing).
 
 Worked example — **opening songs & movement (5, fixed for the year):**
 1. *good morning song* (greeting · names) — Mon
@@ -107,7 +107,7 @@ Worked example — **opening songs & movement (5, fixed for the year):**
 3. *head-shoulders-knees-toes* (body vocabulary · listening) — Wed
 4. *the wheels on the bus / actions song* (sequence · actions) — Thu
 5. *a rhyming song of the month* (rhyme awareness) — Fri
-> same 5 all year → the child masters and *anticipates* them (which builds the security 3–5s need), the teacher never has to invent, and across the week all five touch different language sub-skills. The *exact* song list + lyrics + actions ship in the activity pack.
+> same 5 all year → the child masters and *anticipates* them (which builds the security 3–5s need), the educator never has to invent, and across the week all five touch different language sub-skills. The *exact* song list + lyrics + actions ship in the activity pack.
 
 ---
 

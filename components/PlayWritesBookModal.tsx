@@ -57,7 +57,7 @@ export function PlayWritesBookModal({
       <header className="flex shrink-0 items-center justify-between gap-4 border-b border-ink/5 bg-segment-yellow/40 px-4 py-3 md:px-8">
         <div className="min-w-0">
           <p className="text-[10px] font-bold tracking-normal text-ink-subtle">
-            teacher reference · level {level}
+            educator reference · level {level}
           </p>
           <h2 className="truncate text-[18px] font-extrabold leading-tight text-ink md:text-[22px]">
             play-writes — a play-based writing workbook

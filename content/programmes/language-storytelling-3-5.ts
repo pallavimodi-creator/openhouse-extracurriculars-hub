@@ -16,18 +16,25 @@ const playgroundGames: Record<string, CurriculumActivity> = {
     title: "what's that sound",
     setupLine: "Make a sound and let your friends guess.",
     howToPlay:
-      "Children learn to listen, recognise sounds, and speak clearly. Setup: children sit in a circle, sound cards in a pile. Turn order: one child plays at a time. On their turn, the child picks a card, looks at it (others should not see), and makes the sound — for example, dog → woof woof. Other children guess. If the guess is correct, the child keeps the card. If not, the next child plays.",
-    materials: ["Sound cards"],
+      "Children learn to listen, recognise sounds, and speak clearly. Setup: children sit in a circle, sound cards in a pile. Turn order: one child plays at a time. On their turn, the child picks a card, looks at it (others should not see), and makes the sound — for example, dog → woof woof. Other children guess. If the guess is correct, the child keeps the card. If not, the next child plays. Game ends after set time or set number of rounds.",
+    materials: [
+      "Sound cards",
+      "1. Animal cards",
+      "2. Vehicle cards",
+      "3. Daily objects",
+      "4. Musical instruments cards",
+      "5. Body cards",
+      "6. Nature cards",
+    ],
     variations: [
       { name: "Sound + act", description: "Child makes the sound and acts the thing out." },
-      { name: "Teacher leads", description: "Teacher makes the sound and children guess." },
-      { name: "One category", description: "Use only one category at a time — animals, vehicles, instruments." },
+      { name: "Educator leads", description: "Educator makes the sound and children guess. children can also repeat the sound after educator to learn the sounds" },
+      { name: "One category", description: "Use only one category at a time — animals, vehicles, instruments. educator can name the category before the play" },
     ],
     difficultyLevels: [
-      { level: "Easier", description: "Children repeat the sound after the teacher." },
-      { level: "Medium", description: "Children guess the sound." },
-      { level: "Harder", description: "Child names the source and uses it in a sentence." },
-      { level: "Hardest", description: "Child creates a short story around the sound." },
+      { level: "Easy", description: "educator led variation, use animal and body sound cards" },
+      { level: "Medium", description: "Sound + act and one-category variation, use daily objects and vehicle cards" },
+      { level: "Hard", description: "Use all the cards with time constraints" },
     ],
     debriefPrompts: [],
     type: "physical-game",
@@ -42,53 +49,13 @@ const playgroundGames: Record<string, CurriculumActivity> = {
     materials: ["House mat", "Window cards"],
     variations: [
       { name: "Whole class", description: "The whole class says the two words together." },
-      { name: "Teacher prompt", description: "Teacher helps after 5 seconds if the child is stuck." },
+      { name: "Rhyme Pair Hunt", description: "Place one deck on the windows of the Rhyme House mat and keep the matching rhyming-word cards face up in a separate pile. Children take turns opening a window card and finding its rhyming pair from the pile." },
+      { name: "Say the Rhyme", description: "On their turn, the child opens a window card and says the word. They then say its rhyming word. If correct, they keep the window card. If not, the card stays on the mat. The game ends when all window cards have been played." },
     ],
     difficultyLevels: [
-      { level: "Easier", description: "Teacher says both words." },
-      { level: "Medium", description: "Child repeats after the teacher." },
-      { level: "Harder", description: "Child reads and identifies independently." },
-    ],
-    debriefPrompts: [],
-    type: "physical-game",
-  },
-  "rhyming-ornaments": {
-    id: "rhyming-ornaments",
-    segment: "playground",
-    title: "rhyming ornaments",
-    setupLine: "Say a rhyming word and collect.",
-    howToPlay:
-      "Children produce rhyming words. Setup: place ornaments on the tree. Turn order: one child at a time. On their turn, the child picks one ornament, says the word on it, and says a rhyming word back. If correct, they keep the ornament. If not, the ornament goes back on the tree. The game ends when the ornaments finish.",
-    materials: ["Ornament cards"],
-    variations: [
-      { name: "Group help", description: "Other children help after the first attempt." },
-      { name: "Two rhymes", description: "Child has to say two rhyming words instead of one." },
-    ],
-    difficultyLevels: [
-      { level: "Easier", description: "Teacher gives the rhyme." },
-      { level: "Medium", description: "Child gives one rhyme." },
-      { level: "Harder", description: "Child gives two rhymes." },
-      { level: "Hardest", description: "Child uses the rhyme in a sentence." },
-    ],
-    debriefPrompts: [],
-    type: "physical-game",
-  },
-  "syllable-sprint": {
-    id: "syllable-sprint",
-    segment: "playground",
-    title: "syllable sprint",
-    setupLine: "Clap the word and move forward.",
-    howToPlay:
-      "Children learn syllables. Setup: each child gets a meeple on the board. Turn order: one child at a time. On their turn, the child gets a word, says it, claps each syllable, and moves their meeple forward by that many spaces. Special cards trigger extra moves: water bowl → go back 2; ledge → skip a turn; see & say → pick a nearby object and clap that. The first child to finish wins.",
-    materials: ["Board", "Meeples", "Special cards"],
-    variations: [
-      { name: "Teacher word bank", description: "Teacher gives all the words." },
-      { name: "Child choice", description: "Children pick their own words to clap." },
-    ],
-    difficultyLevels: [
-      { level: "Easier", description: "Teacher claps and the child copies." },
-      { level: "Medium", description: "Child repeats and claps." },
-      { level: "Harder", description: "Child claps independently." },
+      { level: "Easier", description: "Educator says both words. and introduces rhyming pairs by asking children to repeat it" },
+      { level: "Medium", description: "Original gameplay, Rhyme pair hunt variation" },
+      { level: "Harder", description: "Child reads and identifies independently. Say the rhyme variation, children name 2 rhyming words of their own" },
     ],
     debriefPrompts: [],
     type: "physical-game",
@@ -99,16 +66,17 @@ const playgroundGames: Record<string, CurriculumActivity> = {
     title: "story cube",
     setupLine: "Roll and build a story.",
     howToPlay:
-      "Children learn storytelling. Story Maker version: one child at a time rolls the cubes, looks at the pictures that land face-up, and speaks. Level 1 — name + 1 sentence. Level 2 — connect 2-3 ideas. Level 3 — full story with beginning, middle, and end. Chain version: each child adds 1 sentence so a story builds together. The game ends after the story is told.",
-    materials: ["6 cubes"],
+      "Children learn storytelling through three variations — Story Chain, Story Maker, and Story Shuffle.",
+    materials: ["6 dice, each category stuck on a wooden dice (action, setting, object, character, problem, emotion)"],
     variations: [
-      { name: "Story Maker", description: "Each child rolls and tells their own story." },
-      { name: "Chain", description: "Children build one shared story, one sentence at a time." },
+      { name: "Story Chain", description: "One child rolls a die and starts the story with a sentence based on the picture. The next child rolls another die and adds a new sentence to continue the story. Continue taking turns until all children roll a dice and contribute to the story. Extension: educator can divide the children into 2 groups and each group questions the opposite group after their story is complete. Levels — Level 1: add a simple sentence. Level 2: add details to the sentence. Level 3: connect the sentence to previous events in the story." },
+      { name: "Story Maker", description: "A child rolls all six dice. The child looks at the pictures shown and tells a story using them. Other children act as audience and ask questions to the story maker. Game ends after all children contribute and complete the story. Levels — Level 1: name the pictures and include them to say simple sentences. Level 2: connect two or more pictures to create a short story. Level 3: use all the pictures to tell a detailed story with a beginning, middle, and end." },
+      { name: "Story Shuffle", description: "Children take turns rolling the dice. Each child places their dice in sequence and says a sentence using that word, building a story step by step as turns progress. After the story is told, the educator asks the children to shuffle the dice or rearrange their order and create a new version of the story. educator can also ask children to come up with a title for the story." },
     ],
     difficultyLevels: [
-      { level: "Easier", description: "Name the picture only." },
-      { level: "Medium", description: "One sentence." },
-      { level: "Harder", description: "Full story." },
+      { level: "Easy", description: "Story chain variation, educator helps or prompts the children with cues" },
+      { level: "Medium", description: "Story chain variation, children build sentences on their own" },
+      { level: "Hard", description: "Story maker variation, story shuffle" },
     ],
     debriefPrompts: [],
     type: "physical-game",
@@ -119,39 +87,25 @@ const playgroundGames: Record<string, CurriculumActivity> = {
     title: "language wheel",
     setupLine: "Roll, move, and answer the task.",
     howToPlay:
-      "Mixed language practice. Turn order: one child at a time. On their turn, the child rolls the dice, moves their piece on the wheel, picks the task card for that spot, and answers. If the answer is correct, the child gets a token.",
-    materials: ["Wheel", "Dice", "Task cards"],
+      "Setup: place the game mat in the centre with challenge cards. On their turn, the child rolls the dice, moves their piece on the wheel, picks the challenge card for that spot, and completes the task. If the task is complete, the child gets a token. Game ends after playing a set number of rounds or after each child completes their task.",
+    materials: [
+      "Dice",
+      "Meeples",
+      "Challenge cards (reading, writing, listening, speaking)",
+      "Fortune cards",
+      "Language wheel mat",
+      "Swat it snap it cards / DIY prompt sheets",
+    ],
     variations: [
       { name: "Team", description: "Children play in teams; the team confers before answering." },
       { name: "Timed", description: "Set a timer for each turn to keep pace." },
       { name: "Goal-based", description: "First child to N tokens wins." },
+      { name: "educator Note", description: "educator may use cards from the Swat It, Snap It game or create a simple DIY version on a sheet to support challenge-card tasks such as reading, writing, word recognition, jumbled word arrangement and similar activities." },
     ],
     difficultyLevels: [
-      { level: "Easier", description: "Short answer." },
-      { level: "Medium", description: "Sentence." },
-      { level: "Harder", description: "Explanation." },
-    ],
-    debriefPrompts: [],
-    type: "physical-game",
-  },
-  "think-fast": {
-    id: "think-fast",
-    segment: "playground",
-    title: "think fast",
-    setupLine: "Listen and answer fast.",
-    howToPlay:
-      "Quick thinking and speaking. Turn order: teacher gives the prompt. The child answers as fast as they can. Correct answers earn a point.",
-    materials: ["Prompt cards"],
-    variations: [
-      { name: "Fastest answer", description: "First child to answer correctly gets the point." },
-      { name: "Turn by turn", description: "Each child gets a fresh prompt in order." },
-      { name: "Team", description: "Children play as teams; team scores points together." },
-    ],
-    difficultyLevels: [
-      { level: "Easier", description: "Answer in 1 word." },
-      { level: "Medium", description: "Answer in 2 words." },
-      { level: "Harder", description: "Answer in a sentence." },
-      { level: "Hardest", description: "Answer with a short explanation." },
+      { level: "Easy", description: "educator supports children with tasks, easy level task from card" },
+      { level: "Medium", description: "Medium level task from the card" },
+      { level: "Hard", description: "Difficult level task from the card, timed challenge" },
     ],
     debriefPrompts: [],
     type: "physical-game",
@@ -162,8 +116,17 @@ const playgroundGames: Record<string, CurriculumActivity> = {
     title: "guess me",
     setupLine: "Hear three clues. Guess the character or object.",
     howToPlay:
-      "The teacher gives three clues about a character or object from the current book — \"I am tall, I am yellow, I cannot dance\". Children guess. The child who guesses correctly gives the next set of three clues.",
-    materials: ["A bank of clue sets per book"],
+      "Children guess pictures through two variations — Act it out and Guess from Clues.",
+    materials: ["Guess me cards - 7 categories (Actions, Objects, Emotions, Professions, Animals, Food, Vehicles)"],
+    variations: [
+      { name: "Act it out", description: "A child picks a card and holds it on their head without looking at it. The other children act out or make sounds of the picture without saying its name. The child guesses what is on the card. If correct, they keep the card. Take turns and continue the game till a set time or set number of rounds." },
+      { name: "Guess from Clues", description: "The educator gives clues about a picked card — 'I am yellow with black stripes and I make honey'. Children guess." },
+    ],
+    difficultyLevels: [
+      { level: "Easy", description: "Act it out variation" },
+      { level: "Medium", description: "Guess from clues variation. educator names category before describing" },
+      { level: "Hard", description: "Guess from clues — children give clues instead of educator; child makes a sentence with the guessed word." },
+    ],
     debriefPrompts: [],
     type: "physical-game",
   },
@@ -173,17 +136,17 @@ const playgroundGames: Record<string, CurriculumActivity> = {
     title: "i spy",
     setupLine: "Look, find, and say.",
     howToPlay:
-      "Observation and vocabulary. Setup: place the I Spy board in the centre. Turn order: teacher leads. On a turn, the teacher shows a card, children find the matching object on the board, and one child points to it, says its name, then uses it in a sentence.",
-    materials: ["I Spy board", "3 decks of cards"],
+      "Observation and vocabulary. Setup: place the I Spy board in the centre. Turn order: educator leads. On a turn, the educator shows a card, children find the matching object on the board, and one child points to it, says its name, then uses it in a sentence.",
+    materials: ["I spy mat", "3 decks of cards (easy, medium, difficult)"],
     variations: [
       { name: "Timed", description: "Set a short timer for each find." },
       { name: "Turn-based", description: "Each child takes a turn to find one object." },
       { name: "Team", description: "Two teams race to find first." },
     ],
     difficultyLevels: [
-      { level: "Easier", description: "Card shows the picture." },
-      { level: "Medium", description: "Card shows the word." },
-      { level: "Harder", description: "Card gives a riddle." },
+      { level: "Easy", description: "Easy cards" },
+      { level: "Medium", description: "Medium cards" },
+      { level: "Hard", description: "Difficult cards, timed challenge" },
     ],
     debriefPrompts: [],
     type: "physical-game",
@@ -194,17 +157,17 @@ const playgroundGames: Record<string, CurriculumActivity> = {
     title: "every body says",
     setupLine: "Use your body to make things.",
     howToPlay:
-      "Movement and expression. Setup: place body cards in a pile so all children can see. Turn order: one child flips a card. All children use their bodies — alone, in pairs, or as a group — to form the thing on the card. The teacher names what they see. The next child flips the next card.",
-    materials: ["Body cards"],
+      "Movement and expression. Setup: place body cards in a pile so all children can see. Turn order: one child flips a card. All children use their bodies — alone, in pairs, or as a group — to form the thing on the card. The educator names what they see. The next child flips the next card.",
+    materials: ["Everybody says cards"],
     variations: [
       { name: "Solo", description: "Each child forms the object on their own." },
       { name: "Pair", description: "Two children form the object together." },
       { name: "Group", description: "The whole group forms one shared object." },
     ],
     difficultyLevels: [
-      { level: "Easier", description: "Object — form just the thing on the card." },
-      { level: "Medium", description: "Object + action — show the object doing something." },
-      { level: "Harder", description: "Object + interaction — two or more objects acting together." },
+      { level: "Easy", description: "children form the object as pair/individual" },
+      { level: "Medium", description: "Children form the object and also do the action of solo/pair as instructed in the card" },
+      { level: "Hard", description: "Children as a group or individual can come up with own versions of forming the object with their body" },
     ],
     debriefPrompts: [],
     type: "physical-game",
@@ -215,12 +178,22 @@ const playgroundGames: Record<string, CurriculumActivity> = {
     title: "swat it snap it",
     setupLine: "Find it fast and hit it.",
     howToPlay:
-      "Reading and recognition. Setup: spread the cards face-up around the buckets. Turn order: the teacher calls a target — a letter, a word, or a sentence. Children race to swat the matching card with their swatter, then snap it into the correct bucket and read it aloud. The next round begins on the teacher's call.",
-    materials: ["Cards", "Buckets", "Swatters"],
+      "Spread the cards face up around the box. The educator calls out a target letter, word, or missing word from a sentence. Children race to find and swat the matching card, snap it into the box, and read it aloud. Game ends after each child finds a target word or letter.",
+    materials: [
+      "3 Letters",
+      "Blend and digraph Words",
+      "Letters",
+      "Punctuation marks + long vowels Words",
+      "Rhyming Words",
+      "Sight Words",
+      "Sentence Maker",
+      "box",
+      "Swatters",
+    ],
     variations: [
-      { name: "Solo", description: "Each child plays at their own pace as the teacher calls targets." },
-      { name: "Race", description: "Two children swat at the same time — first to the correct card keeps it." },
+      { name: "Solo", description: "Each child plays at their own pace as the educator calls targets." },
       { name: "Team", description: "Children play in teams; team scores points together." },
+      { name: "educator Note", description: "Use a selection of cards that best matches the children's learning level and the focus of the activity. educator may add or remove card types and adapt the challenges in different ways to support various learning objectives, needs, and interests." },
     ],
     difficultyLevels: [
       { level: "Easier", description: "Letter — swat the matching letter card." },
@@ -230,34 +203,45 @@ const playgroundGames: Record<string, CurriculumActivity> = {
     debriefPrompts: [],
     type: "physical-game",
   },
-};
-
-/* ─── Wordsmiths resources — three vocabulary tools that pair with
- * different books. The "see → act → say" sequence is the same across
- * all three. ─────────────────────────────────────────────────────── */
-
-const wordsmithsResources: Record<string, CurriculumActivity> = {
-  "emotion-tiles": {
-    id: "emotion-tiles",
-    segment: "wordsmiths",
-    title: "emotion tiles",
-    setupLine: "Show the tile. Act the feeling. Use it in a sentence.",
+  "story-construction": {
+    id: "story-construction",
+    segment: "playground",
+    title: "story construction",
+    setupLine: "Arrange the cards and narrate the story.",
     howToPlay:
-      "The teacher holds up an emotion tile (happy, sad, angry, calm, afraid, loving). All children act the feeling together with their faces and bodies. Then one child at a time uses the word in a sentence about the current book — \"the monster felt happy when he sorted his colours\".",
-    materials: ["Emotion tile deck — one tile per feeling word"],
+      "Shuffle the story cards and place them face up. Children work together to arrange the cards in the correct order and narrate the story.",
+    // TODO(image): story construction render needs file "ChatGPT Image Jun 4, 2026, 04_06_53 PM.png" (from user)
+    materials: ["8 story cards deck"],
+    variations: [
+      { name: "Story Trail", description: "Children/educators follow the story card by card, describing what is happening in each picture and linking it to the next one to narrate the story." },
+      { name: "Story Squad", description: "Divide children into three teams: Story Makers arrange the cards in the correct order; Story Stars act out the story; Story Questioners ask questions about the story and characters to the 2 teams." },
+      { name: "Story Twist", description: "Children as groups or individuals rearrange the cards in a different order to create a brand-new story. They then narrate or act out their new version. (can use with Story Squad)" },
+    ],
+    difficultyLevels: [
+      { level: "Easy", description: "Story Trail variation" },
+      { level: "Medium", description: "original gameplay" },
+      { level: "Hard", description: "Story Squad, Story Twist variation" },
+    ],
     debriefPrompts: [],
     type: "physical-game",
   },
-  "story-calendar": {
-    id: "story-calendar",
+};
+
+/* ─── Wordsmiths resource — a single vocabulary card deck (digital).
+ * FLAG: replaced the former "emotion tiles" + "story calendar" resources
+ * with one "vocabulary cards" digital deck. Minimal placeholder — needs
+ * review. ─────────────────────────────────────────────────────────── */
+
+const wordsmithsResources: Record<string, CurriculumActivity> = {
+  "vocabulary-cards": {
+    id: "vocabulary-cards",
     segment: "wordsmiths",
-    title: "story calendar",
-    setupLine: "Show the card. Act the word. Use it in a sentence.",
+    title: "vocabulary cards",
+    setupLine: "A digital card deck (coming soon).",
     howToPlay:
-      "The teacher shows a card with a describing or spatial word (clumsy, splendid, under, beside, behind). All children act it out together. Then one child at a time uses the word in a sentence about the current book — \"the giraffe was clumsy on the dance floor\".",
-    materials: ["Story calendar — one describing or spatial word per card"],
+      "Vocabulary cards — a digital card deck (coming soon).",
     debriefPrompts: [],
-    type: "physical-game",
+    type: "digital-game",
   },
 };
 
@@ -612,7 +596,7 @@ function buildLanguageSessionTable(): CurriculumSessionEntry[] {
       // Language segment assignments
       rollRhyme: pickSong(sessionNumber),
       bookOClock: `book-${slot.bookOrder}`,
-      wordsmiths: book?.vocabularyType ?? "story-calendar",
+      wordsmiths: "vocabulary-cards",
       playWrites: PLAY_WRITES_MATERIALS[(sessionNumber - 1) % PLAY_WRITES_MATERIALS.length],
       playground: PLAYGROUND_ROTATION[(sessionNumber - 1) % PLAYGROUND_ROTATION.length],
       experienceBook: "experience-book",
@@ -779,9 +763,8 @@ export const languageStorytelling35: CurriculumProgramme = {
       name: "Wordsmiths",
       durationRange: "10 min",
       objective:
-        "One vocabulary resource per session, matched to the current book's vocabulary type — emotion tiles for feeling words, story calendar for describing, action, and spatial words. The see → act → say sequence is always the same: the educator shows the tile or card, all children act the word together, then one child at a time uses it in a sentence. Acting is always whole-group — no child is singled out.",
-      type: "rotating",
-      rotationPool: Object.keys(wordsmithsResources),
+        "One vocabulary resource per session — the vocabulary cards digital deck (coming soon), matched to the current book's vocabulary. The see → act → say sequence is always the same: the educator shows the card, all children act the word together, then one child at a time uses it in a sentence. Acting is always whole-group — no child is singled out.",
+      type: "fixed",
     },
     {
       id: "play-writes",
@@ -805,7 +788,7 @@ export const languageStorytelling35: CurriculumProgramme = {
       name: "Experience Book",
       durationRange: "10 min",
       objective:
-        "Each child has a personal experience book. The teacher records what happened in the session and what the child built. The child adds one drawing of their own. The book goes home regularly so parents can see the child's growth.",
+        "Each child has a personal experience book. The educator records what happened in the session and what the child built. The child adds one drawing of their own. The book goes home regularly so parents can see the child's growth.",
       type: "fixed",
     },
   ],

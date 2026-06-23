@@ -20,11 +20,11 @@ Sources: India NCF Foundational Stage / NEP 2020, Head Start ELOF, EYFS (UK), pe
 - Language/storytelling: oral storytelling is one of the most effective ways to build oral language; teaches story elements (character, sequence, plot, resolution), word choice and **audience awareness**; strong preschool narrative predicts later reading/writing → **public speaking & communication**. Read-aloud + story-grammar instruction measurably improved preschoolers' storytelling (RCT, n=47). [easternct.edu; link.springer.com]
 
 **Session design (pacing)**
-- NCF-FS illustrative daily routine uses timed blocks (45-min circle time, 15-min snack break, rhyme/song/movement, concept time, arts/craft, story time, wind-up) and prescribes **planning around the child's short attention span**: alternate quiet↔active, group↔individual, indoor↔outdoor; balance child-initiated with teacher-guided. [ncf.ncert.gov.in]
+- NCF-FS illustrative daily routine uses timed blocks (45-min circle time, 15-min snack break, rhyme/song/movement, concept time, arts/craft, story time, wind-up) and prescribes **planning around the child's short attention span**: alternate quiet↔active, group↔individual, indoor↔outdoor; balance child-initiated with educator-guided. [ncf.ncert.gov.in]
 
 **Observation / progress tracking (for the experience book)**
-- NCF-FS prescribes teacher-completed, **non-test** methods: anecdotal records, **checklists of observable markers**, event/time sampling, and **artefacts kept in a portfolio folder taken home each term**. [ncf.ncert.gov.in; cdnbbsr.s3waas.gov.in]
-- A single open-ended activity (e.g. circle-time storytelling) lets a teacher observe **multiple cross-domain markers at once** — sequencing, vocabulary, self-expression, connection to environment. [cdnbbsr.s3waas.gov.in]
+- NCF-FS prescribes educator-completed, **non-test** methods: anecdotal records, **checklists of observable markers**, event/time sampling, and **artefacts kept in a portfolio folder taken home each term**. [ncf.ncert.gov.in; cdnbbsr.s3waas.gov.in]
+- A single open-ended activity (e.g. circle-time storytelling) lets a educator observe **multiple cross-domain markers at once** — sequencing, vocabulary, self-expression, connection to environment. [cdnbbsr.s3waas.gov.in]
 - ELOF gives concrete language markers usable verbatim (e.g. by 60 months, re-tells a story in correct sequence showing cause-and-effect). [headstart.gov]
 
 > Takeaway: our instinct (shared circle time + break + a deepened core block + a closing/reflection that doubles as observation) is directly supported by NCF-FS — the 2-hour structure sits on India's official Foundational Stage framework, not just generic best practice.
@@ -42,14 +42,14 @@ A single **shared frame** wraps whichever strand is on that day (one strand/day)
 | **Break / snack** | 10 min | snack + free movement | **NEW (shared)** |
 | **Deepened core block** | ~30–40 min | read-aloud (lang) · art-making (art) · imagine-playground/wonder-world (stem) | **+10 deepened** |
 | Core block 3 | ~20 min | strand skill block (numbers gym / play-writes / art care, etc.) | existing |
-| **Closing & experience book** | 15 min | recap · feelings check · calm-down + teacher marks the experience book / child adds an artefact | **closing NEW + existing book** |
+| **Closing & experience book** | 15 min | recap · feelings check · calm-down + educator marks the experience book / child adds an artefact | **closing NEW + existing book** |
 
 Per-strand mapping (minutes to be tuned in the pilot — that's what testing is for):
 - **Art day:** circle → art gym+games → break → **artiverse making (deepened)** → art care → closing+book
 - **Language day:** circle → roll&rhyme + wordsmiths → break → **book'o'clock read-aloud (deepened)** → play-writes + playground game → closing+book *(needs the most added time — at-building was only ~80 min)*
 - **STEM day:** circle → logic lab → break → **imagine playground / wonder world (deepened)** → numbers gym → closing+book
 
-Design rules from the research: alternate quiet↔active across blocks; keep any single teacher-led stretch within attention span; the deepened block is the one open-ended, child-led part of the day.
+Design rules from the research: alternate quiet↔active across blocks; keep any single educator-led stretch within attention span; the deepened block is the one open-ended, child-led part of the day.
 
 ---
 

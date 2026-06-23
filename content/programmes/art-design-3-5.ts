@@ -8,7 +8,7 @@ import type {
 
 /* ─── Art Games (3-5) ────────────────────────────────────────
  * 8 games — 4 Fine Motor, 3 Colour, 1 Creative Expression.
- * Rules are explained once; teacher sets up, steps back, observes.
+ * Rules are explained once; educator sets up, steps back, observes.
  */
 
 const artGamesActivities: Record<string, CurriculumActivity> = {
@@ -19,13 +19,17 @@ const artGamesActivities: Record<string, CurriculumActivity> = {
     title: "shape stitch",
     setupLine: "Building the skill to stitch things up.",
     howToPlay:
-      "This game helps children learn to pass thread through holes to create a variety of stitching patterns and attachments. Each child picks a template of their choice. The teacher models a stitch and helps the child pass thread the same way. Move to the next stitch when the child has learnt the former — there is no compulsion to learn all kinds; typically children learn all in a year's time.",
+      "Children sew through templates using shoelaces. Running Stitch = dashed line. Backstitch = continuous joined line. Whip stitch = over the edges in a loop. Pattern Stitching = combines stitch types in a design of the child's choosing.",
     example:
       "Children learn more and more complex stitches over time, become more independent, and can stitch faster.",
     materials: [
       "Stitching bases (geometric shapes · objects · characters)",
       "Shoelaces with a stiff tip",
       "Stitch reference card (running · whip · back · chain · double · pattern)",
+      // reference links — appended here as there is no dedicated reference-links field.
+      "reference: Running stitch — URL NOT PROVIDED (From Jennifer Sewing Board Stitch Tutorial)",
+      "reference: whip stitch — https://youtube.com/shorts/4Z0qfHVjWQw?si=dC3Ib0D3rmSl7o9d",
+      "reference: back stitch — URL NOT PROVIDED (From Jennifer Sewing Board Stitch Tutorial)",
     ],
     variations: [
       {
@@ -143,7 +147,7 @@ const artGamesActivities: Record<string, CurriculumActivity> = {
     title: "mix it up",
     setupLine: "Mix and match colours.",
     howToPlay:
-      "This game helps children learn and enjoy colour matching and colour mixing, and understand what colour different objects are. The teacher picks one variation per round and lays out the cards needed for that variation.",
+      "This game helps children learn and enjoy colour matching and colour mixing, and understand what colour different objects are. The educator picks one variation per round and lays out the cards needed for that variation. Children can play as individuals, pairs or groups.",
     example:
       "Children's colour mixing improves and the range of objects they can name colours for grows.",
     materials: [
@@ -154,35 +158,35 @@ const artGamesActivities: Record<string, CurriculumActivity> = {
     ],
     variations: [
       {
-        name: "Make an artwork",
+        name: "Colour flip",
         description:
-          "Children use the object cue cards as references and the stencils as scaffolds to create their own artwork.",
+          "educator places pairs of colour cards facing down. Children take turns to flip any 2 cards. If they match, they keep it and name the colour. If does not match they place it back. Game ends when all the cards have been flipped and played.",
       },
       {
-        name: "Bizarre colours",
+        name: "Match the colour",
         description:
-          "Each child picks a colour for another child, who must colour their stencil object in that colour and add a second colour to mix.",
+          "educator picks and places the object card. Child picks the colour card/cards matching the object and places near it. educator places the next object card and the next child continues. Same can be repeated with educator placing colour card/cards and children pick up the object cards matching it and place it near them. Game ends after set number of rounds.",
       },
       {
-        name: "Colour challenge",
+        name: "Colour set",
         description:
-          "The teacher allots a colour card to each child; the child has to pick a stencil suitable for that colour.",
+          "educator gives each child a set number of object cards. Then each child takes turns picking up the matching colours from the pile. The game ends once each child has had a turn.",
       },
       {
-        name: "Colour pattern with memory",
+        name: "Mix and match",
         description:
-          "The teacher arranges colour cards in an order — first a few, then more — turns them over each time, and children recall and rearrange from memory.",
+          "educator gives each child a secondary colour card [Orange, purple, green]. Ask them to mix 2 colours to obtain the colour on their card. Children choose the 2 colours and try it out. educator can suggest to try these 2 colours and see if you can match it with your card. The game ends once the children have mixed the colours to create the target colour. Extension: educator adds a colour paint and asks children to add white or black and check if the colour is lighter or darker than the colour card.",
       },
       {
-        name: "Colour chinese whisper",
+        name: "Colour detective",
         description:
-          "Each child sits in a circle holding a colour card; each names an object of that colour and the line continues — repeating from the previous without forgetting.",
+          "educator makes a colour formula question using connector and colour cards (for example, red card + blue card = ?). The child has to place the resultant colour card in place of a question mark. A child can also place an object of resultant colour. The game ends after a set number of rounds.",
       },
-      {
-        name: "Timed matching challenge",
-        description:
-          "Match objects to their colours before the timer runs out.",
-      },
+    ],
+    difficultyLevels: [
+      { level: "Easy", description: "Match the colour and Colour set variation - easy object cards" },
+      { level: "Medium", description: "Colour flip, Use of medium object cards" },
+      { level: "Difficult", description: "Mix and match variation, Use of Complex object cards, Colour detective" },
     ],
     debriefPrompts: [],
     type: "physical-game",
@@ -190,10 +194,11 @@ const artGamesActivities: Record<string, CurriculumActivity> = {
   "colour-riddles": {
     id: "colour-riddles",
     segment: "art-games",
+    // TODO(image): colour friends cover image needs to be replaced — needs correct file (from user).
     title: "colour friends",
     setupLine: "Choose colour friends and tools to colour.",
     howToPlay:
-      "Children make a conscious choice about colours and learn to have fun with colours and diverse tools. Everyone gets the same worksheet, but each child gets to pick their own colour and tool. The dominant colour on the worksheet has to be the colour they chose, but they can use other colours alongside.",
+      "Each child picks one colour card and one tool card. Then they are given an artwork and the selected material and tool. Once the educator has set up all the material, the kids can start their artwork. Game ends once the children complete the artwork using chosen tool and colour. Once the kids are familiar with the colours, the educator can introduce wild cards.",
     example:
       "Children get confident in using different colours, tools, and colour techniques.",
     materials: [
@@ -201,6 +206,7 @@ const artGamesActivities: Record<string, CurriculumActivity> = {
       "Tool cards",
       "Colour Wild cards",
       "Colour Friend worksheets",
+      "general art supplies (A4 paper, pencil, paint, crayons, cotton etc)",
     ],
     variations: [
       {
@@ -213,6 +219,16 @@ const artGamesActivities: Record<string, CurriculumActivity> = {
         description:
           "Children pick the colours, tools, and challenges for each other instead of for themselves.",
       },
+      {
+        name: "Note",
+        description:
+          "educator can place the colour wheel on the table for the kids to observe.",
+      },
+      {
+        name: "Note",
+        description:
+          "This gameplay doesn't depend on the worksheets. educator can also swap in cards from other games (eg: I Shop Texture, DIY sheets) to trace or directly work on.",
+      },
     ],
     debriefPrompts: [],
     type: "physical-game",
@@ -220,12 +236,15 @@ const artGamesActivities: Record<string, CurriculumActivity> = {
 
   // ── Texture / Observation ──
   "i-spot-texture": {
+    // NOTE(flag): id still contains 'spot' ("i-spot-texture") — kept stable on purpose
+    // (referenced in ART_GAMES_CYCLE, lib/content.ts image map, and other files).
     id: "i-spot-texture",
     segment: "art-games",
-    title: "i spot texture",
+    // TODO(image): i shop texture image needs to be updated — needs correct file (from user).
+    title: "i shop texture",
     setupLine: "Learn how to create textures in this fun shopping-for-textures game.",
     howToPlay:
-      "Children learn how to create diverse textures with different materials. Each child gets a limited number of tokens. The teacher decides the price of both objects and textures, written on the cards in erasable marker. Children buy objects and textures of their choice within their token budget, then create the chosen texture on the object — directly on the card using clay or erasable marker.",
+      "Children learn how to create diverse textures with different materials. Each child gets a limited number of tokens. The educator decides the price of both objects and textures, written on the cards in erasable marker. Children buy objects and textures of their choice within their token budget, then create the chosen texture on the object — directly on the card using clay or erasable marker. Game ends once all the children finish the task/artwork or after a set time.",
     example:
       "Children comfortably create different textures using different tools.",
     materials: [
@@ -242,9 +261,9 @@ const artGamesActivities: Record<string, CurriculumActivity> = {
           "Instead of working directly on the card, children recreate the textured object on paper using more art materials.",
       },
       {
-        name: "Free-style shop and sell",
+        name: "Recreate",
         description:
-          "Split children into teams. Each team picks a shop deck and creates products to sell — buying textures from the bank.",
+          "Children buy a card, and then recreate it on an A4 sheet, and add details to the image (background, colour).",
       },
       {
         name: "Timed challenges",
@@ -263,7 +282,7 @@ const artGamesActivities: Record<string, CurriculumActivity> = {
     title: "mini artventure",
     setupLine: "A board game where you roll the dice, do art tasks, and move ahead — an art-task adventure for the minis.",
     howToPlay:
-      "Children learn drawing, colouring, moulding, and building in a board-game task format — the more tasks they complete, the more tokens they collect, and the faster they win. Place the game board on a play mat, shuffle and sort challenge cards by zone colour, shuffle Fortune cards into their own mini-deck, and set up material trays for each zone. Each child picks a token and starts at the Start space. Decide on the number of rounds (6–8 is a good range) and keep a 2-minute timer ready. On their turn, each player rolls the dice and moves forward. The space they land on tells them what to do — green (Draw zone, draw the prompt), blue (Colour zone, colour with wax crayons), purple (Mould zone, shape with playdough), yellow (Build zone, recreate a shape with 2D wooden blocks and connectors), or Fortune (pick a Fortune card — \"take an extra turn,\" \"help a friend finish their drawing,\" etc.). After all players have picked a challenge card, they head to the matching zone tray and start the 2-minute timer. On successful completion, the teacher hands out a reward token. After all rounds, players count their tokens — everyone is a winner, the group celebrates participation and effort.",
+      "Children learn drawing, colouring, moulding, and building in a board-game task format — the more tasks they complete, the more tokens they collect. Place the game board on a play mat, shuffle and sort challenge cards by zone colour, shuffle Fortune cards into their own mini-deck, and set up material trays for each zone. Each child picks a meeple and starts at the Start space. Decide on the number of rounds (6–8 is a good range) and keep a 2-minute timer ready. On their turn, each player rolls the dice and moves forward. The space they land on tells them what to do — Green Zone- Draw, Blue Zone- Colour, Purple Zone- Mould, Yellow Zone- Build. After all players have picked a challenge card, they head to the matching zone tray and start the 2-minute timer. On successful completion, the educator hands out a reward token. After all rounds, players count their tokens — everyone is a winner, the group celebrates participation and effort. Game ending: The game ends when the set number of rounds is over.",
     example:
       "Children get faster, more creative, and more confident with the tasks over time.",
     materials: [
@@ -281,9 +300,9 @@ const artGamesActivities: Record<string, CurriculumActivity> = {
     ],
     variations: [
       {
-        name: "Nominate a friend",
+        name: "Team task",
         description:
-          "When a child lands on a challenge, instead of doing it themselves they nominate which child has to do the challenge — and that child completes it.",
+          "One player from each team rolls the dice and moves the meeple and the group completes the designated task.",
       },
     ],
     debriefPrompts: [],
@@ -310,8 +329,8 @@ const artiverseUnits: ArtiverseUnit[] = [
   {
     id: "av-paper-accordion",
     unitNumber: 1,
-    medium: "Paper — Accordion folding",
-    technique: "Fold paper strips back and forth to make and transform forms — building coordination, control, and spatial awareness.",
+    medium: "✂️ Paper — Accordion folding",
+    technique: "Fold paper strips back and forth to make and transform forms — building coordination, control, and spatial awareness. Prep: Craft paper cut in circle or animal head shape to place on top of the accordion.",
     whatChildrenMake: "Two accordion artworks: an animal body with an added face, then a creature of choice.",
     days: 2,
     abilitiesCovered: ["Tool Precision", "Tracing", "Integrating Artistic Choices"],
@@ -321,8 +340,8 @@ const artiverseUnits: ArtiverseUnit[] = [
   {
     id: "av-paper-circles",
     unitNumber: 2,
-    medium: "Paper — Circles folding",
-    technique: "Fold pre-cut circles into halves or flaps; stick some flat, leave some open; arrange to form objects.",
+    medium: "✂️ Paper — Circles folding",
+    technique: "Fold pre-cut circles into halves or flaps; stick some flat, leave some open; arrange to form objects. Prep: Craft paper cut in circles of different shapes.",
     whatChildrenMake: "Three circle-fold artworks across three sessions.",
     days: 3,
     abilitiesCovered: ["Tool Precision", "Drawing Figures and Patterns", "Integrating Artistic Choices"],
@@ -333,8 +352,8 @@ const artiverseUnits: ArtiverseUnit[] = [
   {
     id: "av-paper-mosaics",
     unitNumber: 3,
-    medium: "Paper — Mosaics",
-    technique: "Tear paper into more pieces and fill outline shapes — building precision, planning, and colour selection.",
+    medium: "✂️ Paper — Mosaics",
+    technique: "Tear paper into more pieces and fill outline shapes — building precision, planning, and colour selection. Prep: Worksheet, craft paper cut into big pieces (kids will make the pieces smaller).",
     whatChildrenMake: "Two mosaic artworks filling outline sheets with pre-torn pieces.",
     days: 2,
     abilitiesCovered: ["Tool Precision", "Names and recognises", "Explores Artistic Concepts"],
@@ -344,8 +363,8 @@ const artiverseUnits: ArtiverseUnit[] = [
   {
     id: "av-paper-loops",
     unitNumber: 4,
-    medium: "Paper — Loops & chains",
-    technique: "Make loops from paper strips, join them into chains, attach faces — building finger control, sequencing, and repetition.",
+    medium: "✂️ Paper — Loops & chains",
+    technique: "Make loops from paper strips, join them into chains, attach faces — building finger control, sequencing, and repetition. Prep: Craft paper strips long enough to form loop.",
     whatChildrenMake: "One paper-chain artwork: a chain creature with an added face.",
     days: 1,
     abilitiesCovered: ["Tool Precision", "Names and recognises", "Explores Artistic Concepts"],
@@ -496,8 +515,8 @@ const artiverseUnits: ArtiverseUnit[] = [
   {
     id: "atl-carle-stripes",
     unitNumber: 17,
-    medium: "Eric Carle — Stripes collage",
-    technique: "Children arrange paper strips, overlap freely, stick after arranging.",
+    medium: "✂️ Eric Carle — Stripes collage",
+    technique: "Children arrange paper strips, overlap freely, stick after arranging. Materials: A4 white paper, coloured paper cut in stripes, pencil/black marker, googly eyes, scissors, glue, tempera paints, dabbers. Prep: Craft paper cut in stripes, some can be pointy and some blunt.",
     whatChildrenMake: "A stripes collage built from layered paper strips.",
     days: 1,
     abilitiesCovered: ["Integrating Artistic Choices", "Emotional Expression through Art", "Visual Arts Integration"],
@@ -507,8 +526,8 @@ const artiverseUnits: ArtiverseUnit[] = [
   {
     id: "atl-carle-caterpillar",
     unitNumber: 18,
-    medium: "Eric Carle — Caterpillar collage (round shape)",
-    technique: "Arrange circles in a line, stick, add details — single medium, round shape.",
+    medium: "✂️ Eric Carle — Caterpillar collage (round shape)",
+    technique: "Arrange circles in a line, stick, add details — single medium, round shape. Materials: A4 white paper, coloured paper cut in stripes, pencil/black marker, googly eyes, scissors, glue, tempera paints, dabbers. Prep: Craft paper cut in circles of irregular shape.",
     whatChildrenMake: "A textured-paper caterpillar over two sessions.",
     days: 2,
     abilitiesCovered: ["Integrating Artistic Choices", "Emotional Expression through Art", "Visual Arts Integration"],
@@ -519,7 +538,7 @@ const artiverseUnits: ArtiverseUnit[] = [
     id: "atl-carle-fruit-veg",
     unitNumber: 19,
     medium: "Eric Carle — Fruit & vegetable collage (irregular shape)",
-    technique: "Tear paper, arrange into shapes, stick freely — single medium, irregular shape.",
+    technique: "Tear paper, arrange into shapes, stick freely — single medium, irregular shape. Materials: A4 white paper, coloured paper cut in stripes, pencil/black marker, googly eyes, scissors, glue, tempera paints, dabbers.",
     whatChildrenMake: "A torn-paper fruit or vegetable collage.",
     days: 1,
     abilitiesCovered: ["Integrating Artistic Choices", "Emotional Expression through Art", "Visual Arts Integration"],
@@ -529,8 +548,8 @@ const artiverseUnits: ArtiverseUnit[] = [
   {
     id: "atl-carle-jellyfish",
     unitNumber: 20,
-    medium: "Eric Carle — Jellyfish collage (multi-medium, multi-shape)",
-    technique: "Use a circle for the head, add strips for tentacles, layer materials — multi-medium and multi-shape.",
+    medium: "✂️ Eric Carle — Jellyfish collage (multi-medium, multi-shape)",
+    technique: "Use a circle for the head, add strips for tentacles, layer materials — multi-medium and multi-shape. Materials: A4 white paper, coloured paper cut in stripes, pencil/black marker, googly eyes, scissors, glue, tempera paints, dabbers. Prep: Craft paper cut in semicircles for head and stripes for tentacles.",
     whatChildrenMake: "A layered jellyfish collage built across two sessions.",
     days: 2,
     abilitiesCovered: ["Integrating Artistic Choices", "Emotional Expression through Art", "Visual Arts Integration"],
@@ -542,7 +561,7 @@ const artiverseUnits: ArtiverseUnit[] = [
     id: "atl-ehlert-sponge",
     unitNumber: 21,
     medium: "Lois Ehlert — Sponge dabbling flowers",
-    technique: "Dab sponge, repeat for petals — building a flower from sponge marks.",
+    technique: "Dab sponge, repeat for petals — building a flower from sponge marks. Materials: A4 paper, tempera paints, dabber sponge, brush.",
     whatChildrenMake: "A sponge-dabbed flower artwork.",
     days: 1,
     abilitiesCovered: ["Integrating Artistic Choices", "Mixes and notices", "Visual Arts Integration"],
@@ -553,7 +572,7 @@ const artiverseUnits: ArtiverseUnit[] = [
     id: "atl-ehlert-brush",
     unitNumber: 22,
     medium: "Lois Ehlert — Brush flowers",
-    technique: "Use brush strokes to create simple flowers.",
+    technique: "Use brush strokes to create simple flowers. Materials: A4 paper, tempera paints, dabber sponge, brush.",
     whatChildrenMake: "A flower artwork made with paintbrush strokes.",
     days: 1,
     abilitiesCovered: ["Integrating Artistic Choices", "Colour Integration", "Visual Arts Integration"],
@@ -564,7 +583,7 @@ const artiverseUnits: ArtiverseUnit[] = [
     id: "atl-ehlert-swirling",
     unitNumber: 23,
     medium: "Lois Ehlert — Swirling flowers",
-    technique: "Move the brush in circles to create loose, swirling flower shapes.",
+    technique: "Move the brush in circles to create loose, swirling flower shapes. Materials: A4 paper, tempera paints, dabber sponge, brush.",
     whatChildrenMake: "A swirling-flower artwork built across two sessions.",
     days: 2,
     abilitiesCovered: ["Integrating Artistic Choices", "Colour Integration", "Visual Arts Integration"],
@@ -575,7 +594,7 @@ const artiverseUnits: ArtiverseUnit[] = [
     id: "atl-ehlert-garden",
     unitNumber: 24,
     medium: "Lois Ehlert — Two-layer flower garden",
-    technique: "Paint a background first, then add flowers on top — building depth in two layers.",
+    technique: "Paint a background first, then add flowers on top — building depth in two layers. Materials: A4 paper, tempera paints, dabber sponge, brush.",
     whatChildrenMake: "A two-layer flower garden over two sessions.",
     days: 2,
     abilitiesCovered: ["Integrating Artistic Choices", "Colour Integration", "Visual Arts Integration"],
@@ -587,7 +606,7 @@ const artiverseUnits: ArtiverseUnit[] = [
     id: "atl-gomi-colour-1",
     unitNumber: 25,
     medium: "Taro Gomi — Simple colouring",
-    technique: "Colour the animal outline; add fun details and backgrounds.",
+    technique: "Colour the animal outline; add fun details and backgrounds. Materials: Crayons, black marker, A4 paper, colour paper, worksheet.",
     whatChildrenMake: "Two simple-colouring worksheets — bear and tiger — coloured with playful details and a background.",
     days: 2,
     abilitiesCovered: ["Explores freely", "Names and recognises", "Emotional Expression through Art"],
@@ -598,7 +617,7 @@ const artiverseUnits: ArtiverseUnit[] = [
     id: "atl-gomi-lines-1",
     unitNumber: 26,
     medium: "Taro Gomi — Line making 1",
-    technique: "Fill the umbrella worksheet with line patterns — dots, dashes, zigzags, waves.",
+    technique: "Fill the umbrella worksheet with line patterns — dots, dashes, zigzags, waves. Materials: Crayons, black marker, A4 paper, colour paper, worksheet.",
     whatChildrenMake: "An umbrella worksheet filled with line-pattern textures.",
     days: 2,
     abilitiesCovered: ["Drawing Figures and Patterns", "Tracing", "Visual Arts Integration"],
@@ -609,7 +628,7 @@ const artiverseUnits: ArtiverseUnit[] = [
     id: "atl-gomi-lines-2",
     unitNumber: 27,
     medium: "Taro Gomi — Add filling inside burger through lines",
-    technique: "Each layer of the burger gets a different line pattern.",
+    technique: "Each layer of the burger gets a different line pattern. Materials: Crayons, black marker, A4 paper, colour paper, worksheet.",
     whatChildrenMake: "A burger worksheet with each layer filled by a different line pattern.",
     days: 2,
     abilitiesCovered: ["Drawing Figures and Patterns", "Tracing", "Visual Arts Integration"],
@@ -620,7 +639,7 @@ const artiverseUnits: ArtiverseUnit[] = [
     id: "atl-gomi-draw-1",
     unitNumber: 28,
     medium: "Taro Gomi — Draw & colour 1",
-    technique: "Colour the character; add a background world around them.",
+    technique: "Colour the character; add a background world around them. Materials: Crayons, black marker, A4 paper, colour paper, worksheet.",
     whatChildrenMake: "A character with a background scene — day 1.",
     days: 1,
     abilitiesCovered: ["Drawing Figures and Patterns", "Names and recognises", "Integrating Artistic Choices"],
@@ -631,7 +650,7 @@ const artiverseUnits: ArtiverseUnit[] = [
     id: "atl-gomi-draw-2",
     unitNumber: 29,
     medium: "Taro Gomi — Draw & colour 2",
-    technique: "Colour the character; build a fuller world with extra elements.",
+    technique: "Colour the character; build a fuller world with extra elements. Materials: Crayons, black marker, A4 paper, colour paper, worksheet.",
     whatChildrenMake: "A character with a fuller scene — day 2.",
     days: 2,
     abilitiesCovered: ["Integrating Artistic Choices", "Emotional Expression through Art", "Visual Arts Integration"],
@@ -662,6 +681,9 @@ function gameForSession(n: number): string {
 }
 
 function gymForSession(n: number): string {
+  // TODO(image): the scribble book + art gym reference images shown in the daily
+  // plan may be wrong and need the correct files (from user). The thumbnails are
+  // resolved in lib/content.ts (GYM_BOOK_IMAGES / gymBookUrl), outside this file.
   // Alternate book day ↔ scribble book day. The art gym book switches from
   // book-1 to book-2 once book-1 is finished — the rule of thumb is around
   // session 30 (15 book days × 2 pages each).
@@ -945,7 +967,7 @@ export const artDesign35: CurriculumProgramme = {
       name: "Artiverse / Artistotle",
       durationRange: "35 min",
       objective:
-        "The core making segment where children build all three skills through sustained work. Artiverse focuses on free, choice-based making across materials and techniques, while Artistotle introduces the work of illustrators and invites children to create in that spirit. The two modes rotate, giving both freedom and depth.",
+        "The core making segment where children build all three skills through sustained work. Artiverse focuses on free, choice-based making across materials and techniques, while Artistotle introduces the work of illustrators and invites children to create in that spirit. The two modes rotate, giving both freedom and depth. If the artwork is completed earlier than expected, the educator can use the same theme to create another related artwork. If the artwork is taking longer than expected, the educator can choose a shorter game that requires less time to play.",
       type: "fixed",
     },
     {
@@ -953,7 +975,7 @@ export const artDesign35: CurriculumProgramme = {
       name: "Experience Book",
       durationRange: "10 min",
       objective:
-        "Coming soon — a record of the child's learning and an opportunity for the teacher to debrief and plan how to help the child. Also used for communication to parents.",
+        "Coming soon — a record of the child's learning and an opportunity for the educator to debrief and plan how to help the child. Also used for communication to parents.",
       type: "fixed",
     },
     {
