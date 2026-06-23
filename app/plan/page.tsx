@@ -31,8 +31,8 @@ const ABOUT = [
   },
   {
     title: "the experience book",
-    blurb: "the one combined record — what we did today + each child's journey",
-    href: "/plan/docs/experience-book",
+    blurb: "the live, fillable book — one per child, with a class progress dashboard",
+    href: "/plan/experience",
     icon: BookOpen,
   },
   {
