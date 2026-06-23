@@ -43,6 +43,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { getCurriculumProgramme, getActivityImage, GYM_BOOK_IMAGES } from "@/lib/content";
+import { LO_LADDERS } from "@/lib/lo-ladders";
 import { cn } from "@/lib/utils";
 import { TeacherGate } from "@/components/TeacherGate";
 import { ArtiverseChapters } from "@/components/ArtiverseChapters";
@@ -676,6 +677,65 @@ function ProgrammeOverviewContent() {
           </div>
         )}
       </section>
+
+      {/* ─── LEARNING OUTCOMES BY LEVEL (3-5 programmes) ─── */}
+      {LO_LADDERS[programme.slug] && (() => {
+        const ladder = LO_LADDERS[programme.slug];
+        return (
+          <section className="mt-10 px-4 md:px-8">
+            <SectionTitle num="·" label="learning outcomes — by level">
+              what &ldquo;going strong&rdquo; looks like at each level. the same activity runs at every level — only the rung changes, by attainment not age.
+            </SectionTitle>
+            {ladder.note && (
+              <p className="mt-2 text-[11px] italic leading-relaxed text-ink-muted">{ladder.note}</p>
+            )}
+            <div className="mt-4 space-y-4">
+              {ladder.groups.map((g) => {
+                const hasLabels = g.rows.some((r) => r.label);
+                return (
+                  <div key={g.skill} className="overflow-hidden rounded-2xl bg-brand-white p-4 shadow-card ring-1 ring-ink/5">
+                    <p className="mb-2 text-[13px] font-extrabold lowercase text-ink">{g.skill}</p>
+                    <div className="-mx-1 overflow-x-auto">
+                      <table className="w-full border-collapse">
+                        <thead>
+                          <tr>
+                            {hasLabels && <th className="w-24" />}
+                            {ladder.scale.map((s) => (
+                              <th key={s} className="border-b border-ink/10 px-2 py-1.5 text-left text-[10px] font-extrabold lowercase text-brand-orange">
+                                {s}
+                              </th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {g.rows.map((row, i) => (
+                            <tr key={i} className="align-top">
+                              {hasLabels && (
+                                <td className="border-b border-ink/5 px-2 py-2 text-[11px] font-bold lowercase text-ink-muted">
+                                  {row.label}
+                                </td>
+                              )}
+                              {row.cells.map((c, j) => (
+                                <td key={j} className="border-b border-ink/5 px-2 py-2 text-[11px] leading-relaxed text-ink-muted">
+                                  {c}
+                                </td>
+                              ))}
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            <p className="mt-3 text-[11px] text-ink-subtle">
+              promotion = securing the ★/hardest rung independently, more than once. the full prose lives in the{" "}
+              <Link href="/plan/docs" className="font-semibold text-brand-orange">planning docs</Link>.
+            </p>
+          </section>
+        );
+      })()}
 
       {/* ═══════════════════════════════════════════════════════
           LANGUAGE-ONLY SECTIONS — only render for the language
