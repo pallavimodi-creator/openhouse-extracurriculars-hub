@@ -689,7 +689,7 @@ export const stem35: CurriculumProgramme = {
       name: "Imagine Playground",
       durationRange: "35 min",
       objective:
-        "Imagination through building. Children meet stem concepts — math, physics, sequencing, conditionals, probability — through stories and hands-on building. Materials are blocks of different kinds: Math Train, Coding Express, STEAM Park, ramp materials, magna tiles, general blocks. The educator sets a challenge, lays out materials, and steps back. 11 core projects run in a fixed order, each met 2–3 times across the year — deeper every time. Why it alternates with Kitchen Play: both build curiosity, problem solving, and creation, but Imagine Playground works in the language of blocks and structures, while Kitchen Play works in the language of everyday kitchen actions. Children need both. Scheduling Note: The duration of Imagine Playground / Kitchen Play sessions may be adjusted based on the scope of the activity. If a project needs more time, educators may shorten Number Gym, Logic Lab, or other components to ensure meaningful engagement and completion of the project. Runs on Session A only.",
+        "Imagination through building. Children meet stem concepts — math, physics, sequencing, conditionals, probability — through stories and hands-on building. Materials are blocks of different kinds: Math Train, Coding Express, STEAM Park, ramp materials, magna tiles, general blocks. The educator sets a challenge, lays out materials, and steps back. 11 core projects run in a fixed order, each met 2–3 times across the year — deeper every time. Why it alternates with Wonder World: both build curiosity, problem solving, and creation, but Imagine Playground works in the language of blocks and structures, while Wonder World works in the language of everyday actions (currently the Kitchen Play resource). Children need both. Scheduling Note: The duration of Imagine Playground / Wonder World sessions may be adjusted based on the scope of the activity. If a project needs more time, educators may shorten Number Gym, Logic Lab, or other components to ensure meaningful engagement and completion of the project. Runs on Session A only.",
       type: "rotating",
       rotationPool: Object.keys(imaginePlaygroundProjects),
     },
@@ -699,10 +699,10 @@ export const stem35: CurriculumProgramme = {
       // display name and content are now "Kitchen Play". FLAG: a later
       // rename of the id string to "kitchen-play" is possible if wanted.
       id: "wonder-world",
-      name: "Kitchen Play",
+      name: "Wonder World",
       durationRange: "35 min",
       objective:
-        "Kitchen Play is a set of themed games — children meet STEM concepts (sorting, sequencing, fractions, classification) through real kitchen actions: sorting food, following recipes, and running a café. The three themed games rotate: sessions begin alternating between Game 1 (Sort & Guess) and Game 2 (Cooking). Game 3 (Restaurant) unlocks only after 20 sessions when children have completed about 5 Cooking sessions; from then on, all three rotate. Materials: action cards · food cards · recipe cards · category cards · cooking mat with menu template on reverse · play-dough + clay tools · pretend-money tokens. Runs on Session B only.",
+        "Wonder World — exploration-based STEM through real-world play. The current resource is Kitchen Play: children meet STEM concepts (sorting, sequencing, fractions, classification) through real kitchen actions — sorting food, following recipes, and running a café. The three Kitchen Play games rotate: sessions begin alternating between Game 1 (Sort & Guess) and Game 2 (Cooking). Game 3 (Restaurant) unlocks only after 20 sessions when children have completed about 5 Cooking sessions; from then on, all three rotate. Materials: action cards · food cards · recipe cards · category cards · cooking mat with menu template on reverse · play-dough + clay tools · pretend-money tokens. Runs on Session B only.",
       type: "rotating",
       rotationPool: Object.keys(wonderWorldActivities),
     },

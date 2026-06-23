@@ -22,6 +22,26 @@ const GOALS: { icon: typeof Smile; title: string; body: string }[] = [
   },
 ];
 
+// How the programme answers the two questions parents ask most: "how will
+// my child learn to read?" and "if my child is older, what more do they get?"
+const GROWS: { icon: typeof Smile; title: string; body: string }[] = [
+  {
+    icon: BookOpen,
+    title: "how we teach reading",
+    body: "reading has two halves — understanding language (comprehension) and sounding out words (decoding). at 3–5 we deliberately build the harder, slower half first: a big vocabulary, close listening, and real storytelling. younger children join in and name pictures; older ones retell whole stories and start hearing the sounds in words. so when letters arrive — at school, and in our 5+ programmes — your child reads with meaning from day one, not just barking at print.",
+  },
+  {
+    icon: Hash,
+    title: "numbers, age by age",
+    body: "the same number game stretches to each child — a younger child counts to 10 and compares more / less; an older child takes away, builds patterns, and meets bigger numbers. nobody waits, and nobody is left behind.",
+  },
+  {
+    icon: Smile,
+    title: "always reaching further",
+    body: "every activity meets a child by what they can do, not their birthday — so an older child is always stretched further in the very same game. that's how a 3-year-old and a 5-year-old thrive side by side.",
+  },
+];
+
 // Parent-facing positioning brochure for the 3-5 at-centre programme.
 // Adapted from the print brochure (at-apartment → at-centre, wonderworld →
 // kitchen play).
@@ -85,7 +105,7 @@ const STRANDS: Strand[] = [
     headline: "where curiosity turns into thinking.",
     learn: ["curiosity", "problem-solving", "number sense", "logic"],
     flow: [
-      { icon: Blocks, label: "imagine playground / kitchen play" },
+      { icon: Blocks, label: "imagine playground / wonder world" },
       { icon: Lightbulb, label: "logic lab" },
       { icon: Hash, label: "number gym" },
     ],
@@ -164,6 +184,29 @@ export default function BrochurePage() {
                       <p className="text-[14px] font-extrabold lowercase text-ink">{g.title}</p>
                       <p className="mt-0.5 text-[12.5px] leading-relaxed text-ink-muted">{g.body}</p>
                     </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* ── HOW IT GROWS — reading + age (the questions parents ask) ── */}
+          <section className="overflow-hidden rounded-2xl bg-brand-white shadow-float ring-1 ring-ink/5 print:break-inside-avoid">
+            <Header />
+            <div className="px-5 pb-6 pt-5">
+              <p className="text-[11px] font-bold lowercase tracking-wide text-brand-orange">grows with your child</p>
+              <h2 className="mt-1 text-[24px] font-extrabold lowercase leading-tight text-ink">the questions parents ask us.</h2>
+              <span className="mt-1.5 block h-1.5 w-14 rounded-full bg-brand-orange/40" />
+              <div className="mt-4 space-y-3">
+                {GROWS.map((g) => (
+                  <div key={g.title} className="rounded-xl bg-brand-cream/50 p-3.5">
+                    <p className="flex items-center gap-2 text-[14px] font-extrabold lowercase text-ink">
+                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-brand-orange/12 text-brand-orange">
+                        <g.icon className="h-4 w-4" strokeWidth={2} />
+                      </span>
+                      {g.title}
+                    </p>
+                    <p className="mt-1.5 text-[12.5px] leading-relaxed text-ink-muted">{g.body}</p>
                   </div>
                 ))}
               </div>

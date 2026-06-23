@@ -362,7 +362,7 @@ function ProgrammeOverviewContent() {
             <p className="mt-1.5 text-[13px] leading-relaxed text-ink md:text-[14px]">
               {isRobotics
                 ? programme.ageGroup === "3-5"
-                  ? "the four skills below are built through hands-on building (imagine playground), themed kitchen games (kitchen play), logic games (logic lab), and number practice (numbers gym) — a rotating set in each part of the day, run at each child's level."
+                  ? "the four skills below are built through hands-on building (imagine playground), real-world play (wonder world), logic games (logic lab), and number practice (numbers gym) — a rotating set in each part of the day, run at each child's level."
                   : "this overview covers mechanics. robotics at openhouse spans three strands — mechanics, electronics, and coding — and this is the mechanics programme."
                 : isArt
                   ? "the skills below are built through a combination of games, making artworks, and practice in the art gym."

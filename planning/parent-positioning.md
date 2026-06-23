@@ -52,4 +52,17 @@ Beyond our own ladder, the same foundations are exactly what India's NEP/NCF Fou
 - **language:** "Telling and re-telling stories is the single best way to grow language — and it's the seed of confident public speaking."
 - **why no tests:** "We don't test 3-year-olds. Educators *observe* and record what your child can actually do, in a book that comes home each term."
 
+---
+
+## the two questions parents ask most
+
+**"how will my child learn to read?"** — Reading has two halves: **understanding language (comprehension)** and **sounding out words (decoding)**. At 3–5 we deliberately build the *harder, slower* half first — a big vocabulary, close listening, and real storytelling. (Pushing letters before this oral base is built produces children who can sound out words but don't understand them.) Younger children join in and name pictures; older children retell whole stories and start hearing the sounds *in* words (rhyme, first sounds). So when formal letters arrive — at school, and in our 5+ programmes — your child reads **with meaning from day one**, not just "barking at print."
+
+**"if my child is older, what *more* are they learning?"** — Every activity meets a child by **what they can do, not their birthday**, so an older child is always stretched further *in the very same game*:
+- **numbers:** a younger child counts to 10 and compares more/less; an older child takes away, builds patterns, and meets bigger numbers (tens & ones).
+- **language:** a younger child names what they see; an older child retells with a beginning–middle–end and hears the sounds in words.
+- **art:** a younger child explores materials; an older child plans a piece and chooses colours for a mood.
+
+Nobody waits, and nobody is left behind — which is exactly how a 3-year-old and a 5-year-old thrive side by side.
+
 *Grounded in: NCF Foundational Stage / NEP 2020 (ncf.ncert.gov.in); EYFS Statutory Framework (gov.uk); Head Start ELOF (headstart.gov); Bers, computational thinking in early childhood (ecrp.illinois.edu); storytelling & oral-language research (link.springer.com, easternct.edu).*
