@@ -171,6 +171,9 @@ export default function PlannerPage() {
 
           {/* strand chooser */}
           <h2 className="mt-6 text-[13px] font-bold text-ink-muted">1 · which strand today?</h2>
+          <p className="mt-1 text-[11px] leading-relaxed text-ink-subtle">
+            general rule: <span className="font-semibold text-ink-muted">keep rotating</span> — run a different strand each day so children get all three across the week. <span className="italic">(fitness and music strands will be added soon.)</span>
+          </p>
           <div className="mt-2 grid gap-2 sm:grid-cols-3">
             {PLANNER_STRANDS.map((s) => (
               <button

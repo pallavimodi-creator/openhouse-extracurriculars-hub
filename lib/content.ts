@@ -255,10 +255,10 @@ export const ACTIVITY_IMAGES: Record<string, string> = {
   "shape-art": "/games/art-3-5/shape-art.png",
   "imagine-that-3-5": "/games/art-3-5/imagine-that.png",
   // STEM 3-5 — Logic Lab game renders
-  "ll-logical-road-builder": "/games/stem-3-5/games-trio.png",
+  "ll-logical-road-builder": "/games/stem-3-5/logical-road-builder.png",
   "ll-stitch-me": "/games/stem-3-5/stitch-me.png",
-  "ll-candy-sort": "/games/stem-3-5/games-trio.png",
-  "ll-magna-tiles": "/games/stem-3-5/games-trio.png",
+  "ll-candy-sort": "/games/stem-3-5/candy-sort.png",
+  "ll-magna-tiles": "/games/stem-3-5/magna-tiles.png",
   "ll-dot-grid": "/games/stem-3-5/dot-grid.png",
   // STEM 3-5 — Imagine Playground (LEGO Education brick activities).
   // No per-activity photos yet; reuse the IP book cover as a fallback
