@@ -42,6 +42,7 @@ export interface TeacherState {
   username?: string;
   role?: "teacher" | "admin";
   category?: TeacherCategory; // if set, teacher sees every programme in this category
+  ageScope?: "3-5"; // if set, the educator runs the integrated 3-5 centre programme (all strands)
   building?: string; // current building / centre — set after the /building picker
 }
 

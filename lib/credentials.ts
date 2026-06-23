@@ -11,6 +11,7 @@ export interface Credential {
   displayName: string;
   role: "teacher" | "admin";
   category?: TeacherCategory; // when set, teacher sees every programme in this category
+  ageScope?: "3-5"; // when set, the educator runs the integrated 3-5 centre programme (all three strands)
 }
 
 export const CREDENTIALS: Credential[] = [
@@ -57,6 +58,17 @@ export const CREDENTIALS: Credential[] = [
     displayName: "robotics teacher",
     role: "teacher",
     category: "stem",
+  },
+  // 3-5 centre educator — runs the integrated at-centre programme (all
+  // three rotating strands: art · stem · language). Lands on the /plan
+  // hub and sees the three 3-5 strands in the library + planner.
+  {
+    username: "eccteacher",
+    password: "eccteacher123",
+    programmeSlug: "art-design-3-5",
+    displayName: "3–5 educator",
+    role: "teacher",
+    ageScope: "3-5",
   },
 ];
 

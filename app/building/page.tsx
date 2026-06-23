@@ -54,10 +54,14 @@ export default function BuildingPickerPage() {
       router.replace("/login");
       return;
     }
-    // Admin / category teachers land on /; single-programme teachers
-    // go straight to their programme. Same routing logic as login.
-    const toHome = t.role === "admin" || !!t.category;
-    router.push(toHome ? "/" : `/${t.programmeSlug}`);
+    // 3-5 educators land on the /plan hub; admin / category teachers land
+    // on /; single-programme teachers go straight to their programme.
+    const dest = t.ageScope
+      ? "/plan"
+      : t.role === "admin" || t.category
+        ? "/"
+        : `/${t.programmeSlug}`;
+    router.push(dest);
   };
 
   const handleSubmitNew = (e: React.FormEvent) => {

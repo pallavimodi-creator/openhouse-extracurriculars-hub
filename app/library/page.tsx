@@ -308,6 +308,8 @@ export default function LibraryPage() {
   // physical-resource filter: all entries · only those needing a physical
   // resource present · only those needing nothing physical.
   const [physFilter, setPhysFilter] = useState<"all" | "physical" | "none">("all");
+  // 3-5 centre educator: a limited picker over just the three 3-5 strands.
+  const [scope35, setScope35] = useState(false);
   const progPickerRef = useRef<HTMLDivElement | null>(null);
 
   const scrollPicker = (dir: "left" | "right") => {
@@ -324,15 +326,19 @@ export default function LibraryPage() {
       return;
     }
     const admin = t.programmeSlug === "*" || t.role === "admin";
+    const is35 = t.ageScope === "3-5";
     setIsAdmin(admin);
+    setScope35(is35);
     setTeacherSlug(t.programmeSlug);
-    // The library is always scoped to a single programme — never "all" —
-    // so educators aren't shown every programme's resources at once.
-    // Admin / centre logins default to the first live programme.
+    // Admin / centre logins default to the first live programme; the 3-5
+    // educator defaults to "all" (across the three strands); single-
+    // programme teachers are locked to their own programme.
     const firstLive = listCurriculumProgrammes().find(
       (p) => p.totalSessions > 0 && getProgrammeStage(p) === "live",
     );
-    setSelectedProgSlug(admin ? (firstLive?.slug ?? "") : t.programmeSlug);
+    setSelectedProgSlug(
+      admin ? (firstLive?.slug ?? "") : is35 ? "all" : t.programmeSlug,
+    );
     setAuthReady(true);
   }, [router]);
 
@@ -340,30 +346,35 @@ export default function LibraryPage() {
     const programmes = listCurriculumProgrammes().filter((p) => p.totalSessions > 0);
 
     let progsToShow: CurriculumProgramme[] = [];
-    if (isAdmin) {
-      // "all" = every programme (cross-programme physical-resource view);
-      // otherwise the single selected programme.
+    if (isAdmin || scope35) {
+      // The 3-5 educator's pool is just the three 3-5 strands; admin sees
+      // every programme. "all" = the whole pool (cross view); otherwise the
+      // single selected programme.
+      const pool = scope35
+        ? programmes.filter((p) => getProgrammeStage(p) === "trial")
+        : programmes;
       progsToShow =
         selectedProgSlug === "all"
-          ? programmes
-          : programmes.filter((p) => p.slug === selectedProgSlug);
+          ? pool
+          : pool.filter((p) => p.slug === selectedProgSlug);
     } else if (teacherSlug) {
       const p = getCurriculumProgramme(teacherSlug);
       progsToShow = p ? [p] : [];
     }
 
     return progsToShow.flatMap(buildItemsFor);
-  }, [isAdmin, teacherSlug, selectedProgSlug]);
+  }, [isAdmin, scope35, teacherSlug, selectedProgSlug]);
 
   // Programme picker (admin / centre) — every programme now, live (5+)
   // first then the 3-5 centre programmes, so all resources are reachable.
   const adminProgrammes = useMemo(() => {
     const all = listCurriculumProgrammes().filter((p) => p.totalSessions > 0);
+    if (scope35) return all.filter((p) => getProgrammeStage(p) === "trial");
     return [
       ...all.filter((p) => getProgrammeStage(p) === "live"),
       ...all.filter((p) => getProgrammeStage(p) === "trial"),
     ];
-  }, []);
+  }, [scope35]);
 
   const filtered = useMemo(() => {
     let result = allItems;
@@ -508,13 +519,16 @@ export default function LibraryPage() {
       )}
       <h1 className="text-[22px] font-bold text-ink">library</h1>
       <p className="mt-1 text-[13px] text-ink-muted">
-        {isAdmin && selectedProgSlug === "all"
-          ? "every resource across all programmes — search, or filter by what you must physically have on hand."
+        {(isAdmin || scope35) && selectedProgSlug === "all"
+          ? scope35
+            ? "every resource across the three 3–5 strands — search, or filter by what you must physically have on hand."
+            : "every resource across all programmes — search, or filter by what you must physically have on hand."
           : "every resource for this programme — search by name, keyword, or material."}
       </p>
 
-      {/* Admin-only programme picker */}
-      {isAdmin && (
+      {/* Programme picker — admin (every programme) or 3-5 educator (the
+          three strands). */}
+      {(isAdmin || scope35) && (
         <div className="mt-4">
           <div className="relative flex items-center gap-1.5">
             <button
@@ -539,7 +553,7 @@ export default function LibraryPage() {
                     : "bg-ink/5 text-ink-muted hover:bg-ink/10"
                 )}
               >
-                all programmes
+                {scope35 ? "all three strands" : "all programmes"}
               </button>
               {adminProgrammes.map((p) => (
                 <button
@@ -669,7 +683,7 @@ export default function LibraryPage() {
         {grouped.map((prog) => {
           // Show the programme title so the centre login knows which
           // programme's resources are on screen.
-          const showProgrammeHeader = isAdmin;
+          const showProgrammeHeader = isAdmin || scope35;
           return (
             <section key={prog.slug} className="space-y-4">
               {showProgrammeHeader && (

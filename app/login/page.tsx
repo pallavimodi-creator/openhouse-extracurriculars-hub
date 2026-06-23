@@ -24,8 +24,12 @@ export default function LoginPage() {
         router.replace("/building");
         return;
       }
-      const toHome = admin || !!existing.category;
-      router.replace(toHome ? "/" : `/${existing.programmeSlug}`);
+      const dest = existing.ageScope
+        ? "/plan"
+        : admin || existing.category
+          ? "/"
+          : `/${existing.programmeSlug}`;
+      router.replace(dest);
     }
   }, [router]);
 
@@ -45,6 +49,7 @@ export default function LoginPage() {
       username: cred.username,
       role: cred.role,
       category: cred.category,
+      ageScope: cred.ageScope,
     });
     // Admins go straight home — they're reviewing, not teaching, so no
     // building needed. Teachers go to the building picker first.

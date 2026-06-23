@@ -268,8 +268,8 @@ export default function HomePage() {
                 body={
                   <>
                     Programmes are split into{" "}
-                    <span className="font-semibold text-brand-orange">live</span> (running now) and{" "}
-                    <span className="font-semibold text-brand-orange">trial</span> (3–5, being piloted). Choose one and open a programme.
+                    <span className="font-semibold text-brand-orange">5+</span> (running now) and the{" "}
+                    <span className="font-semibold text-brand-orange">3–5 trial</span> (the new integrated at-centre programme). Choose one and open a programme.
                   </>
                 }
               />
@@ -305,18 +305,28 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Programme tracks — live first, then trial */}
+      {/* Programme tracks — 5+ (running) clearly separated from the 3–5
+          trial (the new integrated at-centre programme). */}
       <section className="px-4 pt-8 pb-8 md:px-8 md:pt-10 md:pb-12">
-        <div className="space-y-10">
+        <div className="space-y-8">
           <TrackSection
-            label="live"
-            blurb="running at the centre"
+            label="5+ programmes"
+            blurb="running now · ages 5–12 · one subject per programme"
             tone="live"
             items={live}
           />
+          {trial.length > 0 && (
+            <div className="flex items-center gap-3 pt-2" aria-hidden>
+              <span className="h-px flex-1 bg-ink/10" />
+              <span className="rounded-chip bg-ink/5 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-ink-subtle">
+                a separate programme
+              </span>
+              <span className="h-px flex-1 bg-ink/10" />
+            </div>
+          )}
           <TrackSection
-            label="trial"
-            blurb="3–5 programmes being piloted · overviews ready, timings wip"
+            label="3–5 · trial"
+            blurb="the new integrated at-centre programme — art · stem · language rotate across a 2-hour day"
             tone="trial"
             items={trial}
           />
