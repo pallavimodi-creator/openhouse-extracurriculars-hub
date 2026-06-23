@@ -48,7 +48,13 @@ export function FooterNav() {
     });
   }
 
-  items.push({ href: "/plan", label: "plan", icon: ClipboardList });
+  // "plan" is a 3-5-only feature, so it's NOT a global tab (it would be
+  // confusing on the 5+ programmes). It's reached from the trial section /
+  // the 3-5 cards instead. The tab only appears while you're inside the
+  // 3-5 plan area, as a way back to its hub.
+  if (pathname.startsWith("/plan")) {
+    items.push({ href: "/plan", label: "plan", icon: ClipboardList });
+  }
   items.push({ href: "/library", label: "library", icon: BookOpen });
 
   const handleSignOut = () => {

@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { CheckCircle2, ClipboardList, ChevronRight } from "lucide-react";
+import { CheckCircle2, ClipboardList, ChevronRight, BookOpen } from "lucide-react";
 import { getTeacher, getBuilding, type TeacherState } from "@/lib/teacher-state";
 import { PLANNER_STRANDS, getStrandSegments } from "@/lib/planner";
 import { supabase, isSupabaseConfigured, type SessionPlanRow } from "@/lib/supabase";
@@ -107,14 +107,22 @@ export default function PlannerPage() {
             pick today&apos;s strand and the resource for each part — it becomes your run-sheet and is logged for the centre.
           </p>
         </div>
-        {isAdmin && (
+        <div className="flex shrink-0 flex-col items-end gap-1.5">
           <Link
-            href="/plan/log"
-            className="inline-flex shrink-0 items-center gap-1.5 rounded-chip bg-brand-white px-3 py-1.5 text-[11px] font-semibold text-ink-muted ring-1 ring-ink/10 transition hover:bg-ink/5"
+            href="/plan/docs"
+            className="inline-flex items-center gap-1.5 rounded-chip bg-brand-orange/10 px-3 py-1.5 text-[11px] font-semibold text-brand-orange transition hover:bg-brand-orange/15"
           >
-            <ClipboardList className="h-3.5 w-3.5" /> activity log
+            <BookOpen className="h-3.5 w-3.5" /> review the plan
           </Link>
-        )}
+          {isAdmin && (
+            <Link
+              href="/plan/log"
+              className="inline-flex items-center gap-1.5 rounded-chip bg-brand-white px-3 py-1.5 text-[11px] font-semibold text-ink-muted ring-1 ring-ink/10 transition hover:bg-ink/5"
+            >
+              <ClipboardList className="h-3.5 w-3.5" /> activity log
+            </Link>
+          )}
+        </div>
       </div>
 
       {status === "saved" ? (
