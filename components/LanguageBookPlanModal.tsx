@@ -105,9 +105,9 @@ export function LanguageBookPlanModal({
             label="block 2 · days 4–6 · version 2.0 (advanced)"
             tone="block-b"
           />
-          <DayCard day={1} dayPlan={plan.blockB.day1} prefix="v2 · " />
-          <DayCard day={2} dayPlan={plan.blockB.day2} prefix="v2 · " />
-          <Day3Card day={3} dayPlan={plan.blockB.day3} prefix="v2 · " />
+          <DayCard day={4} dayPlan={plan.blockB.day1} />
+          <DayCard day={5} dayPlan={plan.blockB.day2} />
+          <Day3Card day={6} dayPlan={plan.blockB.day3} />
         </div>
       </div>
     </div>,
@@ -146,7 +146,7 @@ function DayCard({
           {day}
         </span>
         <p className="text-[12.5px] font-extrabold lowercase text-ink">
-          {prefix}day {day}
+          {prefix}day {day} of 6
         </p>
         {dayPlan.when && (
           <span className="ml-auto truncate text-[10.5px] font-semibold text-ink-muted">
@@ -221,7 +221,7 @@ function Day3Card({
           {day}
         </span>
         <p className="text-[12.5px] font-extrabold lowercase text-ink">
-          {prefix}day {day} · narration + activity
+          {prefix}day {day} of 6 · narration + activity
         </p>
       </header>
       <div className="space-y-3 px-4 py-3 md:px-5 md:py-4">

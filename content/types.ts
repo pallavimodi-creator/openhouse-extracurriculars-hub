@@ -207,7 +207,12 @@ export interface LanguageBook {
   whyThisPosition: string;
   /** Theme keywords — pair with vocabulary type / songs. */
   themes: string[];
-  /** Target vocabulary words pulled from the book — used in Wordsmiths. */
+  /**
+   * Target vocabulary words for the book — shown in the overview's 8-books
+   * grid. MUST stay identical to the book's lesson-plan vocabulary
+   * (LANGUAGE_BOOK_PLANS in language-book-plans.ts). If the lesson plan's
+   * vocabulary changes, re-copy it here — the lesson plan is the source of truth.
+   */
   vocabulary: string[];
   /**
    * The kind of vocabulary the book is built around — drives which
