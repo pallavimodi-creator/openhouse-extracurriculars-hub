@@ -178,6 +178,19 @@ function psNeedsKit(materials?: string[]): boolean {
   });
 }
 
+// Does this entry need a physical resource present at the centre? Verbal
+// language/speaking games and digital decks need nothing physical;
+// everything else (art games + artworks, stem builds, art-gym/scribble
+// primers, books) does. Powers the cross-programme "physical" filter.
+function itemNeedsPhysical(item: LibraryItem): boolean {
+  if (item.kind !== "activity") return true;
+  const a = item.item;
+  if (a.type === "digital-game") return false;
+  const cat = getCurriculumProgramme(item.programmeSlug)?.category;
+  if (cat === "language") return psNeedsKit(a.materials);
+  return true;
+}
+
 function buildItemsFor(prog: CurriculumProgramme): LibraryItem[] {
   const bookMap: Record<string, string> = {
     "public-speaking-5-8": "speaking-5-8",
@@ -292,6 +305,9 @@ export default function LibraryPage() {
   const [isAdmin, setIsAdmin] = useState(false);
   // admin-only: which programme to filter by ("all" = every programme)
   const [selectedProgSlug, setSelectedProgSlug] = useState<string>("all");
+  // physical-resource filter: all entries · only those needing a physical
+  // resource present · only those needing nothing physical.
+  const [physFilter, setPhysFilter] = useState<"all" | "physical" | "none">("all");
   const progPickerRef = useRef<HTMLDivElement | null>(null);
 
   const scrollPicker = (dir: "left" | "right") => {
@@ -325,8 +341,12 @@ export default function LibraryPage() {
 
     let progsToShow: CurriculumProgramme[] = [];
     if (isAdmin) {
-      // Always exactly one programme — never the full list.
-      progsToShow = programmes.filter((p) => p.slug === selectedProgSlug);
+      // "all" = every programme (cross-programme physical-resource view);
+      // otherwise the single selected programme.
+      progsToShow =
+        selectedProgSlug === "all"
+          ? programmes
+          : programmes.filter((p) => p.slug === selectedProgSlug);
     } else if (teacherSlug) {
       const p = getCurriculumProgramme(teacherSlug);
       progsToShow = p ? [p] : [];
@@ -335,15 +355,15 @@ export default function LibraryPage() {
     return progsToShow.flatMap(buildItemsFor);
   }, [isAdmin, teacherSlug, selectedProgSlug]);
 
-  // Programme picker (admin / centre) — live programmes only, since trial
-  // programmes are blocked.
-  const adminProgrammes = useMemo(
-    () =>
-      listCurriculumProgrammes().filter(
-        (p) => p.totalSessions > 0 && getProgrammeStage(p) === "live",
-      ),
-    []
-  );
+  // Programme picker (admin / centre) — every programme now, live (5+)
+  // first then the 3-5 centre programmes, so all resources are reachable.
+  const adminProgrammes = useMemo(() => {
+    const all = listCurriculumProgrammes().filter((p) => p.totalSessions > 0);
+    return [
+      ...all.filter((p) => getProgrammeStage(p) === "live"),
+      ...all.filter((p) => getProgrammeStage(p) === "trial"),
+    ];
+  }, []);
 
   const filtered = useMemo(() => {
     let result = allItems;
@@ -378,8 +398,12 @@ export default function LibraryPage() {
         return (i.title + " " + i.description).toLowerCase().includes(q);
       });
     }
+    if (physFilter !== "all") {
+      const want = physFilter === "physical";
+      result = result.filter((i) => itemNeedsPhysical(i) === want);
+    }
     return result;
-  }, [allItems, query]);
+  }, [allItems, query, physFilter]);
 
   // Group filtered items by programme only — the hub is a flat resource
   // library, with no "segments of the day" sectioning. Programme order
@@ -484,7 +508,9 @@ export default function LibraryPage() {
       )}
       <h1 className="text-[22px] font-bold text-ink">library</h1>
       <p className="mt-1 text-[13px] text-ink-muted">
-        every resource for this programme — search by name, keyword, or material.
+        {isAdmin && selectedProgSlug === "all"
+          ? "every resource across all programmes — search, or filter by what you must physically have on hand."
+          : "every resource for this programme — search by name, keyword, or material."}
       </p>
 
       {/* Admin-only programme picker */}
@@ -503,6 +529,18 @@ export default function LibraryPage() {
               ref={progPickerRef}
               className="no-scrollbar flex flex-1 gap-2 overflow-x-auto scroll-smooth"
             >
+              <button
+                key="all"
+                onClick={() => setSelectedProgSlug("all")}
+                className={cn(
+                  "shrink-0 rounded-chip px-3 py-1.5 text-[11px] font-semibold transition",
+                  selectedProgSlug === "all"
+                    ? "bg-brand-orange text-white"
+                    : "bg-ink/5 text-ink-muted hover:bg-ink/10"
+                )}
+              >
+                all programmes
+              </button>
               {adminProgrammes.map((p) => (
                 <button
                   key={p.slug}
@@ -540,6 +578,32 @@ export default function LibraryPage() {
           placeholder="search by name, keyword, materials..."
           className="w-full rounded-card border border-ink/10 bg-brand-white py-2.5 pl-9 pr-4 text-[13px] text-ink placeholder:text-ink-subtle focus:border-brand-orange/40 focus:outline-none focus:ring-2 focus:ring-brand-orange/10"
         />
+      </div>
+
+      {/* Physical-resource filter — what must I physically have present?
+          Works across every programme (use with "all programmes"). */}
+      <div className="mt-3 flex flex-wrap items-center gap-1.5">
+        <span className="mr-0.5 text-[10px] font-bold uppercase tracking-wide text-ink-subtle">
+          needs
+        </span>
+        {([
+          { key: "all", label: "everything" },
+          { key: "physical", label: "physical resource" },
+          { key: "none", label: "nothing physical" },
+        ] as const).map((opt) => (
+          <button
+            key={opt.key}
+            onClick={() => setPhysFilter(opt.key)}
+            className={cn(
+              "rounded-chip px-3 py-1 text-[11px] font-semibold transition",
+              physFilter === opt.key
+                ? "bg-ink text-brand-white"
+                : "bg-ink/5 text-ink-muted hover:bg-ink/10"
+            )}
+          >
+            {opt.label}
+          </button>
+        ))}
       </div>
 
       {/* Legend — specific to this programme's category. It names the
@@ -652,19 +716,21 @@ export default function LibraryPage() {
                           const psHasKit =
                             it.kind === "activity" && psNeedsKit(it.item.materials);
                           // Per-category marker for this entry (see legend).
-                          // Art games carry no marker; artworks use the 🌍 badge.
+                          // Use the ITEM's own programme category so markers
+                          // stay correct in the cross-programme "all" view.
+                          const itemCategory = getCurriculumProgramme(it.programmeSlug)?.category;
                           const kindTag: { Icon: LucideIcon; label: string } | null =
                             it.kind !== "activity"
                               ? null
-                              : currentCategory === "art"
+                              : itemCategory === "art"
                                 ? { Icon: Gamepad2, label: "game" }
-                                : currentCategory === "language"
+                                : itemCategory === "language"
                                   ? psHasKit
                                     ? { Icon: Box, label: "kit" }
                                     : { Icon: MessageCircle, label: "no kit" }
-                                  : currentCategory === "stem" && it.segment === "experiment"
+                                  : itemCategory === "stem" && it.segment === "experiment"
                                     ? { Icon: FlaskConical, label: "experiment" }
-                                    : currentCategory === "stem" && it.segment === "build"
+                                    : itemCategory === "stem" && it.segment === "build"
                                       ? { Icon: Wrench, label: "model" }
                                       : null;
                           const cornerBadge = kindTag ? (
