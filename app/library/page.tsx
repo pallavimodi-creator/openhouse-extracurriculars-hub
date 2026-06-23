@@ -165,6 +165,32 @@ function programmeShortLabel(p: CurriculumProgramme): string {
   return `${p.title} · ${p.ageLabel}`;
 }
 
+// Educator reference books per programme — surfaced in the library so the
+// physical-resource filter includes every book to have on hand. (The
+// storytelling read-aloud books are added separately from languageBooks.)
+const REFERENCE_BOOKS: Record<
+  string,
+  { title: string; cover: string; desc: string }[]
+> = {
+  "language-storytelling-3-5": [
+    { title: "playwrites 1", cover: "/play-writes-1/page-01.png", desc: "play-based writing workbook — level 1" },
+    { title: "playwrites 2", cover: "/play-writes-2/page-01.png", desc: "play-based writing workbook — level 2" },
+  ],
+  "art-design-3-5": [
+    { title: "artiverse book", cover: "/artiverse-book/01-accordion.png", desc: "reference artworks across mediums" },
+    { title: "artistotle book", cover: "/artistotle-book/01-cover.png", desc: "artist-led project book (carle · ehlert · gomi)" },
+  ],
+  "robotics-3-5": [
+    { title: "imagine playground book", cover: "/imagine-playground-book/cover.png", desc: "the math-train build projects" },
+  ],
+  "art-design-5-8": [
+    { title: "artiverse book", cover: "/book-covers/art-5-8.png", desc: "reference artworks across mediums" },
+  ],
+  "art-design-8-12": [
+    { title: "artiverse book", cover: "/book-covers/art-8-12.png", desc: "reference artworks across mediums" },
+  ],
+};
+
 // A public-speaking game "needs a kit" only if it uses a designed game
 // component — cards, a deck, a board, a mat, tiles, chits, tokens, etc.
 // Generic gear (a soft ball, a Bluetooth speaker), app / URL prompts, and
@@ -289,9 +315,47 @@ function buildItemsFor(prog: CurriculumProgramme): LibraryItem[] {
     }
   }
 
-  // Artiverse, Artistotle, and Experience Book primers are intentionally
-  // not surfaced in the library — they live as educator reference books in
-  // the programme overview's books row, not as searchable resources.
+  // Storytelling read-aloud books — physical books to have on hand.
+  prog.languageBooks?.forEach((b) => {
+    items.push({
+      kind: "primer",
+      id: `${programmeSlug}/lang-book-${b.order}`,
+      segment: "book-o-clock",
+      title: b.title.toLowerCase(),
+      description: `${b.author} — ${b.summary}`,
+      info: {
+        segmentId: "book-o-clock",
+        segmentName: "Book'o'clock",
+        title: b.title,
+        description: `${b.author}. ${b.summary}`,
+        heroImageUrl: b.heroImageUrl,
+      },
+      thumbImageUrl: b.heroImageUrl,
+      programmeSlug,
+      programmeLabel,
+    });
+  });
+
+  // Educator reference books (workbooks, reference-art books, build books).
+  (REFERENCE_BOOKS[programmeSlug] ?? []).forEach((bk, i) => {
+    items.push({
+      kind: "primer",
+      id: `${programmeSlug}/ref-book-${i}`,
+      segment: "book-o-clock",
+      title: bk.title,
+      description: bk.desc,
+      info: {
+        segmentId: "book-o-clock",
+        segmentName: "reference book",
+        title: bk.title,
+        description: bk.desc,
+        heroImageUrl: bk.cover,
+      },
+      thumbImageUrl: bk.cover,
+      programmeSlug,
+      programmeLabel,
+    });
+  });
 
   return items;
 }
