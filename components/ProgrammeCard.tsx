@@ -30,15 +30,9 @@ export function ProgrammeCard({
   desktop?: boolean;
 }) {
   const hasContent = programme.totalSessions > 0;
-  // The 3-5 (trial) strands are the at-centre programme being designed.
-  // Rather than a dead "coming soon", each links to its plan for review.
+  // The 3-5 (centre) strands now open their full overview, like the 5+
+  // programmes — just marked with an orange "3–5" cue.
   const isTrial = getProgrammeStage(programme) === "trial";
-  const planNote: Record<string, string> = {
-    "art-design-3-5": "art-programme-note",
-    "robotics-3-5": "stem-programme-note",
-    "language-storytelling-3-5": "language-programme-note",
-  };
-  const planHref = `/plan/docs/${planNote[programme.slug] ?? ""}`;
 
   return (
     <div className={cn(
@@ -94,11 +88,11 @@ export function ProgrammeCard({
         </p>
         {isTrial ? (
           <Link
-            href={planHref}
+            href={`/${programme.slug}/overview`}
             className="mt-3 flex items-center justify-center gap-1.5 rounded-card border border-brand-orange/30 bg-brand-orange/5 py-2 text-center text-[11px] font-semibold text-brand-orange transition hover:bg-brand-orange/10 active:scale-[0.98]"
           >
             <ClipboardList className="h-3 w-3" strokeWidth={2.4} />
-            review the plan
+            dive in · 3–5
           </Link>
         ) : hasContent ? (
           <Link

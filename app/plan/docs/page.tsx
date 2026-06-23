@@ -20,11 +20,11 @@ function Index() {
         href="/plan"
         className="mb-3 inline-flex w-fit items-center gap-1.5 rounded-chip bg-brand-white px-2.5 py-1 text-[11px] font-semibold text-ink-muted ring-1 ring-ink/10 transition hover:bg-ink/5"
       >
-        <ChevronLeft className="h-3.5 w-3.5" /> planner
+        <ChevronLeft className="h-3.5 w-3.5" /> the 3–5 programme
       </Link>
-      <h1 className="text-[22px] font-bold text-ink">3–5 programme — the plan</h1>
+      <h1 className="text-[22px] font-bold text-ink">all planning docs &amp; packs</h1>
       <p className="mt-1 text-[13px] text-ink-muted">
-        the full design for the 2-hour at-centre programme — review it here and tell me what to correct. (3–5 only; the 5+ programmes are reference, not planned here.)
+        every planning doc for the 2-hour at-centre programme. (the quickest paths are on the <Link href="/plan" className="font-semibold text-brand-orange">programme hub</Link>.)
       </p>
 
       <div className="mt-6 space-y-7">

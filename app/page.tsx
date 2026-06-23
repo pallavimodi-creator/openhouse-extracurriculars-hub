@@ -114,13 +114,13 @@ function TrackSection({
       {tone === "trial" && (
         <div className="mt-3 flex flex-wrap gap-2">
           <Link
-            href="/plan/docs"
+            href="/plan"
             className="inline-flex items-center gap-1.5 rounded-chip bg-brand-orange px-3 py-1.5 text-[11px] font-bold text-white shadow-card transition hover:opacity-95"
           >
-            review the full 2-hour plan
+            open the 3–5 programme
           </Link>
           <Link
-            href="/plan"
+            href="/plan/session"
             className="inline-flex items-center gap-1.5 rounded-chip bg-brand-white px-3 py-1.5 text-[11px] font-semibold text-ink-muted ring-1 ring-ink/10 transition hover:bg-ink/5"
           >
             plan a session

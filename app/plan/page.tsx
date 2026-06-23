@@ -1,294 +1,201 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useEffect, useState, type ReactNode } from "react";
 import Link from "next/link";
-import { CheckCircle2, ClipboardList, ChevronRight, BookOpen } from "lucide-react";
-import { getTeacher, getBuilding, type TeacherState } from "@/lib/teacher-state";
-import { PLANNER_STRANDS, getStrandSegments } from "@/lib/planner";
-import { supabase, isSupabaseConfigured, type SessionPlanRow } from "@/lib/supabase";
+import {
+  BookOpen,
+  ClipboardList,
+  ChevronRight,
+  Sparkles,
+  Info,
+  CalendarRange,
+  Layers,
+} from "lucide-react";
+import { TeacherGate } from "@/components/TeacherGate";
+import { getTeacher } from "@/lib/teacher-state";
 
-function todayISO() {
-  // Build YYYY-MM-DD from the local date without Date math in module scope.
-  const d = new Date();
-  const m = String(d.getMonth() + 1).padStart(2, "0");
-  const day = String(d.getDate()).padStart(2, "0");
-  return `${d.getFullYear()}-${m}-${day}`;
+// "About the programme" — the combined intro the whole 3-5 programme shares.
+const ABOUT = [
+  {
+    title: "why three strands",
+    blurb: "the split into art · stem · language, and the parent story",
+    href: "/plan/docs/parent-positioning",
+    icon: Info,
+  },
+  {
+    title: "the experience book",
+    blurb: "the one combined record — what we did today + each child's journey",
+    href: "/plan/docs/experience-book",
+    icon: BookOpen,
+  },
+  {
+    title: "how to fill the experience book",
+    blurb: "the educator guide — worked example + golden rules",
+    href: "/plan/docs/how-to-fill-the-experience-book",
+    icon: ChevronRight,
+  },
+  {
+    title: "research & the 2-hour structure",
+    blurb: "the evidence base, the day frame, and how we pilot it",
+    href: "/plan/docs/2hr-ecc-research-and-testing-plan",
+    icon: Sparkles,
+  },
+];
+
+// The three programmes — each opens its full overview (daily structure ·
+// skills · games with images); the chips jump to the deeper docs.
+const PROGRAMMES = [
+  {
+    label: "art & design",
+    slug: "art-design-3-5",
+    note: "art-programme-note",
+    day: "pilot-05-art-day-2hr",
+    accent: "bg-category-art/15 text-category-art",
+    blurb: "fine motor · colour · creative expression",
+  },
+  {
+    label: "stem",
+    slug: "robotics-3-5",
+    note: "stem-programme-note",
+    day: "pilot-06-stem-day-2hr",
+    accent: "bg-category-stem/15 text-category-stem",
+    blurb: "curiosity · problem solving · logic · number sense",
+  },
+  {
+    label: "language through storytelling",
+    slug: "language-storytelling-3-5",
+    note: "language-programme-note",
+    day: "pilot-01-language-day-2hr",
+    accent: "bg-category-language/15 text-category-language",
+    blurb: "listening · speaking · storytelling · vocabulary · pre-writing",
+  },
+];
+
+export default function PlanHubPage() {
+  return (
+    <TeacherGate>
+      <Hub />
+    </TeacherGate>
+  );
 }
 
-export default function PlannerPage() {
-  const router = useRouter();
-  const [teacher, setTeacher] = useState<TeacherState | null>(null);
-  const [centre, setCentre] = useState<string | null>(null);
-  const [ready, setReady] = useState(false);
-
-  const [strand, setStrand] = useState<string | null>(null);
-  const [picks, setPicks] = useState<Record<string, string>>({});
-  const [name, setName] = useState("");
-  const [date, setDate] = useState("");
-  const [status, setStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
-  const [errorMsg, setErrorMsg] = useState("");
-
+function Hub() {
+  const [isAdmin, setIsAdmin] = useState(false);
   useEffect(() => {
     const t = getTeacher();
-    if (!t) {
-      router.replace("/login");
-      return;
-    }
-    setTeacher(t);
-    setCentre(getBuilding());
-    setName(t.teacherName && t.teacherName !== "admin" && t.teacherName !== "openhouse centre" ? t.teacherName : "");
-    setDate(todayISO());
-    setReady(true);
-  }, [router]);
-
-  const strandMeta = PLANNER_STRANDS.find((s) => s.slug === strand);
-  const segments = useMemo(
-    () => (strand ? getStrandSegments(strand) : []),
-    [strand],
-  );
-
-  const isAdmin = teacher?.role === "admin" || teacher?.programmeSlug === "*";
-
-  if (!ready) {
-    return (
-      <div className="flex min-h-[60vh] items-center justify-center">
-        <p className="text-[12px] font-medium text-ink-subtle">loading…</p>
-      </div>
-    );
-  }
-
-  const choosable = segments.filter((s) => s.resources.length > 0);
-  const canSubmit =
-    !!strand && !!name.trim() && choosable.every((s) => picks[s.id]);
-
-  const handleSubmit = async () => {
-    if (!strand || !strandMeta) return;
-    setStatus("saving");
-    setErrorMsg("");
-
-    const picksOut: SessionPlanRow["picks"] = {};
-    for (const seg of choosable) {
-      const rid = picks[seg.id];
-      const res = seg.resources.find((r) => r.id === rid);
-      if (res) picksOut[seg.id] = { resourceId: res.id, resourceLabel: res.label };
-    }
-
-    const row: SessionPlanRow = {
-      session_date: date,
-      teacher_name: name.trim(),
-      teacher_username: teacher?.username ?? null,
-      centre: centre,
-      strand,
-      strand_label: strandMeta.label,
-      picks: picksOut,
-    };
-
-    if (!isSupabaseConfigured || !supabase) {
-      // No backend yet — the plan still works as a run-sheet.
-      setStatus("saved");
-      return;
-    }
-    const { error } = await supabase.from("session_plans").insert(row);
-    if (error) {
-      setStatus("error");
-      setErrorMsg(error.message);
-      return;
-    }
-    setStatus("saved");
-  };
+    setIsAdmin(!!t && (t.role === "admin" || t.programmeSlug === "*"));
+  }, []);
 
   return (
-    <div className="flex flex-col px-4 pt-4 pb-10 md:px-8">
-      <div className="flex items-center justify-between gap-3">
-        <div>
-          <h1 className="text-[22px] font-bold text-ink">today&apos;s plan</h1>
-          <p className="mt-1 text-[13px] text-ink-muted">
-            pick today&apos;s strand and the resource for each part — it becomes your run-sheet and is logged for the centre.
-          </p>
-        </div>
-        <div className="flex shrink-0 flex-col items-end gap-1.5">
-          <Link
-            href="/plan/docs"
-            className="inline-flex items-center gap-1.5 rounded-chip bg-brand-orange/10 px-3 py-1.5 text-[11px] font-semibold text-brand-orange transition hover:bg-brand-orange/15"
-          >
-            <BookOpen className="h-3.5 w-3.5" /> review the plan
-          </Link>
-          {isAdmin && (
-            <Link
-              href="/plan/log"
-              className="inline-flex items-center gap-1.5 rounded-chip bg-brand-white px-3 py-1.5 text-[11px] font-semibold text-ink-muted ring-1 ring-ink/10 transition hover:bg-ink/5"
-            >
-              <ClipboardList className="h-3.5 w-3.5" /> activity log
-            </Link>
-          )}
-        </div>
-      </div>
-
-      {status === "saved" ? (
-        <SavedCard
-          name={name}
-          date={date}
-          strandLabel={strandMeta?.label ?? ""}
-          centre={centre}
-          logged={isSupabaseConfigured}
-          segments={choosable.map((s) => ({
-            name: s.name,
-            resource: s.resources.find((r) => r.id === picks[s.id])?.label ?? "",
-          }))}
-          onReset={() => {
-            setStrand(null);
-            setPicks({});
-            setStatus("idle");
-          }}
-        />
-      ) : (
-        <>
-          {/* who + when */}
-          <div className="mt-4 grid gap-3 sm:grid-cols-2">
-            <label className="block">
-              <span className="text-[11px] font-bold text-ink-muted">your name</span>
-              <input
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="e.g. anjali"
-                className="mt-1 block w-full rounded-lg border border-ink/10 bg-brand-white px-3 py-2.5 text-[14px] focus:border-brand-orange focus:outline-none focus:ring-2 focus:ring-brand-orange/20"
-              />
-            </label>
-            <label className="block">
-              <span className="text-[11px] font-bold text-ink-muted">date</span>
-              <input
-                type="date"
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
-                className="mt-1 block w-full rounded-lg border border-ink/10 bg-brand-white px-3 py-2.5 text-[14px] focus:border-brand-orange focus:outline-none focus:ring-2 focus:ring-brand-orange/20"
-              />
-            </label>
-          </div>
-          {centre && (
-            <p className="mt-2 text-[11px] text-ink-subtle">centre: <span className="font-semibold text-ink-muted">{centre.toLowerCase()}</span></p>
-          )}
-
-          {/* strand chooser */}
-          <h2 className="mt-6 text-[13px] font-bold text-ink-muted">1 · which strand today?</h2>
-          <p className="mt-1 text-[11px] leading-relaxed text-ink-subtle">
-            general rule: <span className="font-semibold text-ink-muted">keep rotating</span> — run a different strand each day so children get all three across the week. <span className="italic">(fitness and music strands will be added soon.)</span>
-          </p>
-          <div className="mt-2 grid gap-2 sm:grid-cols-3">
-            {PLANNER_STRANDS.map((s) => (
-              <button
-                key={s.slug}
-                onClick={() => {
-                  setStrand(s.slug);
-                  setPicks({});
-                }}
-                className={
-                  strand === s.slug
-                    ? "rounded-card bg-brand-orange px-3 py-3 text-[13px] font-extrabold lowercase text-white shadow-card"
-                    : "rounded-card bg-brand-white px-3 py-3 text-[13px] font-semibold lowercase text-ink ring-1 ring-ink/10 transition hover:bg-ink/5"
-                }
-              >
-                {s.label}
-              </button>
-            ))}
-          </div>
-
-          {/* per-segment resource pickers */}
-          {strand && (
-            <>
-              <h2 className="mt-6 text-[13px] font-bold text-ink-muted">2 · resource for each part</h2>
-              <p className="mt-1 text-[11px] text-ink-subtle">circle time and closing reflection bookend every day (fixed). pick a resource for each part below.</p>
-              <div className="mt-3 space-y-2">
-                {segments.map((seg) => (
-                  <div key={seg.id} className="flex flex-wrap items-center gap-3 rounded-card bg-brand-white p-3 shadow-card ring-1 ring-ink/5">
-                    <span className="min-w-[120px] text-[13px] font-extrabold lowercase text-ink">{seg.name}</span>
-                    {seg.resources.length > 0 ? (
-                      <select
-                        value={picks[seg.id] ?? ""}
-                        onChange={(e) => setPicks((p) => ({ ...p, [seg.id]: e.target.value }))}
-                        className="flex-1 rounded-lg border border-ink/10 bg-bg/40 px-3 py-2 text-[13px] focus:border-brand-orange focus:outline-none focus:ring-2 focus:ring-brand-orange/20"
-                      >
-                        <option value="">— choose —</option>
-                        {seg.resources.map((r) => (
-                          <option key={r.id} value={r.id}>{r.label}</option>
-                        ))}
-                      </select>
-                    ) : (
-                      <span className="flex-1 text-[12px] italic text-ink-subtle">fixed — just run it</span>
-                    )}
-                  </div>
-                ))}
-              </div>
-
-              {status === "error" && (
-                <p className="mt-3 rounded-lg bg-red-50 px-3 py-2 text-[12px] font-medium text-red-700">
-                  couldn&apos;t save: {errorMsg}
-                </p>
-              )}
-              {!isSupabaseConfigured && (
-                <p className="mt-3 rounded-lg bg-brand-orange/8 px-3 py-2 text-[11px] text-ink-muted">
-                  note: the centre log isn&apos;t connected yet (Supabase not configured) — your plan still works as a run-sheet. see <span className="font-semibold">planning/supabase-setup.md</span>.
-                </p>
-              )}
-
-              <button
-                onClick={handleSubmit}
-                disabled={!canSubmit || status === "saving"}
-                className="mt-4 flex w-full items-center justify-center gap-2 rounded-card bg-brand-orange py-3 text-[14px] font-extrabold text-white shadow-card transition hover:opacity-95 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-40"
-              >
-                {status === "saving" ? "saving…" : "submit today's plan"}
-                <ChevronRight className="h-4 w-4" />
-              </button>
-            </>
-          )}
-        </>
-      )}
-    </div>
-  );
-}
-
-function SavedCard({
-  name,
-  date,
-  strandLabel,
-  centre,
-  logged,
-  segments,
-  onReset,
-}: {
-  name: string;
-  date: string;
-  strandLabel: string;
-  centre: string | null;
-  logged: boolean;
-  segments: { name: string; resource: string }[];
-  onReset: () => void;
-}) {
-  return (
-    <div className="mt-5 rounded-2xl bg-brand-white p-5 shadow-float ring-1 ring-ink/5">
-      <div className="flex items-center gap-2 text-category-language">
-        <CheckCircle2 className="h-5 w-5" />
-        <p className="text-[14px] font-extrabold">
-          {logged ? "plan submitted & logged" : "plan ready (run-sheet)"}
-        </p>
-      </div>
-      <p className="mt-1 text-[12px] text-ink-muted">
-        {name} · {strandLabel} · {date}{centre ? ` · ${centre.toLowerCase()}` : ""}
+    <div className="flex flex-col px-4 pt-4 pb-12 md:px-8">
+      <h1 className="text-[22px] font-bold text-ink">the 3–5 at-centre programme</h1>
+      <p className="mt-1 max-w-xl text-[13px] leading-relaxed text-ink-muted">
+        one integrated programme, three single-subject strands that rotate day to day — <span className="font-semibold text-ink">art</span>, <span className="font-semibold text-ink">stem</span>, and <span className="font-semibold text-ink">language</span> — across a 2-hour day. <span className="italic">music and fitness strands will be added.</span>
       </p>
-      <div className="mt-4 divide-y divide-ink/5 rounded-lg bg-brand-cream/40">
-        {segments.map((s) => (
-          <div key={s.name} className="flex items-center justify-between gap-3 px-3 py-2">
-            <span className="text-[12px] font-bold lowercase text-ink">{s.name}</span>
-            <span className="text-[12px] text-ink-muted">{s.resource}</span>
+
+      {/* ① ABOUT */}
+      <SectionHeading n="1" label="about the programme" />
+      <div className="grid gap-2.5 sm:grid-cols-2">
+        {ABOUT.map((a) => (
+          <Link
+            key={a.href}
+            href={a.href}
+            className="group flex items-start gap-3 rounded-card bg-brand-white p-3.5 shadow-card ring-1 ring-ink/5 transition hover:shadow-float hover:ring-ink/10"
+          >
+            <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-brand-orange/10 text-brand-orange">
+              <a.icon className="h-3.5 w-3.5" strokeWidth={2.2} />
+            </span>
+            <span className="flex-1">
+              <span className="block text-[13px] font-bold leading-tight text-ink">{a.title}</span>
+              <span className="mt-0.5 block text-[11px] leading-relaxed text-ink-muted">{a.blurb}</span>
+            </span>
+            <ChevronRight className="mt-1 h-4 w-4 shrink-0 text-ink-subtle transition group-hover:text-brand-orange" />
+          </Link>
+        ))}
+      </div>
+
+      {/* ② THE THREE PROGRAMMES */}
+      <SectionHeading n="2" label="the three programmes" />
+      <p className="-mt-1 mb-3 text-[11px] text-ink-subtle">
+        each opens its full overview — daily structure, skills &amp; LOs, and every game with its picture.
+      </p>
+      <div className="space-y-2.5">
+        {PROGRAMMES.map((p) => (
+          <div
+            key={p.slug}
+            className="rounded-card bg-brand-white p-3.5 shadow-card ring-1 ring-ink/5"
+          >
+            <Link
+              href={`/${p.slug}/overview`}
+              className="group flex items-center gap-3"
+            >
+              <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${p.accent}`}>
+                <Layers className="h-4 w-4" strokeWidth={2.2} />
+              </span>
+              <span className="flex-1">
+                <span className="block text-[14px] font-extrabold lowercase text-ink">{p.label}</span>
+                <span className="mt-0.5 block text-[11px] text-ink-muted">{p.blurb}</span>
+              </span>
+              <span className="inline-flex items-center gap-1 text-[11px] font-bold text-brand-orange">
+                open <ChevronRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" />
+              </span>
+            </Link>
+            <div className="mt-2.5 flex flex-wrap gap-1.5 border-t border-ink/5 pt-2.5">
+              <Chip href={`/plan/docs/${p.note}`} icon={Layers}>skills &amp; LOs</Chip>
+              <Chip href={`/plan/docs/${p.day}`} icon={CalendarRange}>the 2-hour day</Chip>
+            </div>
           </div>
         ))}
       </div>
-      <button
-        onClick={onReset}
-        className="mt-4 w-full rounded-card border border-ink/10 bg-brand-white py-2.5 text-[12px] font-semibold text-ink transition hover:bg-ink/5"
-      >
-        plan another day
-      </button>
+
+      {/* ③ RUN A SESSION */}
+      <SectionHeading n="3" label="run a session" />
+      <div className="space-y-2.5">
+        <Link
+          href="/plan/session"
+          className="flex items-center gap-2 rounded-card bg-brand-orange py-3 pl-4 pr-3 text-[14px] font-extrabold text-white shadow-card transition hover:opacity-95 active:scale-[0.99]"
+        >
+          <ClipboardList className="h-4 w-4" />
+          plan today&apos;s session
+          <ChevronRight className="ml-auto h-4 w-4" />
+        </Link>
+        <div className="flex flex-wrap gap-2">
+          {isAdmin && (
+            <Chip href="/plan/log" icon={ClipboardList}>activity log</Chip>
+          )}
+          <Chip href="/plan/docs" icon={BookOpen}>all planning docs &amp; packs</Chip>
+        </div>
+      </div>
     </div>
+  );
+}
+
+function SectionHeading({ n, label }: { n: string; label: string }) {
+  return (
+    <div className="mb-3 mt-8 flex items-center gap-2">
+      <span className="flex h-5 w-5 items-center justify-center rounded-full bg-ink text-[11px] font-extrabold text-brand-white">
+        {n}
+      </span>
+      <h2 className="text-[13px] font-extrabold lowercase text-ink">{label}</h2>
+    </div>
+  );
+}
+
+function Chip({
+  href,
+  icon: Icon,
+  children,
+}: {
+  href: string;
+  icon: typeof BookOpen;
+  children: ReactNode;
+}) {
+  return (
+    <Link
+      href={href}
+      className="inline-flex items-center gap-1.5 rounded-chip bg-ink/5 px-3 py-1.5 text-[11px] font-semibold text-ink-muted transition hover:bg-ink/10"
+    >
+      <Icon className="h-3.5 w-3.5" /> {children}
+    </Link>
   );
 }
