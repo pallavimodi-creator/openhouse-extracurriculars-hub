@@ -74,7 +74,23 @@ The programme runs in **three levels within 3–5** (roughly: **L1** newest/youn
 
 ---
 
-## 5 · how this feeds the rest (so points 5 & 6 derive from here)
+## 5 · which segment grows which skill — *so you know where to look*
+
+Each segment has a **primary skill** it grows and observes best. Teach to it, and observe *that* skill there — don't try to watch everything everywhere.
+
+| segment (language day) | primary skill(s) | what to watch for |
+|---|---|---|
+| circle — song (roll & rhyme) | **listening** · vocabulary (rhyme/sound) | joins in, anticipates words, hears rhyme |
+| circle — greeting / calendar / intention | **speaking** · learning habits | answers, names the day, holds the intention |
+| wordsmiths | **vocabulary** · speaking | acts out & uses the new word |
+| book'o'clock (deepened read-aloud) | **storytelling & comprehension** · listening · vocabulary | follows, answers *why*, retells with story-bones |
+| play-writes | **pre-writing** | grip, controlled marks, patterns left-to-right |
+| playground (game) | speaking · listening · vocabulary *(varies by game)* | plays, talks, uses words |
+| closing reflection | **speaking** · storytelling (recap = sequence) · learning habits | recaps in order, speaks to the group |
+
+> reading: book'o'clock is the storytelling/comprehension window; play-writes is the only pre-writing window; wordsmiths owns vocabulary. The closing recap is the best, lowest-effort place to *observe* speaking & sequencing for the experience book.
+
+## 6 · how this feeds the rest (so points 5 & 6 derive from here)
 
 - **the experience book (next deliverable)** tracks each child's **rung per skill** from this table and their journey toward the ★ — that *is* the milestone journey. The book's "how did each child do" marks map 1:1 to these LOs and their 👁 checks. A child stuck at L1 listening for weeks = "needs more help here," visible to teacher and parent.
 - **the activities (next deliverable)** are *how we teach each rung*. Each activity will name **which skill + which rung** it works, and come as a **fixed set of formats** (e.g. 5 opening songs, named, rotating all year) so a new teacher knows exactly what to run, with built-in repetition for mastery and variety for interest. (See the format-set principle below.)

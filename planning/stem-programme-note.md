@@ -66,7 +66,19 @@ The build/explore block (imagine playground / wonder world) and numbers gym are 
 
 ---
 
-## 5 · how it feeds the rest
+## 5 · which segment grows which skill — *so you know where to look*
+
+| segment (stem day) | primary skill(s) | what to watch for |
+|---|---|---|
+| circle — today's wonder/intention | curiosity · learning habits | a question, holds the intention |
+| logic lab | **logic** · problem solving | sorts, extends a pattern, reasons |
+| imagine playground / wonder world (deepened build/explore) | **curiosity** · **problem solving** · scientific reasoning | wonders, tries, predicts → tests → explains |
+| numbers gym | **number sense** | counts / makes numbers / counts-on at their own page |
+| closing reflection | curiosity (what we found) · speaking · learning habits | says one thing they discovered |
+
+> reading: numbers gym is the **number-sense** window (and self-paced, so it's where the spiral milestones show); the build/explore block is where curiosity + problem solving + scientific reasoning are grown and best observed (the *test → explain* moves are the observe window).
+
+## 6 · how it feeds the rest
 
 - **experience book:** the number-sense **spiral milestones** and the three skills' rungs are exactly what the book tracks per child — the dot-and-date journey toward each ★, with the "needs more help" circle. The book is *planned from these milestones* (your words).
 - **activities (already built):** logic lab games, imagine playground builds, wonder world investigations, numbers gym gamebook — each runs at all three rungs. The **new segments** to script are only the shared **opening circle / closing reflection** and the **deepened build block moves** (build → test → explain, keyed to curiosity/problem-solving/scientific-reasoning rungs).

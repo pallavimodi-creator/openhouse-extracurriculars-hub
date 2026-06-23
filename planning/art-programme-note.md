@@ -51,7 +51,20 @@ In **one** making activity, an **L1** child explores the material and makes free
 
 ---
 
-## 5 · how it feeds the rest
+## 5 · which segment grows which skill — *so you know where to look*
+
+| segment (art day) | primary skill(s) | what to watch for |
+|---|---|---|
+| circle — greeting / intention | learning habits · (observation) | settles, holds the intention |
+| art gym | **fine motor** | grip, control, tracing, patterns |
+| art games | colour · fine motor · creative expression *(varies by game)* | the skill the game targets |
+| reference-artwork making (deepened) | **creative expression** · colour · fine motor | makes own piece, colour choices, talks about it |
+| art care | learning habits / responsibility | tidies, cares for materials |
+| closing reflection | creative expression (talk about choices) · speaking | says one choice they made |
+
+> reading: art gym is the **fine-motor** window; the making block is where **creative expression** (and colour) is grown and best observed — the *look-closely → talk-about-choices* moves are the observe window.
+
+## 6 · how it feeds the rest
 
 - **experience book:** the three skills' rungs are exactly what the book tracks per child — the dot-and-date journey toward each ★, with the "needs more help" circle (e.g. a child stuck at "tool precision" for weeks → fine-motor focus). The book is planned from these rungs.
 - **activities (already built):** art gym (fine-motor warm-up), art games, reference-artwork making, art care — each runs at all three rungs. The **new segments** to script are only the shared **opening circle / closing reflection** and the **deepened making block moves** (make → look closely → talk about choices, keyed to the creative-expression rungs).

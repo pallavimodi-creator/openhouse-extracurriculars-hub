@@ -28,6 +28,8 @@ This is the **milestone journey**. The teacher doesn't mark everything every day
 ### how to mark (the whole mechanic, on one line)
 Each skill has **three rungs**. When a child shows a rung **independently**, **date the dot**. Three dots = they've reached the ★ and are ready to level up. If a child is **stuck** on a rung for weeks, **circle it** — that's the "needs more help" flag, visible to teacher and parent at a glance.
 
+> **mark the skill, not the segment.** We deliberately do **not** ask the teacher to also tag *which segment* a mark came from — that doubles the work and is exactly what would "break" the marking. The teacher only ever records **skill → rung**. *Where* each skill shows up is already solved in the programme note's **segment → skill map** (e.g. "storytelling lives in book'o'clock; pre-writing in play-writes"), so the teacher knows where to *look*, then just marks the skill. The overview answers "where to observe"; the book answers "how far along" — two jobs, kept apart, so marking stays a 30-second task.
+
 ```
 skill        starting out · getting there · going strong ★     focus?
 listening      ◯ 12/6        ◯ ___          ◯ ___              ⃝  ← circle if stuck
