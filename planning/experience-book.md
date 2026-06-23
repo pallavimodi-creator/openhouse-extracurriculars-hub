@@ -43,7 +43,24 @@ listening      ◯ 12/6        ◯ ___          ◯ ___              ⃝  ← ci
 | **vocabulary** | repeats & acts a new word | shows they understand it | uses it in their own talk | ⃝ |
 | **pre-writing** | controlled marks & scribbles | copies patterns left-to-right | forms shapes / own-name shape | ⃝ |
 
-*(art-day and stem-day skill rows append here as those strand notes are built — same book, same mechanic. The stem rows will carry your 11-month number-sense milestones.)*
+### stem skills (from [stem-programme-note.md](stem-programme-note.md))
+
+| skill | starting out | getting there | going strong ★ | focus? |
+|---|---|---|---|---|
+| **curiosity** | notices something new & reacts | asks "what if…" / wonders aloud | predicts, then investigates to find out | ⃝ |
+| **problem solving** | recognises something isn't working | tries a different way | persists, solves & says what helped | ⃝ |
+| **logic** | sorts & matches by one feature | makes & extends a pattern | predicts from a rule / reasons it out | ⃝ |
+| **number sense** | counts with 1-1 correspondence; more/less by looking (to ~10–20) | counts to 20–30; before/after; makes a number 2 ways | counts to 50; bundles tens & ones; solves join/take-away by counting-on | ⃝ |
+
+> number sense tracks against your **11-month spiral** — the rung above is shorthand; the monthly milestone is the detail. This is where "5-year-old does addition / 3-year-old counts" shows up as different dots in the same book.
+
+### art skills (from [art-programme-note.md](art-programme-note.md))
+
+| skill | starting out | getting there | going strong ★ | focus? |
+|---|---|---|---|---|
+| **fine motor** | controls a tool, makes deliberate marks | traces shapes staying on the path | draws figures & patterns; (→ combines into detailed work) | ⃝ |
+| **colour** | explores colour freely | names & matches colours | mixes & notices; uses colour with intention | ⃝ |
+| **creative expression** | tries new ideas & media | shows a feeling/idea in their work | makes deliberate choices; a personal piece they can talk about | ⃝ |
 
 ### the child's level at a glance
 Because level is **per-skill attainment**, not age, the spread naturally shows it: a child might be **going-strong in storytelling** but **starting-out in pre-writing** — and that's fine, and useful. The dots *are* the level.
