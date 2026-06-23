@@ -105,6 +105,12 @@ export const PLAN_DOCS: PlanDoc[] = [
     title: "educator session log & parent pulse",
     group: "pilot & research",
   },
+  {
+    slug: "vocabulary-card-research",
+    title: "do the vocabulary cards work? — the evidence",
+    group: "pilot & research",
+    blurb: "research validation of the wordsmiths flashcard approach (tiers · enactment · dialogic talk)",
+  },
 ];
 
 export function getPlanDoc(slug: string): PlanDoc | undefined {

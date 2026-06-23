@@ -742,6 +742,32 @@ export default function LibraryPage() {
         {query.trim() ? ` for "${query.trim()}"` : ""}
       </p>
 
+      {/* Vocabulary flashcards — two flip decks, shown when the language
+          programme is in view. */}
+      {grouped.some((g) => g.slug === "language-storytelling-3-5") && !query.trim() && (
+        <div className="mt-5">
+          <p className="mb-2 text-[13px] font-extrabold lowercase text-ink">wordsmiths · vocabulary cards</p>
+          <div className="grid gap-2.5 sm:grid-cols-2">
+            {(["easy", "hard"] as const).map((lvl) => (
+              <Link
+                key={lvl}
+                href={`/vocab-cards/${lvl}`}
+                className="group flex items-center gap-3 rounded-card bg-brand-white p-3.5 shadow-card ring-1 ring-ink/5 transition hover:shadow-float hover:ring-ink/10"
+              >
+                <span className={cn("flex h-12 w-12 shrink-0 items-center justify-center rounded-lg text-[18px]", lvl === "easy" ? "bg-segment-yellow/30" : "bg-brand-orange/15")}>
+                  🃏
+                </span>
+                <span className="flex-1">
+                  <span className="block text-[13px] font-bold lowercase text-ink">{lvl} deck</span>
+                  <span className="mt-0.5 block text-[11px] text-ink-muted">flip cards from the books · play the word game</span>
+                </span>
+                <ChevronRight className="h-4 w-4 text-ink-subtle transition group-hover:text-brand-orange" />
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Results — the single selected programme's resources */}
       <div className="mt-4 space-y-8">
         {grouped.map((prog) => {
