@@ -44,7 +44,15 @@ const ABOUT = [
 
 // The three programmes — each opens its full overview (daily structure ·
 // skills · games with images); the chips jump to the deeper docs.
-const PROGRAMMES = [
+const PROGRAMMES: {
+  label: string;
+  slug: string;
+  note: string;
+  day: string;
+  accent: string;
+  blurb: string;
+  extra?: { slug: string; label: string };
+}[] = [
   {
     label: "art & design",
     slug: "art-design-3-5",
@@ -58,6 +66,7 @@ const PROGRAMMES = [
     slug: "robotics-3-5",
     note: "stem-programme-note",
     day: "pilot-06-stem-day-2hr",
+    extra: { slug: "imagine-playground-activities", label: "imagine playground · by level" },
     accent: "bg-category-stem/15 text-category-stem",
     blurb: "curiosity · problem solving · logic · number sense",
   },
@@ -143,6 +152,9 @@ function Hub() {
             <div className="mt-2.5 flex flex-wrap gap-1.5 border-t border-ink/5 pt-2.5">
               <Chip href={`/plan/docs/${p.note}`} icon={Layers}>skills &amp; LOs</Chip>
               <Chip href={`/plan/docs/${p.day}`} icon={CalendarRange}>the 2-hour day</Chip>
+              {p.extra && (
+                <Chip href={`/plan/docs/${p.extra.slug}`} icon={Layers}>{p.extra.label}</Chip>
+              )}
             </div>
           </div>
         ))}

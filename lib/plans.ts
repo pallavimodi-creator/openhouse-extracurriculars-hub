@@ -84,6 +84,12 @@ export const PLAN_DOCS: PlanDoc[] = [
     blurb: "do · notice · say — spending the extra minutes well",
   },
   {
+    slug: "imagine-playground-activities",
+    title: "imagine playground — the activities (by level)",
+    group: "activity packs",
+    blurb: "all 11 stem build projects, scripted, with easy/medium/hard tied to the LOs",
+  },
+  {
     slug: "experience-book",
     title: "the experience book",
     group: "the experience book",
