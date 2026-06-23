@@ -768,6 +768,25 @@ export default function LibraryPage() {
         </div>
       )}
 
+      {/* Imagine Playground game manual — shown when STEM is in view. */}
+      {grouped.some((g) => g.slug === "robotics-3-5") && !query.trim() && (
+        <div className="mt-5">
+          <p className="mb-2 text-[13px] font-extrabold lowercase text-ink">imagine playground · game manual</p>
+          <Link
+            href="/plan/docs/imagine-playground-activities"
+            className="group flex items-center gap-3 rounded-card bg-brand-white p-3.5 shadow-card ring-1 ring-ink/5 transition hover:shadow-float hover:ring-ink/10"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/games/stem-3-5/imagine-playground.png" alt="" className="h-12 w-12 shrink-0 rounded-lg object-cover ring-1 ring-ink/10" />
+            <span className="flex-1">
+              <span className="block text-[13px] font-bold lowercase text-ink">the imagine playground game manual</span>
+              <span className="mt-0.5 block text-[11px] text-ink-muted">how to run all 11 build projects · scripted by level</span>
+            </span>
+            <ChevronRight className="h-4 w-4 text-ink-subtle transition group-hover:text-brand-orange" />
+          </Link>
+        </div>
+      )}
+
       {/* Results — the single selected programme's resources */}
       <div className="mt-4 space-y-8">
         {grouped.map((prog) => {
