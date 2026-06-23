@@ -5,6 +5,8 @@ Built to your format: **what class today → what we did → how each child did 
 
 The book has **two parts**: a **daily page** (the class record, parent-facing) and the **child's progress spread** (the slow journey, child-owned).
 
+> **teachers:** the step-by-step how-to lives in [how-to-fill-the-experience-book.md](how-to-fill-the-experience-book.md) — part of the teacher overview.
+
 ---
 
 ## part A · the daily page  *(one per session — quick, goes to parents as the day's update)*
