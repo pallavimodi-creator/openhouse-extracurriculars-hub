@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ChevronLeft, Music, BookOpen, MessageCircle, Pencil, Dice5, Sparkles, Grid3x3, Palette, Check, Blocks, Lightbulb, Hash, GraduationCap, Smile, Brain } from "lucide-react";
 import { TeacherGate } from "@/components/TeacherGate";
-import { PrintButton } from "@/components/PrintButton";
+import { DownloadBrochureButton } from "@/components/DownloadBrochureButton";
 
 // What parents most want — the aspiration the programme is building toward.
 const GOALS: { icon: typeof Smile; title: string; body: string }[] = [
@@ -133,10 +133,10 @@ export default function BrochurePage() {
           >
             <ChevronLeft className="h-3.5 w-3.5" /> the 3–5 programme
           </Link>
-          <PrintButton />
+          <DownloadBrochureButton />
         </div>
 
-        <div className="w-full max-w-md space-y-5">
+        <div id="brochure-pages" className="w-full max-w-md space-y-5">
           {/* ── COVER ── */}
           <section className="overflow-hidden rounded-2xl bg-brand-white shadow-float ring-1 ring-ink/5 print:break-inside-avoid">
             <Header />
