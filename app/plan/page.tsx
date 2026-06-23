@@ -10,12 +10,19 @@ import {
   Info,
   CalendarRange,
   Layers,
+  Megaphone,
 } from "lucide-react";
 import { TeacherGate } from "@/components/TeacherGate";
 import { getTeacher } from "@/lib/teacher-state";
 
 // "About the programme" — the combined intro the whole 3-5 programme shares.
 const ABOUT = [
+  {
+    title: "the parent brochure",
+    blurb: "the 3–5 positioning — why play-based, and the three strands",
+    href: "/plan/brochure",
+    icon: Megaphone,
+  },
   {
     title: "why three strands",
     blurb: "the split into art · stem · language, and the parent story",
