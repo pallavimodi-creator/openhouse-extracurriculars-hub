@@ -22,9 +22,9 @@ export default function VocabDeckPage({ params }: { params: { level: string } })
         >
           <ChevronLeft className="h-3.5 w-3.5" /> library
         </Link>
-        <h1 className="text-[22px] font-bold text-ink">vocabulary cards — {level} deck</h1>
+        <h1 className="text-[22px] font-bold text-ink">vocabulary cards</h1>
         <p className="mt-1 mb-6 text-[13px] text-ink-muted">
-          flip a card, then play it with the class. front: the word. back: meaning, type, and words it pairs with.
+          sort by difficulty or by story, then flip a card and play it with the class. front: the word &amp; its picture. back: meaning, word type, and word pairs.
         </p>
         <VocabFlashcards level={level} />
       </div>
