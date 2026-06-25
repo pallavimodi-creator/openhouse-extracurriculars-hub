@@ -366,7 +366,7 @@ function ProgrammeOverviewContent() {
                   : "this overview covers mechanics. robotics at openhouse spans three strands — mechanics, electronics, and coding — and this is the mechanics programme."
                 : isArt
                   ? "the skills below are built through a combination of games, making artworks, and practice in the art gym."
-                  : "the skills below are built through a combination of games."}
+                  : "the skills below are built through a combination of games, and storytelling or reading."}
             </p>
           </div>
         </section>
@@ -567,6 +567,24 @@ function ProgrammeOverviewContent() {
                       <p className="mt-1 text-[12px] leading-relaxed text-ink-muted">
                         {firstSentences(seg.objective, 2)}
                       </p>
+                      {/* every game in this set — so playground / art games /
+                          logic lab etc. list their full game roster */}
+                      {seg.rotationPool && seg.rotationPool.length > 0 && (() => {
+                        const titles = seg.rotationPool
+                          .map((k) => programme.activities?.[k]?.title)
+                          .filter((t): t is string => Boolean(t));
+                        if (titles.length === 0) return null;
+                        return (
+                          <div className="mt-2">
+                            <p className="text-[9px] font-bold tracking-wide text-brand-orange">games in this set</p>
+                            <div className="mt-1 flex flex-wrap gap-1">
+                              {titles.map((t) => (
+                                <span key={t} className="rounded-chip bg-brand-cream px-2 py-0.5 text-[10px] font-semibold lowercase text-ink-muted">{t}</span>
+                              ))}
+                            </div>
+                          </div>
+                        );
+                      })()}
                     </div>
                   </div>
                 );
@@ -719,10 +737,10 @@ function ProgrammeOverviewContent() {
         {programme.slug === "art-design-3-5" && (
           <div className="mt-5 rounded-2xl bg-brand-white p-4 shadow-card ring-1 ring-ink/5 md:p-5">
             <p className="text-[11px] font-bold tracking-normal text-brand-orange">
-              talking to children about what they&apos;re building
+              talking to children about what they&apos;re making
             </p>
             <p className="mt-1 text-[12px] italic leading-relaxed text-ink-muted">
-              Speak about skills and abilities simply and naturally — encouraging and conversational, not like testing. Pick one or two of these in passing during class.
+              Speak about skills and abilities simply and naturally — encouraging and conversational, not like testing. The lines below are reference examples — use any that fit naturally in passing, not a checklist.
             </p>
             <ul className="mt-3 grid gap-1.5 md:grid-cols-2">
               {[
