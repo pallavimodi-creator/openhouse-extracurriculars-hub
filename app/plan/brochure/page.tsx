@@ -55,8 +55,7 @@ type Strand = {
   image: string;
   headline: string;
   learn: string[];
-  flow: { icon: typeof Music; label: string }[];
-  favourite: string;
+  flow: { icon: typeof Music; label: string; hint: string }[];
 };
 
 const STRANDS: Strand[] = [
@@ -70,13 +69,12 @@ const STRANDS: Strand[] = [
     headline: "the years language grows fastest.",
     learn: ["listening", "speaking", "reading", "vocabulary", "early writing"],
     flow: [
-      { icon: Music, label: "roll & rhyme" },
-      { icon: BookOpen, label: "book'o'clock" },
-      { icon: MessageCircle, label: "wordsmiths" },
-      { icon: Pencil, label: "play-writes" },
-      { icon: Dice5, label: "playground" },
+      { icon: Music, label: "roll & rhyme", hint: "rhyme songs" },
+      { icon: BookOpen, label: "book'o'clock", hint: "story time" },
+      { icon: MessageCircle, label: "wordsmiths", hint: "word games" },
+      { icon: Pencil, label: "play-writes", hint: "early writing" },
+      { icon: Dice5, label: "playground", hint: "skill games" },
     ],
-    favourite: "rhyme house — name a word, and everyone adds one that rhymes.",
   },
   {
     key: "art",
@@ -88,12 +86,11 @@ const STRANDS: Strand[] = [
     headline: "where small hands learn focus and control.",
     learn: ["fine motor", "colour", "creative expression"],
     flow: [
-      { icon: Sparkles, label: "art gym" },
-      { icon: Grid3x3, label: "art games" },
-      { icon: Palette, label: "artiverse / artistotle" },
-      { icon: Check, label: "art care" },
+      { icon: Sparkles, label: "art gym", hint: "fine motor" },
+      { icon: Grid3x3, label: "art games", hint: "skill games" },
+      { icon: Palette, label: "artiverse / artistotle", hint: "making art" },
+      { icon: Check, label: "art care", hint: "tidy up" },
     ],
-    favourite: "mix it up — match, compare and predict colours.",
   },
   {
     key: "stem",
@@ -105,11 +102,10 @@ const STRANDS: Strand[] = [
     headline: "where curiosity turns into thinking.",
     learn: ["curiosity", "problem-solving", "number sense", "logic"],
     flow: [
-      { icon: Blocks, label: "imagine playground / wonder world" },
-      { icon: Lightbulb, label: "logic lab" },
-      { icon: Hash, label: "number gym" },
+      { icon: Blocks, label: "imagine playground / wonder world", hint: "build & explore" },
+      { icon: Lightbulb, label: "logic lab", hint: "logic puzzles" },
+      { icon: Hash, label: "number gym", hint: "number play" },
     ],
-    favourite: "imagine playground — build curiosity by hand with blocks, ramps and more.",
   },
 ];
 
@@ -239,20 +235,19 @@ export default function BrochurePage() {
                 <p className="mt-1.5 text-[12.5px] leading-relaxed text-ink-muted">
                   we play the openhouse way — the day flows as games and discovery:
                 </p>
-                <div className="mt-2.5 grid grid-cols-2 gap-2">
+                <div className="mt-2.5 grid grid-cols-2 gap-2.5">
                   {s.flow.map((f) => (
                     <div key={f.label} className="flex items-center gap-2">
                       <span className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${s.band} text-ink`}>
                         <f.icon className="h-4 w-4" strokeWidth={2} />
                       </span>
-                      <span className="text-[12.5px] font-semibold lowercase text-ink">{f.label}</span>
+                      <span className="min-w-0">
+                        <span className="block text-[12.5px] font-semibold lowercase leading-tight text-ink">{f.label}</span>
+                        <span className="block text-[10.5px] leading-tight text-ink-muted">{f.hint}</span>
+                      </span>
                     </div>
                   ))}
                 </div>
-
-                <p className="mt-4 text-[12.5px] leading-relaxed text-ink-muted">
-                  <span className="font-bold text-brand-orange">a favourite:</span> {s.favourite}
-                </p>
               </div>
             </section>
           ))}
