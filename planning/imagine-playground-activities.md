@@ -88,36 +88,38 @@ Across the strand children pick up practical STEM knowledge in five domains:
 **A · engage.** educator: "today we are going to build a train track." Ask: "what does a train do? where does it move? what sound does it make?" Show one track piece: "this is a track piece — pieces join to make a path for the train." Join two. Ask: "what happened when I joined them? can the train move on this?" Show engine + car: "the engine pulls the train cars." Place the train and move it. Ask: "why could the train move? what if the track is not joined?"
 
 **B · explore.** Each group builds one track. Ask: "how many pieces have you used? which piece next? is your track getting longer? where will the train start? where will it go?" Children count each group's pieces. Ask: "which group used more / fewer? what if we join both tracks?" Children join tracks and move trains.
-- **easy** — build with 4–6 pieces, count aloud, use long/short and more/less.
-- **medium** — build two tracks, count each, compare more/fewer, join and count the total.
-- **hard** — build with an exact number of pieces (e.g. 14 or 18); the track must reach its destination and pass a landmark.
+- **easy** — join and build 3–5 track pieces and count them.
+- **medium** — build tracks, count them, and compare more/less and long/short.
+- **hard** — join all the tracks and count the total; answer questions like "how many more pieces to reach the destination?"
 
 **C · explain.** Ask: "what does a train need to move? what happened when the track was joined? what if one piece was missing?" Remove a piece. Ask: "what is the problem? where did the train stop? what can we try?" Children fix and test. Turn one piece the wrong way. Ask: "why did the train stop? which piece caused it? what did you change? how do you know it's fixed?"
 
-**D · elaborate.** easy: build a track from one child to another · medium: build from station to picnic area and count the pieces · hard: build from station to picnic area using exactly 14 pieces.
+**D · elaborate.** easy: build a track from one child to another · medium: build from station to destination and count the pieces · hard: build from station to destination using exactly 14 pieces.
 
 **learning check** — child can count pieces, compare tracks, recognise a broken path, fix it, and explain: *"the train stopped because…"*
 
 ---
 
 ### 2 · first trip
-*children learn simple train movement and how action bricks help complete a journey.*
+*children learn simple train movement and how coloured blocks help complete a journey.*
 
 - **skills** — curiosity: notices how signals change movement · problem solving: figures out how to stop/restart the train · logic: sequences start–stop–destination · number sense: uses first-next-last and counts stops.
 - **knowledge** — people travel from one place to another; journeys have starts and destinations; signals guide movement.
 - **materials** — train · track pieces · red & green blocks · station/destination materials · *optional:* stop signs.
 - **grouping** — line up like a train (hands gently on the shoulders ahead); educator holds a green flag for "go" and red for "stop"; play the train game. Then build in 2–3 groups.
 
-**A · engage.** Ask: "have you taken a train, metro, bus or tram? where did you start? where did you reach?" Movement game: green = move, red = stop. Ask: "what made us stop? what made us move again?"
+**A · engage.** Ask: "have you taken a train, metro, bus or tram? where did you start? where did you reach?" Movement game: children form a train behind the educator and follow her signals — green = move, red = stop. Ask: "what made us stop? what made us move again?"
 
 **B · explore.** Children build a double-ended track. educator: "one end is the station, the other is the destination." Children choose a destination — park, zoo, picnic area, home. Move the train station→destination; test stopping with the red block and restarting with green.
 - **easy** — one station, one destination, one stop signal.
 - **medium** — add one stop between station and destination, and change the signal before the train arrives.
 - **hard** — plan and map a route with two stops before the destination; signals must be placed in the correct order.
 
-**C · explain.** Ask: "where did the train start? where did it stop? where did it reach? what did the red signal do? the green signal?"
+At the end, the educator assigns children roles — train, red signal, green signal — and all children take turns testing in groups.
 
-**D · elaborate.** easy: move station→destination, stop once · medium: station → stop 1 → destination · hard: design a trip with a station, two stops, destination and return.
+**C · explain.** Ask: "where did the train start? where did it stop? where did it reach? what did the red signal do? the green signal? how long did the train wait at the red signal before moving? how long did the whole trip take, stopping at stations and reaching the end? did more stops make the trip longer than fewer stops?"
+
+**D · elaborate.** easy: move station→destination, stop once · medium: station → stop 1 → destination · hard: stop at stations following the signals, reach the destination, then return following the same signal stations — count the wait time at each red signal until it turns green.
 
 **learning check** — child can describe the route order and explain what each signal does.
 
@@ -128,19 +130,23 @@ Across the strand children pick up practical STEM knowledge in five domains:
 
 - **skills** — curiosity: notices how many objects fit · problem solving: corrects too many/too few · logic: sorts/classifies freight · number sense: counts, compares, composes/decomposes, adds/removes.
 - **knowledge** — vehicles carry people or things; freight = things carried; cars can be full/empty/heavy/light; different freight may go to different places.
-- **materials** — train cars · number cards · small objects (blocks, crayons, erasers, toy food/tools) · sorting mats · destination cards (market, school, repair shop, picnic area).
+- **materials** — train cars · number cards · sticky notes · small objects (blocks, crayons, erasers, toy food/tools) · sorting mats · destination cards (market, school, repair shop, picnic area).
 - **grouping** — educator explains to all; children work in 2 groups.
 
 **A · engage.** educator: "today we're loading a freight train — freight means things a train carries." Show mixed objects. Ask: "what do you see? which are the same? which different? what could go together?" Sort a few by type: "my rule is — food things together." Ask: "what other rule could we use?"
 
 **B · explore.** Children **sort freight first.** Ask: "what's your sorting rule? colour, size, type or use? which object doesn't belong?" Then **load**: put number 3 on a car — "this car has number 3, we load 3 things." Children choose a number, count objects, load, check.
-- **easy** — sort by one feature; match numbers 1–10 to quantities.
-- **medium** — sort by two features; numbers to 20; compare more/less/equal; show 8 as 5+3 and 6+2.
+- **easy** — sort by one feature (colour, size); match numbers 1–10 to quantities.
+- **medium** — sort by two features (colour, size); numbers to 20; compare more/less/equal; show 8 as 5+3 and 6+2.
 - **hard** — solve freight stories within 20: *"the picnic area needs 15 things, it has 9 — how many more?" "the train has 16 tools, deliver 7 — how many remain?"*
 
 **C · explain.** Ask: "what was your sorting rule? why do these belong together? what number is on the train? how many did you load? does the number match? which car has more/less? how did you know how many more to add?"
 
-**D · elaborate.** easy: sort one group and load the correct quantity · medium: sort two groups and load different quantities · hard: create a delivery problem with a quantity and a sorting rule — *"only blue blocks and small food can go to the picnic area; choose and load 12."*
+**D · elaborate.** Split into two groups — some children become stations along a route, the others become train cars carrying freight. As the train stops at each station and unloads:
+- **easy** — count how many blocks are left after each unloading.
+- **hard** — track how many blocks were unloaded in total and tell the difference; compare which freight was unloaded more / less (e.g. red blocks vs small blocks).
+
+Once the train is empty, the groups swap roles and play again.
 
 **learning check** — child can sort, count, match number to quantity, compare, and solve add/remove load problems.
 
@@ -151,26 +157,28 @@ Across the strand children pick up practical STEM knowledge in five domains:
 
 - **skills** — curiosity: notices which track reaches farther · problem solving: changes the design to reach farther · logic: orders by length/distance · number sense: measures and compares.
 - **knowledge** — tracks can be long/short, reach near/far places, and routes can be compared by distance.
-- **materials** — track pieces · train cars · same-sized blocks · measuring tape · recording sheet · blocks for towers.
+- **materials** — track pieces · same-sized blocks · measuring tape · recording sheet · blocks for towers.
 - **grouping** — educator demo with all; track building in 2 groups; tower building in pairs.
 
-**A · engage.** Show a short and a long track. Ask: "which is longer? which shorter? how can we check?" Measure with same-sized blocks.
+**A · engage.** Show a short and a long track. Ask: "which is longer? which shorter? how can we check?" Measure with same-sized blocks. The educator can use classroom objects — a book, a pencil, the table — to demonstrate non-standard measurement like handspans, finger-widths or blocks.
 
 **B · explore.** Each group builds a track out from the wall. educator: "build a track that reaches as far as possible." Measure with blocks/tape; record the result.
-- **easy** — compare long/short by looking.
-- **medium** — measure with blocks and compare.
+- **easy** — measure with footsteps and compare which is longer or shorter.
+- **medium** — measure using a tape measure or equal-sized blocks.
 - **hard** — build the farthest-reaching track using a fixed number of pieces; record and compare.
+
+After measuring, children record their observations and rebuild the track — comparing the new distance with the previous one, and exploring how changing the track design affects the distance travelled.
 
 **C · explain.** Ask: "which track reached farther? how did we check? did more curves help or not? what changed when you rebuilt?"
 
-**D · elaborate.** Build towers. easy: tall/short · medium: measure with blocks · hard: build the tallest tower using exactly 10 blocks and make it stand.
+**D · elaborate.** Build towers. easy: tall/short · medium: measure using tape · hard: build the tallest tower using exactly 10 blocks and make it stand.
 
 **learning check** — child can compare, measure, record and revise a route/structure.
 
 ---
 
 ### 5 · train sound
-*children use action bricks more purposefully to create a planned journey with signals.*
+*children use coloured blocks more purposefully to create a planned journey with signals.*
 
 - **skills** — curiosity: notices signal effects · problem solving: places signals to help the train · logic: connects signal to action and creates patterns · number sense: counts signals and stops.
 - **knowledge** — sounds, colours and lights can be signals; train sounds warn people; vehicles may need fuel/energy.
@@ -181,12 +189,12 @@ Across the strand children pick up practical STEM knowledge in five domains:
 
 **B · explore.** Children build a picnic area, fuel station, train and track. Move the train picnic→fuel. Test the coloured blocks, then place signal patterns: yellow-blue-yellow-blue · red-green-red-green · yellow-yellow-blue repeated.
 - **easy** — use one signal→action connection; continue an AB pattern with support.
-- **medium** — use 2–3 signals and create an AB/AAB/ABB pattern.
+- **medium** — use 2 signals as an AB pattern without educator support.
 - **hard** — design a route using at least 4 signals in a repeating rule, and explain the rule.
 
 **C · explain.** Ask: "what did yellow do? what did blue do? what was your pattern? what repeated? what comes next? why might a train need sound / fuel / light?"
 
-**D · elaborate.** Add the tunnel and white block. easy: place white near the tunnel and observe · medium: create a signal pattern around the tunnel · hard: design a full route with sound, fuel, light, stop and go signals in a repeating rule.
+**D · elaborate.** Introduce the white block signal — it turns on the light. Then add the tunnel. easy: place the white block near the tunnel and watch the light turn on · medium: create a signal pattern around the tunnel · hard: design a full route with sound, fuel, light, stop and go signals in a repeating rule.
 
 **learning check** — child can connect signal to action, continue/create a pattern, count signals and explain their purpose.
 
