@@ -54,4 +54,4 @@ One breathing/calming ritual, then the **same goodbye every day** so pick-up is 
 ---
 
 ## after the children leave — fill the book (~2 min)
-While it's fresh: write the **daily page** (strand · what we did · one moment) and **date the dots** for the 2–4 focus children you watched in the recap / one-good-thing. (Full method: [how-to-fill-the-experience-book.md](how-to-fill-the-experience-book.md).)
+While it's fresh: write the **daily page** (strand · what we did · one moment) and **date the dots** for the 2–4 focus children you watched in the recap / one-good-thing.

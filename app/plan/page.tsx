@@ -36,12 +36,6 @@ const ABOUT = [
     icon: BookOpen,
     wip: true,
   },
-  {
-    title: "how to fill the experience book",
-    blurb: "the educator guide — worked example + golden rules",
-    href: "/plan/docs/how-to-fill-the-experience-book",
-    icon: ChevronRight,
-  },
 ];
 
 // The three programmes — each opens its full overview (daily structure ·
@@ -178,13 +172,28 @@ function Hub() {
           plan today&apos;s session
           <ChevronRight className="ml-auto h-4 w-4" />
         </Link>
-        <div className="flex flex-wrap gap-2">
-          {isAdmin && (
+        {isAdmin && (
+          <div className="flex flex-wrap gap-2">
             <Chip href="/plan/log" icon={ClipboardList}>activity log</Chip>
-          )}
-          <Chip href="/plan/docs" icon={BookOpen}>all planning docs &amp; packs</Chip>
-        </div>
+          </div>
+        )}
       </div>
+
+      {/* ④ ALL PLANNING DOCS — its own destination, not a buried chip */}
+      <SectionHeading n="4" label="planning docs & packs" />
+      <Link
+        href="/plan/docs"
+        className="group flex items-center gap-3 rounded-card bg-brand-white p-3.5 shadow-card ring-1 ring-ink/5 transition hover:shadow-float hover:ring-ink/10"
+      >
+        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-orange/10 text-brand-orange">
+          <BookOpen className="h-4 w-4" strokeWidth={2.2} />
+        </span>
+        <span className="flex-1">
+          <span className="block text-[14px] font-extrabold lowercase text-ink">all planning docs &amp; packs</span>
+          <span className="mt-0.5 block text-[11px] text-ink-muted">programme notes · the 2-hour day · activity packs · imagine playground · research</span>
+        </span>
+        <ChevronRight className="h-4 w-4 shrink-0 text-ink-subtle transition group-hover:text-brand-orange" />
+      </Link>
     </div>
   );
 }

@@ -87,12 +87,7 @@ export const PLAN_DOCS: PlanDoc[] = [
     slug: "experience-book",
     title: "the experience book",
     group: "the experience book",
-    blurb: "daily page + per-child milestone journey",
-  },
-  {
-    slug: "how-to-fill-the-experience-book",
-    title: "how to fill it — teacher guide",
-    group: "the experience book",
+    blurb: "the intended design — daily page + per-child milestone journey (work in progress)",
   },
   {
     slug: "vocabulary-card-research",
