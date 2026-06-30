@@ -13,5 +13,8 @@ out
 # Vercel
 .vercel
 
+# Generated game-manual HTML — not wired into the app, kept local until needed
+/public/manuals/
+
 # TypeScript incremental build cache
 tsconfig.tsbuildinfo

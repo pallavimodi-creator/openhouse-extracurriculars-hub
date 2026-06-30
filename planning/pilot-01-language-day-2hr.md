@@ -13,15 +13,15 @@ Design rules carried from the research (NCF-FS): plan each block around the chil
 | # | block | min | grouping | energy | what happens |
 |---|---|----|----|----|----|
 | 1 | **opening circle time** | 15 | whole group | active→calm | greeting → a *roll & rhyme* song + movement → calendar/intention → one self-regulation game. (Roll & Rhyme folds into circle here — no separate song block.) |
-| 2 | **wordsmiths** | 15 | whole → pairs | calm | today's vocabulary via see → act → say (emotion tiles / story calendar), tied to today's book |
-| 3 | **break / snack** | 10 | — | free | snack + free movement; reset before the long block |
-| 4 | **book'o'clock — deepened read-aloud** | 35 | whole → small | calm→active | the heart of the day — dialogic read-aloud + story-grammar + illustration talk + a group response (see deepening guide below) |
+| 2 | **book'o'clock — deepened read-aloud** | 35 | whole → small | calm→active | the heart of the day — dialogic read-aloud + story-grammar + illustration talk + a group response (see deepening guide below) |
+| 3 | **break / snack** | 10 | — | free | snack + free movement; reset after the long quiet block, before the next focused work |
+| 4 | **wordsmiths** | 15 | whole → pairs | calm | today's vocabulary via see → act → say (emotion tiles / story calendar) — words come from the story they just heard, so meaning is fresh |
 | 5 | **play-writes + playground game** | 25 | individual → whole | active | individual A4 pre-writing book, then one language playground game |
 | 6 | **closing & experience book** | 20 | whole → individual | calm | story recap → feelings check → calm-down ritual; educator marks the experience book + child adds an artefact to the portfolio |
 
-**= 120 min.** (Language's +40 over at-building comes from: circle 15 · break 10 · read-aloud deepened +10 · fuller closing.)
+**= 120 min.** Break lands at minute 50 — well inside the 45–60 window children can comfortably hold attention to. Wordsmiths follows the read-aloud so the day's vocabulary is anchored in a story the children have just heard. (Language's +40 over at-building comes from: circle 15 · break 10 · read-aloud deepened +10 · fuller closing.)
 
-Quiet/active rhythm check: active(1) → calm(2) → free(3) → calm-with-active-peak(4) → active(5) → calm(6). Good — no two heavy quiet blocks back to back.
+Quiet/active rhythm check: active→calm(1) → calm→active(2) → free(3) → calm(4) → active(5) → calm(6). Good — the break sits between the two longest blocks, and no two heavy quiet blocks back to back.
 
 ---
 
@@ -39,6 +39,6 @@ The at-building read-aloud is ~25 min. The extra 10 is **not** "read more pages"
 
 ## what to watch during the language pilot (feeds the session log)
 - Does the 35-min read-aloud block **sag**, or does the dialogic + response structure hold it?
-- Is **wordsmiths-before-break** the right order, or should vocabulary come *after* the story it belongs to?
+- With vocabulary *after* the read-aloud, are children pulling words from the story they just heard? If not, the connection isn't doing its work.
 - Can the educator get through circle's four parts in 15 min?
 - Does the closing's story-recap give a natural, low-effort moment to mark the experience book?
