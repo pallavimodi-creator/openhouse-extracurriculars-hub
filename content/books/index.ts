@@ -132,6 +132,18 @@ const art58: BookConfig = {
       ],
     },
     {
+      tag: "bc",
+      name: "balance & composition",
+      color: "#5B7A4C",
+      desc: "where things go on the page and why",
+      abilities: [
+        "1. fills whole page",
+        "2. understands foreground/background",
+        "3. draws overlapping for depth and horizon line",
+        "4. understands colour/shape placement for balance",
+      ],
+    },
+    {
       tag: "ic",
       name: "imagination & collaboration",
       color: "#8A7A4C",
@@ -220,7 +232,7 @@ const art58: BookConfig = {
       number: 6,
       sessionRange: "sessions 41–48",
       monthIntro:
-        "your child has used every skill together — line, shape, colour, and imagination — to make work that is truly their own.",
+        "your child has used every skill together — line, shape, colour, composition, and imagination — to make work that is truly their own.",
       atHomeTitle: "art books to read and keep together",
       atHomeTips: [
         "The Dot by Peter H. Reynolds — about the courage to make a mark",
