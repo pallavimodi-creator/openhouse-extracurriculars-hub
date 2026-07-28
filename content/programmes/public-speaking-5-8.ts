@@ -246,6 +246,57 @@ const rollCallActivities: Record<string, CurriculumActivity> = {
 };
 
 const playgroundActivities: Record<string, CurriculumActivity> = {
+  "mumbo-jumbo": {
+    id: "mumbo-jumbo",
+    segment: "playground",
+    title: "mumbo jumbo",
+    setupLine:
+      "Say a string of silly little words out loud — run them together and they sound like a real word or phrase. Everyone listens and works out the hidden phrase.",
+    howToPlay:
+      "The reader picks a mumbo-jumbo card and reads the nonsense words aloud at a natural pace — for example 'Isle Of View'. The class listens to the sounds (not the spelling) and calls out the real phrase they can hear — 'I love you'. If no one gets it, the reader repeats it, running the words together a little faster, until someone decodes it. Whoever guesses reads the next card. The reader must enunciate clearly so the sounds carry; the listeners tune in closely.",
+    example:
+      "'Cat Luh Pill Her' → Caterpillar · 'Bub bell bath' → Bubble bath · 'Isle Of View' → I love you",
+    difficultyLevels: [
+      { level: "Easy", description: "Short, familiar phrases; the reader may repeat as many times as needed and may exaggerate the sounds." },
+      { level: "Medium", description: "Longer phrases; limited repeats, natural pace." },
+      { level: "Hard", description: "Tricky phrases; the reader keeps a natural pace with no exaggerated pauses." },
+    ],
+    materials: ["Mumbo Jumbo phrase cards (chunks on the front, the real phrase on the back)"],
+    promptHeading: "mumbo jumbo phrases — read the chunks, hear the phrase",
+    prompts: [
+      "Cat Luh Pill Her — Caterpillar",
+      "Jog Clay Die Scream — Chocolate Ice Cream",
+      "bay beach arc — Baby Shark",
+      "Meek came house — Mickey Mouse",
+      "high dance eek — Hide & Seek",
+      "ape hand hub hair — A Panda bear",
+      "Peas a Party — Pizza Party",
+      "Bub bell bath — Bubble bath",
+      "Ham burk er — Hamburger",
+      "Ka loring buk — Colouring book",
+      "Sill ease ox — Silly socks",
+      "Eye scream scream kone — Ice Cream cone",
+      "Meh jig want — Magic Wand",
+      "Guard hen floors — Garden Flowers",
+      "Wat chink kar 2 oons — Watching cartoons",
+      "Iwan ta koo kee — I want a cookie",
+      "Pla ing wid ma dawg — Playing with my dog",
+      "Soup he row cape — Superhero cape",
+      "Wat her mell on sall lad — Watermelon salad",
+      "Isle Of View — I love you",
+    ],
+    debriefPrompts: [
+      {
+        questions: [
+          "Which phrases were easy to hear, and which were tricky — why?",
+          "What helped you decode a phrase — the reader speaking clearly, or repeating it a little faster?",
+          "How does saying your own words clearly help people understand you when you speak for real?",
+          "Praise clear, careful reading and close listening.",
+        ],
+      },
+    ],
+    type: "physical-game",
+  },
   "script-flip": {
     id: "script-flip",
     segment: "playground",
@@ -1165,7 +1216,7 @@ export const publicSpeaking58: CurriculumProgramme = {
       rotationPool: [
         "script-flip", "tale-trail", "shuffle", "body-talk", "whats-that-sound",
         "watch-your-step", "train-of-thoughts", "guess-me",
-        "psychiatrist", "reverse-gear",
+        "psychiatrist", "reverse-gear", "mumbo-jumbo",
       ],
     },
     {

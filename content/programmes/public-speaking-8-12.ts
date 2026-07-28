@@ -246,6 +246,57 @@ const rollCallActivities: Record<string, CurriculumActivity> = {
 };
 
 const playgroundActivities: Record<string, CurriculumActivity> = {
+  "mumbo-jumbo": {
+    id: "mumbo-jumbo",
+    segment: "playground",
+    title: "mumbo jumbo",
+    setupLine:
+      "Read a string of unrelated little words out loud — said together at speed, they sound like a real word or phrase. The class listens and decodes the hidden phrase.",
+    howToPlay:
+      "The reader picks a mumbo-jumbo card and reads the nonsense words aloud at a natural, connected pace — for example 'Canoe Key Pass Egret'. The class listens to the sounds rather than the spelling and calls out the phrase they can hear — 'Can you keep a secret?'. If no one gets it, the reader runs the words together a little faster until someone decodes it. Whoever guesses reads the next card. The challenge is precise articulation: the reader must join the sounds cleanly and evenly, and the listeners must track fast connected speech.",
+    example:
+      "'Canoe Key Pass Egret' → Can you keep a secret? · 'Isle Of View' → I love you · 'Read Hick Yule Us' → Ridiculous",
+    difficultyLevels: [
+      { level: "Easy", description: "Short, familiar phrases; the reader may repeat and slightly exaggerate the sounds." },
+      { level: "Medium", description: "Longer phrases; limited repeats at a natural pace." },
+      { level: "Hard", description: "Full-sentence phrases; the reader keeps a fast, even, connected pace with no exaggerated pauses." },
+    ],
+    materials: ["Mumbo Jumbo phrase cards (chunks on the front, the real phrase on the back)"],
+    promptHeading: "mumbo jumbo phrases — read the chunks, hear the phrase",
+    prompts: [
+      "Isle Of View — I love you",
+      "Canoe Key Pass Egret — Can you keep a secret?",
+      "Delete Elmer Made — The little mermaid",
+      "Hype People Earth Duh Hey — Happy Birthday",
+      "Sand Tack Laws — Santa Claus",
+      "Tray Sure Aisle Hand — Treasure Island",
+      "Read Hick Yule Us — Ridiculous",
+      "Prey Tee Womb Anne — Pretty Woman",
+      "Poe Lease Deep Heart Mint — Police Department",
+      "Won Hunt Dread Hollers — One Hundred Dollars",
+      "It Chief Heat — Itchy feet",
+      "Nod Itch Ants — Not a chance",
+      "Tempo Might Hung — Tip of my tongue",
+      "Bee Foreign Halved Her — Before and after",
+      "Muff Heater Gold — My feet are cold",
+      "I'm Issues Home Hutch — I miss you so much",
+      "Peek Nicked Ape Bull — Picnic table",
+      "Noose Raid He Owe — News radio",
+      "Thirst Hay Even Ink — Thursday evening",
+      "Dozen May Kenny Cents Tomb He — Doesn't make any sense to me",
+    ],
+    debriefPrompts: [
+      {
+        questions: [
+          "Which phrases were hardest to decode — was it the reader's pace, or the phrase itself?",
+          "What did the reader do that made a phrase click for the listeners?",
+          "How does joining your sounds cleanly and evenly help people follow you in a real speech?",
+          "Praise precise articulation and sharp listening.",
+        ],
+      },
+    ],
+    type: "physical-game",
+  },
   "script-flip": {
     id: "script-flip",
     segment: "playground",
@@ -1421,7 +1472,7 @@ export const publicSpeaking812: CurriculumProgramme = {
         "script-flip", "tale-trail", "shuffle", "spaggle", "whats-that-sound",
         "pitch-perfect", "speech-a-palooza", "watch-your-step",
         "train-of-thoughts", "guess-me", "psychiatrist",
-        "improv-survival",
+        "improv-survival", "mumbo-jumbo",
       ],
     },
     {
