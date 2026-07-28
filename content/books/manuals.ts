@@ -993,7 +993,7 @@ const robotics58Manual: ManualConfig = {
     {
       title: "what this book is for",
       content:
-        "three skills — building & making, problem solving, observing & understanding. each skill has four abilities. one ability per skill is the ★ north star — what consistent excellent practice looks like by session 48. all abilities are spiral — observable from session 1, deepening across 50 sessions.\n\nyour job is to observe, not evaluate. you are watching for the ability that was seen clearly and circling it. do not circle an ability you did not see. do not skip forward to encourage — only mark what you saw.",
+        "four skills — building & making, observing & understanding, problem solving, presenting & explaining. each skill has four abilities. one ability per skill is the ★ north star — what consistent excellent practice looks like by session 48. all abilities are spiral — observable from session 1, deepening across 50 sessions.\n\nyour job is to observe, not evaluate. you are watching for the ability that was seen clearly and circling it. do not circle an ability you did not see. do not skip forward to encourage — only mark what you saw.",
     },
     {
       title: "how to mark abilities",

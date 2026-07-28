@@ -814,7 +814,7 @@ const experienceBookActivity: CurriculumActivity = {
   setupLine:
     "ten minutes. circle the ability seen clearly today for each skill. one specific note per child. goes home every day.",
   howToPlay:
-    "Educator fills four things per child: experiment name, build day, three ability rows (B&M, PS, O&U — one circled per row), and one specific note (\"worth remembering\"). At 8–12 the most valuable notes capture reasoning. The book also carries the Ability Reference and six monthly Robotics Journey letters. Always conduct a 3-move closing debrief: name what you saw · name the next step · one concept question.",
+    "Educator fills four things per child: experiment name, build day, four ability rows (B&M, O&U, PS, P&E — one circled per row), and one specific note (\"worth remembering\"). At 8–12 the most valuable notes capture reasoning. The book also carries the Ability Reference and six monthly Robotics Journey letters. Always conduct a 3-move closing debrief: name what you saw · name the next step · one concept question.",
   materials: [
     "My Robotics Experience Book (ages 8–12) — per child, hardbound",
     "Ability Reference card (inside cover)",
@@ -839,6 +839,17 @@ const skillAreas: CurriculumSkillArea[] = [
     ],
   },
   {
+    id: "ou",
+    name: "observing & understanding",
+    shortName: "O&U",
+    abilities: [
+      { name: "Observe", description: "names one specific thing that changed — what moved, shifted, or read differently — without being prompted" },
+      { name: "Measure", description: "takes measurements accurately and records every reading correctly, including units, with no gaps in the result table" },
+      { name: "Predict", description: "states a specific prediction before testing — includes a value or a reason connected to what was found in a prior session, not just a direction" },
+      { name: "Explain", description: "explains what caused the result — names the specific cause and connects it to what the data shows", isNorthStar: true },
+    ],
+  },
+  {
     id: "ps",
     name: "problem solving",
     shortName: "PS",
@@ -850,14 +861,14 @@ const skillAreas: CurriculumSkillArea[] = [
     ],
   },
   {
-    id: "ou",
-    name: "observing & understanding",
-    shortName: "O&U",
+    id: "pe",
+    name: "presenting & explaining",
+    shortName: "P&E",
     abilities: [
-      { name: "Observe", description: "names one specific thing that changed — what moved, shifted, or read differently — without being prompted" },
-      { name: "Measure", description: "takes measurements accurately and records every reading correctly, including units, with no gaps in the result table" },
-      { name: "Predict", description: "states a specific prediction before testing — includes a value or a reason connected to what was found in a prior session, not just a direction" },
-      { name: "Explain", description: "explains what caused the result — names the specific cause and connects it to what the data shows", isNorthStar: true },
+      { name: "Show", description: "shows the finished model and states clearly what problem it solves" },
+      { name: "Explain", description: "explains how the model works — names each key part and what it does, using the right technical words" },
+      { name: "Demonstrate", description: "demonstrates the model working and shows the evidence that it meets the goal" },
+      { name: "Teach", description: "teaches someone else how and why it works, and answers their questions with reasons", isNorthStar: true },
     ],
   },
 ];
@@ -1085,6 +1096,7 @@ const checkpoints: CurriculumCheckpoint[] = [
       { skillArea: "B&M", beginning: "connects parts with educator checks (Fit)", developing: "follows the card and notices when a step has not produced the expected result (Follow)", secure: "identifies the specific component that failed and fixes it without being told which part (Adjust)" },
       { skillArea: "PS", beginning: "names general failure", developing: "tries genuinely different approaches (Try)", secure: "names the specific part causing the failure and explains what it is failing to do (Change)" },
       { skillArea: "O&U", beginning: "records readings with gaps", developing: "records every reading correctly including units (Measure)", secure: "writes a specific prediction before testing — a value or a reason connected to prior data (Predict)" },
+      { skillArea: "P&E", beginning: "demonstrates it working with evidence (Demonstrate)", developing: "teaches how and why it works (Teach)", secure: "teaches someone else how and why it works and answers their questions with reasons (Teach ★)" },
     ],
   },
   {
@@ -1093,6 +1105,7 @@ const checkpoints: CurriculumCheckpoint[] = [
       { skillArea: "B&M", beginning: "adjusts within the design (Adjust)", developing: "makes a deliberate improvement and records before/after", secure: "states what they expect to change before testing, then verifies the result (Improve ★)" },
       { skillArea: "PS", beginning: "identifies the specific failing part (Change)", developing: "tries new approaches that go beyond the given steps", secure: "sets a measurable goal and keeps adjusting until the model reaches it (Persist ★)" },
       { skillArea: "O&U", beginning: "predicts a direction", developing: "predicts with a value or a reason (Predict)", secure: "explains what caused the result — names the cause and connects it to what the data shows (Explain ★)" },
+      { skillArea: "P&E", beginning: "demonstrates it working with evidence (Demonstrate)", developing: "teaches how and why it works (Teach)", secure: "teaches someone else how and why it works and answers their questions with reasons (Teach ★)" },
     ],
   },
   {
@@ -1101,6 +1114,7 @@ const checkpoints: CurriculumCheckpoint[] = [
       { skillArea: "B&M", beginning: "improves the design within the build", developing: "makes improvements that measurably change the result", secure: "designs a deliberate improvement, predicts the outcome with a value, tests, and verifies (Improve ★)" },
       { skillArea: "PS", beginning: "tries new approaches", developing: "sets and reaches a measurable goal", secure: "persists across multiple attempts to a measurable goal across the year (Persist ★)" },
       { skillArea: "O&U", beginning: "predicts and explains results", developing: "explains causally using the data", secure: "explains causally and connects the explanation to the underlying mechanism (Explain ★)" },
+      { skillArea: "P&E", beginning: "demonstrates it working with evidence (Demonstrate)", developing: "teaches how and why it works (Teach)", secure: "teaches someone else how and why it works and answers their questions with reasons (Teach ★)" },
     ],
   },
   {
@@ -1109,6 +1123,7 @@ const checkpoints: CurriculumCheckpoint[] = [
       { skillArea: "B&M", beginning: "builds the rod and reel with the manual", developing: "builds independently and adjusts", secure: "designs a deliberate change to the rod or reel, predicts the effect, tests, and verifies (Improve ★)" },
       { skillArea: "PS", beginning: "tries new approaches when the reel sticks", developing: "reaches a measurable goal", secure: "persists across attempts to a measurable goal (Persist ★)" },
       { skillArea: "O&U", beginning: "records lever and pulley readings", developing: "predicts before reading", secure: "explains how the lever and pulley combine — linked to the mechanism (Explain ★)" },
+      { skillArea: "P&E", beginning: "demonstrates it working with evidence (Demonstrate)", developing: "teaches how and why it works (Teach)", secure: "teaches someone else how and why it works and answers their questions with reasons (Teach ★)" },
     ],
   },
   {
@@ -1117,6 +1132,7 @@ const checkpoints: CurriculumCheckpoint[] = [
       { skillArea: "B&M", beginning: "builds the gear train with the manual", developing: "builds independently and adjusts", secure: "designs a gearing change, predicts the rotor effect, tests, and verifies (Improve ★)" },
       { skillArea: "PS", beginning: "tries new approaches when gears slip", developing: "reaches a measurable goal", secure: "persists across attempts to a measurable goal (Persist ★)" },
       { skillArea: "O&U", beginning: "counts and records gear turns", developing: "predicts turns from the ratio", secure: "explains why gear size changes the turns — linked to the ratio (Explain ★)" },
+      { skillArea: "P&E", beginning: "demonstrates it working with evidence (Demonstrate)", developing: "teaches how and why it works (Teach)", secure: "teaches someone else how and why it works and answers their questions with reasons (Teach ★)" },
     ],
   },
   {
@@ -1125,6 +1141,7 @@ const checkpoints: CurriculumCheckpoint[] = [
       { skillArea: "B&M", beginning: "builds the cart with the manual", developing: "builds independently and adjusts", secure: "designs a change to load or axles, predicts the effect, tests, and verifies (Improve ★)" },
       { skillArea: "PS", beginning: "tries new approaches when it veers", developing: "reaches a measurable goal", secure: "persists across attempts to a measurable goal (Persist ★)" },
       { skillArea: "O&U", beginning: "measures rolling distance", developing: "predicts which setup rolls furthest", secure: "explains why load and axle placement change the roll — linked to the data (Explain ★)" },
+      { skillArea: "P&E", beginning: "demonstrates it working with evidence (Demonstrate)", developing: "teaches how and why it works (Teach)", secure: "teaches someone else how and why it works and answers their questions with reasons (Teach ★)" },
     ],
   },
   {
@@ -1133,6 +1150,7 @@ const checkpoints: CurriculumCheckpoint[] = [
       { skillArea: "B&M", beginning: "builds the pulley system with the manual", developing: "builds independently and adjusts", secure: "designs a pulley change, predicts the lifting effect, tests, and verifies (Improve ★)" },
       { skillArea: "PS", beginning: "tries new approaches when the rope slips", developing: "reaches a measurable goal", secure: "persists across attempts to a measurable goal (Persist ★)" },
       { skillArea: "O&U", beginning: "measures lifting effort", developing: "predicts the mechanical advantage", secure: "explains why more pulley reduces effort — linked to the data (Explain ★)" },
+      { skillArea: "P&E", beginning: "demonstrates it working with evidence (Demonstrate)", developing: "teaches how and why it works (Teach)", secure: "teaches someone else how and why it works and answers their questions with reasons (Teach ★)" },
     ],
   },
   {
@@ -1141,6 +1159,7 @@ const checkpoints: CurriculumCheckpoint[] = [
       { skillArea: "B&M", beginning: "builds the drawbridge mechanism with the manual", developing: "builds independently and adjusts", secure: "designs an axle or pulley change, predicts the effect, tests, and verifies (Improve ★)" },
       { skillArea: "PS", beginning: "tries new approaches when it jams", developing: "reaches a measurable goal", secure: "persists across attempts to a measurable goal (Persist ★)" },
       { skillArea: "O&U", beginning: "measures direction and effort", developing: "predicts the axle and pulley behaviour", secure: "explains how axles and pulleys combine — linked to the data (Explain ★)" },
+      { skillArea: "P&E", beginning: "demonstrates it working with evidence (Demonstrate)", developing: "teaches how and why it works (Teach)", secure: "teaches someone else how and why it works and answers their questions with reasons (Teach ★)" },
     ],
   },
   {
@@ -1149,6 +1168,7 @@ const checkpoints: CurriculumCheckpoint[] = [
       { skillArea: "B&M", beginning: "builds wheels, axles and winch with the manual", developing: "builds independently and adjusts", secure: "designs a change to the build, predicts the effect, tests, and verifies (Improve ★)" },
       { skillArea: "PS", beginning: "tries new approaches when it stalls", developing: "reaches a measurable goal", secure: "persists across attempts to a measurable goal (Persist ★)" },
       { skillArea: "O&U", beginning: "measures distance and effort", developing: "predicts the best load position and pull", secure: "explains how wheels, axles and pulleys combine — linked to the data (Explain ★)" },
+      { skillArea: "P&E", beginning: "demonstrates it working with evidence (Demonstrate)", developing: "teaches how and why it works (Teach)", secure: "teaches someone else how and why it works and answers their questions with reasons (Teach ★)" },
     ],
   },
   {
@@ -1157,6 +1177,7 @@ const checkpoints: CurriculumCheckpoint[] = [
       { skillArea: "B&M", beginning: "builds the gear-driven bulldozer with the manual", developing: "builds independently and adjusts", secure: "designs a gearing change for speed or force, predicts, tests, and verifies (Improve ★)" },
       { skillArea: "PS", beginning: "tries new approaches when a gear slips", developing: "reaches a measurable goal", secure: "persists across attempts to a measurable goal (Persist ★)" },
       { skillArea: "O&U", beginning: "counts gear turns and records them", developing: "predicts turns from the ratio", secure: "explains why the gearing trades speed for force — linked to the data (Explain ★)" },
+      { skillArea: "P&E", beginning: "demonstrates it working with evidence (Demonstrate)", developing: "teaches how and why it works (Teach)", secure: "teaches someone else how and why it works and answers their questions with reasons (Teach ★)" },
     ],
   },
 ];

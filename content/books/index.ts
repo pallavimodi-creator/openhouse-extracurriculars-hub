@@ -132,18 +132,6 @@ const art58: BookConfig = {
       ],
     },
     {
-      tag: "bc",
-      name: "balance & composition",
-      color: "#5B7A4C",
-      desc: "where things go on the page and why",
-      abilities: [
-        "1. fills whole page",
-        "2. understands foreground/background",
-        "3. draws overlapping for depth and horizon line",
-        "4. understands colour/shape placement for balance",
-      ],
-    },
-    {
       tag: "ic",
       name: "imagination & collaboration",
       color: "#8A7A4C",
@@ -232,7 +220,7 @@ const art58: BookConfig = {
       number: 6,
       sessionRange: "sessions 41–48",
       monthIntro:
-        "your child has used every skill together — line, shape, colour, composition, and imagination — to make work that is truly their own.",
+        "your child has used every skill together — line, shape, colour, and imagination — to make work that is truly their own.",
       atHomeTitle: "art books to read and keep together",
       atHomeTips: [
         "The Dot by Peter H. Reynolds — about the courage to make a mark",
@@ -872,6 +860,18 @@ const robotics58: BookConfig = {
       ],
     },
     {
+      tag: "O&U",
+      name: "observing & understanding",
+      color: "bg-brand-orange/12 text-brand-orange",
+      desc: "watching closely, measuring carefully, predicting before trying, explaining why.",
+      abilities: [
+        { name: "spots what changed", description: "watches and names one specific thing that changed — without being asked" },
+        { name: "measures and records", description: "measures carefully and writes the number in the right place" },
+        { name: "predicts before trying", description: "writes what they think will happen before trying" },
+        { name: "explains why", description: "says what happened and gives a reason why", isNorthStar: true },
+      ],
+    },
+    {
       tag: "PS",
       name: "problem solving",
       color: "bg-brand-orange/12 text-brand-orange",
@@ -884,15 +884,15 @@ const robotics58: BookConfig = {
       ],
     },
     {
-      tag: "O&U",
-      name: "observing & understanding",
+      tag: "P&E",
+      name: "presenting & explaining",
       color: "bg-brand-orange/12 text-brand-orange",
-      desc: "watching closely, measuring carefully, predicting before trying, explaining why.",
+      desc: "showing the model, explaining what each part does, demonstrating it, and teaching someone else.",
       abilities: [
-        { name: "spots what changed", description: "watches and names one specific thing that changed — without being asked" },
-        { name: "measures and records", description: "measures carefully and writes the number in the right place" },
-        { name: "predicts before trying", description: "writes what they think will happen before trying" },
-        { name: "explains why", description: "says what happened and gives a reason why", isNorthStar: true },
+        { name: "shows the model", description: "shows the finished model to others and names what it is" },
+        { name: "explains the parts", description: "explains what it does and what each main part is for" },
+        { name: "demonstrates it working", description: "demonstrates the model doing its job" },
+        { name: "teaches someone else", description: "teaches a family member how it works and answers their questions", isNorthStar: true },
       ],
     },
   ],
@@ -905,7 +905,7 @@ const robotics58: BookConfig = {
   ],
   dailyLogTracker: {
     label: "circle the ability seen clearly today for each skill · ★ = North Star",
-    levels: ["🔧 B&M — Fits · Follows · Adjusts · Improves ★", "🔍 PS — Notices · Tries · Locates · Reaches ★", "👁 O&U — Spots · Measures · Predicts · Explains ★"],
+    levels: ["🔧 B&M — Fits · Follows · Adjusts · Improves ★", "👁 O&U — Spots · Measures · Predicts · Explains ★", "🔍 PS — Notices · Tries · Locates · Reaches ★", "🗣 P&E — Shows · Explains · Demonstrates · Teaches ★"],
   },
   journeyLabel: "robotics journey",
   journeys: [
@@ -1043,6 +1043,18 @@ const robotics812: BookConfig = {
       ],
     },
     {
+      tag: "O&U",
+      name: "observing & understanding",
+      color: "bg-brand-orange/12 text-brand-orange",
+      desc: "watching closely, measuring accurately, writing specific predictions before testing, explaining what caused a result.",
+      abilities: [
+        { name: "spots what changed", description: "names one specific thing that changed — what moved, shifted, or read differently" },
+        { name: "measures and records", description: "takes measurements accurately and records every reading correctly" },
+        { name: "predicts before trying", description: "writes a specific prediction before testing — a value or a reason, not just a direction" },
+        { name: "explains why", description: "explains what caused the result — names the cause and connects it to the data", isNorthStar: true },
+      ],
+    },
+    {
       tag: "PS",
       name: "problem solving",
       color: "bg-brand-orange/12 text-brand-orange",
@@ -1055,15 +1067,15 @@ const robotics812: BookConfig = {
       ],
     },
     {
-      tag: "O&U",
-      name: "observing & understanding",
+      tag: "P&E",
+      name: "presenting & explaining",
       color: "bg-brand-orange/12 text-brand-orange",
-      desc: "watching closely, measuring accurately, writing specific predictions before testing, explaining what caused a result.",
+      desc: "showing the model, explaining how it works with the right words, demonstrating the evidence, and teaching someone else.",
       abilities: [
-        { name: "spots what changed", description: "names one specific thing that changed — what moved, shifted, or read differently" },
-        { name: "measures and records", description: "takes measurements accurately and records every reading correctly" },
-        { name: "predicts before trying", description: "writes a specific prediction before testing — a value or a reason, not just a direction" },
-        { name: "explains why", description: "explains what caused the result — names the cause and connects it to the data", isNorthStar: true },
+        { name: "shows the model", description: "shows the finished model and states clearly what problem it solves" },
+        { name: "explains how it works", description: "names each key part and what it does, using the right technical words" },
+        { name: "demonstrates the evidence", description: "demonstrates the model working and shows the evidence that it meets the goal" },
+        { name: "teaches someone else", description: "teaches how and why it works, and answers questions with reasons", isNorthStar: true },
       ],
     },
   ],
@@ -1076,7 +1088,7 @@ const robotics812: BookConfig = {
   ],
   dailyLogTracker: {
     label: "circle the ability seen clearly today for each skill · ★ = North Star",
-    levels: ["🔧 B&M — Fits · Follows · Adjusts · Improves ★", "🔍 PS — Notices · Tries · Locates · Reaches ★", "👁 O&U — Spots · Measures · Predicts · Explains ★"],
+    levels: ["🔧 B&M — Fits · Follows · Adjusts · Improves ★", "👁 O&U — Spots · Measures · Predicts · Explains ★", "🔍 PS — Notices · Tries · Locates · Reaches ★", "🗣 P&E — Shows · Explains · Demonstrates · Teaches ★"],
   },
   journeyLabel: "robotics journey",
   journeys: [

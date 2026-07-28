@@ -729,12 +729,6 @@ const checkpoints: CurriculumCheckpoint[] = [
         secure: "Picks a colour and can say why.",
       },
       {
-        skillArea: "Balance & Composition",
-        beginning: "Draws in a small area of the page.",
-        developing: "Begins to fill more of the page.",
-        secure: "Fills the whole page.",
-      },
-      {
         skillArea: "Imagination & Collaboration",
         beginning: "Experiments only when prompted.",
         developing: "Experiments freely with colours and marks.",
@@ -762,12 +756,6 @@ const checkpoints: CurriculumCheckpoint[] = [
         beginning: "Colour mixing results accidental.",
         developing: "Notices when a mix works and tries to repeat.",
         secure: "Identifies warm and cool colours and makes deliberate choice.",
-      },
-      {
-        skillArea: "Balance & Composition",
-        beginning: "Things placed randomly on page.",
-        developing: "Begins to think about placement.",
-        secure: "Uses foreground and background in at least one piece.",
       },
       {
         skillArea: "Imagination & Collaboration",
@@ -799,12 +787,6 @@ const checkpoints: CurriculumCheckpoint[] = [
         secure: "Uses warm and cool colour families expressively.",
       },
       {
-        skillArea: "Balance & Composition",
-        beginning: "Composition not yet considered.",
-        developing: "Uses foreground and background.",
-        secure: "Draws overlapping shapes to show depth. Describes one specific decision about placement.",
-      },
-      {
         skillArea: "Imagination & Collaboration",
         beginning: "Ideas are conventional.",
         developing: "Says one thing about their own work.",
@@ -832,12 +814,6 @@ const checkpoints: CurriculumCheckpoint[] = [
         beginning: "Mixing is adequate but not yet controlled.",
         developing: "Creates tints and shades.",
         secure: "Uses tints, shades, and colour families with control.",
-      },
-      {
-        skillArea: "Balance & Composition",
-        beginning: "Composition is present but not yet balanced.",
-        developing: "Places objects with visual weight in mind.",
-        secure: "Understands how colour and shape placement create balance.",
       },
       {
         skillArea: "Imagination & Collaboration",
@@ -869,12 +845,6 @@ const checkpoints: CurriculumCheckpoint[] = [
         secure: "Uses line, shape, and colour together with intention.",
       },
       {
-        skillArea: "Balance & Composition",
-        beginning: "Compositional thinking emerging.",
-        developing: "Things placed deliberately.",
-        secure: "Work shows compositional thinking throughout.",
-      },
-      {
         skillArea: "Imagination & Collaboration",
         beginning: "Generates ideas but doesn't extend.",
         developing: "Extends ideas across sessions.",
@@ -899,12 +869,6 @@ const checkpoints: CurriculumCheckpoint[] = [
       },
       {
         skillArea: "Colour & Painting",
-        beginning: "Consistent maker. Needs prompts to extend.",
-        developing: "Makes confidently across all mediums. Shows preference.",
-        secure: "Uses all five skill areas together.",
-      },
-      {
-        skillArea: "Balance & Composition",
         beginning: "Consistent maker. Needs prompts to extend.",
         developing: "Makes confidently across all mediums. Shows preference.",
         secure: "Uses all five skill areas together.",
@@ -966,17 +930,6 @@ export const artDesign58: CurriculumProgramme = {
         "Mixes primary to secondary reliably",
         "Identifies warm and cool families",
         "Creates tints and shades",
-      ],
-    },
-    {
-      id: "bc",
-      name: "Balance & Composition",
-      shortName: "B&C",
-      abilities: [
-        "Fills whole page",
-        "Understands foreground/background",
-        "Draws overlapping for depth and horizon line",
-        "Understands colour/shape placement for balance",
       ],
     },
     {
