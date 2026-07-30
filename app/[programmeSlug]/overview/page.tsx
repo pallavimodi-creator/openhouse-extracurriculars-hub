@@ -630,6 +630,14 @@ function ProgrammeOverviewContent() {
             <span className="text-ink-subtle">— same every session, run in order</span>
           </div>
 
+          {/* Jump to the session-by-session build of this. */}
+          <Link
+            href={`/${programme.slug}/plan`}
+            className="mt-3 inline-flex items-center gap-1.5 rounded-chip bg-brand-orange px-3 py-1.5 text-[11px] font-bold text-white shadow-card transition hover:opacity-95"
+          >
+            see the day-by-day plan →
+          </Link>
+
           <div className="mt-3 space-y-2">
             {programme.segmentDefinitions.map((seg) => {
               const Icon = SEGMENT_ICONS[seg.id] ?? Star;

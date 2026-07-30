@@ -39,12 +39,17 @@ export function FooterNav() {
   ];
 
   if (programmeMatch && programmeMatch.totalSessions > 0) {
-    // The hub is a reference, not a session runner — no plans tab, no
-    // experience book. Just the overview and the library.
+    // Inside a 5+ programme: the overview (reference) + the day-by-day
+    // plan (pick a session → its fixed parts and flexible picks).
     items.push({
       href: `/${programmeMatch.slug}/overview`,
       label: "overview",
       icon: LayoutGrid,
+    });
+    items.push({
+      href: `/${programmeMatch.slug}/plan`,
+      label: "plan",
+      icon: ClipboardList,
     });
   }
 
