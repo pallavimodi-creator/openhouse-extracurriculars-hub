@@ -1,16 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { ArtiverseFlipbook } from "@/components/ArtiverseFlipbook";
 import { TeacherGate } from "@/components/TeacherGate";
 import { getCurriculumProgramme } from "@/lib/content";
 
+const PDF_URL = "/artiverse/art-8-12.pdf";
+
 /**
- * Artiverse book — 8–12 art programme. Renders all artiverse units as
- * image + text spreads using the shared ArtiverseFlipbook component.
- * Colour-pencil-only and pencil-on-black-paper units have been retired
- * per curriculum decision; the surviving units are renumbered 1…N
- * for display in the flipbook.
+ * Artiverse book — 8–12 art programme. Renders the teacher-reference PDF
+ * as a flipbook. Number of sessions per artwork is a teacher decision;
+ * the `days` on each unit is a suggested pace only.
  */
 export default function ArtiverseBook812Page() {
   const programme = getCurriculumProgramme("art-design-8-12");
@@ -39,26 +38,42 @@ export default function ArtiverseBook812Page() {
               art &amp; design · ages 8–12
             </p>
             <p className="mt-3 text-[12px] italic leading-relaxed text-ink/75 md:text-[13px]">
-              Watercolour, acrylic, oil pastels, chalk pastels and mixed media. {units.length} units
-              across the year. Each pairs a medium with a focused technique and a subject the child
-              makes their own. The picture in the book is a reference only; children pick their own
-              subject.
+              Oil pastel, watercolour, acrylic, mixed media and pencil. {units.length} units across the year, running easiest to hardest — each pairs a real artist's technique with a subject the child makes their own.
+            </p>
+            <p className="mt-2 text-[12px] font-semibold leading-relaxed text-ink/70 md:text-[13px]">
+              How many sessions each artwork runs is up to the teacher. Adapt the pace to your group.
             </p>
           </div>
         </section>
 
-        {/* Flipbook */}
+        {/* PDF viewer — browser-native, works everywhere */}
         <section className="bg-white px-3 py-6 md:px-8">
           <div className="mx-auto w-full max-w-5xl">
-            <ArtiverseFlipbook
-              units={units}
-              altPrefix="artiverse 8-12 book page"
-            />
+            <div className="overflow-hidden rounded-2xl bg-brand-cream ring-1 ring-ink/10 shadow-[0_8px_30px_rgba(44,43,40,0.12)]">
+              <iframe
+                src={PDF_URL}
+                title="artiverse book · ages 8–12"
+                className="block h-[75vh] w-full min-h-[520px] md:h-[85vh]"
+              />
+            </div>
+            <div className="mt-4 flex flex-wrap items-center justify-center gap-3 text-[12px]">
+              <a
+                href={PDF_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full bg-brand-orange px-4 py-2 font-bold text-white"
+              >
+                open pdf in new tab
+              </a>
+              <a
+                href={PDF_URL}
+                download
+                className="rounded-full bg-ink/5 px-4 py-2 font-semibold text-ink-muted hover:bg-ink/10"
+              >
+                download
+              </a>
+            </div>
           </div>
-          <p className="mx-auto mt-4 max-w-md text-center text-[10px] italic text-ink-subtle">
-            Tap the edges or use the prev / next buttons. Each spread shows the unit
-            technique brief on the left and the reference image on the right.
-          </p>
         </section>
       </div>
     </TeacherGate>

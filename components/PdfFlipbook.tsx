@@ -50,7 +50,10 @@ export function PdfFlipbook({ pdfUrl, preferSpread }: PdfFlipbookProps) {
     async function render() {
       try {
         // Dynamic import so pdfjs is only pulled in on the client.
-        const pdfjs: any = await import("pdfjs-dist");
+        // The legacy build is CommonJS-friendly and dodges the ESM
+        // `Object.defineProperty called on non-object` error that the
+        // modern .mjs build hits under Next 14's webpack.
+        const pdfjs: any = await import("pdfjs-dist/legacy/build/pdf.mjs");
         // The worker file was copied into /public at dev time so it ships
         // with the version-matched library.
         pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";

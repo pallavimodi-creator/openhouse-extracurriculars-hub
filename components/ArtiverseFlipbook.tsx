@@ -62,7 +62,8 @@ function buildBody(unit: ArtiverseUnit): string {
   const opts = unit.topicOptions.length
     ? `Topic options: ${unit.topicOptions.join(" · ")}.`
     : "";
-  const days = unit.days > 1 ? `${unit.days} sessions.` : "";
+  // Days per artwork is a teacher decision; don't render a fixed count.
+  const days = "";
   // Short, sentence-cased body. Sections separated by a single space so the
   // text reads as a paragraph on the right page.
   return [technique.endsWith(".") ? technique : `${technique}.`, days, opts]
