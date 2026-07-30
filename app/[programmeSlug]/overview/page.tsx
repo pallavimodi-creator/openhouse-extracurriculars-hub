@@ -152,6 +152,8 @@ function ProgrammeOverviewContent() {
   const [numbersGymBookOpen, setNumbersGymBookOpen] = useState(false);
   // Play-writes (language 3-5) — Level 1 / Level 2 workbook flipbooks.
   const [playWritesLevel, setPlayWritesLevel] = useState<1 | 2 | null>(null);
+  // "the day · fixed & flexible" — which segment card is expanded.
+  const [openSegment, setOpenSegment] = useState<string | null>(null);
 
   if (!programme) {
     notFound();
@@ -598,6 +600,133 @@ function ProgrammeOverviewContent() {
                   </div>
                 );
               })}
+          </div>
+        </section>
+      )}
+
+      {/* ─── THE DAY · FIXED & FLEXIBLE (5-8 / 8-12 running programmes) ───
+          Every session moves through the same set of segments. Some are
+          FIXED (same every day, run in order — build, artiverse, the
+          experience book) and some are FLEXIBLE (the educator picks from a
+          rotating pool at the child's level). Tap a segment to see its
+          pool and how it runs. */}
+      {programme.ageGroup !== "3-5" && programme.segmentDefinitions.length > 0 && (
+        <section className="mt-10 px-4 md:px-8">
+          <SectionTitle num="·" label="the day · fixed & flexible">
+            a session moves through these parts. some are <strong className="font-bold text-ink">fixed</strong> — the same every day, run in order — and some are <strong className="font-bold text-ink">flexible</strong>, where the educator picks from a rotating pool at the child&apos;s level.
+          </SectionTitle>
+
+          {/* Key — explains the flexible / fixed badges on each segment. */}
+          <div className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-[10px] font-semibold text-ink-muted">
+            <span className="inline-flex items-center gap-1 rounded-chip bg-ink/5 px-2 py-0.5">
+              <RotateCw className="h-3 w-3" /> flexible
+            </span>
+            <span className="text-ink-subtle">
+              — no fixed order; play any, revisit one only after the rest are done
+            </span>
+            <span className="inline-flex items-center gap-1 rounded-chip bg-ink/5 px-2 py-0.5">
+              <Lock className="h-3 w-3" /> fixed
+            </span>
+            <span className="text-ink-subtle">— same every session, run in order</span>
+          </div>
+
+          <div className="mt-3 space-y-2">
+            {programme.segmentDefinitions.map((seg) => {
+              const Icon = SEGMENT_ICONS[seg.id] ?? Star;
+              const isOpen = openSegment === seg.id;
+              const poolTitles = (seg.rotationPool ?? [])
+                .map((k) => programme.activities?.[k]?.title ?? k.replace(/-/g, " "))
+                .filter((t): t is string => Boolean(t));
+              // A segment is genuinely FLEXIBLE only when the educator has a
+              // pool to pick from. A "rotating" segment with no pool (robotics
+              // build / experiment) is really a set-order progression — the
+              // models and cards advance in sequence — so it reads as fixed.
+              const isRotating = seg.type === "rotating" && poolTitles.length > 0;
+              return (
+                <div
+                  key={seg.id}
+                  className="overflow-hidden rounded-xl bg-brand-white shadow-card ring-1 ring-ink/5"
+                >
+                  {/* Header — click to expand the segment's pool + notes. */}
+                  <button
+                    type="button"
+                    onClick={() => setOpenSegment(isOpen ? null : seg.id)}
+                    className="flex w-full items-center gap-2 px-3 py-2.5 text-left transition hover:bg-brand-cream/40"
+                    aria-expanded={isOpen}
+                  >
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-brand-cream text-brand-orange">
+                      <Icon className="h-4 w-4" strokeWidth={1.8} />
+                    </span>
+                    <p className="text-[13px] font-extrabold lowercase text-ink">
+                      {seg.name.toLowerCase()}
+                    </p>
+                    <span className="ml-auto flex items-center gap-1 text-[10px] font-bold text-ink-muted">
+                      {isRotating ? (
+                        <>
+                          <RotateCw className="h-3 w-3" /> flexible
+                          {poolTitles.length > 0 ? ` · ${poolTitles.length} games` : ""}
+                        </>
+                      ) : (
+                        <>
+                          <Lock className="h-3 w-3" /> fixed
+                        </>
+                      )}
+                      {seg.durationRange && (
+                        <>
+                          <span className="mx-1">·</span>
+                          {seg.durationRange}
+                        </>
+                      )}
+                    </span>
+                    <ChevronDown
+                      className={cn(
+                        "h-4 w-4 shrink-0 text-ink/60 transition-transform",
+                        isOpen && "rotate-180",
+                      )}
+                    />
+                  </button>
+
+                  {/* Expanded body — objective, pool (flexible only), and a
+                      short "how it runs" note. */}
+                  {isOpen && (
+                    <div className="space-y-3 border-t border-ink/5 p-3">
+                      <p className="text-[12px] leading-relaxed text-ink-muted">
+                        {firstSentences(seg.objective, 3)}
+                      </p>
+
+                      {isRotating && poolTitles.length > 0 && (
+                        <div>
+                          <p className="text-[9px] font-bold tracking-wide text-brand-orange">
+                            the pool · rotates
+                          </p>
+                          <div className="mt-1 flex flex-wrap gap-1">
+                            {poolTitles.map((t) => (
+                              <span
+                                key={t}
+                                className="rounded-chip bg-brand-cream px-2 py-0.5 text-[10px] font-semibold lowercase text-ink-muted"
+                              >
+                                {t}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      <div className="rounded-xl bg-brand-orange/5 p-3">
+                        <p className="text-[11px] font-bold text-ink">
+                          {isRotating ? "how the rotation works" : "how it runs"}
+                        </p>
+                        <p className="mt-1 text-[11px] leading-relaxed text-ink-muted">
+                          {isRotating
+                            ? `The educator picks 1–2 each session from ${poolTitles.length || "the"} ${poolTitles.length ? "activities" : "pool"} — each one repeats only after the others have been used. Variations change how children play; levels adjust the difficulty within the same activity, without separating children.`
+                            : "No rotation — this part is the same every session and runs in a set order, so a child can join at any session and pick up exactly where the class is."}
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </section>
       )}
