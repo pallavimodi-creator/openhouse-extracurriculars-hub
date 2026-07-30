@@ -639,7 +639,11 @@ function ProgrammeOverviewContent() {
           </Link>
 
           <div className="mt-3 space-y-2">
-            {programme.segmentDefinitions.map((seg) => {
+            {programme.segmentDefinitions
+              // The experience book isn't a planned segment for now — it's
+              // covered by the note below instead.
+              .filter((seg) => seg.id !== "experience-book" && seg.id !== "log-book")
+              .map((seg) => {
               const Icon = SEGMENT_ICONS[seg.id] ?? Star;
               const isOpen = openSegment === seg.id;
               const poolTitles = (seg.rotationPool ?? [])
@@ -735,6 +739,20 @@ function ProgrammeOverviewContent() {
                 </div>
               );
             })}
+          </div>
+
+          {/* Experience book — not shown as a planned segment yet; this note
+              explains what it is and when it happens. */}
+          <div className="mt-3 rounded-xl bg-brand-cream/60 p-3 ring-1 ring-ink/5">
+            <p className="text-[11px] font-extrabold lowercase text-ink">
+              + the experience book
+            </p>
+            <p className="mt-1 text-[11.5px] leading-relaxed text-ink-muted">
+              Every session also ends with the <span className="font-semibold text-ink">experience book</span> — the last{" "}
+              <span className="font-semibold text-ink">10–15 minutes, in class</span>, where each child records what they did and
+              discovered that day. It&apos;s filled during the session, not sent home as homework. (The book itself is being
+              finalised — it isn&apos;t a separate resource here yet.)
+            </p>
           </div>
         </section>
       )}

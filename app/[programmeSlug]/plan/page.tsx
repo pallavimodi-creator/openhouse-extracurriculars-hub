@@ -29,8 +29,9 @@ export default function ProgrammePlanPage() {
   const slug = params.programmeSlug as string;
   const programme = getCurriculumProgramme(slug);
 
-  const hasTrialSession =
-    programme?.sessionTable.some((s) => s.sessionNumber === 0) ?? false;
+  // The trial (day 0) is no longer offered in the plan — the plan starts at
+  // day 1. (Trial rows may still exist in the data; they're just not shown.)
+  const hasTrialSession = false;
 
   const [selectedDay, setSelectedDay] = useState<number>(hasTrialSession ? 0 : 1);
   const [completedDays, setCompletedDays] = useState<number[]>([]);
@@ -143,6 +144,12 @@ export default function ProgrammePlanPage() {
             overview
           </Link>
           .
+        </p>
+        <p className="mt-2 rounded-xl bg-brand-cream/60 p-3 text-[11.5px] leading-relaxed text-ink-muted ring-1 ring-ink/5">
+          <span className="font-semibold text-ink">note · the experience book</span> — every session also ends with{" "}
+          <span className="font-semibold text-ink">10–15 minutes in class</span> for the experience book, where each child
+          records what they did and discovered. It&apos;s filled during the session, not homework. (Being finalised — not a
+          separate resource here yet.)
         </p>
       </section>
 

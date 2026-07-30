@@ -161,7 +161,12 @@ function resolveSegments(
   programme: CurriculumProgramme,
   session: CurriculumSessionEntry
 ): ResolvedSegment[] {
-  return programme.segmentDefinitions.map((segDef) => {
+  return programme.segmentDefinitions
+    // The experience book isn't shown as a planned segment for now — it's
+    // covered by a note (filled in class, last 10–15 min). Excluded here so
+    // it doesn't appear as a card in the day plan.
+    .filter((segDef) => segDef.id !== "experience-book" && segDef.id !== "log-book")
+    .map((segDef) => {
     const actMap = programme.activities;
     const fieldKey = SEGMENT_FIELD_MAP[segDef.id];
     const assignedId = fieldKey ? (session[fieldKey] as string | undefined) : undefined;
