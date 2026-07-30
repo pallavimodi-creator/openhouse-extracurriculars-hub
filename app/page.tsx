@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {
   listCurriculumProgrammes,
+  listHomeProgrammes,
   getCurriculumProgramme,
   getProgrammeStage,
 } from "@/lib/content";
@@ -188,9 +189,9 @@ export default function HomePage() {
   // "coming soon" tag for any programme whose totalSessions === 0, so
   // teachers see what's coming next.
   const programmes = isAdmin
-    ? listCurriculumProgrammes()
+    ? listHomeProgrammes()
     : teacher.category
-      ? listCurriculumProgrammes().filter(
+      ? listHomeProgrammes().filter(
           (p) => p.category === teacher.category,
         )
       : (() => {
