@@ -95,12 +95,21 @@ export function ProgrammeCard({
             dive in · 3–5
           </Link>
         ) : hasContent ? (
-          <Link
-            href={`/${programme.slug}/overview`}
-            className="mt-3 block rounded-card border border-ink/10 bg-brand-white py-2 text-center text-[12px] font-semibold text-ink transition hover:bg-ink/5 active:scale-[0.98]"
-          >
-            dive in
-          </Link>
+          <div className="mt-3 grid grid-cols-2 gap-2">
+            <Link
+              href={`/${programme.slug}/overview`}
+              className="block rounded-card border border-ink/10 bg-brand-white py-2 text-center text-[12px] font-semibold text-ink transition hover:bg-ink/5 active:scale-[0.98]"
+            >
+              overview
+            </Link>
+            <Link
+              href={`/${programme.slug}/plan`}
+              className="flex items-center justify-center gap-1.5 rounded-card border border-brand-orange/30 bg-brand-orange/5 py-2 text-center text-[12px] font-semibold text-brand-orange transition hover:bg-brand-orange/10 active:scale-[0.98]"
+            >
+              <ClipboardList className="h-3 w-3" strokeWidth={2.4} />
+              plan
+            </Link>
+          </div>
         ) : (
           <span className="mt-3 block rounded-card border border-ink/5 bg-bg-subtle py-2 text-center text-[11px] font-medium text-ink-subtle">
             coming soon
