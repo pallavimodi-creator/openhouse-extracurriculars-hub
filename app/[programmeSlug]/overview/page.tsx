@@ -42,7 +42,8 @@ import {
   Compass,
   type LucideIcon,
 } from "lucide-react";
-import { getCurriculumProgramme, getActivityImage, GYM_BOOK_IMAGES } from "@/lib/content";
+import { getCurriculumProgramme, getActivityImage, GYM_BOOK_IMAGES, getTrackLevels } from "@/lib/content";
+import { LevelSwitcher } from "@/components/LevelSwitcher";
 import { LO_LADDERS } from "@/lib/lo-ladders";
 
 // Segment illustrations (3-5). Only the segments that have a render are
@@ -348,6 +349,12 @@ function ProgrammeOverviewContent() {
                     </p>
                   </div>
                 )}
+              {/* Multi-level track (robotics: mechanics → electronics) —
+                  how an educator moves to the next level from inside. */}
+              <LevelSwitcher
+                levels={getTrackLevels(programme.slug)}
+                currentSlug={programme.slug}
+              />
             </div>
           </div>
 
@@ -363,7 +370,9 @@ function ProgrammeOverviewContent() {
               {isRobotics
                 ? programme.ageGroup === "3-5"
                   ? "the four skills below are built through hands-on building (imagine playground), real-world play (wonder world), logic games (logic lab), and number practice (numbers gym) — a rotating set in each part of the day, run at each child's level."
-                  : "this overview covers mechanics. robotics at openhouse spans three strands — mechanics, electronics, and coding — and this is the mechanics programme."
+                  : programme.level === 2
+                    ? "this is level 2 — electronics. robotics runs as a track: level 1 (mechanics) then level 2 (electronics) — use the level switcher above to move between them. each day: an experiment on a real circuit, then a build, then the experience book. the experience book is filled during class, in the last 10–15 minutes, to record the day's discovery — it is not homework."
+                    : "this overview covers level 1 — mechanics. robotics runs as a track: level 1 (mechanics) then level 2 (electronics) — use the level switcher above to move between them. each day ends with the experience book, filled during class in the last 10–15 minutes to record the day's discovery — it is not sent home as homework."
                 : isArt
                   ? "the skills below are built through a combination of games, making artworks, and practice in the art gym."
                   : "the skills below are built through a combination of games, and storytelling or reading."}

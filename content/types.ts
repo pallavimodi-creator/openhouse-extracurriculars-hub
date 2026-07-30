@@ -157,6 +157,14 @@ export interface CurriculumProgramme {
   tagline: string;
   description: string;
   heroImageUrl?: string;
+  /**
+   * Multi-level track (e.g. robotics: level 1 mechanics → level 2
+   * electronics). `level` orders the track; `levelName` names this level;
+   * `trackSlug` links the levels together. Single-level programmes omit all.
+   */
+  level?: number;
+  levelName?: string;
+  trackSlug?: string;
   totalSessions: number;
   skillAreas: CurriculumSkillArea[];
   segmentDefinitions: CurriculumSegmentDef[];
@@ -392,6 +400,19 @@ export interface CurriculumActivity {
    * link by `ActivityPopup`.
    */
   pdfUrl?: string;
+  /** Player/group count for a game-style activity, e.g. "2–4 per group". */
+  players?: string;
+  /** Named blocks/components used by an activity (e.g. electronics kit blocks). */
+  namedBlocks?: { title: string; body: string | string[] }[];
+  duration?: string;
+  goal?: string;
+  steps?: string[];
+  endsWhen?: string;
+  easierVariation?: string;
+  harderVariation?: string;
+  skillIds?: string[];
+  educatorNote?: string | string[];
+  referenceLinks?: { label: string; url: string }[];
 }
 
 export interface CurriculumVariation {

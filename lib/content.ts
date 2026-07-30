@@ -151,6 +151,29 @@ export function listCurriculumProgrammes(): CurriculumProgramme[] {
   return curriculumProgrammes;
 }
 
+/**
+ * Programmes that belong on the home grid. A multi-level track (robotics:
+ * level 1 mechanics → level 2 electronics) shows only its first level here;
+ * later levels are reached from inside the programme via the level switcher,
+ * so the grid never shows two cards with the same name.
+ */
+export function listHomeProgrammes(): CurriculumProgramme[] {
+  return curriculumProgrammes.filter((p) => (p.level ?? 1) === 1);
+}
+
+/**
+ * Every level of the track a programme belongs to, in level order. Returns
+ * [] for single-level programmes so callers can skip the switcher.
+ */
+export function getTrackLevels(slug: string): CurriculumProgramme[] {
+  const prog = curriculumProgrammes.find((p) => p.slug === slug);
+  if (!prog?.trackSlug) return [];
+  const levels = curriculumProgrammes
+    .filter((p) => p.trackSlug === prog.trackSlug)
+    .sort((a, b) => (a.level ?? 1) - (b.level ?? 1));
+  return levels.length > 1 ? levels : [];
+}
+
 // Which track a programme belongs to on the hub landing page. Honours an
 // explicit `stage` on the programme record; otherwise derives it from age
 // group — the three 3-5 programmes are "trial", everything else is "live".
