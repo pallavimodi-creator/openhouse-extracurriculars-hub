@@ -47,46 +47,11 @@ export const CREDENTIALS: Credential[] = [
     role: "admin",
     superAdmin: true,
   },
-  // public speaking teacher — sees both PS programmes (5-8 and 8-12)
-  {
-    username: "psteacher",
-    password: "publicspeaking123",
-    programmeSlug: "public-speaking-5-8",
-    displayName: "public speaking teacher",
-    role: "teacher",
-    category: "language",
-  },
-  // art & design teacher — sees both art programmes (5-8 and 8-12)
-  {
-    username: "artteacher",
-    password: "artteacher123",
-    programmeSlug: "art-design-5-8",
-    displayName: "art & design teacher",
-    role: "teacher",
-    category: "art",
-  },
-  // robotics teacher — sees both robotics programmes (5-8 and 8-12)
-  {
-    username: "roboticsteacher",
-    password: "roboticsteacher123",
-    programmeSlug: "robotics-5-8",
-    displayName: "robotics teacher",
-    role: "teacher",
-    category: "stem",
-  },
-  // 3-5 centre educator — runs the integrated at-centre programme (all
-  // three rotating strands: art · stem · language). Lands on the /plan
-  // hub and sees the three 3-5 strands in the library + planner.
-  {
-    username: "eccteacher",
-    password: "eccteacher123",
-    programmeSlug: "art-design-3-5",
-    displayName: "3–5 educator",
-    role: "teacher",
-    ageScope: "3-5",
-  },
-
   // ─── Per-centre admin logins ─────────────────────────────
+  // Subject-specific teacher logins have been retired. Teachers now sign
+  // in with their centre's shared login (below) and type their own name
+  // when they tap "mark this session done" — that's what feeds the
+  // per-teacher counts on the completions dashboard.
   // One login per Bangalore centre. Each sees every programme (scope "*")
   // and is auto-tagged to its own building, so progress logs stay
   // separated per centre without an extra picker click.
