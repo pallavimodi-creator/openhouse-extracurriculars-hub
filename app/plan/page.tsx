@@ -29,13 +29,6 @@ const ABOUT = [
     href: "/plan/docs/parent-positioning",
     icon: Info,
   },
-  {
-    title: "the experience book",
-    blurb: "the live, fillable book — one per child, with a class progress dashboard",
-    href: "/plan/experience",
-    icon: BookOpen,
-    wip: true,
-  },
 ];
 
 // The three programmes — each opens its full overview (daily structure ·
@@ -111,11 +104,8 @@ function Hub() {
               <a.icon className="h-3.5 w-3.5" strokeWidth={2.2} />
             </span>
             <span className="flex-1">
-              <span className="flex items-center gap-1.5 text-[13px] font-bold leading-tight text-ink">
+              <span className="text-[13px] font-bold leading-tight text-ink">
                 {a.title}
-                {"wip" in a && a.wip && (
-                  <span className="rounded-chip bg-segment-yellow/50 px-1.5 py-0.5 text-[9px] font-bold lowercase text-ink-muted">work in progress</span>
-                )}
               </span>
               <span className="mt-0.5 block text-[11px] leading-relaxed text-ink-muted">{a.blurb}</span>
             </span>

@@ -373,8 +373,8 @@ function ProgrammeOverviewContent() {
                 ? programme.ageGroup === "3-5"
                   ? "the four skills below are built through hands-on building (imagine playground), real-world play (wonder world), logic games (logic lab), and number practice (numbers gym) — a rotating set in each part of the day, run at each child's level."
                   : programme.level === 2
-                    ? "this is level 2 — electronics. robotics runs as a track: level 1 (mechanics) then level 2 (electronics) — use the level switcher above to move between them. each day: an experiment on a real circuit, then a build, then the experience book. the experience book is filled during class, in the last 10–15 minutes, to record the day's discovery — it is not homework."
-                    : "this overview covers level 1 — mechanics. robotics runs as a track: level 1 (mechanics) then level 2 (electronics) — use the level switcher above to move between them. each day ends with the experience book, filled during class in the last 10–15 minutes to record the day's discovery — it is not sent home as homework."
+                    ? "this is level 2 — electronics. robotics runs as a track: level 1 (mechanics) then level 2 (electronics) — use the level switcher above to move between them. each day: an experiment on a real circuit, then a build."
+                    : "this overview covers level 1 — mechanics. robotics runs as a track: level 1 (mechanics) then level 2 (electronics) — use the level switcher above to move between them."
                 : isArt
                   ? "the skills below are built through a combination of games, making artworks, and practice in the art gym."
                   : "the skills below are built through a combination of games, and storytelling or reading."}
@@ -741,19 +741,6 @@ function ProgrammeOverviewContent() {
             })}
           </div>
 
-          {/* Experience book — not shown as a planned segment yet; this note
-              explains what it is and when it happens. */}
-          <div className="mt-3 rounded-xl bg-brand-cream/60 p-3 ring-1 ring-ink/5">
-            <p className="text-[11px] font-extrabold lowercase text-ink">
-              + the experience book
-            </p>
-            <p className="mt-1 text-[11.5px] leading-relaxed text-ink-muted">
-              Every session also ends with the <span className="font-semibold text-ink">experience book</span> — the last{" "}
-              <span className="font-semibold text-ink">10–15 minutes, in class</span>, where each child records what they did and
-              discovered that day. It&apos;s filled during the session, not sent home as homework. (The book itself is being
-              finalised — it isn&apos;t a separate resource here yet.)
-            </p>
-          </div>
         </section>
       )}
 

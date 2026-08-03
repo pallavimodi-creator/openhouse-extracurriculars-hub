@@ -145,12 +145,6 @@ export default function ProgrammePlanPage() {
           </Link>
           .
         </p>
-        <p className="mt-2 rounded-xl bg-brand-cream/60 p-3 text-[11.5px] leading-relaxed text-ink-muted ring-1 ring-ink/5">
-          <span className="font-semibold text-ink">note · the experience book</span> — every session also ends with{" "}
-          <span className="font-semibold text-ink">10–15 minutes in class</span> for the experience book, where each child
-          records what they did and discovered. It&apos;s filled during the session, not homework. (Being finalised — not a
-          separate resource here yet.)
-        </p>
       </section>
 
       {/* Day selector */}
