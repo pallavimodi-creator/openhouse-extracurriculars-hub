@@ -33,3 +33,19 @@ export interface SessionPlanRow {
   // segmentId -> { resourceId, resourceLabel } the teacher chose
   picks: Record<string, { resourceId: string; resourceLabel: string }>;
 }
+
+// One "session done" tap = one row in `session_completions`.
+// Powers the admin dashboard at /plan/completions.
+export interface SessionCompletionRow {
+  id?: string;
+  created_at?: string;
+  completed_at?: string; // when the teacher tapped mark-done
+  session_number: number;
+  teacher_name: string; // typed on tap, remembered per device
+  teacher_username: string | null; // the logged-in account (centre login)
+  centre: string | null; // the building/centre
+  programme_slug: string; // e.g. "art-design-5-8"
+  programme_label: string; // human label (e.g. "art & design")
+  category: string | null; // "art" | "language" | "stem"
+  age_band: string | null; // "3-5" | "5-8" | "8-12"
+}

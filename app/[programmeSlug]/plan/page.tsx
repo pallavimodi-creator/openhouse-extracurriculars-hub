@@ -3,16 +3,14 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useParams, notFound, useRouter } from "next/navigation";
-import { CheckCircle2, Circle } from "lucide-react";
 import { getCurriculumProgramme } from "@/lib/content";
 import { DaySelector } from "@/components/DaySelector";
 import { DayPlan } from "@/components/DayPlan";
 import { TrialSessionCard } from "@/components/TrialSessionCard";
+import { MarkDoneButton } from "@/components/MarkDoneButton";
 import {
   getTeacher,
   getCompletedDays,
-  markDayCompleted,
-  unmarkDayCompleted,
   getNextDay,
 } from "@/lib/teacher-state";
 
@@ -101,16 +99,20 @@ export default function ProgrammePlanPage() {
   );
   const isCompleted = completedDays.includes(selectedDay);
 
-  const handleToggleComplete = () => {
-    if (isCompleted) {
-      setCompletedDays(unmarkDayCompleted(slug, selectedDay));
-      return;
-    }
-    const next = markDayCompleted(slug, selectedDay);
-    setCompletedDays(next);
-    const nextDay = getNextDay(next, programme.totalSessions, hasTrialSession);
-    if (nextDay !== selectedDay) {
-      setTimeout(() => setSelectedDay(nextDay), 250);
+  const handleCompletedChange = (nextCompleted: number[]) => {
+    setCompletedDays(nextCompleted);
+    // After marking done (not undo), jump to the next uncompleted day.
+    const wasCompleted = completedDays.includes(selectedDay);
+    const isNowCompleted = nextCompleted.includes(selectedDay);
+    if (!wasCompleted && isNowCompleted) {
+      const nextDay = getNextDay(
+        nextCompleted,
+        programme.totalSessions,
+        hasTrialSession,
+      );
+      if (nextDay !== selectedDay) {
+        setTimeout(() => setSelectedDay(nextDay), 250);
+      }
     }
   };
 
@@ -199,29 +201,17 @@ export default function ProgrammePlanPage() {
         </div>
       </section>
 
-      {/* Mark as done — teacher-only; admin is in view mode. */}
-      {currentSession && !isAdmin && (
+      {/* Mark as done — anyone signed in can log the session (including
+          centre-admin logins), which is what feeds the /plan/completions
+          dashboard for admins. */}
+      {currentSession && selectedDay > 0 && (
         <section className="mt-5 px-4 md:px-8">
-          <button
-            onClick={handleToggleComplete}
-            className={
-              isCompleted
-                ? "flex w-full items-center justify-center gap-2 rounded-card border-2 border-category-language bg-segment-green/20 py-3.5 text-[14px] font-bold text-green-900 transition hover:bg-segment-green/30 active:scale-[0.99]"
-                : "flex w-full items-center justify-center gap-2 rounded-card bg-brand-orange py-3.5 text-[14px] font-bold text-white shadow-card transition hover:opacity-95 active:scale-[0.99]"
-            }
-          >
-            {isCompleted ? (
-              <>
-                <CheckCircle2 className="h-5 w-5" />
-                <span>session done · tap to undo</span>
-              </>
-            ) : (
-              <>
-                <Circle className="h-5 w-5" />
-                <span>mark this session done</span>
-              </>
-            )}
-          </button>
+          <MarkDoneButton
+            programme={programme}
+            sessionNumber={selectedDay}
+            isCompleted={isCompleted}
+            onChange={handleCompletedChange}
+          />
         </section>
       )}
     </div>

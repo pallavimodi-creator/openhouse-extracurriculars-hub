@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { ChevronLeft, ClipboardList } from "lucide-react";
+import { ChevronLeft, ClipboardCheck, ClipboardList } from "lucide-react";
 import { getTeacher } from "@/lib/teacher-state";
 import { supabase, isSupabaseConfigured, type SessionPlanRow } from "@/lib/supabase";
 
@@ -64,6 +64,12 @@ export default function ActivityLogPage() {
         <ClipboardList className="h-5 w-5 text-brand-orange" /> activity log
       </h1>
       <p className="mt-1 text-[13px] text-ink-muted">what each educator ran, by day and centre.</p>
+      <Link
+        href="/plan/completions"
+        className="mt-2 inline-flex w-fit items-center gap-1.5 rounded-chip bg-brand-white px-2.5 py-1 text-[11px] font-semibold text-ink-muted ring-1 ring-ink/10 transition hover:bg-ink/5"
+      >
+        <ClipboardCheck className="h-3.5 w-3.5" /> session completions dashboard
+      </Link>
 
       {!isSupabaseConfigured ? (
         <div className="mt-6 rounded-2xl bg-brand-white p-5 shadow-card ring-1 ring-ink/5">

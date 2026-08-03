@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { SEGMENT_COLORS, GYM_BOOK_IMAGES, getActivityImage } from "@/lib/content";
+import { getRotationHistory, setRotationHistory } from "@/lib/teacher-state";
 import { ChevronDown } from "lucide-react";
 import { Modal } from "./Modal";
 import { ActivityPopup } from "./ActivityPopup";
@@ -260,9 +261,16 @@ function SegmentRow({
   const [viewingActivity, setViewingActivity] = useState<CurriculumActivity | null>(
     segment.assignedActivity
   );
-  // Rotation blocking: track which activities have been selected from the dropdown
-  // Rule: once selected, cannot be selected again until all others have been used
+  // Rotation blocking: track which activities have been selected from the
+  // dropdown so a teacher cannot re-pick one until every other option in the
+  // pool has been used at least once. Persist per (centre, programme,
+  // segment) so the block survives page reloads.
   const [selectionHistory, setSelectionHistory] = useState<string[]>([]);
+  // Rehydrate on mount so SSR doesn't leak per-device state into the HTML.
+  useEffect(() => {
+    if (!programmeSlug) return;
+    setSelectionHistory(getRotationHistory(programmeSlug, segment.segmentId));
+  }, [programmeSlug, segment.segmentId]);
 
   const currentActivity = viewingActivity ?? segment.assignedActivity;
 
@@ -279,11 +287,13 @@ function SegmentRow({
     setDropdownOpen(false);
     setSelectionHistory((prev) => {
       const next = [...prev, act.id];
-      // If all activities have now been selected, reset history
-      if (next.length >= segment.rotationPool.length) {
-        return [];
+      // If all activities have now been selected, reset history —
+      // fresh cycle starts.
+      const finalNext = next.length >= segment.rotationPool.length ? [] : next;
+      if (programmeSlug) {
+        setRotationHistory(programmeSlug, segment.segmentId, finalNext);
       }
-      return next;
+      return finalNext;
     });
   };
 

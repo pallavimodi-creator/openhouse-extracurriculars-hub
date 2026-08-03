@@ -216,3 +216,89 @@ export function getNextDay(
   // All days completed — return the last one
   return totalSessions;
 }
+
+// ─── Remembered teacher-name per building ──────────────────
+//
+// When a teacher taps "mark this session done" we ask for their name and
+// remember it per centre so subsequent taps on the same device pre-fill.
+// Scoped by building because two centres sharing a device (e.g. the same
+// tablet used at different times) would otherwise cross-contaminate.
+
+const REMEMBERED_TEACHER_PREFIX = "oh-teacher-name-";
+
+function rememberedTeacherKey(building: string | null): string {
+  const b = building && building.trim() ? building.trim() : LEGACY_BUILDING;
+  return `${REMEMBERED_TEACHER_PREFIX}${b}`;
+}
+
+export function getRememberedTeacherName(): string {
+  if (typeof window === "undefined") return "";
+  try {
+    return localStorage.getItem(rememberedTeacherKey(getBuilding())) ?? "";
+  } catch {
+    return "";
+  }
+}
+
+export function setRememberedTeacherName(name: string): void {
+  if (typeof window === "undefined") return;
+  const trimmed = name.trim();
+  if (!trimmed) return;
+  try {
+    localStorage.setItem(rememberedTeacherKey(getBuilding()), trimmed);
+  } catch {
+    /* ignore quota */
+  }
+}
+
+// ─── Rotation history per (building, programme, segment) ────
+//
+// The DayPlan blocks a rotation activity from being re-picked until every
+// other option in the pool has been used at least once. Storing that
+// history per device keeps the block honest across page reloads and
+// sessions — a teacher who ran "match me" yesterday shouldn't see it as an
+// unused option today.
+
+const ROTATION_PREFIX = "oh-rotation-";
+
+function rotationKey(
+  building: string | null,
+  programmeSlug: string,
+  segmentId: string,
+): string {
+  const b = building && building.trim() ? building.trim() : LEGACY_BUILDING;
+  return `${ROTATION_PREFIX}${b}::${programmeSlug}::${segmentId}`;
+}
+
+export function getRotationHistory(
+  programmeSlug: string,
+  segmentId: string,
+): string[] {
+  if (typeof window === "undefined") return [];
+  try {
+    const raw = localStorage.getItem(
+      rotationKey(getBuilding(), programmeSlug, segmentId),
+    );
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? (parsed as string[]) : [];
+  } catch {
+    return [];
+  }
+}
+
+export function setRotationHistory(
+  programmeSlug: string,
+  segmentId: string,
+  history: string[],
+): void {
+  if (typeof window === "undefined") return;
+  try {
+    localStorage.setItem(
+      rotationKey(getBuilding(), programmeSlug, segmentId),
+      JSON.stringify(history),
+    );
+  } catch {
+    /* ignore quota */
+  }
+}
