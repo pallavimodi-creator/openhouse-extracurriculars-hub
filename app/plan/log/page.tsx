@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ChevronLeft, ClipboardCheck, ClipboardList } from "lucide-react";
-import { getTeacher, isSuperAdmin } from "@/lib/teacher-state";
+import { getBuilding, getTeacher, isAdmin, isSuperAdmin } from "@/lib/teacher-state";
 import { supabase, isSupabaseConfigured, type SessionPlanRow } from "@/lib/supabase";
 
 export default function ActivityLogPage() {
@@ -13,6 +13,7 @@ export default function ActivityLogPage() {
   const [rows, setRows] = useState<SessionPlanRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [lockedCentre, setLockedCentre] = useState<string | null>(null);
 
   useEffect(() => {
     const t = getTeacher();
@@ -20,11 +21,14 @@ export default function ActivityLogPage() {
       router.replace("/login");
       return;
     }
-    // Only openhouse team super-admins see cross-centre data.
-    if (!isSuperAdmin(t)) {
+    if (!isAdmin(t)) {
       router.replace("/plan");
       return;
     }
+    // Super-admins see all centres; centre-admins see only their own.
+    const superAdmin = isSuperAdmin(t);
+    const centre = superAdmin ? null : (t.building ?? getBuilding());
+    setLockedCentre(centre);
     setAuthed(true);
 
     (async () => {
@@ -32,12 +36,14 @@ export default function ActivityLogPage() {
         setLoading(false);
         return;
       }
-      const { data, error } = await supabase
+      let query = supabase
         .from("session_plans")
         .select("*")
         .order("session_date", { ascending: false })
         .order("created_at", { ascending: false })
         .limit(500);
+      if (centre) query = query.eq("centre", centre);
+      const { data, error } = await query;
       if (error) setError(error.message);
       else setRows((data ?? []) as SessionPlanRow[]);
       setLoading(false);
@@ -64,6 +70,11 @@ export default function ActivityLogPage() {
         <ClipboardList className="h-5 w-5 text-brand-orange" /> activity log
       </h1>
       <p className="mt-1 text-[13px] text-ink-muted">what each educator ran, by day and centre.</p>
+      {lockedCentre && (
+        <p className="mt-2 inline-flex w-fit items-center gap-1.5 rounded-chip bg-brand-orange/10 px-2.5 py-1 text-[11px] font-semibold text-brand-orange">
+          scoped to {lockedCentre.toLowerCase()}
+        </p>
+      )}
       <Link
         href="/plan/completions"
         className="mt-2 inline-flex w-fit items-center gap-1.5 rounded-chip bg-brand-white px-2.5 py-1 text-[11px] font-semibold text-ink-muted ring-1 ring-ink/10 transition hover:bg-ink/5"
