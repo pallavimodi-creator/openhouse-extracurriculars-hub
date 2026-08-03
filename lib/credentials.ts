@@ -34,8 +34,8 @@ export interface Credential {
 }
 
 // Every centre uses this shape: two logins each.
-// - <slug>admin  / Learn@<Centre>  → dashboardAccess: true  (their centre only)
-// - <slug>teacher / Teach@<Centre> → dashboardAccess: false (plan + mark-done, no dashboards)
+// - <slug>admin    / Learn@<Centre>    → dashboardAccess: true  (their centre only)
+// - <slug>educator / Educate@<Centre>  → dashboardAccess: false (plan + mark-done, no dashboards)
 // Both auto-tag their centre so nothing is per-picker.
 interface Centre {
   slug: string;      // username stem, lowercase (e.g. "jayanagar")
@@ -69,15 +69,15 @@ function centreAdmin(c: Centre): Credential {
   };
 }
 
-function centreTeacher(c: Centre): Credential {
+function centreEducator(c: Centre): Credential {
   return {
-    username: `${c.slug}teacher`,
-    password: `Teach@${c.suffix}`,
+    username: `${c.slug}educator`,
+    password: `Educate@${c.suffix}`,
     programmeSlug: "*",
-    displayName: `${c.display} · teacher`,
+    displayName: `${c.display} · educator`,
     role: "admin", // wide programme access; NOT a dashboard signal
     defaultBuilding: c.building,
-    // dashboardAccess intentionally omitted — teachers can't see dashboards.
+    // dashboardAccess intentionally omitted — educators can't see dashboards.
   };
 }
 
@@ -95,11 +95,11 @@ export const CREDENTIALS: Credential[] = [
   },
 
   // ─── Per-centre logins ───────────────────────────────────
-  // Each centre gets two: teacher (plan + mark-done, no dashboard) and
-  // admin (same + centre-scoped dashboard). Teacher-name capture happens
-  // on the mark-done button, so a single shared teacher login per centre
-  // is enough — each individual teacher types their own name.
-  ...CENTRES.flatMap((c) => [centreTeacher(c), centreAdmin(c)]),
+  // Each centre gets two: educator (plan + mark-done, no dashboard) and
+  // admin (same + centre-scoped dashboard). Educator-name capture
+  // happens on the mark-done button, so a single shared educator login
+  // per centre is enough — each individual educator types their own name.
+  ...CENTRES.flatMap((c) => [centreEducator(c), centreAdmin(c)]),
 ];
 
 export function validateCredentials(

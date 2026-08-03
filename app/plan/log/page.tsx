@@ -70,6 +70,7 @@ export default function ActivityLogPage() {
         <ClipboardList className="h-5 w-5 text-brand-orange" /> activity log
       </h1>
       <p className="mt-1 text-[13px] text-ink-muted">what each educator ran, by day and centre.</p>
+      {/* label already reads "educator" — no change needed. */}
       {lockedCentre && (
         <p className="mt-2 inline-flex w-fit items-center gap-1.5 rounded-chip bg-brand-orange/10 px-2.5 py-1 text-[11px] font-semibold text-brand-orange">
           scoped to {lockedCentre.toLowerCase()}

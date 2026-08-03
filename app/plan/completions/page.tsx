@@ -98,7 +98,7 @@ export default function CompletionsDashboardPage() {
         <ClipboardCheck className="h-5 w-5 text-brand-orange" /> session completions
       </h1>
       <p className="mt-1 text-[13px] text-ink-muted">
-        every session a teacher marked done, grouped by category and age band.
+        every session an educator marked done, grouped by category and age band.
       </p>
       {lockedCentre && (
         <p className="mt-2 inline-flex w-fit items-center gap-1.5 rounded-chip bg-brand-orange/10 px-2.5 py-1 text-[11px] font-semibold text-brand-orange">
@@ -116,7 +116,7 @@ export default function CompletionsDashboardPage() {
         </p>
       ) : rows.length === 0 ? (
         <p className="mt-6 text-[13px] text-ink-subtle">
-          no sessions marked done yet. teachers tap the &quot;mark this session done&quot; button on any programme plan.
+          no sessions marked done yet. educators tap the &quot;mark this session done&quot; button on any programme plan.
         </p>
       ) : (
         <>
@@ -161,7 +161,7 @@ function NotConnected() {
     <div className="mt-6 rounded-2xl bg-brand-white p-5 shadow-card ring-1 ring-ink/5">
       <p className="text-[13px] font-bold text-ink">the dashboard isn&apos;t connected yet</p>
       <p className="mt-1 text-[12px] leading-relaxed text-ink-muted">
-        add the two <span className="font-semibold">NEXT_PUBLIC_SUPABASE_*</span> env vars to Vercel and run the two table SQL blocks — full steps in <span className="font-semibold">planning/supabase-setup.md</span>. once connected, every session a teacher marks done shows up here.
+        add the two <span className="font-semibold">NEXT_PUBLIC_SUPABASE_*</span> env vars to Vercel and run the two table SQL blocks — full steps in <span className="font-semibold">planning/supabase-setup.md</span>. once connected, every session an educator marks done shows up here.
       </p>
     </div>
   );
