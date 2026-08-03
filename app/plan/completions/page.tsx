@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ChevronLeft, ClipboardCheck } from "lucide-react";
-import { getTeacher } from "@/lib/teacher-state";
+import { getTeacher, isSuperAdmin } from "@/lib/teacher-state";
 import {
   isSupabaseConfigured,
   supabase,
@@ -30,8 +30,9 @@ export default function CompletionsDashboardPage() {
       router.replace("/login");
       return;
     }
-    const admin = t.role === "admin" || t.programmeSlug === "*";
-    if (!admin) {
+    // Only the openhouse team super-admins see cross-centre data.
+    // Per-centre admin logins get bounced back to the plan hub.
+    if (!isSuperAdmin(t)) {
       router.replace("/plan");
       return;
     }

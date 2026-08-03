@@ -44,6 +44,17 @@ export interface TeacherState {
   category?: TeacherCategory; // if set, teacher sees every programme in this category
   ageScope?: "3-5"; // if set, the educator runs the integrated 3-5 centre programme (all strands)
   building?: string; // current building / centre — set after the /building picker
+  /**
+   * Super-admin — set only for the openhouse team logins. Gates access
+   * to cross-centre dashboards (/plan/log and /plan/completions). Regular
+   * per-centre admins do NOT have this flag.
+   */
+  superAdmin?: boolean;
+}
+
+/** True only for the openhouse team logins that gate cross-centre dashboards. */
+export function isSuperAdmin(state: TeacherState | null): boolean {
+  return state?.superAdmin === true;
 }
 
 export function isAdmin(state: TeacherState | null): boolean {

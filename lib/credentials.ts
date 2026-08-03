@@ -18,25 +18,34 @@ export interface Credential {
    * scoped to its own building without an extra click.
    */
   defaultBuilding?: string;
+  /**
+   * Super-admin — the openhouse team logins that see cross-centre data
+   * (the activity log at /plan/log and the completions dashboard at
+   * /plan/completions). Per-centre admin logins are NOT super-admins:
+   * they can mark sessions done but can't see other centres' data.
+   */
+  superAdmin?: boolean;
 }
 
 export const CREDENTIALS: Credential[] = [
   // centre — the shared centre login for the extra-curriculars hub.
-  // Sees every programme; this is the centre's reference point.
+  // Sees every programme AND the cross-centre admin dashboards.
   {
     username: "openhousecentre",
     password: "oh.centre.eca",
     programmeSlug: "*",
     displayName: "openhouse centre",
     role: "admin",
+    superAdmin: true,
   },
-  // admin — sees every programme
+  // admin — openhouse team, sees every programme + admin dashboards
   {
     username: "admin",
     password: "openhouselxd",
     programmeSlug: "*",
     displayName: "admin",
     role: "admin",
+    superAdmin: true,
   },
   // public speaking teacher — sees both PS programmes (5-8 and 8-12)
   {
