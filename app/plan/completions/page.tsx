@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ChevronLeft, ClipboardCheck } from "lucide-react";
-import { getBuilding, getTeacher, isAdmin, isSuperAdmin } from "@/lib/teacher-state";
+import { getBuilding, getTeacher, hasDashboardAccess, isSuperAdmin } from "@/lib/teacher-state";
 import {
   isSupabaseConfigured,
   supabase,
@@ -33,9 +33,8 @@ export default function CompletionsDashboardPage() {
       router.replace("/login");
       return;
     }
-    if (!isAdmin(t)) {
-      // Non-admin teachers (single-programme + category teachers) don't
-      // see the dashboard — they only mark their own sessions done.
+    if (!hasDashboardAccess(t)) {
+      // Centre-teacher and everyone else — dashboards are hidden.
       router.replace("/plan");
       return;
     }

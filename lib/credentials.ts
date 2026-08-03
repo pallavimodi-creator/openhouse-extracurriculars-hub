@@ -1,6 +1,6 @@
 // ─── Teacher & admin credentials ─────────────────────────────
-// One shared teacher per category + one admin. No DB — auth is
-// purely against this static list.
+// One HQ login plus, per centre, one teacher login and one admin login.
+// No DB — auth is purely against this static list.
 
 import type { TeacherCategory } from "@/lib/teacher-state";
 
@@ -19,122 +19,87 @@ export interface Credential {
    */
   defaultBuilding?: string;
   /**
-   * Super-admin — the openhouse team logins that see cross-centre data
-   * (the activity log at /plan/log and the completions dashboard at
-   * /plan/completions). Per-centre admin logins are NOT super-admins:
-   * they can mark sessions done but can't see other centres' data.
+   * Super-admin — the openhouse HQ login. Sees cross-centre data
+   * (both dashboards, unfiltered). Every centre-admin has
+   * dashboardAccess but only super-admin sees other centres.
    */
   superAdmin?: boolean;
+  /**
+   * Can view the dashboards (activity log + completions).
+   * - super-admin: true, sees all centres
+   * - centre-admin: true, scoped to their centre
+   * - centre-teacher (and everyone else): false → dashboards are hidden
+   */
+  dashboardAccess?: boolean;
+}
+
+// Every centre uses this shape: two logins each.
+// - <slug>admin  / Learn@<Centre>  → dashboardAccess: true  (their centre only)
+// - <slug>teacher / Teach@<Centre> → dashboardAccess: false (plan + mark-done, no dashboards)
+// Both auto-tag their centre so nothing is per-picker.
+interface Centre {
+  slug: string;      // username stem, lowercase (e.g. "jayanagar")
+  suffix: string;    // password suffix (e.g. "Jayanagar", "JPNagar")
+  building: string;  // display name of the centre (e.g. "JP Nagar")
+  display: string;   // shown to the teacher in-app (e.g. "oh. jp nagar")
+}
+
+const CENTRES: Centre[] = [
+  { slug: "jayanagar",     suffix: "Jayanagar",     building: "Jayanagar",     display: "oh. jayanagar" },
+  { slug: "jpnagar",       suffix: "JPNagar",       building: "JP Nagar",      display: "oh. jp nagar" },
+  { slug: "sarjapur",      suffix: "Sarjapur",      building: "Sarjapur",      display: "oh. sarjapur" },
+  { slug: "whitefield",    suffix: "Whitefield",    building: "Whitefield",    display: "oh. whitefield" },
+  { slug: "hsrlayout",     suffix: "HSRLayout",     building: "HSR Layout",    display: "oh. hsr layout" },
+  { slug: "indiranagar",   suffix: "Indiranagar",   building: "Indiranagar",   display: "oh. indiranagar" },
+  { slug: "sahakarnagar",  suffix: "SahakarNagar",  building: "Sahakar Nagar", display: "oh. sahakar nagar" },
+  { slug: "haralur",       suffix: "Haralur",       building: "Haralur",       display: "oh. haralur" },
+  { slug: "sadashivnagar", suffix: "Sadashivnagar", building: "Sadashivnagar", display: "oh. sadashivnagar" },
+  { slug: "hrbrlayout",    suffix: "HRBRLayout",    building: "HRBR Layout",   display: "oh. hrbr layout" },
+];
+
+function centreAdmin(c: Centre): Credential {
+  return {
+    username: `${c.slug}admin`,
+    password: `Learn@${c.suffix}`,
+    programmeSlug: "*",
+    displayName: `${c.display} · admin`,
+    role: "admin",
+    defaultBuilding: c.building,
+    dashboardAccess: true, // scoped to their centre
+  };
+}
+
+function centreTeacher(c: Centre): Credential {
+  return {
+    username: `${c.slug}teacher`,
+    password: `Teach@${c.suffix}`,
+    programmeSlug: "*",
+    displayName: `${c.display} · teacher`,
+    role: "admin", // wide programme access; NOT a dashboard signal
+    defaultBuilding: c.building,
+    // dashboardAccess intentionally omitted — teachers can't see dashboards.
+  };
 }
 
 export const CREDENTIALS: Credential[] = [
-  // centre — the shared centre login for the extra-curriculars hub.
-  // Sees every programme AND the cross-centre admin dashboards.
-  {
-    username: "openhousecentre",
-    password: "oh.centre.eca",
-    programmeSlug: "*",
-    displayName: "openhouse centre",
-    role: "admin",
-    superAdmin: true,
-  },
-  // admin — openhouse team, sees every programme + admin dashboards
+  // ─── HQ ──────────────────────────────────────────────────
+  // Openhouse team — sees every centre's data across both dashboards.
   {
     username: "admin",
     password: "openhouselxd",
     programmeSlug: "*",
-    displayName: "admin",
+    displayName: "openhouse hq",
     role: "admin",
     superAdmin: true,
+    dashboardAccess: true,
   },
-  // ─── Per-centre admin logins ─────────────────────────────
-  // Subject-specific teacher logins have been retired. Teachers now sign
-  // in with their centre's shared login (below) and type their own name
-  // when they tap "mark this session done" — that's what feeds the
-  // per-teacher counts on the completions dashboard.
-  // One login per Bangalore centre. Each sees every programme (scope "*")
-  // and is auto-tagged to its own building, so progress logs stay
-  // separated per centre without an extra picker click.
-  {
-    username: "jayanagaradmin",
-    password: "Learn@Jayanagar",
-    programmeSlug: "*",
-    displayName: "oh. jayanagar",
-    role: "admin",
-    defaultBuilding: "Jayanagar",
-  },
-  {
-    username: "jpnagaradmin",
-    password: "Learn@JPNagar",
-    programmeSlug: "*",
-    displayName: "oh. jp nagar",
-    role: "admin",
-    defaultBuilding: "JP Nagar",
-  },
-  {
-    username: "sarjapuradmin",
-    password: "Learn@Sarjapur",
-    programmeSlug: "*",
-    displayName: "oh. sarjapur",
-    role: "admin",
-    defaultBuilding: "Sarjapur",
-  },
-  {
-    username: "whitefieldadmin",
-    password: "Learn@Whitefield",
-    programmeSlug: "*",
-    displayName: "oh. whitefield",
-    role: "admin",
-    defaultBuilding: "Whitefield",
-  },
-  {
-    username: "hsrlayoutadmin",
-    password: "Learn@HSRLayout",
-    programmeSlug: "*",
-    displayName: "oh. hsr layout",
-    role: "admin",
-    defaultBuilding: "HSR Layout",
-  },
-  {
-    username: "indiranagaradmin",
-    password: "Learn@Indiranagar",
-    programmeSlug: "*",
-    displayName: "oh. indiranagar",
-    role: "admin",
-    defaultBuilding: "Indiranagar",
-  },
-  {
-    username: "sahakarnagaradmin",
-    password: "Learn@SahakarNagar",
-    programmeSlug: "*",
-    displayName: "oh. sahakar nagar",
-    role: "admin",
-    defaultBuilding: "Sahakar Nagar",
-  },
-  {
-    username: "haraluradmin",
-    password: "Learn@Haralur",
-    programmeSlug: "*",
-    displayName: "oh. haralur",
-    role: "admin",
-    defaultBuilding: "Haralur",
-  },
-  {
-    username: "sadashivnagaradmin",
-    password: "Learn@Sadashivnagar",
-    programmeSlug: "*",
-    displayName: "oh. sadashivnagar",
-    role: "admin",
-    defaultBuilding: "Sadashivnagar",
-  },
-  {
-    username: "hrbrlayoutadmin",
-    password: "Learn@HRBRLayout",
-    programmeSlug: "*",
-    displayName: "oh. hrbr layout",
-    role: "admin",
-    defaultBuilding: "HRBR Layout",
-  },
+
+  // ─── Per-centre logins ───────────────────────────────────
+  // Each centre gets two: teacher (plan + mark-done, no dashboard) and
+  // admin (same + centre-scoped dashboard). Teacher-name capture happens
+  // on the mark-done button, so a single shared teacher login per centre
+  // is enough — each individual teacher types their own name.
+  ...CENTRES.flatMap((c) => [centreTeacher(c), centreAdmin(c)]),
 ];
 
 export function validateCredentials(

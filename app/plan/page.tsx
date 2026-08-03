@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ClipboardCheck, ClipboardList, Home } from "lucide-react";
 import { TeacherGate } from "@/components/TeacherGate";
-import { getTeacher, isAdmin, type TeacherState } from "@/lib/teacher-state";
+import { getTeacher, hasDashboardAccess, type TeacherState } from "@/lib/teacher-state";
 
 /**
  * The 3-5 planner is paused for now — surfaces here just show a "closed"
@@ -25,7 +25,7 @@ function PlanClosed() {
     setTeacher(getTeacher());
   }, []);
 
-  const admin = isAdmin(teacher);
+  const admin = hasDashboardAccess(teacher);
 
   return (
     <div className="mx-auto flex min-h-[calc(100dvh-120px)] w-full max-w-2xl flex-col items-center justify-center px-4 py-10 md:px-8">

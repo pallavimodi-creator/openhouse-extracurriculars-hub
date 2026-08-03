@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ChevronLeft, ClipboardCheck, ClipboardList } from "lucide-react";
-import { getBuilding, getTeacher, isAdmin, isSuperAdmin } from "@/lib/teacher-state";
+import { getBuilding, getTeacher, hasDashboardAccess, isSuperAdmin } from "@/lib/teacher-state";
 import { supabase, isSupabaseConfigured, type SessionPlanRow } from "@/lib/supabase";
 
 export default function ActivityLogPage() {
@@ -21,7 +21,7 @@ export default function ActivityLogPage() {
       router.replace("/login");
       return;
     }
-    if (!isAdmin(t)) {
+    if (!hasDashboardAccess(t)) {
       router.replace("/plan");
       return;
     }

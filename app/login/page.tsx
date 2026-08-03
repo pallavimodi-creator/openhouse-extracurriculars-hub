@@ -53,8 +53,9 @@ export default function LoginPage() {
       // Per-centre logins auto-tag their building so progress logs stay
       // scoped to that centre without an extra picker click.
       building: cred.defaultBuilding,
-      // Only the openhouse team logins see cross-centre dashboards.
+      // superAdmin: only HQ. dashboardAccess: HQ + centre-admins.
       superAdmin: cred.superAdmin,
+      dashboardAccess: cred.dashboardAccess,
     });
     // Admins go straight home — they're reviewing, not teaching, so no
     // building needed. Teachers whose credential already carries a
