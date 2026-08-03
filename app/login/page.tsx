@@ -50,10 +50,14 @@ export default function LoginPage() {
       role: cred.role,
       category: cred.category,
       ageScope: cred.ageScope,
+      // Per-centre logins auto-tag their building so progress logs stay
+      // scoped to that centre without an extra picker click.
+      building: cred.defaultBuilding,
     });
     // Admins go straight home — they're reviewing, not teaching, so no
-    // building needed. Teachers go to the building picker first.
-    if (cred.role === "admin") {
+    // building needed. Teachers whose credential already carries a
+    // defaultBuilding also skip the picker; other teachers pick first.
+    if (cred.role === "admin" || cred.defaultBuilding) {
       router.push("/");
       return;
     }
