@@ -3,6 +3,7 @@
 // No DB — auth is purely against this static list.
 
 import type { TeacherCategory } from "@/lib/teacher-state";
+import { CENTRES, type Centre } from "@/lib/centres";
 
 export interface Credential {
   username: string;
@@ -37,25 +38,7 @@ export interface Credential {
 // - <slug>admin    / Learn@<Centre>    → dashboardAccess: true  (their centre only)
 // - <slug>educator / Educate@<Centre>  → dashboardAccess: false (plan + mark-done, no dashboards)
 // Both auto-tag their centre so nothing is per-picker.
-interface Centre {
-  slug: string;      // username stem, lowercase (e.g. "jayanagar")
-  suffix: string;    // password suffix (e.g. "Jayanagar", "JPNagar")
-  building: string;  // display name of the centre (e.g. "JP Nagar")
-  display: string;   // shown to the teacher in-app (e.g. "oh. jp nagar")
-}
-
-const CENTRES: Centre[] = [
-  { slug: "jayanagar",     suffix: "Jayanagar",     building: "Jayanagar",     display: "oh. jayanagar" },
-  { slug: "jpnagar",       suffix: "JPNagar",       building: "JP Nagar",      display: "oh. jp nagar" },
-  { slug: "sarjapur",      suffix: "Sarjapur",      building: "Sarjapur",      display: "oh. sarjapur" },
-  { slug: "whitefield",    suffix: "Whitefield",    building: "Whitefield",    display: "oh. whitefield" },
-  { slug: "hsrlayout",     suffix: "HSRLayout",     building: "HSR Layout",    display: "oh. hsr layout" },
-  { slug: "indiranagar",   suffix: "Indiranagar",   building: "Indiranagar",   display: "oh. indiranagar" },
-  { slug: "sahakarnagar",  suffix: "SahakarNagar",  building: "Sahakar Nagar", display: "oh. sahakar nagar" },
-  { slug: "haralur",       suffix: "Haralur",       building: "Haralur",       display: "oh. haralur" },
-  { slug: "sadashivnagar", suffix: "Sadashivnagar", building: "Sadashivnagar", display: "oh. sadashivnagar" },
-  { slug: "hrbrlayout",    suffix: "HRBRLayout",    building: "HRBR Layout",   display: "oh. hrbr layout" },
-];
+// Centre list itself lives in @/lib/centres so the dashboards can share it.
 
 function centreAdmin(c: Centre): Credential {
   return {

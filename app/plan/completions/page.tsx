@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ChevronLeft, ClipboardCheck } from "lucide-react";
 import { getTeacher, hasDashboardAccess } from "@/lib/teacher-state";
+import { CENTRE_NAMES } from "@/lib/centres";
 import {
   isSupabaseConfigured,
   supabase,
@@ -53,8 +54,12 @@ export default function CompletionsDashboardPage() {
     })();
   }, [router]);
 
+  // Always show every known centre in the filter, not just centres that
+  // have completions yet — otherwise a fresh dashboard looks like only the
+  // one seeded centre exists. Any extra centre that shows up in data (e.g.
+  // a rename) still gets appended.
   const centres = useMemo(() => {
-    const s = new Set<string>();
+    const s = new Set<string>(CENTRE_NAMES);
     for (const r of rows) if (r.centre) s.add(r.centre);
     return Array.from(s).sort();
   }, [rows]);
