@@ -15,6 +15,7 @@
 const TEACHER_KEY = "oh-teacher";
 const COMPLETED_PREFIX = "oh-completed-";
 const KNOWN_BUILDINGS_PREFIX = "oh-buildings-";
+const SESSION_FOCUS_KEY = "oh-session-focus";
 // Older builds wrote `oh-completed-<programmeSlug>`. New builds write
 // `oh-completed-<building>-<programmeSlug>`. We migrate the legacy keys
 // under a synthetic "(default)" building so teachers don't lose progress.
@@ -236,6 +237,58 @@ export function getNextDay(
   }
   // All days completed — return the last one
   return totalSessions;
+}
+
+// ─── Session focus — the educator's "who + what" for today ─
+//
+// After signing in with a centre login, the educator picks their name
+// and a category (art / language / stem). We store that focus so the
+// home page only shows programmes in that category and mark-done
+// stamps sessions with the educator's name automatically. Focus lives
+// in sessionStorage — it clears when the tab closes so the next
+// educator using the same centre login gets their own picker.
+
+export interface SessionFocus {
+  teacherName: string;
+  category: TeacherCategory;
+}
+
+export function getSessionFocus(): SessionFocus | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = sessionStorage.getItem(SESSION_FOCUS_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as SessionFocus;
+    if (!parsed.teacherName || !parsed.category) return null;
+    return parsed;
+  } catch {
+    return null;
+  }
+}
+
+export function setSessionFocus(focus: SessionFocus): void {
+  if (typeof window === "undefined") return;
+  const trimmed: SessionFocus = {
+    teacherName: focus.teacherName.trim(),
+    category: focus.category,
+  };
+  if (!trimmed.teacherName || !trimmed.category) return;
+  try {
+    sessionStorage.setItem(SESSION_FOCUS_KEY, JSON.stringify(trimmed));
+    // Also update the remembered name so future centre visits pre-fill.
+    setRememberedTeacherName(trimmed.teacherName);
+  } catch {
+    /* ignore */
+  }
+}
+
+export function clearSessionFocus(): void {
+  if (typeof window === "undefined") return;
+  try {
+    sessionStorage.removeItem(SESSION_FOCUS_KEY);
+  } catch {
+    /* ignore */
+  }
 }
 
 // ─── Remembered teacher-name per building ──────────────────

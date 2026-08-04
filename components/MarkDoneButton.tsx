@@ -6,6 +6,7 @@ import type { CurriculumProgramme } from "@/content/types";
 import {
   getBuilding,
   getRememberedTeacherName,
+  getSessionFocus,
   getTeacher,
   markDayCompleted,
   setRememberedTeacherName,
@@ -19,12 +20,12 @@ import {
 
 /**
  * "Mark this session done" — the button teachers tap at the end of a
- * class. Prompts for a name (remembered per device + centre), writes a
- * row to Supabase, and syncs into the existing local "completed days"
- * store so the DaySelector tick keeps working across pages.
- *
- * Admins see the same button so centre-admin logins (which are role
- * "admin") can still log their sessions.
+ * class. If the educator has already set a session focus (name + category
+ * on /who), tapping submits immediately using that name — no re-prompt.
+ * Otherwise an inline form asks for a name (remembered per device +
+ * centre for next time). Writes a row to session_completions and syncs
+ * into the local "completed days" store so the DaySelector tick keeps
+ * working across pages.
  */
 export function MarkDoneButton({
   programme,
@@ -39,12 +40,17 @@ export function MarkDoneButton({
 }) {
   const [showForm, setShowForm] = useState(false);
   const [name, setName] = useState("");
+  const [focusName, setFocusName] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
   const [savedNote, setSavedNote] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    setName(getRememberedTeacherName());
+    // Read the session focus on mount so we know whether to skip the
+    // inline form. Falls back to the remembered name for the form.
+    const focus = getSessionFocus();
+    setFocusName(focus?.teacherName ?? null);
+    setName(focus?.teacherName ?? getRememberedTeacherName());
   }, [showForm]);
 
   const handleUndo = () => {
@@ -58,8 +64,8 @@ export function MarkDoneButton({
     setShowForm(true);
   };
 
-  const handleSubmit = async () => {
-    const trimmed = name.trim();
+  const submit = async (rawName: string) => {
+    const trimmed = rawName.trim();
     if (!trimmed) {
       setError("please add your name so we can log this session.");
       return;
@@ -101,6 +107,12 @@ export function MarkDoneButton({
     setShowForm(false);
   };
 
+  const handleSubmit = () => submit(name);
+  const handleQuickSubmit = () => {
+    if (focusName) submit(focusName);
+    else openForm();
+  };
+
   if (isCompleted) {
     return (
       <div className="flex flex-col gap-2">
@@ -119,13 +131,24 @@ export function MarkDoneButton({
   }
 
   if (!showForm) {
+    // Focus set → one-tap submit (no re-prompt), name shown on the button
+    // so the educator knows who they're logging as. No focus → open the
+    // inline form and ask for a name.
     return (
       <button
-        onClick={openForm}
-        className="flex w-full items-center justify-center gap-2 rounded-card bg-brand-orange py-3.5 text-[14px] font-bold text-white shadow-card transition hover:opacity-95 active:scale-[0.99]"
+        onClick={handleQuickSubmit}
+        disabled={saving}
+        className="flex w-full flex-col items-center justify-center gap-0.5 rounded-card bg-brand-orange py-3.5 text-[14px] font-bold text-white shadow-card transition hover:opacity-95 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60"
       >
-        <Circle className="h-5 w-5" />
-        <span>mark this session done</span>
+        <span className="flex items-center gap-2">
+          <Circle className="h-5 w-5" />
+          <span>{saving ? "saving…" : "mark this session done"}</span>
+        </span>
+        {focusName && !saving && (
+          <span className="text-[10.5px] font-semibold opacity-80">
+            as {focusName.toLowerCase()}
+          </span>
+        )}
       </button>
     );
   }

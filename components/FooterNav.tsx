@@ -11,6 +11,7 @@ import {
   Building2,
   ClipboardList,
   ClipboardCheck,
+  Compass,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { listCurriculumProgrammes } from "@/lib/content";
@@ -18,8 +19,10 @@ import {
   clearTeacher,
   getBuilding,
   clearBuilding,
+  getSessionFocus,
   getTeacher,
   hasDashboardAccess,
+  type SessionFocus,
   type TeacherState,
 } from "@/lib/teacher-state";
 
@@ -28,13 +31,15 @@ export function FooterNav() {
   const router = useRouter();
   const [building, setBuildingState] = useState<string | null>(null);
   const [teacher, setTeacher] = useState<TeacherState | null>(null);
+  const [focus, setFocus] = useState<SessionFocus | null>(null);
 
-  // Read the current building + teacher on mount and whenever the route
-  // changes (picking a building on /building or signing in updates the nav
-  // for the next paint).
+  // Read the current building + teacher + focus on mount and whenever the
+  // route changes (picking a building, signing in, or updating focus on
+  // /who all update the nav for the next paint).
   useEffect(() => {
     setBuildingState(getBuilding());
     setTeacher(getTeacher());
+    setFocus(getSessionFocus());
   }, [pathname]);
 
   // Hide the footer on the login + building-picker pages
@@ -102,9 +107,24 @@ export function FooterNav() {
         paddingBottom: "max(env(safe-area-inset-bottom), 12px)",
       }}
     >
-      {/* Current building chip — tap to switch without signing out.
-          Educators only; admins have their centre implied by their login. */}
-      {building && !isAdmin && (
+      {/* Focus chip — the educator's name + category. Tap to change.
+          Educators only; admins never have a focus. */}
+      {focus && !isAdmin && (
+        <Link
+          href="/who"
+          className="mx-auto flex w-full max-w-4xl items-center justify-center gap-1.5 border-b border-ink/5 px-3 py-1 text-[10px] font-bold text-ink-muted transition hover:bg-brand-orange/8 lg:max-w-7xl"
+          title="tap to switch name or category"
+        >
+          <Compass className="h-3 w-3 text-brand-orange" strokeWidth={2.4} />
+          <span>{focus.category === "art" ? "art & design" : focus.category}</span>
+          <span>·</span>
+          <span className="text-ink">{focus.teacherName.toLowerCase()}</span>
+          <span className="ml-1 text-brand-orange">· switch</span>
+        </Link>
+      )}
+      {/* Current building chip — only when no focus set (focus already
+          shows the centre context). Educators only; admins never see it. */}
+      {building && !isAdmin && !focus && (
         <button
           type="button"
           onClick={handleSwitchBuilding}

@@ -11,7 +11,13 @@ import {
 } from "@/lib/content";
 import { HeroBanner } from "@/components/HeroBanner";
 import { ProgrammeCard } from "@/components/ProgrammeCard";
-import { getTeacher, type TeacherState } from "@/lib/teacher-state";
+import {
+  getSessionFocus,
+  getTeacher,
+  hasDashboardAccess,
+  type SessionFocus,
+  type TeacherState,
+} from "@/lib/teacher-state";
 import type { ProgrammeStage } from "@/content/types";
 
 // Three-step guide tile — consistent layout for the "how to go
@@ -156,6 +162,7 @@ function TrackSection({
 export default function HomePage() {
   const router = useRouter();
   const [teacher, setTeacher] = useState<TeacherState | null>(null);
+  const [focus, setFocus] = useState<SessionFocus | null>(null);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -164,15 +171,20 @@ export default function HomePage() {
       router.replace("/login");
       return;
     }
-    // Non-admin teachers need to have picked a building this session
-    // before they can land on home. Admins skip this — they're reviewing,
-    // not running a class.
-    const admin = t.role === "admin" || t.programmeSlug === "*";
-    if (!admin && !t.building) {
-      router.replace("/building");
-      return;
+    // Non-admin teachers need a building; then a session focus (name +
+    // category). Admins skip both — they're reviewing, not teaching.
+    if (!hasDashboardAccess(t)) {
+      if (!t.building) {
+        router.replace("/building");
+        return;
+      }
+      if (!getSessionFocus()) {
+        router.replace("/who");
+        return;
+      }
     }
     setTeacher(t);
+    setFocus(getSessionFocus());
     setLoaded(true);
   }, [router]);
 
@@ -184,20 +196,23 @@ export default function HomePage() {
     );
   }
 
-  const isAdmin = teacher.programmeSlug === "*" || teacher.role === "admin";
+  const isAdmin = hasDashboardAccess(teacher);
   // Show every programme on the homepage. ProgrammeCard renders a
   // "coming soon" tag for any programme whose totalSessions === 0, so
   // teachers see what's coming next.
+  // - Admins see everything.
+  // - Educators with a session focus see only that category.
+  // - Fallbacks kept for legacy category / single-programme accounts.
   const programmes = isAdmin
     ? listHomeProgrammes()
-    : teacher.category
-      ? listHomeProgrammes().filter(
-          (p) => p.category === teacher.category,
-        )
-      : (() => {
-          const p = getCurriculumProgramme(teacher.programmeSlug);
-          return p ? [p] : [];
-        })();
+    : focus
+      ? listHomeProgrammes().filter((p) => p.category === focus.category)
+      : teacher.category
+        ? listHomeProgrammes().filter((p) => p.category === teacher.category)
+        : (() => {
+            const p = getCurriculumProgramme(teacher.programmeSlug);
+            return p ? [p] : [];
+          })();
 
   // Split the visible programmes into the two landing tracks. Live = the
   // 5-8 / 8-12 programmes running at the centre; trial = the three 3-5
@@ -209,11 +224,31 @@ export default function HomePage() {
     <div className="flex flex-col">
       <HeroBanner />
 
-      {/* Welcome */}
+      {/* Welcome — use the educator's own name (from session focus) when
+          they've picked one; otherwise fall back to the login display. */}
       <section className="px-4 pt-6 pb-2 md:px-8 md:pt-10">
         <h2 className="text-[22px] font-extrabold leading-tight text-ink md:text-[28px]">
-          hello, {teacher.teacherName}.
+          hello, {focus?.teacherName ?? teacher.teacherName}.
         </h2>
+        {focus && !isAdmin && (
+          <p className="mt-1 text-[12px] text-ink-muted">
+            showing{" "}
+            <span className="font-semibold text-brand-orange">
+              {focus.category === "art"
+                ? "art & design"
+                : focus.category === "language"
+                  ? "language"
+                  : "stem"}
+            </span>{" "}
+            programmes.{" "}
+            <Link
+              href="/who"
+              className="font-semibold text-brand-orange underline-offset-2 hover:underline"
+            >
+              switch
+            </Link>
+          </p>
+        )}
       </section>
 
       {/* How to go through the hub — three-step sequence with hand-drawn

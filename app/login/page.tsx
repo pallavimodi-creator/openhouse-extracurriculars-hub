@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { setTeacher, getTeacher } from "@/lib/teacher-state";
+import { getSessionFocus, getTeacher, hasDashboardAccess, setTeacher } from "@/lib/teacher-state";
 import { validateCredentials } from "@/lib/credentials";
 
 export default function LoginPage() {
@@ -12,25 +12,26 @@ export default function LoginPage() {
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
-  // If already signed in, go straight through. Teachers need to have
-  // picked a building this session — if they haven't, route to /building
-  // first. Admins skip the building picker entirely (they're reviewing
-  // the platform, not running a class).
+  // If already signed in, route to the right landing spot:
+  // - Admins go straight to home (they review; no session focus needed).
+  // - Educators without focus go to /who first to pick name + category.
+  // - Educators with focus already set go straight to home.
   useEffect(() => {
     const existing = getTeacher();
-    if (existing) {
-      const admin = existing.role === "admin" || existing.programmeSlug === "*";
-      if (!admin && !existing.building) {
-        router.replace("/building");
-        return;
-      }
-      const dest = existing.ageScope
-        ? "/plan"
-        : admin || existing.category
-          ? "/"
-          : `/${existing.programmeSlug}`;
-      router.replace(dest);
+    if (!existing) return;
+    if (hasDashboardAccess(existing)) {
+      router.replace("/");
+      return;
     }
+    if (!existing.building) {
+      router.replace("/building");
+      return;
+    }
+    if (!getSessionFocus()) {
+      router.replace("/who");
+      return;
+    }
+    router.replace("/");
   }, [router]);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -57,11 +58,15 @@ export default function LoginPage() {
       superAdmin: cred.superAdmin,
       dashboardAccess: cred.dashboardAccess,
     });
-    // Admins go straight home — they're reviewing, not teaching, so no
-    // building needed. Teachers whose credential already carries a
-    // defaultBuilding also skip the picker; other teachers pick first.
-    if (cred.role === "admin" || cred.defaultBuilding) {
+    // Admins go straight home — they're reviewing, not teaching.
+    if (cred.dashboardAccess) {
       router.push("/");
+      return;
+    }
+    // Educators with a centre baked into their credential pick their
+    // name + category first; then the app filters to that category.
+    if (cred.defaultBuilding) {
+      router.push("/who");
       return;
     }
     router.push("/building");
