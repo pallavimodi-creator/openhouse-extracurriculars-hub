@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ChevronLeft, ClipboardCheck } from "lucide-react";
-import { getTeacher, hasDashboardAccess } from "@/lib/teacher-state";
+import { getBuilding, getTeacher, hasDashboardAccess, isSuperAdmin } from "@/lib/teacher-state";
 import { CENTRE_NAMES } from "@/lib/centres";
 import {
   isSupabaseConfigured,
@@ -24,6 +24,9 @@ export default function CompletionsDashboardPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [centreFilter, setCentreFilter] = useState<string>("all");
+  // When a centre-admin views the dashboard, we lock it to their centre.
+  // HQ super-admins see every centre + the centre filter dropdown.
+  const [lockedCentre, setLockedCentre] = useState<string | null>(null);
 
   useEffect(() => {
     const t = getTeacher();
@@ -36,6 +39,9 @@ export default function CompletionsDashboardPage() {
       router.replace("/plan");
       return;
     }
+    const centre = isSuperAdmin(t) ? null : (t.building ?? getBuilding());
+    setLockedCentre(centre);
+    if (centre) setCentreFilter(centre);
     setAuthed(true);
 
     (async () => {
@@ -43,11 +49,15 @@ export default function CompletionsDashboardPage() {
         setLoading(false);
         return;
       }
-      const { data, error } = await supabase
+      let query = supabase
         .from("session_completions")
         .select("*")
         .order("completed_at", { ascending: false })
         .limit(2000);
+      // Centre-admins are scoped server-side too — don't pull other
+      // centres' rows into their browser.
+      if (centre) query = query.eq("centre", centre);
+      const { data, error } = await query;
       if (error) setError(error.message);
       else setRows((data ?? []) as SessionCompletionRow[]);
       setLoading(false);
@@ -94,6 +104,11 @@ export default function CompletionsDashboardPage() {
       <p className="mt-1 text-[13px] text-ink-muted">
         every session an educator marked done, grouped by category and age band.
       </p>
+      {lockedCentre && (
+        <p className="mt-2 inline-flex w-fit items-center gap-1.5 rounded-chip bg-brand-orange/10 px-2.5 py-1 text-[11px] font-semibold text-brand-orange">
+          scoped to {lockedCentre.toLowerCase()}
+        </p>
+      )}
 
       {!isSupabaseConfigured ? (
         <NotConnected />
@@ -116,7 +131,7 @@ export default function CompletionsDashboardPage() {
               session{filtered.length === 1 ? "" : "s"} logged{" "}
               {centreFilter === "all" ? "across all centres" : `at ${centreFilter}`}
             </p>
-            {centres.length > 0 && (
+            {!lockedCentre && centres.length > 0 && (
               <div className="flex items-center gap-1.5">
                 <label className="text-[11px] font-bold text-ink-muted">centre</label>
                 <select
