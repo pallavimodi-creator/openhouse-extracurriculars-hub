@@ -3,24 +3,38 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { Home, BookOpen, LayoutGrid, LogOut, Building2, ClipboardList } from "lucide-react";
+import {
+  Home,
+  BookOpen,
+  LayoutGrid,
+  LogOut,
+  Building2,
+  ClipboardList,
+  ClipboardCheck,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 import { listCurriculumProgrammes } from "@/lib/content";
-import { clearTeacher, getBuilding, clearBuilding, getTeacher } from "@/lib/teacher-state";
+import {
+  clearTeacher,
+  getBuilding,
+  clearBuilding,
+  getTeacher,
+  hasDashboardAccess,
+  type TeacherState,
+} from "@/lib/teacher-state";
 
 export function FooterNav() {
   const pathname = usePathname();
   const router = useRouter();
   const [building, setBuildingState] = useState<string | null>(null);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [teacher, setTeacher] = useState<TeacherState | null>(null);
 
-  // Read the current building + admin flag from session storage on mount
-  // + whenever the route changes (so picking a new building on /building
-  // updates the chip, and admin sessions never get a building chip).
+  // Read the current building + teacher on mount and whenever the route
+  // changes (picking a building on /building or signing in updates the nav
+  // for the next paint).
   useEffect(() => {
     setBuildingState(getBuilding());
-    const t = getTeacher();
-    setIsAdmin(!!t && (t.role === "admin" || t.programmeSlug === "*"));
+    setTeacher(getTeacher());
   }, [pathname]);
 
   // Hide the footer on the login + building-picker pages
@@ -28,7 +42,9 @@ export function FooterNav() {
     return null;
   }
 
-  // Detect if we're inside a programme page
+  const isAdmin = hasDashboardAccess(teacher);
+
+  // Detect if we're inside a programme page (5+ only; 3-5 is hidden).
   const programmes = listCurriculumProgrammes();
   const programmeMatch = programmes.find(
     (p) => pathname === `/${p.slug}` || pathname.startsWith(`/${p.slug}/`)
@@ -38,28 +54,33 @@ export function FooterNav() {
     { href: "/", label: "home", icon: Home },
   ];
 
+  // Inside a programme: educators get overview + plan (plan is where they
+  // mark sessions done); admins only get overview (they're review-only).
   if (programmeMatch && programmeMatch.totalSessions > 0) {
-    // Inside a 5+ programme: the overview (reference) + the day-by-day
-    // plan (pick a session → its fixed parts and flexible picks).
     items.push({
       href: `/${programmeMatch.slug}/overview`,
       label: "overview",
       icon: LayoutGrid,
     });
+    if (!isAdmin) {
+      items.push({
+        href: `/${programmeMatch.slug}/plan`,
+        label: "plan",
+        icon: ClipboardList,
+      });
+    }
+  }
+
+  // Admins get a top-level "dashboard" tab so /plan/completions is one
+  // tap away from anywhere in the app.
+  if (isAdmin) {
     items.push({
-      href: `/${programmeMatch.slug}/plan`,
-      label: "plan",
-      icon: ClipboardList,
+      href: "/plan/completions",
+      label: "dashboard",
+      icon: ClipboardCheck,
     });
   }
 
-  // "plan" is a 3-5-only feature, so it's NOT a global tab (it would be
-  // confusing on the 5+ programmes). It's reached from the trial section /
-  // the 3-5 cards instead. The tab only appears while you're inside the
-  // 3-5 plan area, as a way back to its hub.
-  if (pathname.startsWith("/plan")) {
-    items.push({ href: "/plan", label: "plan", icon: ClipboardList });
-  }
   items.push({ href: "/library", label: "library", icon: BookOpen });
 
   const handleSignOut = () => {
@@ -82,7 +103,7 @@ export function FooterNav() {
       }}
     >
       {/* Current building chip — tap to switch without signing out.
-          Hidden for admins (they review the platform, don't run classes). */}
+          Educators only; admins have their centre implied by their login. */}
       {building && !isAdmin && (
         <button
           type="button"
