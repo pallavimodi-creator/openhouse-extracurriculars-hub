@@ -116,7 +116,13 @@ export function FooterNav() {
           title="tap to switch name or category"
         >
           <Compass className="h-3 w-3 text-brand-orange" strokeWidth={2.4} />
-          <span>{focus.category === "art" ? "art & design" : focus.category}</span>
+          <span>
+            {focus.category === "art"
+              ? "art & design"
+              : focus.category === "stem"
+                ? "robotics"
+                : focus.category}
+          </span>
           <span>·</span>
           <span className="text-ink">{focus.teacherName.toLowerCase()}</span>
           <span className="ml-1 text-brand-orange">· switch</span>

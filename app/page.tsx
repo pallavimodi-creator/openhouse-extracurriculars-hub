@@ -238,7 +238,7 @@ export default function HomePage() {
                 ? "art & design"
                 : focus.category === "language"
                   ? "language"
-                  : "stem"}
+                  : "robotics"}
             </span>{" "}
             programmes.{" "}
             <Link

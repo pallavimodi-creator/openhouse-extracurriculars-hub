@@ -115,7 +115,7 @@ export default function WhoPage() {
           />
           <CategoryButton
             id="stem"
-            label="stem"
+            label="robotics"
             icon={FlaskConical}
             selected={category === "stem"}
             onSelect={setCategory}
