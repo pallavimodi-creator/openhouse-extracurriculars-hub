@@ -32,12 +32,36 @@ export function DownloadBrochureButton({
       const pw = pdf.internal.pageSize.getWidth();
       const ph = pdf.internal.pageSize.getHeight();
 
+      // Anything with data-pdf-hide is skipped by html2canvas — plus the
+      // fixed footer nav, which otherwise overlays every captured section
+      // because of its position:fixed. And empty scaffold elements (like
+      // the outer <nav> wrapping the footer) whose content shouldn't be
+      // captured at all.
+      const ignore = (el: Element): boolean => {
+        if (el instanceof HTMLElement && el.hasAttribute("data-pdf-hide")) {
+          return true;
+        }
+        // Hide anything with fixed positioning — overlays don't belong on
+        // per-section captures. This catches the footer nav automatically.
+        if (el instanceof HTMLElement) {
+          const style = window.getComputedStyle(el);
+          if (style.position === "fixed") return true;
+        }
+        return false;
+      };
+
+      let addedAny = false;
       for (let i = 0; i < sections.length; i++) {
         const canvas = await html2canvas(sections[i] as HTMLElement, {
           scale: 2,
           backgroundColor: "#ffffff",
           useCORS: true,
+          ignoreElements: ignore,
         });
+        // Skip degenerate or invisible sections so they don't become
+        // blank pages.
+        if (canvas.width === 0 || canvas.height === 0) continue;
+
         const img = canvas.toDataURL("image/jpeg", 0.95);
         const ratio = canvas.height / canvas.width;
         let w = pw;
@@ -46,9 +70,14 @@ export function DownloadBrochureButton({
           h = ph;
           w = ph / ratio;
         }
-        if (i > 0) pdf.addPage();
-        pdf.addImage(img, "JPEG", (pw - w) / 2, (ph - h) / 2 > 0 ? (ph - h) / 2 : 0, w, h);
+        if (addedAny) pdf.addPage();
+        // Top-align the image on the page (was centered → gave huge
+        // white space above short sections). Horizontal centering stays
+        // for the rare taller-than-page case.
+        pdf.addImage(img, "JPEG", (pw - w) / 2, 0, w, h);
+        addedAny = true;
       }
+      if (!addedAny) return;
       pdf.save(filename);
     } catch {
       // fall back to the print dialog if generation fails
