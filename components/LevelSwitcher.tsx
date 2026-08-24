@@ -12,6 +12,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { UPDATED_SLUGS } from "@/content/updated";
 import type { CurriculumProgramme } from "@/content/types";
 
 export function LevelSwitcher({
@@ -58,8 +59,15 @@ export function LevelSwitcher({
                   <span className="block text-[9px] font-bold uppercase tracking-[0.16em] text-ink-subtle">
                     level {levelNo}
                   </span>
-                  <span className="block truncate text-[13.5px] font-extrabold leading-tight text-ink">
-                    {lv.levelName ?? lv.title}
+                  <span className="flex items-center gap-1.5">
+                    <span className="truncate text-[13.5px] font-extrabold leading-tight text-ink">
+                      {lv.levelName ?? lv.title}
+                    </span>
+                    {UPDATED_SLUGS.has(lv.slug) && (
+                      <span className="shrink-0 rounded-full bg-brand-orange px-1.5 py-px text-[9px] font-semibold lowercase text-white">
+                        updated
+                      </span>
+                    )}
                   </span>
                 </span>
                 <span className="shrink-0 text-right">

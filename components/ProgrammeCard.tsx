@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { getProgrammeStage } from "@/lib/content";
 import { CategoryChip } from "./CategoryChip";
 import { AgeChip } from "./AgeChip";
+import { UPDATED_SLUGS } from "@/content/updated";
 import type { CurriculumProgramme, Category } from "@/content/types";
 
 const cardAccent: Record<Category, string> = {
@@ -75,6 +76,11 @@ export function ProgrammeCard({
             }
           />
           <AgeChip label={programme.ageLabel} />
+          {UPDATED_SLUGS.has(programme.slug) && (
+            <span className="rounded-full bg-brand-orange px-2 py-0.5 text-[10px] font-semibold lowercase text-white shadow-sm">
+              updated
+            </span>
+          )}
         </div>
       </div>
 
