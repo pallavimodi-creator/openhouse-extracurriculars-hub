@@ -165,6 +165,8 @@ export interface CurriculumProgramme {
   level?: number;
   levelName?: string;
   trackSlug?: string;
+  /** Optional human-readable duration (e.g. "~2 months") — used by music levels. */
+  durationLabel?: string;
   totalSessions: number;
   skillAreas: CurriculumSkillArea[];
   segmentDefinitions: CurriculumSegmentDef[];
@@ -381,7 +383,7 @@ export interface CurriculumSessionEntry {
 
 export interface CurriculumActivity {
   id: string;
-  segment: "roll-call" | "playground" | "showtime" | "sign-off" | "log-book" | "art-gym" | "art-games" | "artiverse" | "art-care" | "experiment" | "build" | "experience-book" | "roll-rhyme" | "book-o-clock" | "wordsmiths" | "play-writes" | "imagine-playground" | "wonder-world" | "logic-lab" | "numbers-gym";
+  segment: "roll-call" | "playground" | "showtime" | "sign-off" | "log-book" | "art-gym" | "art-games" | "artiverse" | "art-care" | "experiment" | "build" | "experience-book" | "roll-rhyme" | "book-o-clock" | "wordsmiths" | "play-writes" | "imagine-playground" | "wonder-world" | "logic-lab" | "numbers-gym" | "warm-up" | "your-instrument" | "ensemble";
   title: string;
   cardName?: string;
   setupLine: string;

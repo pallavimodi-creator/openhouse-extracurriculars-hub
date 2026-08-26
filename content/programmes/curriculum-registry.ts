@@ -9,6 +9,7 @@ import {
   roboticsElectronics58,
   roboticsElectronics812,
 } from "./robotics-electronics";
+import { musicProgrammes } from "./music-levels";
 
 // 3-5 programmes hidden for now (not imported). To bring them back,
 // re-add these imports and their entries in the array below:
@@ -36,4 +37,9 @@ export const curriculumProgrammes: CurriculumProgramme[] = [
   roboticsElectronics58,
   robotics812,
   roboticsElectronics812,
+
+  // ── Music ──
+  // Music — two age bands (5–8 · 8–12), each a level-based track (l1/l2/l3).
+  // Level 1 of each band shows on the home grid; levels 2–3 via the switcher.
+  ...musicProgrammes,
 ];

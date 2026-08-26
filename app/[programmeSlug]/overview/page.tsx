@@ -98,6 +98,10 @@ import {
 import { PlayWritesBookModal } from "@/components/PlayWritesBookModal";
 import { LanguageBooksGrid } from "@/components/LanguageBooksGrid";
 import { SongsPlaylist } from "@/components/SongsPlaylist";
+import { MusicSongsSection } from "@/components/MusicSongsSection";
+import { MusicWarmupsSection } from "@/components/MusicWarmupsSection";
+import { MusicDailyFlow } from "@/components/MusicDailyFlow";
+import { PdfFlipbookModal } from "@/components/PdfFlipbookModal";
 
 // Where each ability lives (by skill id + ability index).
 // NOTE: 5-8 / 8-12 art now folds the laminated art-gym book pages and
@@ -154,6 +158,10 @@ function ProgrammeOverviewContent() {
   const [playWritesLevel, setPlayWritesLevel] = useState<1 | 2 | null>(null);
   // "the day · fixed & flexible" — which segment card is expanded.
   const [openSegment, setOpenSegment] = useState<string | null>(null);
+  // In-page PDF flip viewer for the music level book (opens from the books row).
+  const [flipPdf, setFlipPdf] = useState<{ url: string; title: string } | null>(
+    null
+  );
 
   if (!programme) {
     notFound();
@@ -168,6 +176,7 @@ function ProgrammeOverviewContent() {
   const isArt = programme.category === "art";
   const isRobotics = programme.category === "stem";
   const isLanguage = programme.category === "language";
+  const isMusic = programme.category === "music";
 
   // Every overview has the same four top-level sections now: daily flow
   // · skills · segments (each segment card contains its full info inline)
@@ -744,6 +753,17 @@ function ProgrammeOverviewContent() {
         </section>
       )}
 
+      {/* ─── MUSIC — the 3 parts explained: rotating vs linear, and how
+          band play works with its general rules. ─── */}
+      {isMusic && (
+        <section className="mt-10 px-4 md:px-8">
+          <SectionTitle num={sectionNum("daily-flow")} label="daily flow">
+            a 90-minute class — 3 parts, in this order.
+          </SectionTitle>
+          <MusicDailyFlow />
+        </section>
+      )}
+
       {/* ─── SKILLS & ABILITIES ─── */}
       <section className="mt-10 px-4 md:px-8">
         <SectionTitle num={sectionNum("skills")} label="skills & abilities">
@@ -1275,7 +1295,8 @@ function ProgrammeOverviewContent() {
           title: string;
           subtitle: string;
         } & (
-          | { kind: "route"; href: string }
+          | { kind: "route"; href: string; newTab?: boolean }
+          | { kind: "pdf-flip"; pdfUrl: string }
           | { kind: "soon" }
           | {
               kind: "modal";
@@ -1349,7 +1370,81 @@ function ProgrammeOverviewContent() {
             subtitle: "educator reference · 3 levels · self-paced",
           });
         }
-        // The experience book is not surfaced in the hub — no card here.
+        // Robotics — child experience books + level-up materials, per band.
+        if (programme.slug === "robotics-5-8") {
+          books.push({
+            kind: "route", href: "/experience-books/mechanics-experience-book-5-8.pdf", newTab: true,
+            cover: "/experience-books/covers/mechanics-experience-book-5-8.png",
+            title: "mechanics experience book", subtitle: "child's portfolio · level 1 · machines 1–10",
+          });
+          books.push({
+            kind: "route", href: "/experience-books/robotics-levelup-assessment.pdf", newTab: true,
+            cover: "/experience-books/covers/robotics-levelup-assessment.png",
+            title: "level-up assessment", subtitle: "mechanics → electronics · the tow-truck readiness check",
+          });
+          books.push({
+            kind: "route", href: "/experience-books/mechanics-level-up-exercises.pdf", newTab: true,
+            cover: "/experience-books/covers/mechanics-level-up-exercises.png",
+            title: "level-up exercises", subtitle: "mechanics · redesign each machine, keeping its job · new · aug 2026",
+          });
+        }
+        if (programme.slug === "robotics-8-12") {
+          books.push({
+            kind: "route", href: "/experience-books/mechanics-experience-book-8-12.pdf", newTab: true,
+            cover: "/experience-books/covers/mechanics-experience-book-8-12.png",
+            title: "mechanics experience book", subtitle: "child's portfolio · level 1 · machines 1–10",
+          });
+          books.push({
+            kind: "route", href: "/experience-books/robotics-levelup-assessment.pdf", newTab: true,
+            cover: "/experience-books/covers/robotics-levelup-assessment.png",
+            title: "level-up assessment", subtitle: "mechanics → electronics · the tow-truck readiness check",
+          });
+          books.push({
+            kind: "route", href: "/experience-books/mechanics-level-up-exercises.pdf", newTab: true,
+            cover: "/experience-books/covers/mechanics-level-up-exercises.png",
+            title: "level-up exercises", subtitle: "mechanics · redesign each machine, keeping its job · new · aug 2026",
+          });
+        }
+        // Electronics (Level 2) child experience books — one per band.
+        if (programme.slug === "robotics-electronics-5-8") {
+          books.push({
+            kind: "route", href: "/robotics-manuals/elec-experience-book-5-8.pdf", newTab: true,
+            cover: "/experience-books/covers/elec-experience-book-5-8.png",
+            title: "electronics experience book", subtitle: "child's portfolio · level 2 · 5 machines",
+          });
+        }
+        if (programme.slug === "robotics-electronics-8-12") {
+          books.push({
+            kind: "route", href: "/robotics-manuals/elec-experience-book-8-12.pdf", newTab: true,
+            cover: "/experience-books/covers/elec-experience-book-8-12.png",
+            title: "electronics experience book", subtitle: "child's portfolio · level 2 · 5 machines",
+          });
+        }
+        // Extra assignments — for a child who finishes a model early (both electronics bands).
+        if (programme.slug === "robotics-electronics-5-8" || programme.slug === "robotics-electronics-8-12") {
+          books.push({
+            kind: "route", href: "/experience-books/electronics-level-up-exercises.pdf", newTab: true,
+            cover: "/experience-books/covers/electronics-level-up-exercises.png",
+            title: "level-up exercises (extra)",
+            subtitle: "extra design challenges — hand to a child who builds a model faster than the class",
+          });
+        }
+        // Music — the child's level book, per level (keyboard · ukulele · drums · vocals).
+        // Both age bands share the same per-level books, so pull the level from
+        // the slug (e.g. music-5-8-l2 / music-8-12-l2 → "2").
+        {
+          const lvl = isMusic
+            ? programme.slug.match(/-l(\d)$/)?.[1]
+            : undefined;
+          if (lvl) {
+            books.push({
+              kind: "pdf-flip", pdfUrl: `/music/music-book-l${lvl}.pdf`,
+              cover: `/experience-books/covers/music-book-l${lvl}.png`,
+              title: `music book · level ${lvl}`,
+              subtitle: "the child's level book — keyboard · ukulele · drums · vocals",
+            });
+          }
+        }
         if (books.length === 0) return null;
         return (
           <section className="mt-10 px-4 md:px-8">
@@ -1462,6 +1557,35 @@ function ProgrammeOverviewContent() {
                     </button>
                   );
                 }
+                if (book.kind === "pdf-flip") {
+                  // open the PDF in the in-page flip viewer — no download
+                  return (
+                    <button
+                      key={book.pdfUrl}
+                      type="button"
+                      onClick={() =>
+                        setFlipPdf({ url: book.pdfUrl, title: book.title })
+                      }
+                      className={cardClasses}
+                    >
+                      {inner}
+                    </button>
+                  );
+                }
+                if (book.newTab) {
+                  // downloadable PDF (experience book / assessment) — open in a new tab
+                  return (
+                    <a
+                      key={book.href}
+                      href={book.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={cardClasses}
+                    >
+                      {inner}
+                    </a>
+                  );
+                }
                 return (
                   <Link key={book.href} href={book.href} className={cardClasses}>
                     {inner}
@@ -1472,6 +1596,13 @@ function ProgrammeOverviewContent() {
           </section>
         );
       })()}
+
+      {/* ─── MUSIC — warm-ups (they rotate) + songs & sheet music ─── */}
+      {isMusic && <MusicWarmupsSection />}
+      {isMusic && <MusicSongsSection level={programme.level ?? 1} />}
+
+      {/* In-page PDF flip viewer for the music book (opens from the books row). */}
+      <PdfFlipbookModal pdf={flipPdf} onClose={() => setFlipPdf(null)} />
 
       {/* ─── ARTIVERSE BOOK MODAL — opens from the books row ─── */}
       <ArtiverseBookModal
