@@ -47,6 +47,7 @@ import {
 import {
   getCurriculumProgramme,
   listCurriculumProgrammes,
+  getSubjectProgrammes,
   getActivityImage,
   GYM_BOOK_IMAGES,
   getProgrammeStage,
@@ -422,8 +423,15 @@ export default function LibraryPage() {
           ? pool
           : pool.filter((p) => p.slug === selectedProgSlug);
     } else if (teacherSlug) {
+      // Show every game in the teacher's SUBJECT — across BOTH age bands
+      // (5-8 and 8-12) and all levels (a robotics teacher gets mechanics +
+      // electronics, for both bands), so the library reflects all the games
+      // for what they teach, not just their own band.
+      const subject = getSubjectProgrammes(teacherSlug).filter(
+        (p) => p.totalSessions > 0
+      );
       const p = getCurriculumProgramme(teacherSlug);
-      progsToShow = p ? [p] : [];
+      progsToShow = subject.length ? subject : p ? [p] : [];
     }
 
     return progsToShow.flatMap(buildItemsFor);
