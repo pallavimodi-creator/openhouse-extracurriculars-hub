@@ -78,7 +78,9 @@ function extractYouTubeId(url: string): string | null {
  * the result is an alternating sequence of [text, url, text, url, ...].
  */
 function linkifyMaterial(text: string): React.ReactNode {
-  const urlRe = /https?:\/\/[^\s)]+/g;
+  // Match full http(s) URLs AND root-relative asset paths (e.g. the electronics
+  // model manuals / cue cards at /robotics-manuals/*.pdf) so they linkify too.
+  const urlRe = /(?:https?:\/\/[^\s)]+|\/[^\s)]+\.(?:pdf|png|jpg|jpeg))/gi;
   const parts = text.split(urlRe);
   const matches = text.match(urlRe) ?? [];
   const nodes: React.ReactNode[] = [];
@@ -452,6 +454,33 @@ export function ActivityPopup({
           </div>
         );
       })()}
+
+      {/* Reference links — component gallery, teacher reference, tutorials */}
+      {activity.referenceLinks && activity.referenceLinks.length > 0 && (
+        <div>
+          <h3 className="text-[12px] font-semibold tracking-normal text-ink-muted">
+            reference links
+          </h3>
+          <ul className="mt-2 space-y-1">
+            {activity.referenceLinks.map((ref, i) => (
+              <li
+                key={i}
+                className="flex items-start gap-2 text-[12px] text-ink-muted"
+              >
+                <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-brand-orange/60" />
+                <a
+                  href={ref.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 font-medium text-brand-orange underline underline-offset-2 hover:opacity-80"
+                >
+                  {ref.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       {/* Debrief */}
       {activity.debriefPrompts.length > 0 && (
