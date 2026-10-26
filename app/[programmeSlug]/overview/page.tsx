@@ -19,6 +19,7 @@ import {
   FlaskConical,
   Wrench,
   Droplet,
+  Users,
   Brush,
   Pencil,
   Hand,
@@ -56,6 +57,9 @@ const SEGMENT_IMAGES: Record<string, string> = {
 // Relevant icon per segment — used (instead of a text tile) when a segment
 // has no illustration, so "the day" never shows a bare placeholder.
 const SEGMENT_ICONS: Record<string, LucideIcon> = {
+  "opening-circle": Users,
+  "closing-circle": Music,
+  break: Droplet,
   "roll-rhyme": Music,
   "book-o-clock": BookOpen,
   wordsmiths: MessageCircle,
