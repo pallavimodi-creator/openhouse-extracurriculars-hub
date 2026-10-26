@@ -9,14 +9,14 @@ import type {
  * 60 sessions across ~7.5 months.
  *
  * Session structure (A and B alternate; Imagine Playground and
- * Kitchen Play are exploration-based segments that swap places):
+ * WonderWorld are exploration-based segments that swap places):
  *
  *   imagine-playground / wonder-world    35 min
  *   logic-lab                            20 min
  *   numbers-gym                          25 min
  *   experience-book                      10 min
  *
- * Scheduling Note: The duration of Imagine Playground / Kitchen Play
+ * Scheduling Note: The duration of Imagine Playground / WonderWorld
  * sessions may be adjusted based on the scope of the activity. If a
  * project needs more time, educators may shorten Number Gym, Logic
  * Lab, or other components to ensure meaningful engagement and
@@ -403,149 +403,179 @@ const imaginePlaygroundProjects: Record<string, CurriculumActivity> = {
 
 };
 
-/* ─── Kitchen Play — 3 rotating games (segment id stays "wonder-world")
- * STEM through real kitchen actions: sorting food, following recipes,
- * and running a café. Game 1 (Sort & Guess) and Game 2 (Cooking)
- * alternate from the start; Game 3 (Restaurant) unlocks after ~20
- * sessions (≈5 Cooking sessions in), then all three rotate.
- *
- * TODO(asset): Kitchen Play book + recipe list to be added soon
- * (from user). The old WonderWorldBookModal placeholder remains in
- * components/ until the new book is provided.
- *
- * FLAG: the segment id below is still "wonder-world" under the hood
- * (display name is "Kitchen Play") to avoid type churn. */
+/* ─── WonderWorld — the Little Kitchen game (segment id "wonder-world")
+ * One kit, four repeatable games that grow with the child (played two
+ * ways: easy 3–4 · medium 4–5): sort & guess, cooking, restaurant,
+ * recipe development. No scores, no winners — the educator reads the
+ * play as observation. Source: lexagod little_kitchen game design. */
 
 const wonderWorldActivities: Record<string, CurriculumActivity> = {
-  // Game 1 — Sort & Guess
-  "kp-sort-and-guess": {
-    id: "kp-sort-and-guess",
+  // The Little Kitchen kit — one kit, four repeatable games that grow with the
+  // child (played two ways: easy 3–4 · medium 4–5). Replaces the earlier
+  // one-off tiffin activities. No scores, no winners — the educator reads the
+  // play as observation. Source: lexagod little_kitchen game design.
+  "kg-sort-guess": {
+    id: "kg-sort-guess",
     segment: "wonder-world",
-    title: "sort & guess",
-    setupLine: "Sort food by its traits, flip to match, then guess the mystery food.",
+    title: "little kitchen · sort & guess",
+    setupLine: "Sort real foods by a true rule, then guess a hidden one by ruling out.",
     howToPlay:
-      "Three game types — Sort, Flip, and Guess — run in order over several sessions, with the rule getting harder each time. Type 1 (Sort) builds the trait language; Type 2 (Flip) adds memory and matching; Type 3 (Guess) only opens once Sort is learned.",
+      "Children sort the food cards into two piles by a true rule, count each pile, then one child hides a card and gives clues while the others rule cards out until they name it.",
+    players: "2–4 children · 1 educator",
+    duration: "15–20 min",
+    goal: "the child sorts food cards by a true rule, then names a hidden card from clues.",
+    steps: [
+      "lay out the food cards face-up.",
+      "name a true rule — fruit / vegetable, or grows underground / above ground (by the part we eat).",
+      "sort the cards into two piles on the table.",
+      "count each pile and find its number on the mat's number track — which has more?",
+      "one child hides a card and gives clues in their own words; the others turn ruled-out cards face-down, then name the card and say the \"because…\".",
+    ],
+    endsWhen: "the hidden card is named.",
+    easierVariation:
+      "one rule, teacher-named; sort and count one pile; skip the guess (level a, 3–4).",
+    harderVariation:
+      "the child chooses the rule, compares both piles, then gives free spoken clues for the guess (level b, 4–5).",
+    skillIds: ["logic", "number-sense", "curiosity"],
     materials: [
-      "food cards (start with half the deck, fruits + vegetables only)",
-      "2 hoops (or 2 marked floor areas)",
-      "a chalk line for above/below",
+      "Fruit cards (10) + vegetable cards (10)",
+      "The cooking mat's number track (1–20)",
     ],
-    example:
-      "Progress from colour recognition to category sorting, then above/below ground, then guessing. Ensure each skill is independently and consistently demonstrated before moving on. If a child sorts wrong, place their card beside the correct one and ask 'why did you sort this here?' / 'does this match the rule you chose?' — let them notice, don't tell.",
+    educatorNote:
+      "A rule must be TRUE. Underground foods are potato, carrot, radish, onion, beetroot — everything else grows above ground. Never sort by colour (apple, grapes come in more than one).",
     variations: [
-      {
-        name: "Type 1 · Sort",
-        description:
-          "Run these in order over several sessions; same setup, the rule gets harder. Colour: assign one colour to each hoop; the educator sorts 3–4 cards to show how, then children sort the rest. Category: two areas = fruit/vegetable; the educator fixes the rule before starting and keeps it fixed (if tomato is a fruit today, it stays a fruit). Above/below ground: draw a line; cards go above or below by where the food grows; once secure, add a third zone 'on the ground'. Individual: each child gets a set number of cards and takes turns sorting into categories. Group: the educator assigns a category to each group and they sort their cards into it.",
-      },
-      {
-        name: "Type 2 · Flip (memory + match)",
-        description:
-          "All cards face-up 20–30 sec; children look, then flip all face-down. Each child turns one card and hunts for its match, keeping the pair if it matches, returning it if not. Match rule rises with level: same colour → same category → same colour and category → the exact same food card.",
-      },
-      {
-        name: "Type 3 · Guess (only after Sort is learned)",
-        description:
-          "One child picks a mystery food (kept secret). Others ask yes/no questions ('is it a fruit?', 'does it grow underground?'). Children can ask only 3 yes/no questions. After each answer, remove the ruled-out cards. Guess the food, then the finder explains 'because…' to connect the clues.",
-      },
-    ],
-    difficultyLevels: [
-      {
-        level: "Easy",
-        description:
-          "Children sort on a single rule (e.g. fruit/vegetable); in Guess, no limited questions; educator supports if needed.",
-      },
-      {
-        level: "Hard",
-        description:
-          "The educator gives a combination of traits (colour + category, or colour + above/below ground, or category + above/below ground) e.g. 'red fruit', 'yellow vegetable that grows above ground'; in Guess, the educator assigns a limited number of questions; children play independently or add a time constraint.",
-      },
+      { name: "Two children", description: "One sorts, one checks and counts." },
+      { name: "Small group", description: "Each child owns a pile." },
+      { name: "Level up", description: "Sort by both rules in turn." },
+      { name: "Level down", description: "The teacher places the first card." },
     ],
     debriefPrompts: [],
     type: "physical-game",
   },
-
-  // Game 2 — Cooking
-  "kp-cooking": {
-    id: "kp-cooking",
+  "kg-cooking": {
+    id: "kg-cooking",
     segment: "wonder-world",
-    title: "cooking",
-    setupLine: "Lay the recipe steps, collect the play-dough, cook station by station.",
+    title: "little kitchen · cooking",
+    setupLine: "Follow a picture recipe — count with dots and put the steps in order.",
     howToPlay:
-      "Follow the recipe. The instruction is dictated by the educator according to the child's level (e.g. an easier 3–4 step instruction, and a harder variation, even on the same mat with the same recipe; extra steps for the harder recipe can be prompted by the educator separately to that group). Following the instructions, children lay the action cards and ingredient cards in order on the mat = the cooking steps. Collect the play-dough of the specific colour from the educator matching your ingredients (educators can make a portion of each clay and ask kids to collect). Follow the steps on the mat. Cut, pour, mix, mould — child performs these on their mat. Scoop, freeze, heat, blend — carry the mat to the station, do the action, run the station timer if needed and count the cook time, bring it back. Finish on the work-plate/glass; check & serve. educators can assign roles — one child reads the recipe and counts portions; the other walks the stations and cooks.",
+      "Children pick a dish card, count one play-dough portion per dot on the recipe, lay the action cards in order, then cook the dish on the mat's plate.",
+    players: "2–4 children · 1 educator",
+    duration: "15–20 min",
+    goal: "the child cooks a dish by counting play-dough portions to the dots and sequencing the action cards.",
+    steps: [
+      "pick a dish card and turn it over to the recipe (count-dots, a ½-glass, numbered steps).",
+      "place one play-dough portion per dot and find the total on the mat's number track.",
+      "lay the action cards in a row to match the numbered steps.",
+      "cook on the plate — mould the dish, halve on the ½ / ¼ lines, fill the glass to ½.",
+      "check and re-do any step that misfired.",
+    ],
+    endsWhen: "the dish is cooked and served.",
+    easierVariation:
+      "a 2–3 ingredient ★ dish (fruit bowl, lassi); count to ~10, one portion per dot (level a).",
+    harderVariation:
+      "a 3–4 ingredient ★★ dish; add two dot-groups within 10 and place the number token for the total, then halve on the ½ line (level b).",
+    skillIds: ["number-sense", "problem-solving", "logic"],
     materials: [
-      "recipe cards (easy / medium / hard — same recipe)",
-      "fruit/vegetable cards as ingredients",
-      "action cards (cut · mix · mould · pour · blend · heat · cool · scoop)",
-      "cooking mat (work-plate with ½/¼ lines — mat A)",
-      "play-dough + clay tools",
-      "action station set around the room + a timer/clock (Heat · Cool/Freeze · Blend · Scoop — handled by educator at the station)",
+      "Dish / recipe cards (18 dishes, ★ and ★★ rings)",
+      "Ingredient + action cards",
+      "The cooking mat (number track + ½ / ¼ plate + glass)",
+      "Play-dough + number tokens (1–10)",
     ],
-    example:
-      "Progression: counting before adding; adding before halving. Let a child notice a wrong step (e.g. 'the soup has no water') and fix it — that noticing-and-fixing is the problem-solving skill, not the finished dish.",
+    namedBlocks: [
+      {
+        title: "how to read a recipe — no words",
+        body:
+          "Pick a dish by its front picture, then turn it over: the dots tell you how many of each ingredient (one play-dough portion per dot), a ½-glass means fill to half, and the numbered little pictures show the order of the actions.",
+      },
+    ],
     variations: [
-      {
-        name: "Fractions & Adding (harder)",
-        description:
-          "After the dish is made, add the ½/¼ concept: halve a portion on the ½ line, quarter it on the ¼ line.",
-      },
-    ],
-    difficultyLevels: [
-      {
-        level: "Easy",
-        description: "Easy/medium recipe cards, type 1 gameplay",
-      },
-      {
-        level: "Hard",
-        description: "Difficult recipe cards, type 2 gameplay",
-      },
+      { name: "Kitchen line", description: "Each child does one action in turn." },
+      { name: "Read & cook", description: "One child reads the dots, one cooks." },
+      { name: "Level up", description: "Halve or share a portion." },
+      { name: "Level down", description: "The teacher pre-places the portions, the child counts." },
     ],
     debriefPrompts: [],
     type: "physical-game",
   },
-
-  // Game 3 — Restaurant (unlocks after ~20 sessions / ~5 Cooking sessions)
-  "kp-restaurant": {
-    id: "kp-restaurant",
+  "kg-restaurant": {
+    id: "kg-restaurant",
     segment: "wonder-world",
-    title: "restaurant",
-    setupLine: "Order, cook, bill and pay — run the café in two rounds.",
+    title: "little kitchen · restaurant",
+    setupLine: "Run a café — take orders, cook, bill and make change with pretend money.",
     howToPlay:
-      "Pre-game setup: the educator places the recipe cards on the menu card (max 5) and sets prices as a number of tokens; gives a set number of tokens to the customer; educators can divide them into groups with roles as customers and chef+cashier. Play 2 rounds and swap roles for the 2nd round. Stage 1 · Order & Cook: customer orders from the menu by pointing; one child/group is both chef and cashier; the chef takes the order and places the recipe card on the invoice side of the card; the chef cooks the dish on the kitchen mat; the chef discusses the recipe requirements with the customer and can ask the customer to choose the required ingredients (fruit/vegetable/toppings etc). Stage 2 · Bill & Pay: the cashier totals the bill (adding extra price for add-ons if used) on the invoice; the customer pays the total; the cashier gives change.",
+      "Children take roles (customer, chef, cashier), order off the menu, cook the dish, then bill and make change with pretend money on the invoice mat.",
+    players: "2–4 children · 1 educator",
+    duration: "15–20 min",
+    goal: "the child runs a café off the menu and invoice — ordering, cooking, billing and making change.",
+    steps: [
+      "set up — flip one mat to its menu | invoice back; take roles customer · chef · cashier (with two children, one is chef and cashier).",
+      "the customer orders off the menu by pointing, and sets the table.",
+      "the chef cooks the dish on the plate (as in cooking).",
+      "bill by token — drop each dish's price-coin into an invoice row and stack the coins in the total box.",
+      "pay, then put the change in the change box.",
+    ],
+    endsWhen: "the bill is paid and change is given.",
+    easierVariation:
+      "order, cook and serve; count the plates — no money (level a).",
+    harderVariation:
+      "menu ₹1–₹10; pay and make change within 10 — a ₹6 bill paid with ₹10 gives ₹4 change (level b).",
+    skillIds: ["number-sense", "problem-solving", "curiosity"],
     materials: [
-      "two areas: a kitchen (the cooking mat) and a restaurant counter",
-      "one menu card (educator sets the prices)",
-      "pretend money — tokens",
-      "the cooked dishes",
+      "Two cooking mats (one on its menu | invoice back)",
+      "Dish cards",
+      "Pretend money — ₹1 · ₹2 · ₹5 · ₹10",
     ],
-    example:
-      "Don't add money until counting and serving are smooth: paying → making change → re-totalling for add-ons.",
     variations: [
-      {
-        name: "Add-ons (harder)",
-        description:
-          "The chef offers add-ons — 'extra cheese? butter? a vegetable?' — and tells the prices; the child chooses add-ons based on the tokens left. Add-ons cost ₹1–₹4 extra, so the bill must be re-totalled on the invoice.",
-      },
+      { name: "Swap roles", description: "Change roles each order." },
+      { name: "Busy café", description: "More orders come in at once." },
+      { name: "Level up", description: "A 2-dish bill, total ≤ ₹10." },
+      { name: "Level down", description: "Every dish costs ₹1." },
     ],
-    difficultyLevels: [
-      {
-        level: "Easy",
-        description: "Customers and chefs with a single recipe",
-      },
-      {
-        level: "Hard",
-        description:
-          "Chefs with multiple food items, cooking specified portions (e.g. ½ portion sandwich + ½ portion vegetable salad + 1 glass of orange juice)",
-      },
+    debriefPrompts: [],
+    type: "physical-game",
+  },
+  "kg-recipe-dev": {
+    id: "kg-recipe-dev",
+    segment: "wonder-world",
+    title: "little kitchen · recipe development",
+    setupLine: "Invent your own dish from the cards, predict it, then say why it works.",
+    howToPlay:
+      "Children choose ingredients into the tray, sequence their own action cards toward a goal, predict an observable, make and name the dish, then say why it works.",
+    players: "2–4 children · 1 educator",
+    duration: "15–20 min",
+    goal: "the child invents a dish, predicts an observable, makes it, and says the \"because…\".",
+    steps: [
+      "choose ingredients into the tray (no recipe card).",
+      "lay your own action cards in order toward a goal (\"make it drinkable in the glass\").",
+      "predict an observable — colour, count, pieces, halves or shape (\"it'll be 3 yellow pieces\").",
+      "make it on the plate, name it, and check — did the prediction hold?",
+      "say the \"because…\"; the teacher notes it.",
+    ],
+    endsWhen: "the child names the dish and says why it works.",
+    easierVariation:
+      "combine 2–3 cards and name it; the teacher prompts one sense (level a).",
+    harderVariation:
+      "order the actions, predict an observable and check it, then justify the \"because\" (level b).",
+    skillIds: ["curiosity", "problem-solving", "logic"],
+    materials: [
+      "Ingredient + action cards",
+      "The small tray + the cooking mat",
+      "Play-dough",
+    ],
+    variations: [
+      { name: "Why-taster", description: "One invents, one keeps asking \"why?\"." },
+      { name: "Menu of the day", description: "Invent a dish to add to the café menu." },
+      { name: "Level up", description: "Add a constraint — \"use a vegetable\"." },
+      { name: "Level down", description: "\"What could these two make?\"" },
     ],
     debriefPrompts: [],
     type: "physical-game",
   },
 };
 
-/* ─── 60-session table — Imagine Playground / Kitchen Play alternate
+/* ─── 60-session table — Imagine Playground / WonderWorld alternate
  * Sessions 1, 3, 5… are Session A (Imagine Playground).
- * Sessions 2, 4, 6… are Session B (Kitchen Play; entry field is still
+ * Sessions 2, 4, 6… are Session B (WonderWorld; entry field is still
  * `wonderWorld` and segment id is still "wonder-world").
  * Logic Lab and NumbersGym run every session. ──────────────────── */
 
@@ -570,23 +600,13 @@ const buildPlayground = (n: number): string => {
   return order[(n - 1) % order.length];
 };
 
-const buildKitchenPlay = (n: number): string => {
-  // 30 Session-B slots (n = 1..30). Kitchen Play has 3 games.
-  // Sessions begin alternating Game 1 (Sort & Guess) and Game 2
-  // (Cooking). Game 3 (Restaurant) unlocks only after ~20 sessions,
-  // by when children have done ~5 Cooking sessions; from then on all
-  // three games rotate. (Segment id stays "wonder-world".)
-  const SORT_AND_GUESS = "kp-sort-and-guess";
-  const COOKING = "kp-cooking";
-  const RESTAURANT = "kp-restaurant";
-
-  // Slots 1–10 (Session-B 1–10 ≈ overall sessions 2–20): alternate
-  // Sort & Guess / Cooking. From slot 11 onward, rotate all three.
-  if (n <= 10) {
-    return n % 2 === 1 ? SORT_AND_GUESS : COOKING;
-  }
-  const rotation = [SORT_AND_GUESS, COOKING, RESTAURANT];
-  return rotation[(n - 11) % rotation.length];
+const buildWonderWorld = (n: number): string => {
+  // Little Kitchen — the four games rotate in a fixed order and are replayed
+  // across the Session-B slots. Re-playing a game is the point: the same game
+  // runs easy (3–4) then medium (4–5), deepening every time; 18 dishes mean a
+  // class can cook for months without repeating.
+  const cycle = ["kg-sort-guess", "kg-cooking", "kg-restaurant", "kg-recipe-dev"];
+  return cycle[(n - 1) % cycle.length];
 };
 
 const LOGIC_LAB_CYCLE = [
@@ -615,7 +635,7 @@ const buildSessionTable = (): CurriculumSessionEntry[] => {
       entry.imaginePlayground = buildPlayground(aIndex);
       aIndex += 1;
     } else {
-      entry.wonderWorld = buildKitchenPlay(bIndex);
+      entry.wonderWorld = buildWonderWorld(bIndex);
       bIndex += 1;
     }
     out.push(entry);
@@ -689,20 +709,20 @@ export const stem35: CurriculumProgramme = {
       name: "Imagine Playground",
       durationRange: "35 min",
       objective:
-        "Imagination through building. Children meet stem concepts — math, physics, sequencing, conditionals, probability — through stories and hands-on building. Materials are blocks of different kinds: Math Train, Coding Express, STEAM Park, ramp materials, magna tiles, general blocks. The educator sets a challenge, lays out materials, and steps back. 11 core projects run in a fixed order, each met 2–3 times across the year — deeper every time. Why it alternates with Wonder World: both build curiosity, problem solving, and creation, but Imagine Playground works in the language of blocks and structures, while Wonder World works in the language of everyday actions (currently the Kitchen Play resource). Children need both. Scheduling Note: The duration of Imagine Playground / Wonder World sessions may be adjusted based on the scope of the activity. If a project needs more time, educators may shorten Number Gym, Logic Lab, or other components to ensure meaningful engagement and completion of the project. Runs on Session A only.",
+        "Imagination through building. Children meet stem concepts — math, physics, sequencing, conditionals, probability — through stories and hands-on building. Materials are blocks of different kinds: Math Train, Coding Express, STEAM Park, ramp materials, magna tiles, general blocks. The educator sets a challenge, lays out materials, and steps back. 11 core projects run in a fixed order, each met 2–3 times across the year — deeper every time. Why it alternates with WonderWorld: both build curiosity, problem solving, and creation, but Imagine Playground works in the language of blocks and structures, while WonderWorld works in the language of everyday things. Children need both. Runs on Session A only.",
       type: "rotating",
       rotationPool: Object.keys(imaginePlaygroundProjects),
     },
     {
       // NOTE: the internal segment id stays "wonder-world" to avoid type
       // churn across the session table and CurriculumSessionEntry; the
-      // display name and content are now "Kitchen Play". FLAG: a later
+      // display name and content are now "WonderWorld". FLAG: a later
       // rename of the id string to "kitchen-play" is possible if wanted.
       id: "wonder-world",
-      name: "Wonder World",
+      name: "WonderWorld",
       durationRange: "35 min",
       objective:
-        "Wonder World — exploration-based STEM through real-world play. The current resource is Kitchen Play: children meet STEM concepts (sorting, sequencing, fractions, classification) through real kitchen actions — sorting food, following recipes, and running a café. The three Kitchen Play games rotate: sessions begin alternating between Game 1 (Sort & Guess) and Game 2 (Cooking). Game 3 (Restaurant) unlocks only after 20 sessions when children have completed about 5 Cooking sessions; from then on, all three rotate. Materials: action cards · food cards · recipe cards · category cards · cooking mat with menu template on reverse · play-dough + clay tools · pretend-money tokens. Runs on Session B only.",
+        "Imagination through everyday things. Children meet stem concepts — sorting, sequencing, fractions, classification — through the Little Kitchen kit — a repeatable kitchen board game played with food cards, two cooking mats and play-dough (no blocks). One kit, four games that grow with the child: sort & guess (logic), cooking (number sense), restaurant (money) and recipe development (invention). The same game is played two ways — easy for 3–4, medium for 4–5 — so it deepens across the year; 18 dishes mean a class can cook for months without repeating. No scores, no winners — the educator reads the play as observation. Why it alternates with Imagine Playground: both are creation- and curiosity-driven, but WonderWorld grounds learning in daily life while Imagine Playground stretches it through imaginary worlds. Runs on Session B only.",
       type: "rotating",
       rotationPool: Object.keys(wonderWorldActivities),
     },
