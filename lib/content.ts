@@ -324,9 +324,11 @@ export const ACTIVITY_IMAGES: Record<string, string> = {
   "ip-chain-reaction": "/games/stem-3-5/imagine-playground.png",
   "ip-probability": "/games/stem-3-5/imagine-playground.png",
   // STEM 3-5 — Kitchen Play: the 3 themed games share the segment image.
-  "kp-sort-and-guess": "/games/stem-3-5/kitchen-play.png",
-  "kp-cooking": "/games/stem-3-5/kitchen-play.png",
-  "kp-restaurant": "/games/stem-3-5/kitchen-play.png",
+  // WonderWorld — the Little Kitchen game (4 modes share the one kit image).
+  "kg-sort-guess": "/games/stem-3-5/kitchen-play.png",
+  "kg-cooking": "/games/stem-3-5/kitchen-play.png",
+  "kg-restaurant": "/games/stem-3-5/kitchen-play.png",
+  "kg-recipe-dev": "/games/stem-3-5/kitchen-play.png",
   // Language through Storytelling — 3-5 playground games. The two
   // names that overlap with public-speaking IDs are suffixed `-lang`
   // so each programme gets its own render.
