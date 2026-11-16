@@ -8,19 +8,17 @@ import type {
  * Ages 3–5 · 90 minutes per session · 2 sessions per week
  * 60 sessions across ~7.5 months.
  *
- * Session structure (A and B alternate; Imagine Playground and
- * WonderWorld are exploration-based segments that swap places):
+ * Session structure (WonderWorld is the exploration segment — the
+ * Little Kitchen game; more games can be plugged into the kit later):
  *
- *   imagine-playground / wonder-world    35 min
+ *   wonder-world                         35 min
  *   logic-lab                            20 min
  *   numbers-gym                          25 min
  *   experience-book                      10 min
  *
- * Scheduling Note: The duration of Imagine Playground / WonderWorld
- * sessions may be adjusted based on the scope of the activity. If a
- * project needs more time, educators may shorten Number Gym, Logic
- * Lab, or other components to ensure meaningful engagement and
- * completion of the project.
+ * Scheduling Note: The duration of WonderWorld may be adjusted based on
+ * the scope of the activity. If a game needs more time, educators may
+ * shorten Numbers Gym, Logic Lab, or other components.
  * ----------------------------------------------------------------- */
 
 /* ─── Logic Lab games ─────────────────────────────────────────────
@@ -272,137 +270,6 @@ const logicLabGames: Record<string, CurriculumActivity> = {
   },
 };
 
-/* ─── Imagine Playground — 11 core build projects + 4 maker fillers ─
- * Each project listed here is a CurriculumActivity so it can be
- * surfaced via the library / segment popups. Lesson-plan detail
- * lives in components/ImaginePlaygroundBookModal.tsx (used as the
- * educator reference book on the overview page). ───────────────── */
-
-const imaginePlaygroundProjects: Record<string, CurriculumActivity> = {
-  "ip-train-time": {
-    id: "ip-train-time",
-    segment: "imagine-playground",
-    title: "train time",
-    setupLine: "Build a track and number the train cars.",
-    howToPlay:
-      "Children join track pieces, attach train cars, count pieces as they connect, and stick numbers on each car in order. Low-stakes entry to the block system; counting while building makes Number Sense visible from Day 1.",
-    materials: ["Track pieces", "Train cars", "Number sticky notes"],
-    debriefPrompts: [],
-    type: "physical-game",
-  },
-  "ip-first-trip": {
-    id: "ip-first-trip",
-    segment: "imagine-playground",
-    title: "first trip",
-    setupLine: "Build a station, build a destination, take the train across.",
-    howToPlay:
-      "Children build a double-ended track and discover that a coloured action brick (red) changes the train's behaviour — first exposure to cause-and-effect bricks.",
-    materials: ["Track pieces", "Train", "Red action bricks", "Red stop brick", "Green action bricks"],
-    debriefPrompts: [],
-    type: "physical-game",
-  },
-  "ip-load-the-train": {
-    id: "ip-load-the-train",
-    segment: "imagine-playground",
-    title: "load the train",
-    setupLine: "Pick a number card, load that many bricks.",
-    howToPlay:
-      "Direct number-to-quantity mapping. Children see 5 on a card, count 5 bricks, and load them. Number Sense made physical.",
-    materials: ["Train cars", "Number bricks or notes", "Small loadable objects"],
-    debriefPrompts: [],
-    type: "physical-game",
-  },
-  "ip-longest-track": {
-    id: "ip-longest-track",
-    segment: "imagine-playground",
-    title: "longest track",
-    setupLine: "Build the longest track and measure it.",
-    howToPlay:
-      "Standard and non-standard measurement. Children build a track from a wall outwards, measure with a tape, and compare. Then they build towers and measure height.",
-    materials: ["Track pieces", "Tape measure", "Number bricks for non-standard measuring"],
-    debriefPrompts: [],
-    type: "physical-game",
-  },
-  "ip-train-sound": {
-    id: "ip-train-sound",
-    segment: "imagine-playground",
-    title: "train sound",
-    setupLine: "Plan a journey using yellow, blue, and white bricks.",
-    howToPlay:
-      "Yellow, blue, and white action bricks change the train's behaviour. Children plan a journey before the train moves — first experience of forward planning and sequencing. White bricks light up inside a tunnel.",
-    materials: ["Track pieces", "Train", "Action bricks (yellow, blue, white)", "Tunnel cutout"],
-    debriefPrompts: [],
-    type: "physical-game",
-  },
-  "ip-o-shaped-track": {
-    id: "ip-o-shaped-track",
-    segment: "imagine-playground",
-    title: "o-shaped track",
-    setupLine: "Build a looping track.",
-    howToPlay:
-      "Introduces looping — the same journey repeated. Children compare the O-track with a double-ended track. Foundation of computational thinking.",
-    materials: ["Curved track pieces", "Straight track pieces", "Train", "Action bricks"],
-    debriefPrompts: [],
-    type: "physical-game",
-  },
-  "ip-y-shaped-track": {
-    id: "ip-y-shaped-track",
-    segment: "imagine-playground",
-    title: "y-shaped track",
-    setupLine: "Coloured tickets decide the path.",
-    howToPlay:
-      "First if-then thinking. If red ticket, then go to red stop. Children build a Y-track with a switch and use coloured bricks as tickets. Foundation of conditional logic.",
-    materials: ["Y-shaped track", "Track switch", "Coloured bricks (tickets and stops)"],
-    debriefPrompts: [],
-    type: "physical-game",
-  },
-  "ip-trouble-on-the-road": {
-    id: "ip-trouble-on-the-road",
-    segment: "imagine-playground",
-    title: "trouble on the road",
-    setupLine: "Read the traffic signs and solve the route problem.",
-    howToPlay:
-      "Children apply route planning to solve traffic problems. The educator places action bricks randomly along the track — children identify the problem and choose the right traffic sign to fix it.",
-    materials: ["Y-shaped track", "Building cards", "Action bricks", "Traffic sign set"],
-    debriefPrompts: [],
-    type: "physical-game",
-  },
-  "ip-ramps": {
-    id: "ip-ramps",
-    segment: "imagine-playground",
-    title: "ramps",
-    setupLine: "Build a ramp with magna tiles. Predict and measure how far cars roll.",
-    howToPlay:
-      "Children build ramps using magna tiles and other materials, then roll cars down. Before each roll they predict where the car will stop, then mark the actual stopping point on a number track and record results on a graph. Introduces motion, gravity, prediction.",
-    materials: ["Magna Tiles", "Cars or rolling objects", "Track template pages", "Number bricks", "Result graphs"],
-    debriefPrompts: [],
-    type: "physical-game",
-  },
-  "ip-chain-reaction": {
-    id: "ip-chain-reaction",
-    segment: "imagine-playground",
-    title: "chain reaction",
-    setupLine: "One event triggers the next.",
-    howToPlay:
-      "Cause-and-effect at its richest. Children build trigger sequences in pairs, then combine all the pairs' work into one long chain reaction. They explain first cause, first event, and last event.",
-    materials: ["Building pieces", "Objects that move, fall, push, or trigger"],
-    debriefPrompts: [],
-    type: "physical-game",
-  },
-  "ip-probability": {
-    id: "ip-probability",
-    segment: "imagine-playground",
-    title: "probability",
-    setupLine: "Predict, spin, record. Build a prize from what you collect.",
-    howToPlay:
-      "A spinner with coloured sections. Children predict, spin, and record outcomes across many rounds. They notice that more spaces of one colour means a better chance — but never a guarantee. Foundation of statistical thinking.",
-    materials: ["Wheel model", "Coloured bricks (red, yellow, blue, turquoise)", "Result graphs"],
-    debriefPrompts: [],
-    type: "physical-game",
-  },
-
-};
-
 /* ─── WonderWorld — the Little Kitchen game (segment id "wonder-world")
  * One kit, four repeatable games that grow with the child (played two
  * ways: easy 3–4 · medium 4–5): sort & guess, cooking, restaurant,
@@ -573,32 +440,8 @@ const wonderWorldActivities: Record<string, CurriculumActivity> = {
   },
 };
 
-/* ─── 60-session table — Imagine Playground / WonderWorld alternate
- * Sessions 1, 3, 5… are Session A (Imagine Playground).
- * Sessions 2, 4, 6… are Session B (WonderWorld; entry field is still
- * `wonderWorld` and segment id is still "wonder-world").
- * Logic Lab and NumbersGym run every session. ──────────────────── */
-
-const buildPlayground = (n: number): string => {
-  // 30 Session-A slots covering 11 core projects in fixed order.
-  // Sessions 1–11 introduce each project once; the remaining 19
-  // Session-As cycle revisits in fixed order so children meet each
-  // project 2–3 times across the year, deeper each time.
-  const order = [
-    "ip-train-time",
-    "ip-first-trip",
-    "ip-load-the-train",
-    "ip-longest-track",
-    "ip-train-sound",
-    "ip-o-shaped-track",
-    "ip-y-shaped-track",
-    "ip-trouble-on-the-road",
-    "ip-ramps",
-    "ip-chain-reaction",
-    "ip-probability",
-  ];
-  return order[(n - 1) % order.length];
-};
+/* ─── 60-session table — WonderWorld (Little Kitchen) is the one
+ * exploration segment; Logic Lab and NumbersGym run every session too. ─ */
 
 const buildWonderWorld = (n: number): string => {
   // Little Kitchen — the four games rotate in a fixed order and are replayed
@@ -619,26 +462,16 @@ const LOGIC_LAB_CYCLE = [
 
 const buildSessionTable = (): CurriculumSessionEntry[] => {
   const out: CurriculumSessionEntry[] = [];
-  let aIndex = 1;
-  let bIndex = 1;
   for (let i = 1; i <= 60; i++) {
-    const isSessionA = i % 2 === 1;
-    const entry: CurriculumSessionEntry = {
+    out.push({
       sessionNumber: i,
-      sessionType: isSessionA ? "A" : "B",
+      sessionType: "A",
       logicLab: LOGIC_LAB_CYCLE[(i - 1) % LOGIC_LAB_CYCLE.length],
-      numbersGym: `ng-l1-pg-${i}`, // placeholder marker — children pace themselves
+      numbersGym: `ng-l1-pg-${i}`,
       experienceBook: "experience-book",
+      wonderWorld: buildWonderWorld(i),
       topicLayer: 1,
-    };
-    if (isSessionA) {
-      entry.imaginePlayground = buildPlayground(aIndex);
-      aIndex += 1;
-    } else {
-      entry.wonderWorld = buildWonderWorld(bIndex);
-      bIndex += 1;
-    }
-    out.push(entry);
+    });
   }
   return out;
 };
@@ -704,16 +537,7 @@ export const stem35: CurriculumProgramme = {
     },
   ],
   segmentDefinitions: [
-    { id: "opening-circle", name: "opening circle", durationRange: "15 min", objective: "A warm start together — a hello and meet-and-greet, then a song or two to settle the group and wake up voices and bodies before the session begins. (A song playlist will be added.)", type: "fixed" },
-    {
-      id: "imagine-playground",
-      name: "Imagine Playground",
-      durationRange: "35 min",
-      objective:
-        "Imagination through building. Children meet stem concepts — math, physics, sequencing, conditionals, probability — through stories and hands-on building. Materials are blocks of different kinds: Math Train, Coding Express, STEAM Park, ramp materials, magna tiles, general blocks. The educator sets a challenge, lays out materials, and steps back. 11 core projects run in a fixed order, each met 2–3 times across the year — deeper every time. Why it alternates with WonderWorld: both build curiosity, problem solving, and creation, but Imagine Playground works in the language of blocks and structures, while WonderWorld works in the language of everyday things. Children need both. Runs on Session A only.",
-      type: "rotating",
-      rotationPool: Object.keys(imaginePlaygroundProjects),
-    },
+    { id: "opening-circle", name: "opening circle", durationRange: "15 min", objective: "A warm start together — a hello and meet-and-greet, then a song or two to settle the group and wake up voices and bodies before the session begins. Pick songs from the circle & songs bank — opening-circle set.", type: "fixed" },
     {
       // NOTE: the internal segment id stays "wonder-world" to avoid type
       // churn across the session table and CurriculumSessionEntry; the
@@ -723,7 +547,7 @@ export const stem35: CurriculumProgramme = {
       name: "WonderWorld",
       durationRange: "35 min",
       objective:
-        "Imagination through everyday things. Children meet stem concepts — sorting, sequencing, fractions, classification — through the Little Kitchen kit — a repeatable kitchen board game played with food cards, two cooking mats and play-dough (no blocks). One kit, four games that grow with the child: sort & guess (logic), cooking (number sense), restaurant (money) and recipe development (invention). The same game is played two ways — easy for 3–4, medium for 4–5 — so it deepens across the year; 18 dishes mean a class can cook for months without repeating. No scores, no winners — the educator reads the play as observation. Why it alternates with Imagine Playground: both are creation- and curiosity-driven, but WonderWorld grounds learning in daily life while Imagine Playground stretches it through imaginary worlds. Runs on Session B only.",
+        "Imagination through everyday things. Children meet stem concepts — sorting, sequencing, fractions, classification — through the Little Kitchen kit — a repeatable kitchen board game played with food cards, two cooking mats and play-dough (no blocks). One kit, four games that grow with the child: sort & guess (logic), cooking (number sense), restaurant (money) and recipe development (invention). The same game is played two ways — easy for 3–4, medium for 4–5 — so it deepens across the year; 18 dishes mean a class can cook for months without repeating. No scores, no winners — the educator reads the play as observation. This is the exploration segment every session; more games can be added to the kit over time.",
       type: "rotating",
       rotationPool: Object.keys(wonderWorldActivities),
     },
@@ -753,11 +577,10 @@ export const stem35: CurriculumProgramme = {
         "Each child has a personal Experience Book. The educator writes one specific sentence about what the child did that day — a project they built, a question they asked, a number they counted, a 'because' they explained. The child adds a drawing or stamp. The book goes home regularly so parents can see growth. This is also where Number Sense level transitions are recorded.",
       type: "fixed",
     },
-    { id: "closing-circle", name: "closing circle", durationRange: "15 min", objective: "A calm finish together — a simple fitness / movement song to round off the class. (A song playlist will be added.)", type: "fixed" },
+    { id: "closing-circle", name: "closing circle", durationRange: "15 min", objective: "A calm finish together — a simple fitness / movement song to round off the class. Pick a movement song from the circle & songs bank — closing-circle set.", type: "fixed" },
   ],
   sessionTable: buildSessionTable(),
   activities: {
-    ...imaginePlaygroundProjects,
     ...wonderWorldActivities,
     ...logicLabGames,
   },

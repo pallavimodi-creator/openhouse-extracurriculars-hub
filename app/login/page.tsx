@@ -63,10 +63,10 @@ export default function LoginPage() {
       router.push("/");
       return;
     }
-    // Educators with a centre baked into their credential pick their
-    // name + category first; then the app filters to that category.
+    // Centre educators run the 3–5 rotating programme — they land on the
+    // rotating home (with the daily log) rather than a category picker.
     if (cred.defaultBuilding) {
-      router.push("/who");
+      router.push("/rotating");
       return;
     }
     router.push("/building");

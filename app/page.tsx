@@ -77,11 +77,13 @@ function TrackSection({
   blurb,
   tone,
   items,
+  isAdmin = false,
 }: {
   label: string;
   blurb: string;
   tone: "live" | "trial";
   items: ReturnType<typeof listCurriculumProgrammes>;
+  isAdmin?: boolean;
 }) {
   if (items.length === 0) return null;
 
@@ -121,27 +123,27 @@ function TrackSection({
       {tone === "trial" && (
         <div className="mt-3 flex flex-wrap gap-2">
           <Link
-            href="/plan"
+            href="/rotating"
             className="inline-flex items-center gap-1.5 rounded-chip bg-brand-orange px-3 py-1.5 text-[11px] font-bold text-white shadow-card transition hover:opacity-95"
           >
-            open the 3–5 programme
+            overview
           </Link>
-          <Link
-            href="/plan/session"
+          <a
+            href="#daily-plans"
             className="inline-flex items-center gap-1.5 rounded-chip bg-brand-white px-3 py-1.5 text-[11px] font-semibold text-ink-muted ring-1 ring-ink/10 transition hover:bg-ink/5"
           >
-            plan a session
-          </Link>
+            daily plans
+          </a>
           <Link
-            href="/plan/docs"
+            href="/circle"
             className="inline-flex items-center gap-1.5 rounded-chip bg-brand-white px-3 py-1.5 text-[11px] font-semibold text-ink-muted ring-1 ring-ink/10 transition hover:bg-ink/5"
           >
-            planning docs
+            song library
           </Link>
         </div>
       )}
 
-      <div className="mt-4 space-y-6">
+      <div id={tone === "trial" ? "daily-plans" : undefined} className="mt-4 scroll-mt-4 space-y-6">
         {byCategory.map((c) => (
           <div key={c.key}>
             <h4 className="mb-2 text-[13px] font-extrabold lowercase text-ink">
@@ -309,9 +311,9 @@ export default function HomePage() {
                 title="pick a track"
                 body={
                   <>
-                    Programmes are split into{" "}
-                    <span className="font-semibold text-brand-orange">5+</span> (running now) and the{" "}
-                    <span className="font-semibold text-brand-orange">3–5 trial</span> (the new integrated at-centre programme). Choose one and open a programme.
+                    Start with{" "}
+                    <span className="font-semibold text-brand-orange">the 3–5 programme</span> (the centre&apos;s integrated day — art · stem · language rotate), or open a{" "}
+                    <span className="font-semibold text-brand-orange">5+</span> single-subject programme. Pick one to begin.
                   </>
                 }
               />
@@ -352,25 +354,26 @@ export default function HomePage() {
       <section className="px-4 pt-8 pb-8 md:px-8 md:pt-10 md:pb-12">
         <div className="space-y-8">
           <TrackSection
-            label="5+ programmes"
-            blurb="running now · ages 5–12 · one subject per programme"
-            tone="live"
-            items={live}
+            label="the 3–5 programme"
+            blurb="the centre's integrated day — art · stem · language rotate. open a strand below for its session plan."
+            tone="trial"
+            items={trial}
+            isAdmin={isAdmin}
           />
-          {trial.length > 0 && (
+          {live.length > 0 && (
             <div className="flex items-center gap-3 pt-2" aria-hidden>
               <span className="h-px flex-1 bg-ink/10" />
               <span className="rounded-chip bg-ink/5 px-2.5 py-1 text-[10px] font-bold tracking-wider text-ink-subtle">
-                a separate programme
+                also at the centre
               </span>
               <span className="h-px flex-1 bg-ink/10" />
             </div>
           )}
           <TrackSection
-            label="3–5 · trial"
-            blurb="the new integrated at-centre programme — art · stem · language rotate across a 2-hour day"
-            tone="trial"
-            items={trial}
+            label="5+ programmes"
+            blurb="ages 5–12 · one subject per programme"
+            tone="live"
+            items={live}
           />
         </div>
       </section>

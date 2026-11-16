@@ -49,3 +49,19 @@ export interface SessionCompletionRow {
   category: string | null; // "art" | "language" | "stem"
   age_band: string | null; // "3-5" | "5-8" | "8-12"
 }
+
+// One daily entry an educator fills for the 3–5 rotating programme.
+// teacher name + which strand they ran today + how it went + notes.
+// Powers the admin daily dashboard at /daily. Table SQL in
+// planning/supabase-daily-logs.sql.
+export interface DailyLogRow {
+  id?: string;
+  created_at?: string;
+  log_date: string; // YYYY-MM-DD
+  centre: string | null; // the building/centre
+  teacher_username: string | null; // the logged-in centre account
+  teacher_name: string; // the individual educator (typed on submit)
+  programme: "art" | "language" | "stem"; // which strand ran today
+  status: "completed" | "partial" | "challenges"; // how it went
+  notes: string; // free text — what went well / what was hard
+}

@@ -384,7 +384,7 @@ function ProgrammeOverviewContent() {
             <p className="mt-1.5 text-[13px] leading-relaxed text-ink md:text-[14px]">
               {isRobotics
                 ? programme.ageGroup === "3-5"
-                  ? "the four skills below are built through hands-on building (imagine playground), real-world play (wonder world), logic games (logic lab), and number practice (numbers gym) — a rotating set in each part of the day, run at each child's level."
+                  ? "the four skills below are built through real-world play (wonderworld — the little kitchen), logic games (logic lab), and number practice (numbers gym) — run at each child's level in each part of the day."
                   : programme.level === 2
                     ? "this is level 2 — electronics. robotics runs as a track: level 1 (mechanics) then level 2 (electronics) — use the level switcher above to move between them. each day: an experiment on a real circuit, then a build."
                     : "this overview covers level 1 — mechanics. robotics runs as a track: level 1 (mechanics) then level 2 (electronics) — use the level switcher above to move between them."
@@ -532,25 +532,10 @@ function ProgrammeOverviewContent() {
           <div className="mt-4 space-y-3 text-[13px] leading-relaxed text-ink-muted md:text-[14px]">
             <p>
               At Openhouse, language is learnt through{" "}
-              <span className="font-semibold text-ink">the world of stories</span>.
-            </p>
-            <p>
-              This is a holistic language programme that builds all core skills —{" "}
-              <span className="font-semibold text-ink">listening, speaking, reading, and early writing</span> — through the formats that children learn best from: books, songs, games, and playful practice.
-            </p>
-            <p>
-              Every part of the programme is rooted in context. Children don&apos;t learn words in isolation — they meet them in stories, use them in conversation, revisit them through games, and gradually make them their own. Our writing work is also meaning-driven, with children expressing ideas from stories through drawing, mark-making, and early writing.
+              <span className="font-semibold text-ink">the world of stories</span> — a holistic programme that builds <span className="font-semibold text-ink">listening, speaking, reading and early writing</span> through books, songs, games and play. Children don&apos;t learn words in isolation — they meet them in stories, use them in conversation, and revisit them through games until the words are their own.
             </p>
             <p className="rounded-xl bg-brand-white p-3 ring-1 ring-ink/10">
-              This is an{" "}
-              <span className="font-semibold text-ink">emergent literacy programme</span>. Children first understand what reading is — how books work, how print carries meaning, and how language flows — before learning to decode it.
-            </p>
-            <p>
-              We intentionally do not begin with phonics or alphabet-led reading at this stage. At ages 3–5, children learn language best through rich exposure, repetition, and meaningful use. This approach builds strong vocabulary, confident expression, and a deep connection to books — forming the foundation for formal reading and writing that follows.
-            </p>
-            <p>
-              Across sessions, stories act as the anchor. Words, ideas, and expressions are encountered again and again, until they are{" "}
-              <span className="font-semibold text-ink">understood, used, and truly owned</span>.
+              It&apos;s an <span className="font-semibold text-ink">emergent-literacy</span> approach: children first understand what reading <em>is</em> — how books work, how print carries meaning — before decoding it. We don&apos;t begin with phonics; at ages 3–5, language grows best through rich exposure, repetition and meaningful use, forming the foundation for the formal reading and writing that follows.
             </p>
           </div>
         </section>
@@ -563,57 +548,110 @@ function ProgrammeOverviewContent() {
           <SectionTitle num="·" label="the day · what happens in each part">
             the centre day moves through these parts. each is a rotating set of games/activities the educator runs at the child&apos;s level.
           </SectionTitle>
-          <div className="mt-4 space-y-2.5">
-            {programme.segmentDefinitions
-              .filter((s) => s.id !== "experience-book")
-              .map((seg) => {
-                const img = SEGMENT_IMAGES[seg.id];
-                return (
-                  <div key={seg.id} className="flex gap-3 rounded-2xl bg-brand-white p-3.5 shadow-card ring-1 ring-ink/5">
-                    {img ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img src={img} alt="" className="h-20 w-20 shrink-0 rounded-lg object-cover ring-1 ring-ink/10" />
-                    ) : (
-                      <span className="flex h-20 w-20 shrink-0 items-center justify-center rounded-lg bg-brand-cream text-brand-orange ring-1 ring-ink/5">
-                        {(() => {
-                          const Icon = SEGMENT_ICONS[seg.id] ?? Star;
-                          return <Icon className="h-8 w-8" strokeWidth={1.8} />;
-                        })()}
-                      </span>
-                    )}
-                    <div className="min-w-0 flex-1">
-                      <div className="flex flex-wrap items-baseline gap-2">
-                        <p className="text-[14px] font-extrabold lowercase text-ink">{seg.name.toLowerCase()}</p>
-                        {seg.durationRange && (
-                          <span className="text-[10px] font-semibold text-ink-subtle">{seg.durationRange}</span>
-                        )}
-                      </div>
-                      <p className="mt-1 text-[12px] leading-relaxed text-ink-muted">
-                        {firstSentences(seg.objective, 2)}
-                      </p>
-                      {/* every game in this set — so playground / art games /
-                          logic lab etc. list their full game roster */}
-                      {seg.rotationPool && seg.rotationPool.length > 0 && (() => {
-                        const titles = seg.rotationPool
-                          .map((k) => programme.activities?.[k]?.title)
-                          .filter((t): t is string => Boolean(t));
-                        if (titles.length === 0) return null;
-                        return (
-                          <div className="mt-2">
-                            <p className="text-[9px] font-bold tracking-wide text-brand-orange">games in this set</p>
-                            <div className="mt-1 flex flex-wrap gap-1">
-                              {titles.map((t) => (
-                                <span key={t} className="rounded-chip bg-brand-cream px-2 py-0.5 text-[10px] font-semibold lowercase text-ink-muted">{t}</span>
-                              ))}
-                            </div>
-                          </div>
-                        );
+          {(() => {
+            // Phase grouping — language reads as a clear arc: song → book →
+            // writing → game (with a break and a calm close). Other 3-5
+            // programmes list their parts flat.
+            const DAY_PHASES: Record<
+              string,
+              { emoji: string; label: string; segments: string[]; main?: boolean }[]
+            > = {
+              "language-storytelling-3-5": [
+                { emoji: "🎵", label: "song", segments: ["opening-circle", "roll-rhyme"], main: true },
+                { emoji: "📖", label: "book", segments: ["book-o-clock", "wordsmiths"], main: true },
+                { emoji: "☕", label: "break", segments: ["break"] },
+                { emoji: "✍️", label: "writing", segments: ["play-writes"], main: true },
+                { emoji: "🎮", label: "game", segments: ["playground"], main: true },
+                { emoji: "🌙", label: "close", segments: ["closing-circle"] },
+              ],
+            };
+            const phases = DAY_PHASES[programme.slug];
+            const segs = programme.segmentDefinitions.filter((s) => s.id !== "experience-book");
+            const renderCard = (seg: (typeof segs)[number]) => {
+              const img = SEGMENT_IMAGES[seg.id];
+              return (
+                <div key={seg.id} className="flex gap-3 rounded-2xl bg-brand-white p-3.5 shadow-card ring-1 ring-ink/5">
+                  {img ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={img} alt="" className="h-20 w-20 shrink-0 rounded-lg object-cover ring-1 ring-ink/10" />
+                  ) : (
+                    <span className="flex h-20 w-20 shrink-0 items-center justify-center rounded-lg bg-brand-cream text-brand-orange ring-1 ring-ink/5">
+                      {(() => {
+                        const Icon = SEGMENT_ICONS[seg.id] ?? Star;
+                        return <Icon className="h-8 w-8" strokeWidth={1.8} />;
                       })()}
+                    </span>
+                  )}
+                  <div className="min-w-0 flex-1">
+                    <div className="flex flex-wrap items-baseline gap-2">
+                      <p className="text-[14px] font-extrabold lowercase text-ink">{seg.name.toLowerCase()}</p>
+                      {seg.durationRange && (
+                        <span className="text-[10px] font-semibold text-ink-subtle">{seg.durationRange}</span>
+                      )}
                     </div>
+                    <p className="mt-1 text-[12px] leading-relaxed text-ink-muted">
+                      {firstSentences(seg.objective, 2)}
+                    </p>
+                    {seg.rotationPool && seg.rotationPool.length > 0 && (() => {
+                      const titles = seg.rotationPool
+                        .map((k) => programme.activities?.[k]?.title)
+                        .filter((t): t is string => Boolean(t));
+                      if (titles.length === 0) return null;
+                      return (
+                        <div className="mt-2">
+                          <p className="text-[9px] font-bold tracking-wide text-brand-orange">games in this set</p>
+                          <div className="mt-1 flex flex-wrap gap-1">
+                            {titles.map((t) => (
+                              <span key={t} className="rounded-chip bg-brand-cream px-2 py-0.5 text-[10px] font-semibold lowercase text-ink-muted">{t}</span>
+                            ))}
+                          </div>
+                        </div>
+                      );
+                    })()}
                   </div>
-                );
-              })}
-          </div>
+                </div>
+              );
+            };
+
+            if (!phases) {
+              return <div className="mt-4 space-y-2.5">{segs.map(renderCard)}</div>;
+            }
+
+            return (
+              <>
+                {/* the shape of the day — the four learning phases, in order */}
+                <div className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1.5 rounded-2xl bg-brand-cream/60 px-4 py-3 ring-1 ring-ink/5">
+                  {phases
+                    .filter((p) => p.main)
+                    .map((p, i, arr) => (
+                      <span key={p.label} className="flex items-center gap-2">
+                        <span className="inline-flex items-center gap-1 rounded-chip bg-brand-white px-2.5 py-1 text-[12px] font-extrabold lowercase text-ink shadow-card ring-1 ring-ink/5">
+                          <span aria-hidden>{p.emoji}</span> {p.label}
+                        </span>
+                        {i < arr.length - 1 && <span className="text-[13px] text-ink-subtle" aria-hidden>→</span>}
+                      </span>
+                    ))}
+                </div>
+
+                <div className="mt-5 space-y-5">
+                  {phases.map((ph) => {
+                    const phSegs = ph.segments
+                      .map((id) => segs.find((s) => s.id === id))
+                      .filter((s): s is (typeof segs)[number] => Boolean(s));
+                    if (phSegs.length === 0) return null;
+                    return (
+                      <div key={ph.label}>
+                        <p className="mb-2 flex items-center gap-1.5 text-[12px] font-extrabold lowercase tracking-wide text-ink-muted">
+                          <span aria-hidden>{ph.emoji}</span> {ph.label}
+                        </p>
+                        <div className="space-y-2.5">{phSegs.map(renderCard)}</div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </>
+            );
+          })()}
         </section>
       )}
 
@@ -777,42 +815,23 @@ function ProgrammeOverviewContent() {
         {/* Explainer — for the 3-5 art programme only. Why these
             skills matter, how the class builds them, and how to
             explain it to children and parents. */}
-        {programme.slug === "art-design-3-5" && (
-          <div className="mt-4 space-y-3">
-            <div className="rounded-2xl bg-brand-white p-4 shadow-card ring-1 ring-ink/5 md:p-5">
-              <p className="text-[11px] font-bold tracking-normal text-brand-orange">
-                why we observe skills &amp; abilities
+        {programme.ageGroup === "3-5" && (
+          <div className="mt-4 rounded-2xl bg-brand-white p-4 shadow-card ring-1 ring-ink/5 md:p-5">
+            <p className="text-[11px] font-bold tracking-normal text-brand-orange">
+              why we observe skills &amp; abilities
+            </p>
+            <div className="mt-2 space-y-2 text-[12.5px] leading-relaxed text-ink-muted md:text-[13px]">
+              <p>
+                we watch the small things a child practises — not just the finished work.
               </p>
-              <div className="mt-2 space-y-2 text-[12.5px] leading-relaxed text-ink-muted md:text-[13px]">
-                <p>
-                  At Openhouse, we don&apos;t only look at the final artwork a child creates. We also observe the smaller skills and abilities children build consistently through repeated experiences in class.
-                </p>
-                <p>
-                  <span className="font-semibold text-ink">Skills</span> are the larger areas of development children are building through art. <span className="font-semibold text-ink">Abilities</span> are the smaller observable actions within each skill that help us understand how a child is progressing over time.
-                </p>
-                <p>
-                  For example, &ldquo;fine motor&rdquo; is a skill, while &ldquo;holding and controlling a tool carefully&rdquo; is an ability within that skill.
-                </p>
-                <p className="rounded-lg bg-brand-cream p-3 text-[12px] leading-relaxed text-ink">
-                  The goal is not perfection or making all children create the same artwork. The goal is for children to gradually become more <span className="font-semibold">confident, expressive, independent, intentional, and capable</span> in how they create and communicate through art.
-                </p>
-              </div>
-            </div>
-
-            {/* How each segment of class builds these abilities */}
-            {/* Plain skills + abilities explainer (no heading) */}
-            <div className="rounded-2xl bg-segment-yellow/15 p-4 ring-1 ring-segment-yellow/40 md:p-5">
-              <div className="space-y-2 text-[12.5px] leading-relaxed text-ink-muted md:text-[13px]">
-                <p>
-                  <span className="font-semibold text-ink">Skills</span> are the big things we are learning to get better at. <span className="font-semibold text-ink">Abilities</span> are the small things we practise every day that help us build those skills.
-                </p>
-                <p>
-                  For example, if drawing is a big skill, then holding a pencil carefully, making lines, colouring with control, and choosing colours intentionally are all smaller abilities that help us get better at drawing.
-                </p>
-                <p>
-                  We build these abilities slowly by practising them again and again — through games, making, experimenting, and trying in different ways.
-                </p>
-              </div>
+              <p>
+                a <span className="font-semibold text-ink">skill</span> is a big area they grow in; an{" "}
+                <span className="font-semibold text-ink">ability</span> is a small action inside it. children build skills by practising the abilities, again and again.
+              </p>
+              <p className="rounded-lg bg-brand-cream p-3 text-[12px] text-ink">
+                the goal isn&apos;t a perfect or identical result — it&apos;s children growing more{" "}
+                <span className="font-semibold">confident, expressive and capable</span> over time.
+              </p>
             </div>
           </div>
         )}
@@ -907,43 +926,6 @@ function ProgrammeOverviewContent() {
           ))}
         </div>
 
-        {/* Debrief lines — teacher-friendly phrases for noticing
-            skills + abilities with 3-5 year olds. Art programme only. */}
-        {programme.slug === "art-design-3-5" && (
-          <div className="mt-5 rounded-2xl bg-brand-white p-4 shadow-card ring-1 ring-ink/5 md:p-5">
-            <p className="text-[11px] font-bold tracking-normal text-brand-orange">
-              talking to children about what they&apos;re making
-            </p>
-            <p className="mt-1 text-[12px] italic leading-relaxed text-ink-muted">
-              Speak about skills and abilities simply and naturally — encouraging and conversational, not like testing. The lines below are reference examples — use any that fit naturally in passing, not a checklist.
-            </p>
-            <ul className="mt-3 grid gap-1.5 md:grid-cols-2">
-              {[
-                "Today we practised controlling our fingers carefully.",
-                "I noticed you made your lines very slowly and carefully.",
-                "You kept trying even when it felt tricky.",
-                "You chose your colours very thoughtfully today.",
-                "I saw you using your imagination.",
-                "You made something in your own special way.",
-                "Your hands are getting stronger with tools.",
-                "You remembered how to use the material independently.",
-                "You tried a new idea today.",
-                "You worked very patiently on your artwork.",
-              ].map((line) => (
-                <li
-                  key={line}
-                  className="flex items-start gap-2 text-[11.5px] leading-relaxed text-ink-muted"
-                >
-                  <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-brand-orange/80" />
-                  <span className="flex-1">&ldquo;{line}&rdquo;</span>
-                </li>
-              ))}
-            </ul>
-            <p className="mt-3 text-[11px] leading-relaxed text-ink-muted">
-              The focus of these conversations: helping children notice effort, encouraging independence, appreciating creative choices, building confidence, and helping children feel proud of learning and trying.
-            </p>
-          </div>
-        )}
       </section>
 
       {/* ─── LEARNING OUTCOMES (3-5 programmes) ───
@@ -951,12 +933,12 @@ function ProgrammeOverviewContent() {
           planning/levels-and-skills-model.md): "levels" skills carry a
           different milestone at each level; "ladder" skills (dispositions)
           are one ladder toward one milestone. */}
-      {LO_LADDERS[programme.slug] && (() => {
+      {programme.ageGroup !== "3-5" && LO_LADDERS[programme.slug] && (() => {
         const prog = LO_LADDERS[programme.slug];
         return (
           <section className="mt-10 px-4 md:px-8">
             <SectionTitle num="·" label="learning outcomes">
-              two kinds of skill grow here. some are <strong>true levels</strong> — each level is a different target with its own milestone, so the same game carries a different aim per child. others are <strong>dispositions</strong> — one ladder toward one goal, climbed at each child&rsquo;s own pace.
+              two kinds of skill grow here. a <strong>levelled</strong> skill sets a new target at each level — children work toward a different milestone as they climb. a <strong>single-ladder</strong> skill has one goal everyone works toward, each at their own pace.
             </SectionTitle>
             {prog.levelNote && (
               <p className="mt-2 text-[11px] italic leading-relaxed text-ink-muted">{prog.levelNote}</p>
@@ -967,7 +949,7 @@ function ProgrammeOverviewContent() {
                   <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
                     <p className="text-[13px] font-extrabold lowercase text-ink">{sk.skill}</p>
                     <span className={`rounded-chip px-2 py-0.5 text-[9px] font-bold lowercase ${sk.kind === "levels" ? "bg-brand-orange/12 text-brand-orange" : "bg-ink/8 text-ink-muted"}`}>
-                      {sk.kind === "levels" ? "true levels · a milestone each" : "one ladder · disposition"}
+                      {sk.kind === "levels" ? "levelled · a milestone each level" : "one ladder · one shared goal"}
                     </span>
                   </div>
                   {sk.note && <p className="mb-3 text-[10.5px] italic leading-relaxed text-ink-subtle">{sk.note}</p>}
@@ -1217,15 +1199,19 @@ function ProgrammeOverviewContent() {
           {/* ─── 8 BOOKS IN ORDER ─── */}
           <section className="mt-10 px-4 md:px-8">
             <SectionTitle num={sectionNum("language-books")} label="the 8 books">
-              In reading order. Tap a book to see why it sits in this position.
+              read in order, book 1 → book 8 — each one builds on the last.
             </SectionTitle>
+            <div className="mt-3 rounded-2xl bg-brand-cream/60 p-4 ring-1 ring-ink/5 md:p-5">
+              <p className="text-[12.5px] leading-relaxed text-ink md:text-[13px]">
+                the order is a gentle build — <b>books 1–2</b> build joining in · <b>3–4</b> describing and feeling words · <b>5–6</b> understanding characters · <b>7–8</b> personal storytelling and richer vocabulary.
+              </p>
+              <p className="mt-2 text-[12px] leading-relaxed text-ink-muted">
+                a child doesn&rsquo;t need the earlier books to take part — <b className="text-ink">each book works on its own</b>, so a child who misses a session still joins in fully. you simply carry on from wherever the class has reached, no starting over.
+              </p>
+            </div>
             <div className="mt-4">
               <LanguageBooksGrid books={programme.languageBooks} />
             </div>
-            <p className="mt-4 text-[11px] italic leading-relaxed text-ink-muted">
-              Books 1–2 build participation. Books 3–4 build describing and feeling language. Books 5–6 build
-              complex character understanding. Books 7–8 build personal storytelling and dense vocabulary.
-            </p>
           </section>
 
           {/* ─── COMMUNITY SINGING ─── */}
@@ -1315,16 +1301,16 @@ function ProgrammeOverviewContent() {
         const books: BookEntry[] = [];
         if (programme.slug === "art-design-3-5") {
           books.push({
-            kind: "modal",
-            modalKey: "artiverse-3-5",
-            cover: "/artiverse-book/01-accordion.png",
-            title: "artwork references",
-            subtitle: "reference artworks for the age — educators pick their own",
+            kind: "route",
+            href: "/artiverse-book",
+            cover: "/artiverse-book/cover.png",
+            title: "the artiverse book",
+            subtitle: "12 single-session artworks — the skill is the point",
           });
           books.push({
-            kind: "modal",
-            modalKey: "artistotle-3-5",
-            cover: "/artistotle-book/01-cover.png",
+            kind: "route",
+            href: "/artistotle-book",
+            cover: "/artistotle-book/cover.png",
             title: "the artistotle book",
             subtitle: "educator reference · 3 artists · 13 projects",
           });
@@ -1355,16 +1341,13 @@ function ProgrammeOverviewContent() {
         // STEM 3–5 — two educator reference books built like the
         // artiverse / artistotle books.
         if (programme.slug === "robotics-3-5") {
-          // Imagine Playground is a game (the 11 build projects, in the
-          // library/segment) PLUS its game manual — this book, which opens
-          // the scripted by-level activities. Kitchen Play is a game too,
-          // but has no manual book, so no card for it here.
+          // WonderWorld is the exploration segment — the Little Kitchen game.
           books.push({
-            kind: "route",
-            href: "/plan/docs/imagine-playground-activities",
-            cover: "/games/stem-3-5/imagine-playground.png",
-            title: "the imagine playground game manual",
-            subtitle: "how to run all 11 build projects · scripted by level",
+            kind: "modal",
+            modalKey: "wonderworld-3-5",
+            cover: "/prog-stem-3-5.png",
+            title: "the wonderworld book",
+            subtitle: "the little kitchen game — how to run it",
           });
           books.push({
             kind: "modal",

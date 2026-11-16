@@ -120,7 +120,7 @@ export function SegmentInfoPopup({ info }: { info: SegmentInfo }) {
             {unit && (unit.mode === "artistotle" || unit.mode === "artiverse") && (
               <span
                 aria-hidden="true"
-                title={unit.mode === "artistotle" ? "Artistotle — 3 days, 1 project" : `Artiverse — ${unit.days} day${unit.days > 1 ? "s" : ""}`}
+                title={unit.mode === "artistotle" ? `Artistotle — ${unit.days === 1 ? "one session, one project" : `${unit.days} days, 1 project`}` : `Artiverse — ${unit.days} session${unit.days > 1 ? "s" : ""}`}
                 className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full bg-segment-blue/85 text-[18px] shadow-md ring-2 ring-white/70"
               >
                 {unit.mode === "artistotle" ? "👴" : "🌍"}
@@ -246,12 +246,27 @@ export function SegmentInfoPopup({ info }: { info: SegmentInfo }) {
             <div className="rounded-card bg-segment-blue/30 p-3 ring-1 ring-ink/5">
               <p className="text-[10px] font-semibold tracking-wider text-ink">
                 <span aria-hidden className="mr-1">👴</span>
-                Artistotle · 3 continuous days · 1 finished project
+                {unit.days === 1
+                  ? "Artistotle · one session · one project"
+                  : `Artistotle · ${unit.days} continuous days · 1 finished project`}
               </p>
               <p className="mt-1 text-[12px] leading-relaxed text-ink-muted">
-                One artwork is built across three sessions, in the spirit of the
-                illustrator. Day 1 begins it, day 2 deepens it, day 3 finishes it
-                — a single piece the child takes home.
+                {unit.days === 1
+                  ? "One artwork made in a single session, in the spirit of the illustrator. The objective is the skill — the collage, the dab, the line — never a copy. The child takes the piece home the same day."
+                  : "One artwork is built across sessions, in the spirit of the illustrator — a single piece the child takes home."}
+              </p>
+            </div>
+          )}
+          {unit.mode === "artiverse" && unit.days === 1 && (
+            <div className="rounded-card bg-segment-yellow/40 p-3 ring-1 ring-ink/5">
+              <p className="text-[10px] font-semibold tracking-wider text-ink">
+                <span aria-hidden className="mr-1">🌍</span>
+                Artiverse · one session · one artwork
+              </p>
+              <p className="mt-1 text-[12px] leading-relaxed text-ink-muted">
+                One complete artwork in a single session. The skill — the fold,
+                the mark, the technique — is the objective; the pictured subject
+                is only one option the child can swap for their own.
               </p>
             </div>
           )}
@@ -280,14 +295,19 @@ export function SegmentInfoPopup({ info }: { info: SegmentInfo }) {
             </div>
           )}
           {/* Day-by-day breakdown — surfaces what happens on each
-              session of the unit (especially useful for the 2-day
-              artiverse and 3-day artistotle units). */}
+              session. For single-session units (3–5) it's one complete
+              artwork; older age-bands may still run multi-day units. */}
           <div className="rounded-card bg-ink/[0.03] p-3">
             <p className="text-[10px] font-semibold tracking-wider text-ink-subtle">
-              How the days run
+              {unit.days === 1 ? "The session" : "How the days run"}
             </p>
             <ul className="mt-1.5 space-y-1.5">
-              {unit.mode === "artistotle" ? (
+              {unit.days === 1 ? (
+                <li className="flex items-start gap-2 text-[12px] leading-relaxed text-ink-muted">
+                  <span className="mt-0.5 inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-segment-blue/40 text-[9px] font-extrabold text-ink">1</span>
+                  <span>One complete artwork in this session. The skill above is the objective — children pick their own subject and take the piece home.</span>
+                </li>
+              ) : unit.mode === "artistotle" ? (
                 <>
                   <li className="flex items-start gap-2 text-[12px] leading-relaxed text-ink-muted">
                     <span className="mt-0.5 inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-brand-orange/15 text-[9px] font-extrabold text-brand-orange">1</span>
@@ -329,10 +349,10 @@ export function SegmentInfoPopup({ info }: { info: SegmentInfo }) {
               for the whole unit. */}
           <div className="rounded-card bg-ink/[0.03] p-3">
             <p className="text-[10px] font-semibold tracking-wider text-ink-subtle">
-              Materials each day
+              Materials
             </p>
             <p className="mt-1 text-[12px] leading-relaxed text-ink-muted">
-              {unit.medium}{unit.medium.endsWith(".") ? "" : "."} The same materials are set out on every day of this unit.
+              {unit.medium}{unit.medium.endsWith(".") ? "" : "."}{unit.days === 1 ? "" : " The same materials are set out on every day of this unit."}
             </p>
           </div>
         </div>

@@ -1,13 +1,15 @@
 /**
- * Artiverse chapter notes — final teacher-handbook structure.
+ * Artiverse chapter notes — teacher handbook, aligned 1:1 to the book.
  *
- * Three chapters: paper · crayons · paint. Each project lists how to
- * conduct it (teacher actions) and the artwork count. Used inside the
- * artiverse book modal as the side-panel reference.
+ * Three chapters: paper · crayons · paint. Twelve projects, each a single
+ * artwork made in one session. Every project leads with THE SKILL it
+ * teaches — the fold, the tear, the mark — and frames the pictured artwork
+ * as just one option. The specific animal/object is never the objective.
  */
 interface Project {
   name: string;
-  artworks: number;
+  skill: string; // the technique/skill this project teaches — the real objective
+  note: string; // the artwork is only one way to use the skill
   prep?: string[];
   steps: string[];
 }
@@ -18,7 +20,6 @@ interface Chapter {
   band: { bg: string; ink: string };
   why: string;
   guidelines: string[];
-  totalArtworks: number;
   projects: Project[];
 }
 
@@ -27,69 +28,57 @@ const CHAPTERS: Chapter[] = [
     name: "paper folding & sticking",
     emoji: "📄",
     band: { bg: "bg-segment-yellow", ink: "text-ink" },
-    why: "Paper helps children build finger strength and understand shape, space, and construction.",
+    why: "Paper builds finger strength and a feel for shape, space and construction. The objective is always the fold or the tear — not the animal it turns into.",
     guidelines: [
-      "Always pre-cut materials.",
-      "Always give stencils for faces if needed.",
-      "Focus on folding and sticking, not drawing.",
-      "Allow uneven and imperfect work.",
+      "Pre-cut all materials; give face stencils if needed.",
+      "Focus on folding, tearing and sticking — not drawing.",
+      "The pictured animal is one option. Let children pick their own.",
+      "Allow uneven, imperfect work.",
     ],
-    totalArtworks: 10,
     projects: [
       {
         name: "accordion folding",
-        artworks: 2,
-        prep: [
-          "Paper strips (5–10 cm thick)",
-          "Animal face stencils",
-          "Glue + crayons",
-        ],
+        skill: "the accordion fold — a strip folded back and forth.",
+        note: "we start here because it's the simplest fold. a giraffe's neck, fish fins, a springy creature — any of them; the fold is the point.",
+        prep: ["Paper strips (5–10 cm wide)", "Animal face stencils", "Glue + crayons"],
         steps: [
           "Show folding back and forth.",
-          "Help children press folds.",
-          "Children stick the folded strip as a body.",
+          "Help children press each fold.",
+          "Stick the folded strip as a body.",
           "Add a face and decorate.",
         ],
       },
       {
         name: "circles folding",
-        artworks: 3,
+        skill: "folding a circle — in half, stick some flat, leave some open.",
+        note: "a fishbowl, ladybugs, a stacked-circle bird — pick any; it's the fold that matters.",
         prep: ["Pre-cut circles in different sizes"],
         steps: [
           "Children fold circles into halves or flaps.",
           "Stick some parts flat, leave some open.",
-          "Arrange to form objects.",
+          "Arrange the circles into an object.",
         ],
       },
       {
         name: "mosaics",
-        artworks: 2,
+        skill: "tear & place — tear paper small and fill a shape.",
+        note: "an elephant, a snail's shell, their own animal — the skill is the tearing and filling, not the picture.",
         prep: ["Pre-torn coloured paper", "Simple outline sheets"],
         steps: [
           "Children tear more pieces.",
-          "Fill shapes using pieces.",
-          "Encourage colour choice.",
+          "Fill the shape with pieces.",
+          "Encourage their own colour choices.",
         ],
       },
       {
         name: "loops & chains",
-        artworks: 1,
-        prep: ["Paper strips (short)"],
+        skill: "looping — curl a strip into a loop and link them up.",
+        note: "a caterpillar, a bunny, a two-colour garland — any of these; the loop is the point.",
+        prep: ["Short paper strips"],
         steps: [
-          "Children make loops.",
-          "Join loops into chains.",
-          "Attach faces.",
-        ],
-      },
-      {
-        name: "simple origami",
-        artworks: 2,
-        prep: ["Square papers"],
-        steps: [
-          "Teach one fold at a time.",
-          "Assist where needed.",
-          "Stick the finished piece.",
-          "Decorate the background.",
+          "Children curl strips into loops.",
+          "Join loops into a chain.",
+          "Add a face or details.",
         ],
       },
     ],
@@ -98,51 +87,39 @@ const CHAPTERS: Chapter[] = [
     name: "crayons",
     emoji: "🖍️",
     band: { bg: "bg-brand-orange", ink: "text-white" },
-    why: "Crayons build grip control and help children colour with intention.",
+    why: "Crayons build grip control and intention. Each project is about how the hand moves — free marks, then control, then discovering a new colour.",
     guidelines: [
-      "Encourage drawing before colouring.",
-      "Do not fix drawings.",
-      "Focus on control, not perfection.",
+      "Let children draw before they colour.",
+      "Do not fix or redraw their work.",
+      "Focus on the skill — control, not a perfect picture.",
     ],
-    totalArtworks: 15,
     projects: [
       {
-        name: "solid colours in shapes",
-        artworks: 2,
-        steps: ["Draw simple shapes.", "Children fill colour inside."],
-      },
-      {
-        name: "solid colours in scenery",
-        artworks: 2,
-        steps: ["Draw simple scenery.", "Children colour large areas."],
-      },
-      {
-        name: "intricate colouring",
-        artworks: 2,
-        steps: ["Draw simple detailed objects.", "Children colour carefully."],
-      },
-      {
         name: "doodling",
-        artworks: 2,
+        skill: "free mark-making — loops, lines, scribbles that go anywhere.",
+        note: "the aim is a relaxed, confident grip; whatever it turns into is a bonus.",
         steps: [
-          "Children make lines, dots, patterns.",
-          "Use the page for texture.",
+          "Children make lines, dots and patterns.",
+          "Fill the page with free marks and texture.",
         ],
       },
       {
-        name: "colour mixing — shapes",
-        artworks: 2,
-        steps: ["Use 2 colours in one shape.", "Overlap and observe."],
+        name: "colouring",
+        skill: "colouring inside a shape — filling it in and staying in.",
+        note: "colour it however they like; the skill is the control, not the picture.",
+        steps: [
+          "Draw a few simple shapes.",
+          "Children fill the colour inside.",
+        ],
       },
       {
-        name: "colour mixing — objects",
-        artworks: 3,
-        steps: ["Colour objects using blended colours."],
-      },
-      {
-        name: "colour mixing — scenery",
-        artworks: 2,
-        steps: ["Create colourful backgrounds."],
+        name: "colour mixing",
+        skill: "layering colour — one colour over another to make a new one.",
+        note: "the discovery is the mix; the drawing is just where it happens.",
+        steps: [
+          "Use two colours in one shape.",
+          "Overlap them and watch the new colour appear.",
+        ],
       },
     ],
   },
@@ -150,53 +127,66 @@ const CHAPTERS: Chapter[] = [
     name: "paint",
     emoji: "🎨",
     band: { bg: "bg-segment-blue", ink: "text-ink" },
-    why: "Paint helps children explore movement, pressure, and expression.",
+    why: "Paint is about movement, pressure and expression. Each project teaches one way of putting paint down — a press, a fingertip, a dab, a dot, a blow.",
     guidelines: [
       "Accept mess.",
-      "Limit colours to 2–3 initially.",
-      "Demonstrate lightly.",
+      "Limit to 2–3 colours at first.",
+      "Demonstrate lightly, then let them lead.",
     ],
-    totalArtworks: 12,
     projects: [
       {
         name: "hand painting",
-        artworks: 3,
+        skill: "whole-hand printing — press a painted hand and lift it off.",
+        note: "a tree, a bird, a splashy pattern — the skill is the press and feeling at home with paint.",
         prep: ["Paint trays", "Large sheets"],
         steps: [
-          "Children dip hands in paint.",
-          "Press on paper.",
-          "Observe prints.",
-          "Build images from prints.",
+          "Children dip a hand in paint.",
+          "Press it flat on the paper and lift.",
+          "Build an image from the prints.",
         ],
       },
       {
         name: "finger painting",
-        artworks: 3,
+        skill: "finger control in paint — spread, swirl and dot with fingertips.",
+        note: "make anything; the point is leading the colour with a finger.",
         prep: ["Thick paint", "Trays"],
         steps: [
-          "Children use fingers.",
-          "Make swirls, dots, spreads.",
+          "Children paint with their fingers.",
+          "Make swirls, dots and spreads.",
           "Allow free mixing.",
         ],
       },
       {
         name: "sponge painting",
-        artworks: 3,
+        skill: "dab & press — build texture by pressing a sponge.",
+        note: "clouds, a bush, a patterned sky — the skill is the pressure and the dabbing.",
         prep: ["Sponge pieces", "Paint"],
         steps: [
-          "Dip sponge lightly.",
-          "Dab repeatedly.",
-          "Create patterns or objects.",
+          "Dip the sponge lightly.",
+          "Dab it repeatedly.",
+          "Build a pattern or object.",
         ],
       },
       {
         name: "q-tip painting",
-        artworks: 3,
+        skill: "dotting — small, careful dots that build up an image.",
+        note: "flowers, spots, a dotty pattern — the skill is the precise little dots.",
         prep: ["Q-tips", "Paint"],
         steps: [
-          "Dip tip in paint.",
-          "Make dots and patterns.",
-          "Build images using dots.",
+          "Dip the tip in paint.",
+          "Make dots and small patterns.",
+          "Build an image out of dots.",
+        ],
+      },
+      {
+        name: "blow & splatter",
+        skill: "moving paint without a brush — blow it through a straw, or flick to splatter.",
+        note: "whatever the shapes become is theirs; the play is the point.",
+        prep: ["Straws", "Thin paint", "Trays"],
+        steps: [
+          "Drip thin paint onto the page.",
+          "Blow through a straw to move it — or flick to splatter.",
+          "Let the shapes become their own thing.",
         ],
       },
     ],
@@ -205,15 +195,15 @@ const CHAPTERS: Chapter[] = [
 
 export function ArtiverseChapters({ compact = false }: { compact?: boolean }) {
   void compact;
-  const total = CHAPTERS.reduce((sum, c) => sum + c.totalArtworks, 0);
+  const total = CHAPTERS.reduce((sum, c) => sum + c.projects.length, 0);
   return (
     <div className="space-y-6">
       <div className="rounded-2xl bg-segment-yellow/30 p-4 ring-1 ring-segment-yellow/50">
         <p className="text-[11px] font-bold tracking-normal text-brand-orange">
-          three chapters · {total} artworks
+          three chapters · {total} projects · one artwork each
         </p>
         <p className="mt-1 text-[12.5px] leading-relaxed text-ink md:text-[13px]">
-          Artiverse focuses on helping children become comfortable and confident with art materials. Imagery is open and neutral — children create their own versions using references only as inspiration.
+          Artiverse helps children get comfortable and confident with art materials. Every project teaches one skill — a fold, a mark, a way of painting — in a single session. The reference image is only inspiration; children make their own version.
         </p>
       </div>
 
@@ -234,7 +224,7 @@ export function ArtiverseChapters({ compact = false }: { compact?: boolean }) {
               </span>
               <div>
                 <p className="text-[10px] font-bold opacity-70">
-                  chapter {ci + 1} · {chapter.totalArtworks} artworks
+                  chapter {ci + 1} · {chapter.projects.length} projects
                 </p>
                 <h3 className="text-[20px] font-extrabold lowercase leading-tight md:text-[24px]">
                   {chapter.name}
@@ -289,13 +279,18 @@ export function ArtiverseChapters({ compact = false }: { compact?: boolean }) {
                   {i + 1}
                 </span>
                 <div className="flex-1 pt-0.5">
-                  <div className="flex flex-wrap items-baseline gap-x-2">
-                    <p className="text-[13.5px] font-extrabold lowercase text-ink md:text-[14px]">
-                      {p.name}
+                  <p className="text-[13.5px] font-extrabold lowercase text-ink md:text-[14px]">
+                    {p.name}
+                  </p>
+                  {/* the skill is the objective — lead with it */}
+                  <div className="mt-1.5 rounded-xl bg-segment-yellow/20 px-3 py-2 ring-1 ring-segment-yellow/40">
+                    <p className="text-[12px] leading-relaxed text-ink">
+                      <span className="font-extrabold text-brand-orange">the skill:</span>{" "}
+                      {p.skill}
                     </p>
-                    <span className="rounded-chip bg-brand-cream px-1.5 py-0.5 text-[10px] font-bold text-ink-muted">
-                      {p.artworks} {p.artworks === 1 ? "artwork" : "artworks"}
-                    </span>
+                    <p className="mt-0.5 text-[11.5px] leading-relaxed text-ink-muted">
+                      {p.note}
+                    </p>
                   </div>
                   {p.prep && (
                     <div className="mt-2">
@@ -341,7 +336,7 @@ export function ArtiverseChapters({ compact = false }: { compact?: boolean }) {
           important — for both books
         </p>
         <p className="mt-1 text-[12.5px] leading-relaxed text-ink md:text-[13px]">
-          All outcomes are choice-based. Children should not copy perfectly — reference images are only for inspiration. Children should choose their own colours, add details, make changes, create freely. Mess and imperfection are part of learning.
+          The objective is the skill, never the specific object. The same skill can make many things — paper loops can be a snail, a bangle or a necklace. Children choose their own colours, add their own details, and make their own version. Mess and imperfection are part of learning.
         </p>
       </div>
     </div>

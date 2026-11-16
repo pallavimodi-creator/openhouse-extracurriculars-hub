@@ -1,12 +1,15 @@
 /**
- * Artistotle chapter notes — final teacher-handbook structure.
+ * Artistotle chapter notes — teacher handbook.
  *
- * Three illustrators: Eric Carle · Lois Ehlert · Taro Gomi. Each
- * project lists how to conduct it. Used inside the artistotle book
- * modal as the side-panel reference.
+ * Three illustrators: Eric Carle · Lois Ehlert · Taro Gomi. Every project
+ * is a single artwork made in one session, and leads with THE SKILL the
+ * illustrator's style teaches — not the character. Children work in each
+ * artist's spirit while making their own choices.
  */
 interface Project {
   name: string;
+  skill: string; // the technique this project teaches — the real objective
+  note: string; // the artwork is only one way to use the skill
   steps: string[];
 }
 
@@ -23,39 +26,31 @@ const CHAPTERS: ArtistotleChapter[] = [
     illustrator: "eric carle",
     emoji: "🐛",
     band: { bg: "bg-segment-yellow", ink: "text-ink" },
-    why: "Focus on collage and texture.",
+    why: "Collage and texture — building a picture from layered, torn and cut paper. The objective is the layering, never the creature it becomes.",
     projects: [
       {
         name: "stripes collage",
-        steps: [
-          "Children arrange strips.",
-          "Overlap freely.",
-          "Stick after arranging.",
-        ],
+        skill: "layering paper strips into a picture.",
+        note: "overlap them freely; the skill is the layering, not what it turns into.",
+        steps: ["Children arrange the strips.", "Overlap them freely.", "Stick once they're happy."],
       },
       {
         name: "caterpillar collage",
-        steps: [
-          "Arrange circles in a line.",
-          "Stick.",
-          "Add details.",
-        ],
+        skill: "building a body from a row of circles.",
+        note: "a caterpillar is one option; it's lining up and sticking the circles that matters.",
+        steps: ["Arrange circles in a line.", "Stick them down.", "Add a face and details."],
       },
       {
         name: "fruit & vegetable collage",
-        steps: [
-          "Tear paper.",
-          "Arrange into shapes.",
-          "Stick freely.",
-        ],
+        skill: "tearing paper into organic shapes.",
+        note: "a fruit, a vegetable, anything round-ish — the skill is the tear and the fill.",
+        steps: ["Tear the paper.", "Arrange into a shape.", "Stick freely."],
       },
       {
         name: "jellyfish collage",
-        steps: [
-          "Use a circle for the head.",
-          "Add strips for tentacles.",
-          "Layer materials.",
-        ],
+        skill: "combining shape types — a round head, strip tentacles.",
+        note: "the skill is mixing different shapes into one piece; the jellyfish is just the example.",
+        steps: ["Use a circle for the head.", "Add strips for tentacles.", "Layer the materials."],
       },
     ],
   },
@@ -63,23 +58,31 @@ const CHAPTERS: ArtistotleChapter[] = [
     illustrator: "lois ehlert",
     emoji: "🌻",
     band: { bg: "bg-brand-orange", ink: "text-white" },
-    why: "Focus on bold colour and layering.",
+    why: "Bold colour and clean shape — flowers and animals built from dabs, strokes and simple forms.",
     projects: [
       {
         name: "sponge flowers",
-        steps: ["Dab sponge.", "Repeat for petals."],
+        skill: "sponge-dabbing to build a flower from marks.",
+        note: "any flower; the skill is the dab and repeating it for petals.",
+        steps: ["Dab the sponge.", "Repeat for each petal."],
       },
       {
         name: "brush flowers",
-        steps: ["Use brush strokes.", "Create simple flowers."],
+        skill: "simple brush-stroke flowers.",
+        note: "the skill is controlling the brush; the flower is up to the child.",
+        steps: ["Use brush strokes.", "Build simple flowers."],
       },
       {
         name: "swirling flowers",
-        steps: ["Move brush in circles.", "Create loose shapes."],
+        skill: "moving the brush in circles for loose shapes.",
+        note: "the skill is the swirling motion, not a neat flower.",
+        steps: ["Move the brush in circles.", "Make loose, swirling shapes."],
       },
       {
         name: "two-layer garden",
-        steps: ["Paint the background.", "Add flowers on top."],
+        skill: "painting a background first, then adding on top — building depth.",
+        note: "the skill is working in two layers; the garden is one way to show it.",
+        steps: ["Paint the background.", "Add flowers on top once it's dry enough."],
       },
     ],
   },
@@ -87,27 +90,37 @@ const CHAPTERS: ArtistotleChapter[] = [
     illustrator: "taro gomi",
     emoji: "🖍️",
     band: { bg: "bg-segment-blue", ink: "text-ink" },
-    why: "Focus on playful drawing and expression.",
+    why: "Playful, fearless drawing — loose lines and the child's own ideas, never a perfect copy.",
     projects: [
       {
         name: "simple colouring",
-        steps: ["Colour the bear (day 1) and tiger (day 2) worksheets.", "Add playful details and a background."],
+        skill: "colouring an outline and adding your own world around it.",
+        note: "bear, tiger, anything — the skill is the colour and the details they add.",
+        steps: ["Colour the animal outline.", "Add playful details and a background."],
       },
       {
         name: "line making 1",
-        steps: ["Practise lines and patterns."],
+        skill: "filling a shape with line patterns — dots, dashes, zigzags, waves.",
+        note: "the skill is the variety of marks; the shape is just where they go.",
+        steps: ["Fill the worksheet with line patterns.", "Mix dots, dashes, zigzags and waves."],
       },
       {
         name: "line making 2",
-        steps: ["Fill objects using patterns."],
+        skill: "giving each part its own line pattern.",
+        note: "the skill is choosing a different pattern per section.",
+        steps: ["Give each part a different line pattern.", "Fill the whole shape."],
       },
       {
         name: "draw & colour 1",
-        steps: ["Draw simple objects.", "Colour freely."],
+        skill: "drawing a character and giving it a background.",
+        note: "any character; the skill is placing it in a little world.",
+        steps: ["Draw a simple character.", "Colour it and add a background."],
       },
       {
         name: "draw & colour 2",
-        steps: ["Create a full scene.", "Encourage storytelling."],
+        skill: "building a fuller scene around your character.",
+        note: "the skill is adding more of a world; the story is theirs.",
+        steps: ["Draw a character.", "Build a fuller scene with extra elements."],
       },
     ],
   },
@@ -120,15 +133,15 @@ export function ArtistotleChapters({ compact = false }: { compact?: boolean }) {
     <div className="space-y-6">
       <div className="rounded-2xl bg-brand-orange/15 p-4 ring-1 ring-brand-orange/30">
         <p className="text-[11px] font-bold tracking-normal text-brand-orange">
-          three illustrators · {totalProjects} projects · ~15–20 sessions
+          three illustrators · {totalProjects} projects · one artwork each
         </p>
         <p className="mt-1 text-[12.5px] leading-relaxed text-ink md:text-[13px]">
-          Artistotle focuses on learning art through the styles of well-known illustrators. Children create artworks inspired by each artist while making their own choices.
+          Artistotle teaches art through the styles of well-known illustrators. Each project teaches one technique in a single session; children work in the artist&rsquo;s spirit while making their own choices — never copying.
         </p>
         <ul className="mt-2 space-y-1 text-[11.5px] leading-relaxed text-ink-muted">
           <li>· Introduce the artist simply (1–2 lines only).</li>
-          <li>· Focus on technique, not copying.</li>
-          <li>· Allow interpretation.</li>
+          <li>· Focus on the technique, not copying the artist.</li>
+          <li>· The named artwork is one option — allow interpretation.</li>
         </ul>
       </div>
 
@@ -189,7 +202,17 @@ export function ArtistotleChapters({ compact = false }: { compact?: boolean }) {
                   <p className="text-[13.5px] font-extrabold lowercase text-ink md:text-[14px]">
                     {p.name}
                   </p>
-                  <div className="mt-1.5">
+                  {/* the skill is the objective — lead with it */}
+                  <div className="mt-1.5 rounded-xl bg-brand-orange/10 px-3 py-2 ring-1 ring-brand-orange/25">
+                    <p className="text-[12px] leading-relaxed text-ink">
+                      <span className="font-extrabold text-brand-orange">the skill:</span>{" "}
+                      {p.skill}
+                    </p>
+                    <p className="mt-0.5 text-[11.5px] leading-relaxed text-ink-muted">
+                      {p.note}
+                    </p>
+                  </div>
+                  <div className="mt-2">
                     <p className="text-[10px] font-bold tracking-normal text-ink-subtle">
                       how to conduct
                     </p>
@@ -216,7 +239,7 @@ export function ArtistotleChapters({ compact = false }: { compact?: boolean }) {
           final note
         </p>
         <p className="mt-1 text-[12.5px] leading-relaxed text-ink md:text-[13px]">
-          The goal is not to create perfect artwork. The goal is to help children feel confident, explore materials, and express ideas.
+          The goal is never a perfect copy of the artist. The objective is the skill — the collage, the dab, the fearless line — so children feel confident, explore the materials, and make the artwork their own.
         </p>
       </div>
     </div>

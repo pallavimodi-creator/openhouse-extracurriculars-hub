@@ -353,7 +353,8 @@ function SegmentRow({
               // children pick from, and a one-line frame for "what
               // we're making".
               const isArtistotle =
-                programmeSlug === "art-design-3-5" && unit?.days === 3;
+                programmeSlug === "art-design-3-5" &&
+                (unit?.id?.startsWith("atl-") ?? false);
               const unitDescription = unit
                 ? `Today's session uses ${unit.medium.toLowerCase()}. Technique: ${unit.technique.toLowerCase()}. Children make their own piece — reference topic: ${unit.whatChildrenMake.toLowerCase()}.`
                 : segment.objective;
@@ -362,8 +363,8 @@ function SegmentRow({
                 segmentName: isArtistotle ? "Artistotle" : "Artiverse",
                 title: unit?.medium ?? segment.artiverseUnitName ?? "artiverse",
                 subText:
-                  segment.artiverseUnit !== undefined && segment.artiverseDay !== undefined && unit
-                    ? `${isArtistotle ? "project" : "unit"} ${segment.artiverseUnit} · day ${segment.artiverseDay} of ${unit.days}`
+                  segment.artiverseUnit !== undefined && unit
+                    ? `${isArtistotle ? "project" : "unit"} ${segment.artiverseUnit}${(segment.artiverseDay ?? 1) > 1 ? ` · revisit ${segment.artiverseDay} (new artwork, same skill)` : " · one session"}`
                     : undefined,
                 description: unitDescription,
                 artiverseUnit: unit
@@ -376,10 +377,10 @@ function SegmentRow({
                       heroImageUrl: unit.heroImageUrl,
                       extraImages: unit.extraImages,
                       // 3-5 art puts artiverse + artistotle in the same
-                      // segment slot, distinguished by days === 3. Other
-                      // programmes have artiverse only.
+                      // segment slot, distinguished by the unit id prefix
+                      // (atl- = artistotle). Other programmes have artiverse only.
                       mode:
-                        programmeSlug === "art-design-3-5" && unit.days === 3
+                        programmeSlug === "art-design-3-5" && unit.id.startsWith("atl-")
                           ? "artistotle"
                           : "artiverse",
                     }
@@ -393,6 +394,23 @@ function SegmentRow({
                 description,
                 bookLinkSlug: bookSlug,
                 heroImageUrl: bookCoverUrl,
+              };
+            } else if (
+              segment.segmentId === "opening-circle" ||
+              segment.segmentId === "closing-circle"
+            ) {
+              info = {
+                segmentId: segment.segmentId,
+                segmentName: segment.segmentName,
+                title: segment.segmentName,
+                description,
+                externalLink: {
+                  href: "/circle",
+                  label:
+                    segment.segmentId === "closing-circle"
+                      ? "closing circle songs + accessory →"
+                      : "opening circle songs →",
+                },
               };
             } else {
               info = {
@@ -484,21 +502,21 @@ function SegmentRow({
               )}
               <div className="flex-1">
                 {(() => {
-                  // Distinguish artiverse (2 days · 2 distinct artworks)
-                  // from artistotle (3 days · 1 finished project) using
-                  // the unit's `days` field. Falls back to "artiverse"
-                  // when no unit data is loaded.
-                  const days = segment.artiverseUnitData?.days;
-                  const mode = days === 3 ? "artistotle" : "artiverse";
-                  const emoji = days === 3 ? "👴" : "🌍";
-                  const dayCue = days
-                    ? `day ${segment.artiverseDay} of ${days}`
-                    : `day ${segment.artiverseDay}`;
+                  // Distinguish artiverse from artistotle using the unit id
+                  // prefix (atl- = artistotle). Every project is now a single
+                  // session, so there is no day-of-N cue. Falls back to
+                  // "artiverse" when no unit data is loaded.
+                  const isAtl = segment.artiverseUnitData?.id?.startsWith("atl-") ?? false;
+                  const mode = isAtl ? "artistotle" : "artiverse";
+                  const emoji = isAtl ? "👴" : "🌍";
+                  const label = isAtl ? "project" : "unit";
+                  const visit = segment.artiverseDay ?? 1;
+                  const cue = visit > 1 ? `revisit ${visit}` : "one session";
                   return (
                     <>
                       <p className="text-[12px] font-medium text-ink">
                         <span aria-hidden className="mr-1">{emoji}</span>
-                        {mode} · unit {segment.artiverseUnit} · {dayCue}
+                        {mode} · {label} {segment.artiverseUnit} · {cue}
                       </p>
                       <p className="mt-0.5 text-[12px] leading-relaxed text-ink-muted">
                         {segment.artiverseUnitData

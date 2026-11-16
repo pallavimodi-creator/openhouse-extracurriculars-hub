@@ -640,7 +640,7 @@ export const languageStorytelling35: CurriculumProgramme = {
     },
   ],
   segmentDefinitions: [
-    { id: "opening-circle", name: "opening circle", durationRange: "15 min", objective: "A warm start together — a hello and meet-and-greet, then a song or two to settle the group and wake up voices and bodies before the session begins. (A song playlist will be added.)", type: "fixed" },
+    { id: "opening-circle", name: "opening circle", durationRange: "15 min", objective: "A warm start together — a hello and meet-and-greet, then a song or two to settle the group and wake up voices and bodies before the session begins. Pick songs from the circle & songs bank — opening-circle set.", type: "fixed" },
     {
       id: "roll-rhyme",
       name: "Roll & Rhyme",
@@ -692,7 +692,7 @@ export const languageStorytelling35: CurriculumProgramme = {
         "Each child has a personal experience book. The educator records what happened in the session and what the child built. The child adds one drawing of their own. The book goes home regularly so parents can see the child's growth.",
       type: "fixed",
     },
-    { id: "closing-circle", name: "closing circle", durationRange: "15 min", objective: "A calm finish together — a simple fitness / movement song to round off the class. (A song playlist will be added.)", type: "fixed" },
+    { id: "closing-circle", name: "closing circle", durationRange: "15 min", objective: "A calm finish together — a simple fitness / movement song to round off the class. Pick a movement song from the circle & songs bank — closing-circle set.", type: "fixed" },
   ],
   sessionTable: buildLanguageSessionTable(),
   activities: { ...playgroundGames, ...wordsmithsResources },
