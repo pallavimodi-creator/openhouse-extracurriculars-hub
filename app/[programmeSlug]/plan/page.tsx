@@ -219,19 +219,6 @@ export default function ProgrammePlanPage() {
         <p className="mt-1 text-[12px] font-semibold text-ink/60">
           {programme.ageLabel} · {programme.totalSessions} sessions
         </p>
-        <p className="mt-2 text-[12px] leading-relaxed text-ink-muted md:text-[13px]">
-          pick a session to see how that day runs — its{" "}
-          <span className="font-bold text-ink">fixed</span> parts in order and
-          the <span className="font-bold text-ink">flexible</span> games the
-          educator picks. the fixed / flexible key is on the{" "}
-          <Link
-            href={`/${slug}/overview`}
-            className="font-semibold text-brand-orange underline-offset-2 hover:underline"
-          >
-            overview
-          </Link>
-          .
-        </p>
       </section>
 
       {/* 3–5: dashboard is integrated into the daily plans — admin only. */}
@@ -271,9 +258,6 @@ export default function ProgrammePlanPage() {
                 </span>
               )}
             </div>
-            <p className="mt-2 text-[11.5px] text-ink-subtle">
-              read the plan below, then log how it went at the end — it all stays on one page.
-            </p>
           </div>
         </section>
       )}
@@ -338,9 +322,7 @@ export default function ProgrammePlanPage() {
             <h2 className="text-[15px] font-extrabold lowercase text-ink">
               log this session
             </h2>
-            <p className="mt-0.5 text-[12.5px] text-ink-muted">
-              how did session {selectedDay} go? this goes to the centre&rsquo;s daily dashboard.
-            </p>
+            <p className="mt-0.5 text-[12.5px] text-ink-muted">how did session {selectedDay} go?</p>
 
             {logSaved ? (
               <div className="mt-4 rounded-2xl bg-category-language/15 px-4 py-4 text-center ring-1 ring-category-language/30">

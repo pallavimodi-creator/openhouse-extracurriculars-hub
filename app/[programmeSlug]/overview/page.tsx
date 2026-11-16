@@ -41,6 +41,7 @@ import {
   Hash,
   Puzzle,
   Compass,
+  ChefHat,
   type LucideIcon,
 } from "lucide-react";
 import { getCurriculumProgramme, getActivityImage, GYM_BOOK_IMAGES, getTrackLevels } from "@/lib/content";
@@ -49,10 +50,9 @@ import { LO_LADDERS } from "@/lib/lo-ladders";
 
 // Segment illustrations (3-5). Only the segments that have a render are
 // listed; the rest show without an image.
-const SEGMENT_IMAGES: Record<string, string> = {
-  "imagine-playground": "/games/stem-3-5/imagine-playground.png",
-  "wonder-world": "/games/stem-3-5/kitchen-play.png", // section is Wonder World; Kitchen Play is the current resource (its image)
-};
+// Segments are shown with a relevant ICON (not a photo) so "the day" reads
+// consistently across every programme. Left intentionally empty.
+const SEGMENT_IMAGES: Record<string, string> = {};
 
 // Relevant icon per segment — used (instead of a text tile) when a segment
 // has no illustration, so "the day" never shows a bare placeholder.
@@ -70,6 +70,7 @@ const SEGMENT_ICONS: Record<string, LucideIcon> = {
   artiverse: Palette,
   "log-book": Notebook,
   "art-care": Heart,
+  "wonder-world": ChefHat,
   "logic-lab": Lightbulb,
   "numbers-gym": Hash,
 };
@@ -87,14 +88,6 @@ import { ArtistotleChapters } from "@/components/ArtistotleChapters";
 import { ArtiverseBookModal, ArtiverseCoverArt } from "@/components/ArtiverseBookModal";
 import { ArtiverseAgeCover } from "@/components/ArtiverseAgeCover";
 import { ArtistotleBookModal } from "@/components/ArtistotleBookModal";
-import {
-  ImaginePlaygroundBookModal,
-  ImaginePlaygroundCoverArt,
-} from "@/components/ImaginePlaygroundBookModal";
-import {
-  WonderWorldBookModal,
-  WonderWorldCoverArt,
-} from "@/components/WonderWorldBookModal";
 import {
   NumbersGymBookModal,
   NumbersGymCoverArt,
@@ -155,8 +148,6 @@ function ProgrammeOverviewContent() {
   // books row.
   const [artiverseBookOpen, setArtiverseBookOpen] = useState(false);
   const [artistotleBookOpen, setArtistotleBookOpen] = useState(false);
-  const [imaginePlaygroundBookOpen, setImaginePlaygroundBookOpen] = useState(false);
-  const [wonderWorldBookOpen, setWonderWorldBookOpen] = useState(false);
   const [numbersGymBookOpen, setNumbersGymBookOpen] = useState(false);
   // Play-writes (language 3-5) — Level 1 / Level 2 workbook flipbooks.
   const [playWritesLevel, setPlayWritesLevel] = useState<1 | 2 | null>(null);
@@ -998,8 +989,7 @@ function ProgrammeOverviewContent() {
               ))}
             </div>
             <p className="mt-3 text-[11px] text-ink-subtle">
-              for <strong>levels</strong> skills, promotion = securing the next level&rsquo;s milestone independently, more than once. for <strong>dispositions</strong>, the goal is the same — children just deepen. full prose in the{" "}
-              <Link href="/plan/docs" className="font-semibold text-brand-orange">planning docs</Link>.
+              for <strong>levels</strong> skills, promotion = securing the next level&rsquo;s milestone independently, more than once. for <strong>dispositions</strong>, the goal is the same — children just deepen.
             </p>
           </section>
         );
@@ -1293,8 +1283,6 @@ function ProgrammeOverviewContent() {
               modalKey:
                 | "artiverse-3-5"
                 | "artistotle-3-5"
-                | "imagine-playground-3-5"
-                | "wonderworld-3-5"
                 | "numbersgym-3-5";
             }
         );
@@ -1343,18 +1331,11 @@ function ProgrammeOverviewContent() {
         if (programme.slug === "robotics-3-5") {
           // WonderWorld runs two games — the Little Kitchen kit and Little Chefs.
           books.push({
-            kind: "modal",
-            modalKey: "wonderworld-3-5",
-            cover: "/prog-stem-3-5.png",
-            title: "the wonderworld book",
-            subtitle: "the little kitchen game — how to run it",
-          });
-          books.push({
             kind: "route",
             href: "/little-chefs",
             cover: "/prog-stem-3-5.png",
             title: "little chefs — the recipe book",
-            subtitle: "10 food shops · the wonderworld game",
+            subtitle: "10 food shops · the wonderworld pretend-play",
           });
           books.push({
             kind: "modal",
@@ -1461,10 +1442,6 @@ function ProgrammeOverviewContent() {
                 if (book.kind === "modal") {
                   if (book.modalKey === "artiverse-3-5") {
                     thumbInner = <ArtiverseCoverArt size="thumb" />;
-                  } else if (book.modalKey === "imagine-playground-3-5") {
-                    thumbInner = <ImaginePlaygroundCoverArt size="thumb" />;
-                  } else if (book.modalKey === "wonderworld-3-5") {
-                    thumbInner = <WonderWorldCoverArt size="thumb" />;
                   } else if (book.modalKey === "numbersgym-3-5") {
                     thumbInner = <NumbersGymCoverArt size="thumb" />;
                   }
@@ -1533,13 +1510,9 @@ function ProgrammeOverviewContent() {
                   const onClick =
                     book.modalKey === "artistotle-3-5"
                       ? () => setArtistotleBookOpen(true)
-                      : book.modalKey === "imagine-playground-3-5"
-                        ? () => setImaginePlaygroundBookOpen(true)
-                        : book.modalKey === "wonderworld-3-5"
-                          ? () => setWonderWorldBookOpen(true)
-                          : book.modalKey === "numbersgym-3-5"
-                            ? () => setNumbersGymBookOpen(true)
-                            : () => setArtiverseBookOpen(true);
+                      : book.modalKey === "numbersgym-3-5"
+                        ? () => setNumbersGymBookOpen(true)
+                        : () => setArtiverseBookOpen(true);
                   return (
                     <button
                       key={book.modalKey}
@@ -1606,14 +1579,6 @@ function ProgrammeOverviewContent() {
       <ArtistotleBookModal
         isOpen={artistotleBookOpen}
         onClose={() => setArtistotleBookOpen(false)}
-      />
-      <ImaginePlaygroundBookModal
-        isOpen={imaginePlaygroundBookOpen}
-        onClose={() => setImaginePlaygroundBookOpen(false)}
-      />
-      <WonderWorldBookModal
-        isOpen={wonderWorldBookOpen}
-        onClose={() => setWonderWorldBookOpen(false)}
       />
       <NumbersGymBookModal
         isOpen={numbersGymBookOpen}

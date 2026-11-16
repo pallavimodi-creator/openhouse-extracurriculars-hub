@@ -310,25 +310,8 @@ export const ACTIVITY_IMAGES: Record<string, string> = {
   "ll-candy-sort": "/games/stem-3-5/candy-sort.png",
   "ll-magna-tiles": "/games/stem-3-5/magna-tiles.png",
   "ll-dot-grid": "/games/stem-3-5/dot-grid.png",
-  // STEM 3-5 — Imagine Playground: the 11 build projects share the
-  // segment illustration.
-  "ip-train-time": "/games/stem-3-5/imagine-playground.png",
-  "ip-first-trip": "/games/stem-3-5/imagine-playground.png",
-  "ip-load-the-train": "/games/stem-3-5/imagine-playground.png",
-  "ip-longest-track": "/games/stem-3-5/imagine-playground.png",
-  "ip-train-sound": "/games/stem-3-5/imagine-playground.png",
-  "ip-o-shaped-track": "/games/stem-3-5/imagine-playground.png",
-  "ip-y-shaped-track": "/games/stem-3-5/imagine-playground.png",
-  "ip-trouble-on-the-road": "/games/stem-3-5/imagine-playground.png",
-  "ip-ramps": "/games/stem-3-5/imagine-playground.png",
-  "ip-chain-reaction": "/games/stem-3-5/imagine-playground.png",
-  "ip-probability": "/games/stem-3-5/imagine-playground.png",
-  // STEM 3-5 — Kitchen Play: the 3 themed games share the segment image.
-  // WonderWorld — the Little Kitchen game (4 modes share the one kit image).
-  "kg-sort-guess": "/games/stem-3-5/kitchen-play.png",
-  "kg-cooking": "/games/stem-3-5/kitchen-play.png",
-  "kg-restaurant": "/games/stem-3-5/kitchen-play.png",
-  "kg-recipe-dev": "/games/stem-3-5/kitchen-play.png",
+  // STEM 3-5 — WonderWorld (Little Kitchen + Little Chefs) uses ICONS, not
+  // photos, so no image entries here — keeps the segment consistent.
   // Language through Storytelling — 3-5 playground games. The two
   // names that overlap with public-speaking IDs are suffixed `-lang`
   // so each programme gets its own render.

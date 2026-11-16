@@ -102,7 +102,7 @@ const STRANDS: Strand[] = [
     headline: "where curiosity turns into thinking.",
     learn: ["curiosity", "problem-solving", "number sense", "logic"],
     flow: [
-      { icon: Blocks, label: "imagine playground / wonder world", hint: "build & explore" },
+      { icon: Blocks, label: "wonderworld", hint: "little kitchen · little chefs" },
       { icon: Lightbulb, label: "logic lab", hint: "logic puzzles" },
       { icon: Hash, label: "number gym", hint: "number play" },
     ],

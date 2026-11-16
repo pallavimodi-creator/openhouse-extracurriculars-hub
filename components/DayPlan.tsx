@@ -129,7 +129,6 @@ const SEGMENT_FIELD_MAP: Record<string, keyof CurriculumSessionEntry> = {
   wordsmiths: "wordsmiths",
   "play-writes": "playWrites",
   // STEM 3-5 segments
-  "imagine-playground": "imaginePlayground",
   "wonder-world": "wonderWorld",
   "logic-lab": "logicLab",
   "numbers-gym": "numbersGym",
@@ -138,7 +137,7 @@ const SEGMENT_FIELD_MAP: Record<string, keyof CurriculumSessionEntry> = {
 // Segments where activities run in fixed order with deliberate
 // repetition — same activity, deeper layer. Used to compute the
 // "(re-visit)" flag so the day plan can mark second / third meetings.
-const REVISIT_SEGMENTS = new Set(["imagine-playground", "wonder-world"]);
+const REVISIT_SEGMENTS = new Set(["wonder-world"]);
 
 /**
  * Returns true if `assignedId` has already appeared in any session
@@ -544,7 +543,7 @@ function SegmentRow({
             </div>
           ) : (
             <p className="text-[12px] leading-relaxed text-ink-muted">
-              {segment.objective}
+              {segment.objective.split(/(?<=[.!?])\s+/)[0]}
             </p>
           )}
           <p className="mt-1.5 text-[11px] font-medium text-brand-orange">
