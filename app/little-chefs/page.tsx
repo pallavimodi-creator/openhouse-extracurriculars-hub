@@ -70,6 +70,11 @@ export default function LittleChefsPage() {
             educator; children just cook and play. keep pricing simple at this age — 1-coin prices, counters,
             matching, or adding within 10.
           </p>
+          <p className="mt-2.5 rounded-lg bg-category-stem/12 px-3.5 py-2.5 text-[12.5px] leading-relaxed text-ink">
+            <b>in the plans:</b> little chefs is a <b>pretend-play activity</b> that rotates with the little kitchen
+            <b> game</b> — so it runs about <b>every other session</b>, and each of the 10 shops comes round roughly
+            <b> 3 times across the year</b> (a different shop &amp; card each time).
+          </p>
         </section>
 
         {/* Shops */}
@@ -158,7 +163,11 @@ export default function LittleChefsPage() {
         <section className="mt-9 overflow-hidden rounded-2xl bg-brand-white shadow-card ring-1 ring-ink/[0.05]">
           <div className="bg-category-stem/12 px-5 py-4">
             <h2 className="text-[16px] font-extrabold lowercase text-ink">which shop builds which skill</h2>
-            <p className="mt-0.5 text-[12px] text-ink-muted">a planning guide, not an assessment · ● strong · ○ supporting</p>
+            <p className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-[12px] text-ink-muted">
+              <span>a planning guide, not an assessment —</span>
+              <span className="inline-flex items-center gap-1.5"><span className="inline-block h-2.5 w-2.5 rounded-full bg-brand-orange" /> strong fit</span>
+              <span className="inline-flex items-center gap-1.5"><span className="inline-block h-2.5 w-2.5 rounded-full border-2 border-ink/30" /> supporting</span>
+            </p>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full min-w-[460px] border-collapse text-[12.5px]">
@@ -175,10 +184,12 @@ export default function LittleChefsPage() {
                   <tr key={shop.slug} className="border-t border-ink/5">
                     <td className="px-4 py-2 font-bold lowercase text-ink">{shop.emoji} {shop.name}</td>
                     {DOMAIN_ORDER.map((d) => (
-                      <td key={d} className="px-3 py-2 text-center text-[15px]">
-                        <span className={shop.domains[d] === "strong" ? "text-brand-orange" : "text-ink-subtle"}>
-                          {shop.domains[d] === "strong" ? "●" : "○"}
-                        </span>
+                      <td key={d} className="px-3 py-2 text-center">
+                        {shop.domains[d] === "strong" ? (
+                          <span className="inline-block h-3 w-3 rounded-full bg-brand-orange align-middle" title="strong fit" />
+                        ) : (
+                          <span className="inline-block h-3 w-3 rounded-full border-2 border-ink/30 align-middle" title="supporting" />
+                        )}
                       </td>
                     ))}
                   </tr>

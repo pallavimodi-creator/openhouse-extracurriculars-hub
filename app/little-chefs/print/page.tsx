@@ -79,6 +79,9 @@ export default function LittleChefsPrintPage() {
               a real 15–20 minute pretend-play.</p>
             <p>each shop is a little set of reusable <b>recipe &amp; challenge cards</b> — pick a few each time and
               repeat them with new combinations. every shop deepens as children revisit it.</p>
+            <p>little chefs is a <b>pretend-play activity</b> that rotates with the little kitchen <b>game</b> in the
+              stem plans — it runs about <b>every other session</b>, so each of the 10 shops comes round roughly
+              <b> three times across the year</b>.</p>
             <p className="rounded-lg bg-brand-cream p-3.5">the four skills on each challenge —
               <b> curiosity · problem solving · logic · number sense</b> — are for you, not the child. ★ marks the
               north-star ability. keep pricing simple: 1-coin prices, counters, matching, or adding within 10.</p>
@@ -99,17 +102,22 @@ export default function LittleChefsPrintPage() {
                 <tr key={shop.slug}>
                   <td className="border border-ink/10 px-3 py-1.5 font-bold lowercase">{shop.emoji} {shop.name}</td>
                   {DOMAIN_ORDER.map((d) => (
-                    <td key={d} className="border border-ink/10 px-2 py-1.5 text-center text-[16px]">
-                      <span className={shop.domains[d] === "strong" ? "text-brand-orange" : "text-ink-subtle"}>
-                        {shop.domains[d] === "strong" ? "●" : "○"}
-                      </span>
+                    <td key={d} className="border border-ink/10 px-2 py-1.5 text-center">
+                      {shop.domains[d] === "strong" ? (
+                        <span className="inline-block h-3 w-3 rounded-full bg-brand-orange align-middle" />
+                      ) : (
+                        <span className="inline-block h-3 w-3 rounded-full border-2 border-ink/35 align-middle" />
+                      )}
                     </td>
                   ))}
                 </tr>
               ))}
             </tbody>
           </table>
-          <p className="mt-1.5 text-[11px] italic text-ink-subtle">● strong natural opportunity · ○ supporting</p>
+          <p className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] text-ink-subtle">
+            <span className="inline-flex items-center gap-1.5"><span className="inline-block h-2.5 w-2.5 rounded-full bg-brand-orange" /> strong — a natural fit</span>
+            <span className="inline-flex items-center gap-1.5"><span className="inline-block h-2.5 w-2.5 rounded-full border-2 border-ink/35" /> supporting</span>
+          </p>
         </section>
 
         {/* SHOP PAGES */}

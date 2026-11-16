@@ -438,18 +438,38 @@ const wonderWorldActivities: Record<string, CurriculumActivity> = {
     debriefPrompts: [],
     type: "physical-game",
   },
+  // Little Chefs — a pretend-play activity (not a game). One of ten food shops
+  // per session, run from the Little Chefs recipe book.
+  "lc-little-chefs": {
+    id: "lc-little-chefs",
+    segment: "wonder-world",
+    title: "little chefs · pretend-play",
+    setupLine: "Open one pretend food shop today — the child chooses, makes, experiments, and fills a shop order.",
+    howToPlay:
+      "A pretend-play activity (not a fixed game): run one of the ten food shops from the Little Chefs recipe book. Three connected experiences — choose & make the food, experiment with one feature of it, then fill a shop order with a maths or logic twist. Pick a few of the shop's challenge cards and repeat shops across the term — each shop comes round about three times over the year, deeper each time.",
+    players: "small groups · 1 educator",
+    duration: "15–20 min",
+    materials: [
+      "The Little Chefs recipe book",
+      "Toy / felt / foam / clay / play-dough food materials + pretend coins",
+    ],
+    debriefPrompts: [],
+    type: "facilitated",
+  },
 };
 
-/* ─── 60-session table — WonderWorld (Little Kitchen) is the one
- * exploration segment; Logic Lab and NumbersGym run every session too. ─ */
+/* ─── 60-session table — WonderWorld runs every session and rotates its two
+ * activities: Little Kitchen (a game) ↔ Little Chefs (pretend-play). Logic
+ * Lab and NumbersGym run every session too. ──────────────────────────────── */
 
+const KITCHEN_CYCLE = ["kg-sort-guess", "kg-cooking", "kg-restaurant", "kg-recipe-dev"];
 const buildWonderWorld = (n: number): string => {
-  // Little Kitchen — the four games rotate in a fixed order and are replayed
-  // across the Session-B slots. Re-playing a game is the point: the same game
-  // runs easy (3–4) then medium (4–5), deepening every time; 18 dishes mean a
-  // class can cook for months without repeating.
-  const cycle = ["kg-sort-guess", "kg-cooking", "kg-restaurant", "kg-recipe-dev"];
-  return cycle[(n - 1) % cycle.length];
+  // Odd WonderWorld sessions run the Little Kitchen game (cycling the four);
+  // even sessions run Little Chefs (pretend-play, one shop from the recipe book).
+  // So the two alternate — each shop comes round about three times across 60.
+  if (n % 2 === 0) return "lc-little-chefs";
+  const k = Math.floor((n - 1) / 2);
+  return KITCHEN_CYCLE[k % KITCHEN_CYCLE.length];
 };
 
 const LOGIC_LAB_CYCLE = [
