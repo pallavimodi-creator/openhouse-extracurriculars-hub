@@ -47,6 +47,15 @@ export default function LittleChefsPage() {
           </p>
         </section>
 
+        <div className="mt-4">
+          <Link
+            href="/little-chefs/print"
+            className="inline-flex items-center gap-1.5 rounded-full bg-brand-orange px-5 py-2.5 text-[13px] font-extrabold text-white shadow-card transition hover:opacity-95"
+          >
+            🖨 print the teacher book (with images) →
+          </Link>
+        </div>
+
         {/* How it works */}
         <section className="mt-5 rounded-2xl bg-brand-white p-5 shadow-card ring-1 ring-ink/[0.05] md:p-6">
           <p className="text-[11px] font-bold tracking-normal text-brand-orange">how a session runs</p>
