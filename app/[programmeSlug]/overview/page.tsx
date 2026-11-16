@@ -1341,13 +1341,20 @@ function ProgrammeOverviewContent() {
         // STEM 3–5 — two educator reference books built like the
         // artiverse / artistotle books.
         if (programme.slug === "robotics-3-5") {
-          // WonderWorld is the exploration segment — the Little Kitchen game.
+          // WonderWorld runs two games — the Little Kitchen kit and Little Chefs.
           books.push({
             kind: "modal",
             modalKey: "wonderworld-3-5",
             cover: "/prog-stem-3-5.png",
             title: "the wonderworld book",
             subtitle: "the little kitchen game — how to run it",
+          });
+          books.push({
+            kind: "route",
+            href: "/little-chefs",
+            cover: "/prog-stem-3-5.png",
+            title: "little chefs — the recipe book",
+            subtitle: "10 food shops · the wonderworld game",
           });
           books.push({
             kind: "modal",
