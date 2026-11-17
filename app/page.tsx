@@ -91,6 +91,7 @@ function TrackSection({
     { key: "art", label: "art & design" },
     { key: "language", label: "language through storytelling and public speaking" },
     { key: "stem", label: "stem & robotics" },
+    { key: "music", label: "music & fitness" },
   ];
   const byCategory = categoryOrder
     .map((c) => ({ ...c, items: items.filter((p) => p.category === c.key) }))
