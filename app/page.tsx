@@ -313,7 +313,7 @@ export default function HomePage() {
                 body={
                   <>
                     Start with{" "}
-                    <span className="font-semibold text-brand-orange">the 3–5 programme</span> (the centre&apos;s integrated day — art · stem · language rotate), or open a{" "}
+                    <span className="font-semibold text-brand-orange">the 3–5 programme</span> (the centre&apos;s integrated day — art · language · stem · music & fitness rotate), or open a{" "}
                     <span className="font-semibold text-brand-orange">5+</span> single-subject programme. Pick one to begin.
                   </>
                 }
@@ -356,7 +356,7 @@ export default function HomePage() {
         <div className="space-y-8">
           <TrackSection
             label="the 3–5 programme"
-            blurb="the centre's integrated day — art · stem · language rotate. open a strand below for its session plan."
+            blurb="the centre's integrated day — art · language · stem · music & fitness rotate. open a strand below for its session plan."
             tone="trial"
             items={trial}
             isAdmin={isAdmin}
