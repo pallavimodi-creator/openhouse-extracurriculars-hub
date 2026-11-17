@@ -383,7 +383,7 @@ export interface CurriculumSessionEntry {
 
 export interface CurriculumActivity {
   id: string;
-  segment: "roll-call" | "playground" | "showtime" | "sign-off" | "log-book" | "art-gym" | "art-games" | "artiverse" | "art-care" | "experiment" | "build" | "experience-book" | "roll-rhyme" | "book-o-clock" | "wordsmiths" | "play-writes" | "imagine-playground" | "wonder-world" | "logic-lab" | "numbers-gym" | "warm-up" | "your-instrument" | "ensemble";
+  segment: "roll-call" | "playground" | "showtime" | "sign-off" | "log-book" | "art-gym" | "art-games" | "artiverse" | "art-care" | "experiment" | "build" | "experience-book" | "roll-rhyme" | "book-o-clock" | "wordsmiths" | "play-writes" | "imagine-playground" | "wonder-world" | "logic-lab" | "numbers-gym" | "warm-up" | "your-instrument" | "ensemble" | "active-listening" | "singing" | "movement" | "music-fitness";
   title: string;
   cardName?: string;
   setupLine: string;

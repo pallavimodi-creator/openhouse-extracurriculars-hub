@@ -412,6 +412,10 @@ export const ACTIVITY_VIDEOS: Record<string, string> = {
   "improv-survival": "https://youtu.be/QoufaYiNAmE",
   // Art & Design
   "colour-flip": "https://youtu.be/Um9c5L71xGE",
+  // Music & Fitness
+  "ml-body-percussion": "https://www.youtube.com/watch?v=3ZV0vNHiJCw",
+  "ml-london-bridge": "https://youtu.be/wFTAWqLYil0",
+  "ml-dancing-forest": "https://www.youtube.com/watch?v=gNA1ZOUU0po",
 };
 
 export function getActivityVideo(id: string): string | undefined {

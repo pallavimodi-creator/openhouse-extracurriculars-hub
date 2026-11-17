@@ -218,6 +218,12 @@ function itemNeedsPhysical(item: LibraryItem): boolean {
   return true;
 }
 
+// A programme belongs in the library if it has a session plan OR a bank of
+// activities (the music & fitness strand has games but no day-by-day yet).
+function hasLibraryContent(p: CurriculumProgramme): boolean {
+  return p.totalSessions > 0 || Object.keys(p.activities ?? {}).length > 0;
+}
+
 function buildItemsFor(prog: CurriculumProgramme): LibraryItem[] {
   const bookMap: Record<string, string> = {
     "public-speaking-5-8": "speaking-5-8",
@@ -408,7 +414,7 @@ export default function LibraryPage() {
   }, [router]);
 
   const allItems = useMemo(() => {
-    const programmes = listCurriculumProgrammes().filter((p) => p.totalSessions > 0);
+    const programmes = listCurriculumProgrammes().filter(hasLibraryContent);
 
     let progsToShow: CurriculumProgramme[] = [];
     if (isAdmin || scope35) {
@@ -440,7 +446,7 @@ export default function LibraryPage() {
   // Programme picker (admin / centre) — every programme now, live (5+)
   // first then the 3-5 centre programmes, so all resources are reachable.
   const adminProgrammes = useMemo(() => {
-    const all = listCurriculumProgrammes().filter((p) => p.totalSessions > 0);
+    const all = listCurriculumProgrammes().filter(hasLibraryContent);
     if (scope35) return all.filter((p) => getProgrammeStage(p) === "trial");
     return [
       ...all.filter((p) => getProgrammeStage(p) === "live"),
@@ -492,9 +498,7 @@ export default function LibraryPage() {
   // library, with no "segments of the day" sectioning. Programme order
   // follows listCurriculumProgrammes(); item order is preserved.
   const grouped = useMemo(() => {
-    const allProgs = listCurriculumProgrammes().filter(
-      (p) => p.totalSessions > 0
-    );
+    const allProgs = listCurriculumProgrammes().filter(hasLibraryContent);
 
     type ProgrammeGroup = {
       slug: string;

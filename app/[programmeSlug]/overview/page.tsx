@@ -73,6 +73,10 @@ const SEGMENT_ICONS: Record<string, LucideIcon> = {
   "wonder-world": ChefHat,
   "logic-lab": Lightbulb,
   "numbers-gym": Hash,
+  "active-listening": Ear,
+  singing: Music,
+  movement: Dumbbell,
+  "music-fitness": Music,
 };
 
 // First sentence or two of a long segment objective, for the scannable
@@ -540,13 +544,16 @@ function ProgrammeOverviewContent() {
             the centre day moves through these parts. each is a rotating set of games/activities the educator runs at the child&apos;s level.
           </SectionTitle>
 
-          {/* Into the day-by-day plan — the session-by-session build + the log. */}
-          <Link
-            href={`/${programme.slug}/plan`}
-            className="mt-3 inline-flex items-center gap-1.5 rounded-chip bg-brand-orange px-3.5 py-2 text-[12px] font-extrabold text-white shadow-card transition hover:opacity-95"
-          >
-            see the day-by-day plan →
-          </Link>
+          {/* Into the day-by-day plan — the session-by-session build + the log.
+              Hidden while a programme's plan is still being sequenced. */}
+          {programme.totalSessions > 0 && (
+            <Link
+              href={`/${programme.slug}/plan`}
+              className="mt-3 inline-flex items-center gap-1.5 rounded-chip bg-brand-orange px-3.5 py-2 text-[12px] font-extrabold text-white shadow-card transition hover:opacity-95"
+            >
+              see the day-by-day plan →
+            </Link>
+          )}
 
           {(() => {
             // Phase grouping — language reads as a clear arc: song → book →
@@ -652,6 +659,45 @@ function ProgrammeOverviewContent() {
               </>
             );
           })()}
+        </section>
+      )}
+
+      {/* ─── GAMES BY SKILL (music & fitness) — coverage at a glance, so it's
+          obvious which skills have plenty of games and which need more. ─── */}
+      {programme.slug === "music-fitness-3-5" && (
+        <section className="mt-10 px-4 md:px-8">
+          <SectionTitle num="·" label="games by skill">
+            every game is tagged to the skills it builds. this shows coverage at a glance — which skills have plenty of games, and which still need more.
+          </SectionTitle>
+          <div className="mt-4 grid gap-3 md:grid-cols-2">
+            {programme.skillAreas.map((sk) => {
+              const games = Object.values(programme.activities).filter((a) =>
+                (a.skillIds ?? []).includes(sk.id),
+              );
+              const thin = games.length < 3;
+              return (
+                <div key={sk.id} className="rounded-2xl bg-brand-white p-4 shadow-card ring-1 ring-ink/[0.05]">
+                  <div className="flex items-baseline justify-between gap-2">
+                    <p className="text-[14px] font-extrabold lowercase text-ink">{sk.name}</p>
+                    <span className={`rounded-chip px-2 py-0.5 text-[10px] font-bold ${thin ? "bg-brand-orange/15 text-brand-orange" : "bg-category-music/20 text-ink"}`}>
+                      {games.length} game{games.length === 1 ? "" : "s"}{thin ? " · needs more" : ""}
+                    </span>
+                  </div>
+                  <div className="mt-2 flex flex-wrap gap-1.5">
+                    {games.length === 0 ? (
+                      <span className="text-[11px] italic text-ink-subtle">no games yet</span>
+                    ) : (
+                      games.map((g) => (
+                        <span key={g.id} className="rounded-chip bg-brand-cream px-2 py-0.5 text-[10.5px] font-semibold lowercase text-ink-muted">
+                          {g.title}
+                        </span>
+                      ))
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </section>
       )}
 
