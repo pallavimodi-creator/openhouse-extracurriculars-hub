@@ -598,6 +598,44 @@ export default function LibraryPage() {
           : "every resource for this programme — search by name, keyword, or material."}
       </p>
 
+      {/* The books & the song library — openable, flippable books plus the
+          song repository, for the 3-5 strands. Always visible (not filtered). */}
+      {(scope35 || isAdmin) && (
+        <div className="mt-4">
+          <p className="text-[12px] font-extrabold lowercase text-ink-muted">the books &amp; the song library</p>
+          <div className="no-scrollbar mt-2 flex gap-3 overflow-x-auto pb-1">
+            {[
+              { href: "/artiverse-book", title: "artiverse book", sub: "art · free-making skills", cover: "/artiverse-book/01-accordion.png", tint: "bg-category-art/15" },
+              { href: "/artistotle-book", title: "artistotle book", sub: "art · in the spirit of the greats", cover: "/artistotle-book/01-cover.png", tint: "bg-category-art/15" },
+              { href: "/art-gym-book", title: "art gym & scribble", sub: "art · fine-motor warm-up", cover: "/gym-books/3-5-book.png", tint: "bg-category-art/15" },
+              { href: "/numbersgym-book", title: "numbers gym book", sub: "stem · self-paced number play", emoji: "🔢", tint: "bg-category-stem/15" },
+              { href: "/puppet-worksheets", title: "puppet characters", sub: "language · print & cut puppets", emoji: "🎭", tint: "bg-category-language/20" },
+              { href: "/circle", title: "song library", sub: "every circle & tidy-up song", emoji: "🎵", tint: "bg-category-music/20" },
+            ].map((b) => (
+              <Link
+                key={b.href}
+                href={b.href}
+                className="group flex w-[140px] shrink-0 flex-col overflow-hidden rounded-2xl bg-brand-white shadow-card ring-1 ring-ink/[0.05] transition hover:-translate-y-0.5 hover:shadow-lg"
+              >
+                <div className={`flex h-24 items-center justify-center overflow-hidden ${b.tint}`}>
+                  {b.cover ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={b.cover} alt="" className="h-full w-full object-cover" />
+                  ) : (
+                    <span className="text-[34px]" aria-hidden>{b.emoji}</span>
+                  )}
+                </div>
+                <div className="flex flex-1 flex-col p-3">
+                  <p className="text-[12.5px] font-extrabold lowercase leading-tight text-ink">{b.title}</p>
+                  <p className="mt-0.5 text-[10.5px] leading-snug text-ink-muted">{b.sub}</p>
+                  <span className="mt-2 text-[11px] font-bold text-brand-orange">open →</span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Programme picker — admin (every programme) or 3-5 educator (the
           three strands). */}
       {(isAdmin || scope35) && (
