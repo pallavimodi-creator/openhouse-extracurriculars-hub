@@ -11,10 +11,12 @@ import {
 } from "./robotics-electronics";
 import { musicProgrammes } from "./music-levels";
 
-// The three 3-5 programmes — the "3-5 trial" track on the home.
+// The 3-5 programmes — the "3-5 trial" track on the home. Four strands
+// rotate daily: art → language → stem → music & fitness.
 import { artDesign35 } from "./art-design-3-5";
 import { languageStorytelling35 } from "./language-storytelling-3-5";
 import { stem35 } from "./stem-3-5";
+import { musicFitness35 } from "./music-fitness-3-5";
 
 // Registry of every programme surfaced to teachers — powers the
 // homepage grid and the library page. Ordered by category
@@ -40,7 +42,10 @@ export const curriculumProgrammes: CurriculumProgramme[] = [
   robotics812,
   roboticsElectronics812,
 
-  // ── Music ──
+  // ── Music & Fitness ──
+  // Music & Fitness 3–5 — the fourth strand of the at-centre rotation
+  // (placeholder; games being designed).
+  musicFitness35,
   // Music — two age bands (5–8 · 8–12), each a level-based track (l1/l2/l3).
   // Level 1 of each band shows on the home grid; levels 2–3 via the switcher.
   ...musicProgrammes,

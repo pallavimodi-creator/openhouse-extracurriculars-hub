@@ -142,7 +142,6 @@ export function LanguageBooksGrid({ books }: { books: LanguageBook[] }) {
                       <p className="mt-1 text-[11.5px] font-bold text-ink">
                         {VOCAB_TYPE_LABEL[book.vocabularyType]}
                       </p>
-                      <p className="mt-1 text-[9.5px] italic text-ink/40">coming soon</p>
                     </div>
                   )}
                   <div className="rounded-lg bg-brand-cream/60 p-3 ring-1 ring-ink/5">

@@ -476,14 +476,6 @@ export const stem35: CurriculumProgramme = {
         "Every child works in their personal gamebook at their own level. Three level books (1 → 2 → 3); a child moves up when they demonstrate the current level confidently across two independent sessions. The gamebook is a surface for thinking with objects — every page uses physical materials (coloured tiles, threading beads, balance scales, number tracks, counters, sorting trays).",
       type: "fixed",
     },
-    {
-      id: "experience-book",
-      name: "Experience Book",
-      durationRange: "10 min",
-      objective:
-        "Each child has a personal Experience Book. The educator writes one specific sentence about what the child did that day — a project they built, a question they asked, a number they counted, a 'because' they explained. The child adds a drawing or stamp. The book goes home regularly so parents can see growth. This is also where Number Sense level transitions are recorded.",
-      type: "fixed",
-    },
     { id: "closing-circle", name: "closing circle", durationRange: "15 min", objective: "A calm finish together — a simple fitness / movement song to round off the class. Pick a movement song from the circle & songs bank — closing-circle set.", type: "fixed" },
   ],
   sessionTable: buildSessionTable(),

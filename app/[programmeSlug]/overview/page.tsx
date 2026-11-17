@@ -539,6 +539,15 @@ function ProgrammeOverviewContent() {
           <SectionTitle num="·" label="the day · what happens in each part">
             the centre day moves through these parts. each is a rotating set of games/activities the educator runs at the child&apos;s level.
           </SectionTitle>
+
+          {/* Into the day-by-day plan — the session-by-session build + the log. */}
+          <Link
+            href={`/${programme.slug}/plan`}
+            className="mt-3 inline-flex items-center gap-1.5 rounded-chip bg-brand-orange px-3.5 py-2 text-[12px] font-extrabold text-white shadow-card transition hover:opacity-95"
+          >
+            see the day-by-day plan →
+          </Link>
+
           {(() => {
             // Phase grouping — language reads as a clear arc: song → book →
             // writing → game (with a break and a calm close). Other 3-5

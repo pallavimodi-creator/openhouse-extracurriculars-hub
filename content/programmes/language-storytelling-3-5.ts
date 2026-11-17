@@ -237,9 +237,9 @@ const wordsmithsResources: Record<string, CurriculumActivity> = {
     id: "vocabulary-cards",
     segment: "wordsmiths",
     title: "vocabulary cards",
-    setupLine: "A digital card deck (coming soon).",
+    setupLine: "A digital card deck, matched to the current book's words.",
     howToPlay:
-      "Vocabulary cards — a digital card deck (coming soon).",
+      "One vocabulary resource per session — the digital card deck, matched to the current book's vocabulary. The sequence is always the same: see → act → say. The educator shows the card, all children act the word together, then one child at a time uses it in a sentence. Acting is always whole-group — no child is singled out.",
     debriefPrompts: [],
     type: "digital-game",
   },
@@ -663,7 +663,7 @@ export const languageStorytelling35: CurriculumProgramme = {
       name: "Wordsmiths",
       durationRange: "10 min",
       objective:
-        "One vocabulary resource per session — the vocabulary cards digital deck (coming soon), matched to the current book's vocabulary. The see → act → say sequence is always the same: the educator shows the card, all children act the word together, then one child at a time uses it in a sentence. Acting is always whole-group — no child is singled out.",
+        "One vocabulary resource per session — the vocabulary cards digital deck, matched to the current book's vocabulary. The see → act → say sequence is always the same: the educator shows the card, all children act the word together, then one child at a time uses it in a sentence. Acting is always whole-group — no child is singled out.",
       type: "fixed",
     },
     { id: "break", name: "break", durationRange: "10 min", objective: "A short rest and snack break in the middle of the longer two-hour class.", type: "fixed" },
@@ -683,14 +683,6 @@ export const languageStorytelling35: CurriculumProgramme = {
         "One game per session, rotating by skill tag so all five skills are covered across the week. Games are connected to the current book — children play with characters, words, and events they already know.",
       type: "rotating",
       rotationPool: Object.keys(playgroundGames),
-    },
-    {
-      id: "experience-book",
-      name: "Experience Book",
-      durationRange: "10 min",
-      objective:
-        "Each child has a personal experience book. The educator records what happened in the session and what the child built. The child adds one drawing of their own. The book goes home regularly so parents can see the child's growth.",
-      type: "fixed",
     },
     { id: "closing-circle", name: "closing circle", durationRange: "15 min", objective: "A calm finish together — a simple fitness / movement song to round off the class. Pick a movement song from the circle & songs bank — closing-circle set.", type: "fixed" },
   ],

@@ -903,14 +903,6 @@ export const artDesign35: CurriculumProgramme = {
       type: "fixed",
     },
     {
-      id: "log-book",
-      name: "Experience Book",
-      durationRange: "10 min",
-      objective:
-        "Coming soon — a record of the child's learning and an opportunity for the educator to debrief and plan how to help the child. Also used for communication to parents.",
-      type: "fixed",
-    },
-    {
       id: "art-care",
       name: "Art Care",
       durationRange: "5 min",

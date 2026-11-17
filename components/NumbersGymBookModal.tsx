@@ -373,7 +373,7 @@ function HowItWorksPage() {
             move up after two confident sessions
           </p>
           <p className="mt-1 text-[12px] leading-relaxed text-ink-muted">
-            A child moves to the next level when they demonstrate the current level confidently across two independent sessions. The teacher records this in the Experience Book — no announcement, no celebration, no labelling. The next session, the child opens the next level book.
+            A child moves to the next level when they demonstrate the current level confidently across two independent sessions. The teacher records this quietly — no announcement, no celebration, no labelling. The next session, the child opens the next level book.
           </p>
         </li>
         <li className="rounded-xl bg-brand-white p-3 ring-1 ring-ink/5">

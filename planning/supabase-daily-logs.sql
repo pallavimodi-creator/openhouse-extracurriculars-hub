@@ -9,10 +9,17 @@ create table if not exists public.daily_logs (
   centre           text,                 -- building / centre (e.g. "Indiranagar")
   teacher_username text,                 -- the logged-in centre account
   teacher_name     text not null,        -- the individual educator (typed on submit)
-  programme        text not null check (programme in ('art','language','stem')),
-  status           text not null check (status in ('completed','partial','challenges')),
-  notes            text default ''
+  programme        text not null check (programme in ('art','language','stem','music')),
+  status           text not null check (status in ('completed','not_completed','partial','challenges')),
+  notes            text default ''       -- the reason when a day was NOT completed
 );
+
+-- If the table already exists from the earlier (3-way) version, widen the
+-- two checks so the new binary status + the music strand are accepted:
+--   alter table public.daily_logs drop constraint if exists daily_logs_programme_check;
+--   alter table public.daily_logs add  constraint daily_logs_programme_check check (programme in ('art','language','stem','music'));
+--   alter table public.daily_logs drop constraint if exists daily_logs_status_check;
+--   alter table public.daily_logs add  constraint daily_logs_status_check check (status in ('completed','not_completed','partial','challenges'));
 
 create index if not exists daily_logs_centre_date_idx
   on public.daily_logs (centre, log_date desc);

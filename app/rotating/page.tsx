@@ -1,28 +1,14 @@
 "use client";
 
-import Link from "next/link";
+import { RotationCalendar } from "@/components/RotationCalendar";
+import { STRANDS } from "@/content/calendar";
 
 /* The 3–5 rotating-programme landing page.
- * Infographic-first: the rotation cycle + why we rotate. Minimal copy. */
+ * Infographic-first: the rotation cycle + the month calendar + why we
+ * rotate. One strand per day: art → language → stem → music & fitness. */
 
-type Prog = {
-  key: "art" | "language" | "stem";
-  title: string;
-  emoji: string;
-  ring: string; // tailwind colour classes
-  bg: string;
-  text: string;
-  dot: string;
-};
-
-const PROGS: Prog[] = [
-  { key: "art", title: "art & design", emoji: "🎨", ring: "ring-category-art/50", bg: "bg-category-art/15", text: "text-category-art", dot: "bg-category-art" },
-  { key: "language", title: "language & storytelling", emoji: "📖", ring: "ring-category-language/50", bg: "bg-category-language/20", text: "text-category-language", dot: "bg-category-language" },
-  { key: "stem", title: "stem & robotics", emoji: "🤖", ring: "ring-category-stem/50", bg: "bg-category-stem/15", text: "text-category-stem", dot: "bg-category-stem" },
-];
-
-// Four day-cards show the loop: art → language → stem → art …
-const CYCLE: Prog[] = [PROGS[0], PROGS[1], PROGS[2], PROGS[0]];
+// Day-cards show the loop, then it repeats.
+const CYCLE = [...STRANDS];
 
 export default function RotatingPage() {
   return (
@@ -32,16 +18,16 @@ export default function RotatingPage() {
         <p className="text-[11px] font-extrabold uppercase tracking-[0.16em] text-brand-white/80">
           ages 3–5 · at the centre
         </p>
-        <h1 className="mt-2 max-w-[18ch] text-[26px] font-extrabold lowercase leading-[1.05] md:text-[36px]">
+        <h1 className="mt-2 max-w-[20ch] text-[26px] font-extrabold lowercase leading-[1.05] md:text-[36px]">
           one rotating programme — every child gets it all
         </h1>
-        <p className="mt-3 max-w-[48ch] text-[13.5px] font-medium leading-relaxed text-brand-white/90 md:text-[15px]">
-          each day runs a different strand — art, then language, then stem — and
-          then loops. come any days you like; the rotation makes sure you meet
-          all three.
+        <p className="mt-3 max-w-[50ch] text-[13.5px] font-medium leading-relaxed text-brand-white/90 md:text-[15px]">
+          each day runs a different strand — art, then language, then stem, then
+          music &amp; fitness — and then loops. come any days you like; the
+          rotation makes sure you meet all four.
         </p>
         <p className="mt-3 text-[12px] font-medium text-brand-white/80">
-          this page just explains how the day works. the daily plans, the song library and the dashboard are on the home page.
+          this page explains how the day works and what runs when. the daily plans, the song library and the dashboard are on the home page.
         </p>
       </section>
 
@@ -56,9 +42,9 @@ export default function RotatingPage() {
 
         <div className="mt-4 flex items-stretch gap-2 overflow-x-auto pb-1 md:gap-3">
           {CYCLE.map((p, i) => (
-            <div key={i} className="flex items-stretch gap-2 md:gap-3">
+            <div key={p.key} className="flex items-stretch gap-2 md:gap-3">
               <div
-                className={`flex w-[150px] shrink-0 flex-col justify-between rounded-2xl bg-brand-white p-4 shadow-card ring-1 ${p.ring} md:w-[180px]`}
+                className={`flex w-[150px] shrink-0 flex-col justify-between rounded-2xl bg-brand-white p-4 shadow-card ring-1 ${p.ring} md:w-[170px]`}
               >
                 <div className="flex items-center justify-between">
                   <span
@@ -68,11 +54,11 @@ export default function RotatingPage() {
                     {p.emoji}
                   </span>
                   <span className="rounded-chip bg-brand-cream px-2 py-0.5 text-[10px] font-bold text-ink-muted">
-                    {i < 3 ? `day ${i + 1}` : "day 4"}
+                    day {i + 1}
                   </span>
                 </div>
                 <p className={`mt-3 text-[13.5px] font-extrabold lowercase leading-tight ${p.text}`}>
-                  {p.title}
+                  {p.label}
                 </p>
               </div>
               {/* arrow between cards; the last one loops back */}
@@ -91,34 +77,17 @@ export default function RotatingPage() {
         </div>
       </section>
 
-      {/* and inside art — artiverse ↔ artistotle rotate too */}
+      {/* the month calendar — what runs on each day */}
       <section className="mt-8">
         <h2 className="text-[13px] font-extrabold lowercase text-ink-muted">
-          and inside the art days — two books rotate too
+          the month at a glance
         </h2>
         <p className="mt-0.5 text-[12.5px] text-ink-muted">
-          on an art day, the making time alternates between the two art books.
+          each day is pre-allocated to a strand. sessions run every day; the winter break is 26–31 december.
         </p>
-        <div className="mt-3 flex flex-wrap items-stretch gap-3">
-          <div className="min-w-[220px] flex-1 rounded-2xl bg-category-art/15 p-4 ring-1 ring-category-art/40">
-            <p className="text-[14px] font-extrabold lowercase text-ink">📄 artiverse</p>
-            <p className="mt-1 text-[12.5px] leading-relaxed text-ink-muted">
-              free making across materials — paper, crayons, paint. the child learns a <b className="text-ink">skill</b> (a fold, a dab, a mark) and makes their own thing.
-            </p>
-            <Link href="/artiverse-book" className="mt-2 inline-block text-[12px] font-extrabold text-brand-orange">open the artiverse book →</Link>
-          </div>
-          <div className="flex items-center self-center text-[22px] text-ink-subtle" aria-hidden>↔</div>
-          <div className="min-w-[220px] flex-1 rounded-2xl bg-segment-yellow/25 p-4 ring-1 ring-segment-yellow/50">
-            <p className="text-[14px] font-extrabold lowercase text-ink">👴 artistotle</p>
-            <p className="mt-1 text-[12.5px] leading-relaxed text-ink-muted">
-              making <b className="text-ink">in the spirit of an illustrator</b> — carle, ehlert, gomi — learning their technique, never copying.
-            </p>
-            <Link href="/artistotle-book" className="mt-2 inline-block text-[12px] font-extrabold text-brand-orange">open the artistotle book →</Link>
-          </div>
+        <div className="mt-3">
+          <RotationCalendar />
         </div>
-        <p className="mt-3 rounded-2xl bg-brand-cream/70 px-4 py-2.5 text-center text-[12.5px] font-semibold text-ink-muted ring-1 ring-ink/[0.05]">
-          so across art days a child gets both — open free-making <b className="text-ink">and</b> technique from the greats.
-        </p>
       </section>
 
       {/* why we rotate */}
@@ -133,12 +102,12 @@ export default function RotatingPage() {
             </p>
             <p className="mt-2 text-[13px] leading-relaxed text-ink-muted">
               because the strand changes every day and loops, each child builds
-              up <b className="text-ink">all three</b> over their visits — whether
+              up <b className="text-ink">all four</b> over their visits — whether
               they come twice a week or every day.
             </p>
           </div>
 
-          {/* mini infographic: 3 children, each ends up with all three dots */}
+          {/* mini infographic: 3 children, each ends up with all four dots */}
           <div className="rounded-2xl bg-brand-cream/60 p-5 ring-1 ring-ink/[0.05]">
             <p className="mb-3 text-[11px] font-extrabold uppercase tracking-wide text-ink-subtle">
               over a few visits
@@ -157,28 +126,30 @@ export default function RotatingPage() {
                     {kid.name}
                   </span>
                   <span className="ml-auto flex items-center gap-1.5">
-                    {PROGS.map((p) => (
+                    {STRANDS.map((p) => (
                       <span
                         key={p.key}
                         className={`h-4 w-4 rounded-full ${p.dot}`}
-                        title={p.title}
+                        title={p.label}
                       />
                     ))}
-                    <span className="ml-1 text-[12px] font-extrabold text-category-language">✓ all three</span>
+                    <span className="ml-1 text-[12px] font-extrabold text-category-language">✓ all four</span>
                   </span>
                 </li>
               ))}
             </ul>
-            <div className="mt-4 flex items-center gap-2 text-[11px] font-bold text-ink-muted">
-              <span className="h-3 w-3 rounded-full bg-category-art" /> art
-              <span className="ml-2 h-3 w-3 rounded-full bg-category-language" /> language
-              <span className="ml-2 h-3 w-3 rounded-full bg-category-stem" /> stem
+            <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] font-bold text-ink-muted">
+              {STRANDS.map((p) => (
+                <span key={p.key} className="inline-flex items-center gap-1.5">
+                  <span className={`h-3 w-3 rounded-full ${p.dot}`} /> {p.short}
+                </span>
+              ))}
             </div>
           </div>
         </div>
 
         <p className="mt-4 rounded-2xl bg-category-language/15 px-4 py-3 text-center text-[13.5px] font-extrabold lowercase text-ink ring-1 ring-category-language/30">
-          different days, same full experience — art, language &amp; stem for every child.
+          different days, same full experience — art, language, stem &amp; music for every child.
         </p>
       </section>
     </div>

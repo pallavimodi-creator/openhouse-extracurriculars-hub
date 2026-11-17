@@ -61,7 +61,9 @@ export interface DailyLogRow {
   centre: string | null; // the building/centre
   teacher_username: string | null; // the logged-in centre account
   teacher_name: string; // the individual educator (typed on submit)
-  programme: "art" | "language" | "stem"; // which strand ran today
-  status: "completed" | "partial" | "challenges"; // how it went
-  notes: string; // free text — what went well / what was hard
+  programme: "art" | "language" | "stem" | "music"; // which strand ran that day
+  // Binary completion for the day. ("partial"/"challenges" are legacy values
+  // that may still exist on old rows — the dashboard reads them gracefully.)
+  status: "completed" | "not_completed" | "partial" | "challenges";
+  notes: string; // the reason, when a day was NOT completed (else empty)
 }

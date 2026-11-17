@@ -29,10 +29,10 @@ const THREE_FIVE = new Set([
 ]);
 const NAME_KEY = "oh-daily-educator-name";
 const todayISO = () => new Date().toISOString().slice(0, 10);
+// Binary day completion — the only two options an educator marks.
 const LOG_STATUS = [
-  { key: "completed", label: "completed" },
-  { key: "partial", label: "partly done" },
-  { key: "challenges", label: "faced challenges" },
+  { key: "completed", label: "completed ✓" },
+  { key: "not_completed", label: "did not complete ✗" },
 ] as const;
 
 /**
@@ -64,7 +64,7 @@ export default function ProgrammePlanPage() {
   const is35 = THREE_FIVE.has(slug);
   const [logName, setLogName] = useState("");
   const [logStatus, setLogStatus] = useState<
-    "completed" | "partial" | "challenges" | null
+    "completed" | "not_completed" | null
   >(null);
   const [logNotes, setLogNotes] = useState("");
   const [logSaving, setLogSaving] = useState(false);
@@ -166,11 +166,14 @@ export default function ProgrammePlanPage() {
     }
   };
 
-  const canSubmitLog = !!logName.trim() && !!logStatus && !logSaving;
+  // When a day is not completed, the reason is required.
+  const reasonOk = logStatus !== "not_completed" || !!logNotes.trim();
+  const canSubmitLog = !!logName.trim() && !!logStatus && reasonOk && !logSaving;
   const submitLog = async () => {
     if (!is35 || !programme) return;
     const t = teacher ?? getTeacher();
     if (!t || !logName.trim() || !logStatus) return;
+    if (logStatus === "not_completed" && !logNotes.trim()) return;
     setLogSaving(true);
     setLogError(null);
     try {
@@ -188,9 +191,9 @@ export default function ProgrammePlanPage() {
       centre: t.building ?? null,
       teacher_username: t.username ?? null,
       teacher_name: logName.trim(),
-      programme: programme.category as "art" | "language" | "stem",
+      programme: programme.category as "art" | "language" | "stem" | "music",
       status: logStatus,
-      notes: logNotes.trim(),
+      notes: logStatus === "not_completed" ? logNotes.trim() : "",
     };
     const { error } = await supabase.from("daily_logs").insert(row);
     setLogSaving(false);
@@ -320,15 +323,17 @@ export default function ProgrammePlanPage() {
         <section className="mt-5 px-4 md:px-8">
           <div className="mx-auto w-full max-w-5xl rounded-2xl bg-brand-white p-5 shadow-card ring-1 ring-ink/[0.05] md:p-6">
             <h2 className="text-[15px] font-extrabold lowercase text-ink">
-              log this session
+              mark today
             </h2>
-            <p className="mt-0.5 text-[12.5px] text-ink-muted">how did session {selectedDay} go?</p>
+            <p className="mt-0.5 text-[12.5px] text-ink-muted">
+              did you complete today&rsquo;s session ({todayISO()})?
+            </p>
 
             {logSaved ? (
               <div className="mt-4 rounded-2xl bg-category-language/15 px-4 py-4 text-center ring-1 ring-category-language/30">
-                <p className="text-[14px] font-extrabold text-ink">logged ✓</p>
+                <p className="text-[14px] font-extrabold text-ink">marked ✓</p>
                 <p className="mt-1 text-[12.5px] text-ink-muted">
-                  thanks{logName.trim() ? `, ${logName.trim()}` : ""} — your note is on the daily dashboard.
+                  thanks{logName.trim() ? `, ${logName.trim()}` : ""} — it&rsquo;s on the daily dashboard.
                 </p>
                 <button
                   onClick={() => {
@@ -338,34 +343,51 @@ export default function ProgrammePlanPage() {
                   }}
                   className="mt-2 text-[12px] font-bold text-brand-orange"
                 >
-                  log another entry
+                  mark another entry
                 </button>
               </div>
             ) : (
               <>
                 <div className="mt-3 flex flex-wrap gap-2">
-                  {LOG_STATUS.map((s) => (
-                    <button
-                      key={s.key}
-                      type="button"
-                      onClick={() => setLogStatus(s.key)}
-                      className={`rounded-full px-4 py-2 text-[13px] font-bold transition ${
-                        logStatus === s.key
-                          ? "bg-brand-orange text-white shadow-card"
-                          : "bg-brand-cream text-ink-muted ring-1 ring-ink/10 hover:bg-ink/5"
-                      }`}
-                    >
-                      {s.label}
-                    </button>
-                  ))}
+                  {LOG_STATUS.map((s) => {
+                    const active = logStatus === s.key;
+                    const good = s.key === "completed";
+                    return (
+                      <button
+                        key={s.key}
+                        type="button"
+                        onClick={() => setLogStatus(s.key)}
+                        className={`rounded-full px-4 py-2 text-[13px] font-bold transition ${
+                          active
+                            ? good
+                              ? "bg-category-language text-white shadow-card"
+                              : "bg-brand-orange text-white shadow-card"
+                            : "bg-brand-cream text-ink-muted ring-1 ring-ink/10 hover:bg-ink/5"
+                        }`}
+                      >
+                        {s.label}
+                      </button>
+                    );
+                  })}
                 </div>
-                <textarea
-                  value={logNotes}
-                  onChange={(e) => setLogNotes(e.target.value)}
-                  placeholder="notes — what the children did, anything to flag…"
-                  rows={3}
-                  className="mt-3 block w-full rounded-lg border border-ink/10 bg-bg/40 px-3 py-2.5 text-[14px] focus:border-brand-orange focus:outline-none focus:ring-2 focus:ring-brand-orange/20"
-                />
+
+                {/* The reason — only asked for (and required) when NOT completed. */}
+                {logStatus === "not_completed" && (
+                  <div className="mt-3">
+                    <label htmlFor="log-reason" className="text-[12px] font-bold text-ink-muted">
+                      why couldn&rsquo;t it be completed?
+                    </label>
+                    <textarea
+                      id="log-reason"
+                      value={logNotes}
+                      onChange={(e) => setLogNotes(e.target.value)}
+                      placeholder="e.g. power cut · low attendance · materials not ready…"
+                      rows={3}
+                      className="mt-1 block w-full rounded-lg border border-ink/10 bg-bg/40 px-3 py-2.5 text-[14px] focus:border-brand-orange focus:outline-none focus:ring-2 focus:ring-brand-orange/20"
+                    />
+                  </div>
+                )}
+
                 {logError && (
                   <p className="mt-2 rounded-lg bg-red-50 px-3 py-2 text-[12px] font-medium text-red-700">
                     {logError}
@@ -382,7 +404,7 @@ export default function ProgrammePlanPage() {
                   disabled={!canSubmitLog}
                   className="mt-3 w-full rounded-full bg-brand-orange py-3 text-[14px] font-extrabold text-white shadow-card transition hover:opacity-95 disabled:cursor-not-allowed disabled:opacity-40"
                 >
-                  {logSaving ? "saving…" : "log this session"}
+                  {logSaving ? "saving…" : "mark today"}
                 </button>
               </>
             )}
