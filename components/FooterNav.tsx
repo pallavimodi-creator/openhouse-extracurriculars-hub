@@ -11,6 +11,7 @@ import {
   Building2,
   ClipboardList,
   ClipboardCheck,
+  CalendarDays,
   Compass,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -57,6 +58,9 @@ export function FooterNav() {
 
   const items: { href: string; label: string; icon: typeof Home }[] = [
     { href: "/", label: "home", icon: Home },
+    // Persistent "plans" tab — the 3–5 centre day plans (all four strands),
+    // mirroring the at-apartment plans tab so a day plan is always one tap away.
+    { href: "/plans", label: "plans", icon: CalendarDays },
   ];
 
   // Inside a programme: educators get overview + plan (plan is where they

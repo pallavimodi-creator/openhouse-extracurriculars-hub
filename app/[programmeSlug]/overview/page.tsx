@@ -74,8 +74,10 @@ const SEGMENT_ICONS: Record<string, LucideIcon> = {
   "logic-lab": Lightbulb,
   "numbers-gym": Hash,
   "active-listening": Ear,
+  musicality: Music,
   singing: Music,
   movement: Dumbbell,
+  fitness: Dumbbell,
   "music-fitness": Music,
 };
 
@@ -176,6 +178,11 @@ function ProgrammeOverviewContent() {
   const isRobotics = programme.category === "stem";
   const isLanguage = programme.category === "language";
   const isMusic = programme.category === "music";
+  // The 5–8 / 8–12 music programmes are instrument/band-based (daily flow,
+  // warm-ups, songs, level book). The 3–5 "music & fitness" strand is NOT —
+  // it runs its own segments (active listening · musicality · fitness ·
+  // closing circle), so the band-music sections must never render for it.
+  const isBandMusic = isMusic && programme.ageGroup !== "3-5";
 
   // Every overview has the same four top-level sections now: daily flow
   // · skills · segments (each segment card contains its full info inline)
@@ -841,9 +848,9 @@ function ProgrammeOverviewContent() {
         </section>
       )}
 
-      {/* ─── MUSIC — the 3 parts explained: rotating vs linear, and how
-          band play works with its general rules. ─── */}
-      {isMusic && (
+      {/* ─── MUSIC (band) — the 3 parts explained: rotating vs linear, and how
+          band play works with its general rules. Band-music only. ─── */}
+      {isBandMusic && (
         <section className="mt-10 px-4 md:px-8">
           <SectionTitle num={sectionNum("daily-flow")} label="daily flow">
             a 90-minute class — 3 parts, in this order.
@@ -1463,7 +1470,7 @@ function ProgrammeOverviewContent() {
         // Both age bands share the same per-level books, so pull the level from
         // the slug (e.g. music-5-8-l2 / music-8-12-l2 → "2").
         {
-          const lvl = isMusic
+          const lvl = isBandMusic
             ? programme.slug.match(/-l(\d)$/)?.[1]
             : undefined;
           if (lvl) {
@@ -1619,9 +1626,9 @@ function ProgrammeOverviewContent() {
         );
       })()}
 
-      {/* ─── MUSIC — warm-ups (they rotate) + songs & sheet music ─── */}
-      {isMusic && <MusicWarmupsSection />}
-      {isMusic && <MusicSongsSection level={programme.level ?? 1} />}
+      {/* ─── MUSIC (band) — warm-ups (they rotate) + songs & sheet music ─── */}
+      {isBandMusic && <MusicWarmupsSection />}
+      {isBandMusic && <MusicSongsSection level={programme.level ?? 1} />}
 
       {/* In-page PDF flip viewer for the music book (opens from the books row). */}
       <PdfFlipbookModal pdf={flipPdf} onClose={() => setFlipPdf(null)} />

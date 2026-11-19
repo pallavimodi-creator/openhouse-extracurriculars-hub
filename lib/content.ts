@@ -415,6 +415,7 @@ export const ACTIVITY_VIDEOS: Record<string, string> = {
   // Music & Fitness
   "ml-body-percussion": "https://www.youtube.com/watch?v=3ZV0vNHiJCw",
   "ml-london-bridge": "https://youtu.be/wFTAWqLYil0",
+  "ml-charlie-ocean": "https://youtu.be/53AcNRXGZg8",
   "ml-dancing-forest": "https://www.youtube.com/watch?v=gNA1ZOUU0po",
 };
 
@@ -435,4 +436,11 @@ export const SEGMENT_COLORS: Record<string, string> = {
   experiment: "bg-brand-orange/12 text-brand-orange",
   build: "bg-brand-orange/12 text-brand-orange",
   "experience-book": "bg-brand-orange/12 text-brand-orange",
+  // Music & Fitness (3-5) — music-blue chips for every part of the day.
+  "opening-circle": "bg-category-music/20 text-ink",
+  "active-listening": "bg-category-music/20 text-ink",
+  singing: "bg-category-music/20 text-ink",
+  musicality: "bg-category-music/20 text-ink",
+  fitness: "bg-category-music/20 text-ink",
+  "closing-circle": "bg-category-music/20 text-ink",
 };

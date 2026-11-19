@@ -3,9 +3,11 @@ import type { CurriculumActivity, CurriculumProgramme } from "@/content/types";
 /* ───────────────────────────────────────────────────────────────
  * Music & Fitness — ages 3–5.
  *
- * The fourth strand of the at-centre rotation. A day runs:
- *   opening circle → active listening (10m) → singing & voice (placeholder)
- *   → break → movement games (15m · two games) → closing circle.
+ * The fourth strand of the at-centre rotation. A day runs through
+ * SIX parts, in order:
+ *   opening circle → active listening (10m) → sing along (10m) →
+ *   fitness mania (15m · two movement games) → musicality (10m) →
+ *   closing circle.
  *
  * Four skills (grounded in early-childhood music + fundamental-movement
  * frameworks — Dalcroze/Kodály listening & musicianship, and the FMS
@@ -14,34 +16,15 @@ import type { CurriculumActivity, CurriculumProgramme } from "@/content/types";
  *
  * Every game is tagged to the skills it builds (skillIds) so coverage —
  * and the gaps — are visible on the overview's "games by skill" grid.
+ * Every game's video / audio / story links are on referenceLinks so
+ * they're clickable in the activity popup (namedBlocks don't render).
  * ─────────────────────────────────────────────────────────────── */
 
-/* ── Active listening & music games (the 10-minute listening block) ── */
+/* ── Active listening — whole-body listening & singing games (10 min) ──
+ * Children tune in, follow a musical cue and respond. One game a session,
+ * rotating through the set. The three traditional singing games carry a
+ * YouTube reference (and an embedded player via ACTIVITY_VIDEOS). */
 const listeningGames: Record<string, CurriculumActivity> = {
-  "ml-body-percussion": {
-    id: "ml-body-percussion",
-    segment: "active-listening",
-    title: "body percussion",
-    setupLine: "Make music with your body — clap, stomp, pat — to the beat of a song.",
-    howToPlay:
-      "Children discover the sounds their bodies make (clap, stomp, pat, click) and perform a pattern of body-percussion cues along to a medium-fast song, in sequence or together.",
-    players: "whole group · 1 educator",
-    duration: "10 min",
-    materials: ["7 dice with a body part on each face", "A medium-fast song", "Body-percussion videos (TV)"],
-    skillIds: ["musicality", "listening"],
-    easierVariation: "Level 1 — sing & clap along; the educator gives a pattern of beats on different body parts and children copy.",
-    harderVariation:
-      "Level 2 — in a circle, each child rolls a body-part die and does the action; then play on the beat in sequence (try two dice at once). Level 3 — follow a body-percussion video.",
-    namedBlocks: [
-      {
-        title: "video bank (level 3)",
-        body:
-          "youtube.com/watch?v=3ZV0vNHiJCw · =1GaDczCwFcw · =r6PVNEMHpcQ · =hqZeWsUwRb0 · =xshgioG7zjE · =D0J5DneSHxI · =s3kIWk-tGZ4",
-      },
-    ],
-    debriefPrompts: [],
-    type: "physical-game",
-  },
   "ml-london-bridge": {
     id: "ml-london-bridge",
     segment: "active-listening",
@@ -53,6 +36,7 @@ const listeningGames: Record<string, CurriculumActivity> = {
     duration: "10 min",
     materials: ["Space to form a bridge with two children's arms"],
     skillIds: ["listening", "musicality"],
+    referenceLinks: [{ label: "🎬 watch — london bridge", url: "https://youtu.be/wFTAWqLYil0" }],
     debriefPrompts: [],
     type: "physical-game",
   },
@@ -67,6 +51,7 @@ const listeningGames: Record<string, CurriculumActivity> = {
     duration: "10 min",
     materials: ["A circle of space"],
     skillIds: ["listening", "musicality"],
+    referenceLinks: [{ label: "🎬 watch — charlie over the ocean", url: "https://youtu.be/53AcNRXGZg8" }],
     debriefPrompts: [],
     type: "physical-game",
   },
@@ -81,6 +66,7 @@ const listeningGames: Record<string, CurriculumActivity> = {
     duration: "10 min",
     materials: ["An open space with two sides"],
     skillIds: ["listening", "creative-expression"],
+    referenceLinks: [{ label: "🎬 watch — we are dancing in the forest", url: "https://www.youtube.com/watch?v=gNA1ZOUU0po" }],
     debriefPrompts: [],
     type: "physical-game",
   },
@@ -134,11 +120,149 @@ const listeningGames: Record<string, CurriculumActivity> = {
   },
 };
 
-/* ── Movement & fitness games (the 15-minute block — two games a day) ── */
+/* ── Sing along — the Christmas choir (10 min) ──
+ * Baby instruments + voices rehearse a bank of Christmas songs each
+ * session, building up to a December performance. */
+const singingGames: Record<string, CurriculumActivity> = {
+  "ml-sing-along": {
+    id: "ml-sing-along",
+    segment: "singing",
+    title: "sing along — the christmas choir",
+    setupLine: "Pick up a shaker and sing — we're getting ready for Christmas.",
+    howToPlay:
+      "Hand out the baby instruments — maracas, egg shakers, a xylophone — and warm up little voices. Each session the group rehearses the Christmas songs below, keeping a steady beat with the shakers, so that by December they can perform them together as a choir. Start with one verse, add simple actions, and build up song by song.",
+    players: "whole group · 1 educator",
+    duration: "10 min",
+    materials: ["Maracas", "Egg shakers", "A xylophone", "Any other baby / percussion instruments"],
+    skillIds: ["musicality", "creative-expression"],
+    referenceLinks: [
+      { label: "🎵 jingle bells (kids)", url: "https://www.youtube.com/results?search_query=jingle+bells+kids+song" },
+      { label: "🎵 santa claus is coming to town (kids)", url: "https://www.youtube.com/results?search_query=santa+claus+is+coming+to+town+kids+song" },
+      { label: "🎵 we wish you a merry christmas (kids)", url: "https://www.youtube.com/results?search_query=we+wish+you+a+merry+christmas+kids+song" },
+      { label: "🎵 rudolph the red-nosed reindeer (kids)", url: "https://www.youtube.com/results?search_query=rudolph+the+red+nosed+reindeer+kids+song" },
+      { label: "🎵 deck the halls (kids)", url: "https://www.youtube.com/results?search_query=deck+the+halls+kids+song" },
+      { label: "🎵 jingle bell rock (kids)", url: "https://www.youtube.com/results?search_query=jingle+bell+rock+kids+song" },
+    ],
+    educatorNote: "This is the same focus every session — rehearse the choir songs and keep building toward the December performance.",
+    debriefPrompts: [],
+    type: "facilitated",
+  },
+};
+
+/* ── Musicality — focused music games: beat, rhythm, pitch, timbre (10 min) ──
+ * The music skills beyond listening. One game a session, rotating through
+ * the set. Links (video bank, sound sets, pitch playlist, stories,
+ * metronome) are on each game's referenceLinks. */
+const musicalityGames: Record<string, CurriculumActivity> = {
+  "ml-body-percussion": {
+    id: "ml-body-percussion",
+    segment: "musicality",
+    title: "body percussion",
+    setupLine: "Make music with your body — clap, stomp, pat — to the beat of a song.",
+    howToPlay:
+      "Children discover the sounds their bodies make (clap, stomp, pat, click) and perform a pattern of body-percussion cues along to a medium-fast song, in sequence or together.",
+    players: "whole group · 1 educator",
+    duration: "10 min",
+    materials: ["7 dice with a body part on each face", "A medium-fast song", "A TV / screen for the video bank"],
+    skillIds: ["musicality", "listening"],
+    easierVariation: "Level 1 — sing & clap along; the educator gives a pattern of beats on different body parts and children copy.",
+    harderVariation:
+      "Level 2 — in a circle, each child rolls a body-part die and does the action; then play on the beat in sequence (try two dice at once). Level 3 — follow a body-percussion video.",
+    referenceLinks: [
+      { label: "🎬 body-percussion video 1", url: "https://www.youtube.com/watch?v=3ZV0vNHiJCw" },
+      { label: "🎬 body-percussion video 2", url: "https://www.youtube.com/watch?v=1GaDczCwFcw" },
+      { label: "🎬 body-percussion video 3", url: "https://www.youtube.com/watch?v=r6PVNEMHpcQ" },
+      { label: "🎬 body-percussion video 4", url: "https://www.youtube.com/watch?v=hqZeWsUwRb0" },
+      { label: "🎬 body-percussion video 5", url: "https://www.youtube.com/watch?v=xshgioG7zjE" },
+      { label: "🎬 body-percussion video 6", url: "https://www.youtube.com/watch?v=D0J5DneSHxI" },
+      { label: "🎬 body-percussion video 7", url: "https://www.youtube.com/watch?v=s3kIWk-tGZ4" },
+    ],
+    debriefPrompts: [],
+    type: "physical-game",
+  },
+  "ml-whos-that-sound": {
+    id: "ml-whos-that-sound",
+    segment: "musicality",
+    title: "who's that sound?",
+    setupLine: "Listen to a mystery sound — then guess what makes it.",
+    howToPlay:
+      "Play a sound from the speaker; children listen, then name what makes it — an animal, a vehicle, an everyday object, or a musical instrument — and match it to the right cue card. Play in a circle or a line, sitting or standing, as a whole group or one child at a time.",
+    players: "whole group or 1+ child · 1 educator",
+    duration: "10 min",
+    materials: ["Cue cards (animal · vehicle · object · musical instrument)", "A speaker", "The sound sets (linked below)"],
+    skillIds: ["listening", "musicality"],
+    referenceLinks: [
+      { label: "🎧 animal sounds", url: "https://soundcloud.com/aswathi-nambiar-221680422/sets/animal-audio" },
+      { label: "🎧 daily object sounds", url: "https://soundcloud.com/aswathi-nambiar-221680422/sets/daily-objects" },
+      { label: "🎧 musical instrument sounds", url: "https://soundcloud.com/aswathi-nambiar-221680422/sets/musical-instrument" },
+      { label: "🎧 vehicle sounds", url: "https://soundcloud.com/aswathi-nambiar-221680422/sets/vehicle" },
+    ],
+    educatorNote: "The source game also has two harder variations — keep the game deck handy.",
+    debriefPrompts: [],
+    type: "facilitated",
+  },
+  "ml-whats-that-pitch": {
+    id: "ml-whats-that-pitch",
+    segment: "musicality",
+    title: "what's that pitch?",
+    setupLine: "Is it high or low? Listen, then show the pitch.",
+    howToPlay:
+      "Play a sound; children listen for its pitch — high or low. They show which way it goes with the arrow placard (up / down), or hold up number card 1 or 2. Play in a circle or a straight line, as a whole group or one child at a time.",
+    players: "whole group or 1+ child · 1 educator",
+    duration: "10 min",
+    materials: ["The pitch playlist (linked below)", "An arrow placard", "Number cards (1 & 2)"],
+    skillIds: ["listening", "musicality"],
+    referenceLinks: [{ label: "🎧 pitch playlist", url: "https://on.soundcloud.com/lvGazTj1NFrMuVOJYM" }],
+    educatorNote: "The source game has two variations — keep the game deck handy.",
+    debriefPrompts: [],
+    type: "facilitated",
+  },
+  "ml-rhythm-play": {
+    id: "ml-rhythm-play",
+    segment: "musicality",
+    title: "rhythm play",
+    setupLine: "Clap the fruit pattern — in time with the metronome.",
+    howToPlay:
+      "Arrange up to four chairs or hula hoops in a line. Place small balls / pom-poms on them and give each a fruit value: a pear is one green ball — clap once; an apple is two red balls — clap twice; an empty chair is a rest — stay silent. Children read the line left to right and clap the rhythm, keeping time with the metronome.",
+    players: "whole group or 1+ child · 1 educator",
+    duration: "10 min",
+    materials: ["Chairs or hula hoops (max 4 in a line)", "Small balls / pom-poms (max 2 per chair — green & red)"],
+    skillIds: ["musicality"],
+    referenceLinks: [{ label: "▶ metronome (musicca)", url: "https://www.musicca.com/metronome" }],
+    educatorNote: "Learners clap the patterns along with the metronome.",
+    debriefPrompts: [],
+    type: "physical-game",
+  },
+  "ml-pitch-and-story": {
+    id: "ml-pitch-and-story",
+    segment: "musicality",
+    title: "pitch and story",
+    setupLine: "Listen to the story — answer the characters in their own high or low voice.",
+    howToPlay:
+      "The educator narrates a story. As each animal or character appears, the educator voices it in a high or low pitch, and children respond by making the matching sound — high for the tiny bird, low for the big bear. Children stand in a line as they play along.",
+    players: "whole group or 1+ child · 1 educator",
+    duration: "10 min",
+    materials: ["A story (choose one below)"],
+    skillIds: ["musicality", "creative-expression"],
+    referenceLinks: [
+      { label: "📕 the three dinos & the lost babies", url: "https://drive.google.com/file/d/1Zi9wSKpQMMReWXJkxOh68-NEwecRjaxr/view" },
+      { label: "📕 the three giants & the giant drum", url: "https://drive.google.com/file/d/1H4MZWxs0eBzAEYMXhFMg-os5ncc_vk1U/view" },
+      { label: "📕 mimi the tiny bird and bobo the big bear", url: "https://drive.google.com/file/d/1rF9W3cAhzskt2j2sE61cMAbd0ftvXHi_/view" },
+      { label: "📕 silly echo cave", url: "https://drive.google.com/file/d/1uHIVDRVusoayIIOYlXCNbRpkr6-_qAeN/view" },
+      { label: "📕 the tall tree and the little seed", url: "https://drive.google.com/file/d/1Ib0rwydgwRUN4H3m4cniXewE6L1cmmYH/view" },
+    ],
+    debriefPrompts: [],
+    type: "facilitated",
+  },
+};
+
+/* ── Fitness mania — movement & fitness games (15 min · two a session) ──
+ * Balance, coordination, agility and strength through active challenges.
+ * Each game runs easy → medium → hard. Demo clips on referenceLinks. */
 const movementGames: Record<string, CurriculumActivity> = {
   "mv-balancing-act": {
     id: "mv-balancing-act",
-    segment: "movement",
+    segment: "fitness",
     title: "balancing act",
     setupLine: "In pairs, balance an object between two body parts and walk to the finish.",
     howToPlay:
@@ -149,12 +273,13 @@ const movementGames: Record<string, CurriculumActivity> = {
     skillIds: ["fitness", "creative-expression"],
     easierVariation: "No timer; short 2 m distance; soft toy.",
     harderVariation: "15-second timer; 6 m with turns; rubber ball (unstable).",
+    referenceLinks: [{ label: "🎬 demo video", url: "https://www.instagram.com/reel/DGx-5YDS1wg/" }],
     debriefPrompts: [],
     type: "physical-game",
   },
   "mv-triathlon": {
     id: "mv-triathlon",
-    segment: "movement",
+    segment: "fitness",
     title: "mini triathlon",
     setupLine: "Stack, carry and drop — race through three zones in sequence.",
     howToPlay:
@@ -165,12 +290,13 @@ const movementGames: Record<string, CurriculumActivity> = {
     skillIds: ["fitness"],
     easierVariation: "No timer; 2 m; 1 stack of 2 items.",
     harderVariation: "30-second timer; 6 m with zig-zags; 4+ stacks of 4.",
+    referenceLinks: [{ label: "🎬 demo video", url: "https://www.instagram.com/reel/DGA-YDzSxIe/" }],
     debriefPrompts: [],
     type: "physical-game",
   },
   "mv-bowling": {
     id: "mv-bowling",
-    segment: "movement",
+    segment: "fitness",
     title: "bowling",
     setupLine: "Roll the ball and knock down the pins.",
     howToPlay:
@@ -186,7 +312,7 @@ const movementGames: Record<string, CurriculumActivity> = {
   },
   "mv-ball-toss": {
     id: "mv-ball-toss",
-    segment: "movement",
+    segment: "fitness",
     title: "ball toss",
     setupLine: "Toss the ball into the hoop or bucket from the line.",
     howToPlay:
@@ -202,7 +328,7 @@ const movementGames: Record<string, CurriculumActivity> = {
   },
   "mv-paper-tunnels": {
     id: "mv-paper-tunnels",
-    segment: "movement",
+    segment: "fitness",
     title: "paper tunnels",
     setupLine: "Roll the ball through the paper arches without knocking them down.",
     howToPlay:
@@ -213,13 +339,13 @@ const movementGames: Record<string, CurriculumActivity> = {
     skillIds: ["fitness"],
     easierVariation: "Large A3 arches; no timer.",
     harderVariation: "Narrow / half-size arches; 30-second scoring challenge.",
-    namedBlocks: [{ title: "demo", body: "instagram.com/reel/DEocNuIxbC4" }],
+    referenceLinks: [{ label: "🎬 demo video", url: "https://www.instagram.com/reel/DEocNuIxbC4/" }],
     debriefPrompts: [],
     type: "physical-game",
   },
   "mv-pool-noodle": {
     id: "mv-pool-noodle",
-    segment: "movement",
+    segment: "fitness",
     title: "pool-noodle foot balance",
     setupLine: "Balance a pool noodle on your foot and lift it onto the buckets.",
     howToPlay:
@@ -230,13 +356,13 @@ const movementGames: Record<string, CurriculumActivity> = {
     skillIds: ["fitness"],
     easierVariation: "Short noodle; low buckets; dominant foot.",
     harderVariation: "Long noodle; tall/stacked buckets; hop while balancing.",
-    namedBlocks: [{ title: "demo", body: "instagram.com/reel/DJODBpmSDmf" }],
+    referenceLinks: [{ label: "🎬 demo video", url: "https://www.instagram.com/reel/DJODBpmSDmf/" }],
     debriefPrompts: [],
     type: "physical-game",
   },
   "mv-balloon-highfive": {
     id: "mv-balloon-highfive",
-    segment: "movement",
+    segment: "fitness",
     title: "balloon high-five",
     setupLine: "Keep the balloon up, high-five your partner, and move to the finish.",
     howToPlay:
@@ -247,13 +373,13 @@ const movementGames: Record<string, CurriculumActivity> = {
     skillIds: ["fitness", "creative-expression"],
     easierVariation: "1 high-five per turn; straight path; no timer.",
     harderVariation: "5 high-fives per turn; obstacle path; fastest time wins.",
-    namedBlocks: [{ title: "demo", body: "instagram.com/reel/DJCHPaYy7Oq" }],
+    referenceLinks: [{ label: "🎬 demo video", url: "https://www.instagram.com/reel/DJCHPaYy7Oq/" }],
     debriefPrompts: [],
     type: "physical-game",
   },
   "mv-hoop-cup-stack": {
     id: "mv-hoop-cup-stack",
-    segment: "movement",
+    segment: "fitness",
     title: "hoop-jump cup stack",
     setupLine: "Jump side-to-side in the hoops, carrying cups to stack them.",
     howToPlay:
@@ -264,13 +390,13 @@ const movementGames: Record<string, CurriculumActivity> = {
     skillIds: ["fitness"],
     easierVariation: "3 cups; hoops close together.",
     harderVariation: "10 cups; hoops wide apart; 1-minute limit.",
-    namedBlocks: [{ title: "demo", body: "instagram.com/reel/DHNf2N5x7eY" }],
+    referenceLinks: [{ label: "🎬 demo video", url: "https://www.instagram.com/reel/DHNf2N5x7eY/" }],
     debriefPrompts: [],
     type: "physical-game",
   },
   "mv-tunnel-ball": {
     id: "mv-tunnel-ball",
-    segment: "movement",
+    segment: "fitness",
     title: "tunnel ball",
     setupLine: "Roll the ball through a tunnel of legs without touching anyone.",
     howToPlay:
@@ -281,13 +407,13 @@ const movementGames: Record<string, CurriculumActivity> = {
     skillIds: ["fitness"],
     easierVariation: "4 players; large soft ball; just pass through.",
     harderVariation: "8+ players; small ball; must hit a goal cone at the end.",
-    namedBlocks: [{ title: "demo", body: "instagram.com/reel/DGO7dBQzJRC" }],
+    referenceLinks: [{ label: "🎬 demo video", url: "https://www.instagram.com/reel/DGO7dBQzJRC/" }],
     debriefPrompts: [],
     type: "physical-game",
   },
   "mv-cup-blow": {
     id: "mv-cup-blow",
-    segment: "movement",
+    segment: "fitness",
     title: "cup blow race",
     setupLine: "Blow the paper cup along the string — breath control, no hands.",
     howToPlay:
@@ -298,13 +424,13 @@ const movementGames: Record<string, CurriculumActivity> = {
     skillIds: ["musicality", "fitness"],
     easierVariation: "Short 1 m string; lower level.",
     harderVariation: "2 m string at chest height (crouch); 15-second race.",
-    namedBlocks: [{ title: "demo", body: "instagram.com/reel/DJA52PuzbNx" }],
+    referenceLinks: [{ label: "🎬 demo video", url: "https://www.instagram.com/reel/DJA52PuzbNx/" }],
     debriefPrompts: [],
     type: "physical-game",
   },
   "mv-hoop-cone-relay": {
     id: "mv-hoop-cone-relay",
-    segment: "movement",
+    segment: "fitness",
     title: "hoop cone relay",
     setupLine: "Shift the team's cone hoop-by-hoop back to the start.",
     howToPlay:
@@ -314,7 +440,7 @@ const movementGames: Record<string, CurriculumActivity> = {
     materials: ["6–8 hula hoops", "2 cones (per team)", "Start-line markers", "Stopwatch (optional)"],
     skillIds: ["fitness"],
     harderVariation: "Add a movement (skip/hop) between hoops.",
-    namedBlocks: [{ title: "demo", body: "instagram.com/reel/DCpG2cSN8sj" }],
+    referenceLinks: [{ label: "🎬 demo video", url: "https://www.instagram.com/reel/DCpG2cSN8sj/" }],
     debriefPrompts: [],
     type: "physical-game",
   },
@@ -322,6 +448,8 @@ const movementGames: Record<string, CurriculumActivity> = {
 
 const allActivities: Record<string, CurriculumActivity> = {
   ...listeningGames,
+  ...singingGames,
+  ...musicalityGames,
   ...movementGames,
 };
 
@@ -335,8 +463,8 @@ export const musicFitness35: CurriculumProgramme = {
   heroImageUrl: "/openhouse-logo.png",
   tagline: "listen, sing, move — rhythm, musicality and joyful fitness through play.",
   description:
-    "Music & Fitness is the fourth strand of the 3–5 rotation. A day moves through active listening and music games, singing & voice, and a block of movement & fitness games. Children build four skills — listening, musicality, creative expression and fitness — all through play. Every game is tagged to the skills it builds.",
-  totalSessions: 0, // day-by-day plan to be sequenced once the singing block is designed
+    "Music & Fitness is the fourth strand of the 3–5 rotation. A day moves through six parts — an opening circle, active listening, sing along (the Christmas choir), fitness mania (two movement games), musicality, and a closing circle. Children build four skills — listening, musicality, creative expression and fitness — all through play. Every game is tagged to the skills it builds.",
+  totalSessions: 0, // day-by-day plan to be sequenced
   skillAreas: [
     {
       id: "listening",
@@ -383,36 +511,68 @@ export const musicFitness35: CurriculumProgramme = {
       ],
     },
   ],
+  // The 3–5 day runs SIX parts, in order:
+  //   opening circle → active listening (~10m) → sing along (~10m) →
+  //   fitness mania (two games, ~15m) → musicality (~10m) → closing circle.
   segmentDefinitions: [
-    { id: "opening-circle", name: "opening circle", durationRange: "15 min", objective: "A warm start together — a hello and meet-and-greet, then a song or two to settle the group and wake up voices and bodies. Pick songs from the song library — opening-circle set.", type: "fixed" },
+    {
+      id: "opening-circle",
+      name: "opening circle",
+      durationRange: "5 min",
+      objective:
+        "Gather, greet and warm up little hands and voices with a hello / settling song before the day begins.",
+      type: "fixed",
+    },
     {
       id: "active-listening",
       name: "active listening",
       durationRange: "10 min",
       objective:
-        "A music & listening game — body percussion, singing games and listening games that build active listening, beat and musicality. One game per session, rotating through the set.",
+        "A whole-body listening game — children tune in, follow a musical cue and respond. One game a session, rotating through the set.",
       type: "rotating",
-      rotationPool: Object.keys(listeningGames),
+      rotationPool: [
+        "ml-london-bridge",
+        "ml-charlie-ocean",
+        "ml-dancing-forest",
+        "ml-musical-chairs",
+        "ml-fruit-basket",
+        "ml-hidden-objects",
+      ],
     },
     {
       id: "singing",
-      name: "singing & voice",
+      name: "sing along",
       durationRange: "10 min",
       objective:
-        "The singing & voice block — songs, pitch and vocal play that build the voice. This block is being designed now; for now the time can flow into opening-circle songs and the listening games.",
-      type: "fixed",
+        "The Christmas choir — with maracas, egg shakers and a xylophone, children rehearse a bank of Christmas songs each session, building toward a December performance.",
+      type: "rotating",
+      rotationPool: ["ml-sing-along"],
     },
-    { id: "break", name: "break", durationRange: "10 min", objective: "A short rest and snack break in the middle of the longer class.", type: "fixed" },
     {
-      id: "movement",
-      name: "movement & fitness",
-      durationRange: "15 min",
+      id: "fitness",
+      name: "fitness mania",
+      durationRange: "15 min · two games",
       objective:
         "Two movement & fitness games a session — balance, coordination, agility and strength through active, playful challenges. Each game runs easy → medium → hard so it fits every child.",
       type: "rotating",
       rotationPool: Object.keys(movementGames),
     },
-    { id: "closing-circle", name: "closing circle", durationRange: "15 min", objective: "A calm finish together — a simple fitness / movement song to round off the class. Pick a movement song from the song library — closing-circle set.", type: "fixed" },
+    {
+      id: "musicality",
+      name: "musicality",
+      durationRange: "10 min",
+      objective:
+        "A focused music game — beat, rhythm, pitch and timbre through body percussion, sound and pitch games. One game a session, rotating through the set.",
+      type: "rotating",
+      rotationPool: ["ml-body-percussion", "ml-whos-that-sound", "ml-whats-that-pitch", "ml-rhythm-play", "ml-pitch-and-story"],
+    },
+    {
+      id: "closing-circle",
+      name: "closing circle",
+      durationRange: "5 min",
+      objective: "A calm finish together — a simple fitness / movement song to round off the class.",
+      type: "fixed",
+    },
   ],
   sessionTable: [], // to be sequenced
   activities: allActivities,

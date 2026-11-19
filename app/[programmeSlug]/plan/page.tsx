@@ -111,11 +111,20 @@ export default function ProgrammePlanPage() {
     }
     const done = admin ? [] : getCompletedDays(slug);
     setCompletedDays(done);
-    const next = admin
-      ? hasTrialSession
-        ? 0
-        : 1
-      : getNextDay(done, programme.totalSessions, hasTrialSession);
+    // Deep-link from the rotation calendar: /plan?session=N opens that session.
+    let deepLink: number | null = null;
+    try {
+      const raw = new URLSearchParams(window.location.search).get("session");
+      const n = raw ? parseInt(raw, 10) : NaN;
+      if (Number.isInteger(n) && n >= 1 && n <= programme.totalSessions) deepLink = n;
+    } catch {}
+    const next =
+      deepLink ??
+      (admin
+        ? hasTrialSession
+          ? 0
+          : 1
+        : getNextDay(done, programme.totalSessions, hasTrialSession));
     setSelectedDay(next);
     setAuthState("ok");
   }, [slug, programme, hasTrialSession, router]);

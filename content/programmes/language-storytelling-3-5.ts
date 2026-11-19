@@ -237,9 +237,11 @@ const wordsmithsResources: Record<string, CurriculumActivity> = {
     id: "vocabulary-cards",
     segment: "wordsmiths",
     title: "vocabulary cards",
-    setupLine: "A digital card deck, matched to the current book's words.",
+    setupLine: "A printable card deck, matched to the current book's words — kindly print it before class.",
     howToPlay:
-      "One vocabulary resource per session — the digital card deck, matched to the current book's vocabulary. The sequence is always the same: see → act → say. The educator shows the card, all children act the word together, then one child at a time uses it in a sentence. Acting is always whole-group — no child is singled out.",
+      "Kindly print the vocabulary cards (PDF, linked below) before class. One vocabulary resource per session — the card deck, matched to the current book's vocabulary. The sequence is always the same: see → act → say. The educator shows the card, all children act the word together, then one child at a time uses it in a sentence. Acting is always whole-group — no child is singled out.",
+    materials: ["The printed vocabulary cards (PDF linked below) — kindly print before class"],
+    referenceLinks: [{ label: "🖨️ print the vocabulary cards (PDF)", url: "/vocab-cards/wordsmiths-3-5.pdf" }],
     debriefPrompts: [],
     type: "digital-game",
   },
@@ -663,7 +665,7 @@ export const languageStorytelling35: CurriculumProgramme = {
       name: "Wordsmiths",
       durationRange: "10 min",
       objective:
-        "One vocabulary resource per session — the vocabulary cards digital deck, matched to the current book's vocabulary. The see → act → say sequence is always the same: the educator shows the card, all children act the word together, then one child at a time uses it in a sentence. Acting is always whole-group — no child is singled out.",
+        "Kindly print the vocabulary cards (PDF) before class. One vocabulary resource per session — the printable card deck, matched to the current book's vocabulary. The see → act → say sequence is always the same: the educator shows the card, all children act the word together, then one child at a time uses it in a sentence. Acting is always whole-group — no child is singled out.",
       type: "fixed",
     },
     { id: "break", name: "break", durationRange: "10 min", objective: "A short rest and snack break in the middle of the longer two-hour class.", type: "fixed" },

@@ -411,6 +411,17 @@ function SegmentRow({
                       : "opening circle songs →",
                 },
               };
+            } else if (segment.segmentId === "wordsmiths") {
+              info = {
+                segmentId: segment.segmentId,
+                segmentName: segment.segmentName,
+                title: segment.segmentName,
+                description,
+                externalLink: {
+                  href: "/vocab-cards/wordsmiths-3-5.pdf",
+                  label: "print the vocabulary cards (PDF) →",
+                },
+              };
             } else {
               info = {
                 segmentId: segment.segmentId,
