@@ -609,12 +609,14 @@ export default function LibraryPage() {
           <p className="text-[12px] font-extrabold lowercase text-ink-muted">the books &amp; the song library</p>
           <div className="no-scrollbar mt-2 flex gap-3 overflow-x-auto pb-1">
             {[
-              { href: "/artiverse-book", title: "artiverse book", sub: "art · free-making skills", cover: "/artiverse-book/01-accordion.png", tint: "bg-category-art/15" },
-              { href: "/artistotle-book", title: "artistotle book", sub: "art · in the spirit of the greats", cover: "/artistotle-book/01-cover.png", tint: "bg-category-art/15" },
+              { href: "/artiverse-book", title: "artiverse book", sub: "art · free-making skills", cover: "/artiverse-book/cover.png", tint: "bg-category-art/15" },
+              { href: "/artistotle-book", title: "artistotle book", sub: "art · in the spirit of the greats", cover: "/artistotle-book/cover.png", tint: "bg-category-art/15" },
               { href: "/art-gym-book", title: "art gym & scribble", sub: "art · fine-motor warm-up", cover: "/gym-books/3-5-book.png", tint: "bg-category-art/15" },
               { href: "/numbersgym-book", title: "numbers gym book", sub: "stem · self-paced number play", emoji: "🔢", tint: "bg-category-stem/15" },
               { href: "/puppet-worksheets", title: "puppet characters", sub: "language · print & cut puppets", emoji: "🎭", tint: "bg-category-language/20" },
+              { href: "/vocab-cards/easy", title: "vocabulary cards", sub: "language · word cards · see → act → say", cover: "/vocab-cards/hunt.png", tint: "bg-category-language/20" },
               { href: "/circle", title: "song library", sub: "every circle & tidy-up song", emoji: "🎵", tint: "bg-category-music/20" },
+              { href: "/music-fitness-3-5/overview", title: "music & fitness games", sub: "music · listening, singing & fitness", cover: "/prog-music-3-5.png", tint: "bg-category-music/20" },
             ].map((b) => (
               <Link
                 key={b.href}

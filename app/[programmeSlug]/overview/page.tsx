@@ -979,6 +979,22 @@ function ProgrammeOverviewContent() {
           ))}
         </div>
 
+        {/* The single north star — the culmination all the skills build
+            toward together (used instead of a per-skill north star). */}
+        {programme.northStar && (
+          <div className="mt-4 rounded-2xl bg-brand-orange/8 p-4 shadow-card ring-1 ring-brand-orange/25 md:p-5">
+            <p className="flex items-center gap-1.5 text-[11px] font-bold tracking-normal text-brand-orange">
+              <span aria-hidden>★</span> the north star — where it all comes together
+            </p>
+            <p className="mt-1.5 text-[14px] font-extrabold lowercase text-ink">
+              {programme.northStar.name}
+            </p>
+            <p className="mt-1 text-[12.5px] leading-relaxed text-ink-muted md:text-[13px]">
+              {programme.northStar.description}
+            </p>
+          </div>
+        )}
+
       </section>
 
       {/* ─── LEARNING OUTCOMES (3-5 programmes) ───

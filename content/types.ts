@@ -169,6 +169,12 @@ export interface CurriculumProgramme {
   durationLabel?: string;
   totalSessions: number;
   skillAreas: CurriculumSkillArea[];
+  /**
+   * An optional single "north star" for the programme — the one culmination
+   * every skill builds toward together. Rendered as one callout under the
+   * skills grid, instead of a separate north-star ability inside each skill.
+   */
+  northStar?: { name: string; description: string };
   segmentDefinitions: CurriculumSegmentDef[];
   sessionTable: CurriculumSessionEntry[];
   activities: Record<string, CurriculumActivity>;

@@ -65,7 +65,7 @@ const listeningGames: Record<string, CurriculumActivity> = {
     players: "whole group · 1 educator",
     duration: "10 min",
     materials: ["An open space with two sides"],
-    skillIds: ["listening", "creative-expression"],
+    skillIds: ["listening"],
     referenceLinks: [{ label: "🎬 watch — we are dancing in the forest", url: "https://www.youtube.com/watch?v=gNA1ZOUU0po" }],
     debriefPrompts: [],
     type: "physical-game",
@@ -134,7 +134,7 @@ const singingGames: Record<string, CurriculumActivity> = {
     players: "whole group · 1 educator",
     duration: "10 min",
     materials: ["Maracas", "Egg shakers", "A xylophone", "Any other baby / percussion instruments"],
-    skillIds: ["musicality", "creative-expression"],
+    skillIds: ["musicality"],
     referenceLinks: [
       { label: "🎵 jingle bells (kids)", url: "https://www.youtube.com/results?search_query=jingle+bells+kids+song" },
       { label: "🎵 santa claus is coming to town (kids)", url: "https://www.youtube.com/results?search_query=santa+claus+is+coming+to+town+kids+song" },
@@ -243,7 +243,7 @@ const musicalityGames: Record<string, CurriculumActivity> = {
     players: "whole group or 1+ child · 1 educator",
     duration: "10 min",
     materials: ["A story (choose one below)"],
-    skillIds: ["musicality", "creative-expression"],
+    skillIds: ["musicality"],
     referenceLinks: [
       { label: "📕 the three dinos & the lost babies", url: "https://drive.google.com/file/d/1Zi9wSKpQMMReWXJkxOh68-NEwecRjaxr/view" },
       { label: "📕 the three giants & the giant drum", url: "https://drive.google.com/file/d/1H4MZWxs0eBzAEYMXhFMg-os5ncc_vk1U/view" },
@@ -270,7 +270,7 @@ const movementGames: Record<string, CurriculumActivity> = {
     players: "pairs · 1 educator",
     duration: "15 min",
     materials: ["Objects of different shapes/sizes (soft toy, cup, ball)", "1 body-parts die", "Cones (start/finish)", "Timer"],
-    skillIds: ["fitness", "creative-expression"],
+    skillIds: ["fitness"],
     easierVariation: "No timer; short 2 m distance; soft toy.",
     harderVariation: "15-second timer; 6 m with turns; rubber ball (unstable).",
     referenceLinks: [{ label: "🎬 demo video", url: "https://www.instagram.com/reel/DGx-5YDS1wg/" }],
@@ -370,7 +370,7 @@ const movementGames: Record<string, CurriculumActivity> = {
     players: "pairs · 1 educator",
     duration: "15 min",
     materials: ["1 balloon per pair", "Cones (start/finish)", "Floor markers"],
-    skillIds: ["fitness", "creative-expression"],
+    skillIds: ["fitness"],
     easierVariation: "1 high-five per turn; straight path; no timer.",
     harderVariation: "5 high-fives per turn; obstacle path; fastest time wins.",
     referenceLinks: [{ label: "🎬 demo video", url: "https://www.instagram.com/reel/DJCHPaYy7Oq/" }],
@@ -460,11 +460,15 @@ export const musicFitness35: CurriculumProgramme = {
   category: "music",
   ageGroup: "3-5",
   ageLabel: "ages 3–5",
-  heroImageUrl: "/openhouse-logo.png",
+  heroImageUrl: "/prog-music-3-5.png",
   tagline: "listen, sing, move — rhythm, musicality and joyful fitness through play.",
   description:
-    "Music & Fitness is the fourth strand of the 3–5 rotation. A day moves through six parts — an opening circle, active listening, sing along (the Christmas choir), fitness mania (two movement games), musicality, and a closing circle. Children build four skills — listening, musicality, creative expression and fitness — all through play. Every game is tagged to the skills it builds.",
+    "Music & Fitness is the fourth strand of the 3–5 rotation. A day moves through six parts — an opening circle, active listening, sing along (the Christmas choir), fitness mania (two movement games), musicality, and a closing circle. Children build three skills — listening, musicality and fitness — all through play, building toward one north star: performing. Every game is tagged to the skills it builds.",
   totalSessions: 0, // day-by-day plan to be sequenced
+  // Three skills. There is no separate north-star ability per skill — the
+  // whole programme builds toward ONE north star (below), the culmination of
+  // all three: the child performs. (Creative expression isn't a standalone
+  // skill here — it IS that culmination.)
   skillAreas: [
     {
       id: "listening",
@@ -474,7 +478,6 @@ export const musicFitness35: CurriculumProgramme = {
         { name: "notices", description: "Attends to a sound, a change, or a musical cue — without being told what to listen for." },
         { name: "discriminates", description: "Tells sounds apart — loud/soft, fast/slow, high/low, one instrument from another." },
         { name: "responds", description: "Acts on a musical cue — starts, stops, or moves when the music tells them to." },
-        { name: "anticipates", description: "Internalises a melody or pattern and predicts what comes next.", isNorthStar: true },
       ],
     },
     {
@@ -483,20 +486,8 @@ export const musicFitness35: CurriculumProgramme = {
       shortName: "musicality",
       abilities: [
         { name: "keeps a beat", description: "Claps, taps or steps a steady beat." },
-        { name: "follows rhythm", description: "Copies and follows a rhythm or body-percussion pattern." },
+        { name: "follows rhythm & pitch", description: "Copies and follows a rhythm or body-percussion pattern, and tells high from low." },
         { name: "uses voice", description: "Joins in singing, matches pitch, and controls their breath." },
-        { name: "creates", description: "Makes up a rhythm, sound or verse of their own.", isNorthStar: true },
-      ],
-    },
-    {
-      id: "creative-expression",
-      name: "creative expression",
-      shortName: "expression",
-      abilities: [
-        { name: "moves", description: "Moves their whole body freely to music — big and small." },
-        { name: "expresses", description: "Shows a feeling or an idea through movement." },
-        { name: "improvises", description: "Invents a movement or a response in the moment." },
-        { name: "performs", description: "Shares a movement, song or idea with the group with confidence.", isNorthStar: true },
       ],
     },
     {
@@ -506,11 +497,16 @@ export const musicFitness35: CurriculumProgramme = {
       abilities: [
         { name: "coordinates", description: "Combines movements and controls hand-eye / foot-eye actions." },
         { name: "agility", description: "Changes direction, reacts and moves quickly and safely." },
-        { name: "balances", description: "Holds and controls balance while still or moving." },
-        { name: "strength & stamina", description: "Sustains effort through an active sequence.", isNorthStar: true },
+        { name: "balances & builds strength", description: "Holds balance while still or moving, and sustains effort through an active sequence." },
       ],
     },
   ],
+  // The one north star — the culmination of all three skills.
+  northStar: {
+    name: "performs",
+    description:
+      "The child puts the three skills together — listening for the cue, keeping the beat and singing, and moving their body — to share a little piece with the group, with growing confidence.",
+  },
   // The 3–5 day runs SIX parts, in order:
   //   opening circle → active listening (~10m) → sing along (~10m) →
   //   fitness mania (two games, ~15m) → musicality (~10m) → closing circle.
